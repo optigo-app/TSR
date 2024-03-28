@@ -251,3 +251,64 @@
         font-size: 12px;
     }
 }
+
+
+
+
+.TSRFooterMain{
+    background-color: #424242;
+    display: flex;
+}
+
+.TSRFooterPart1{
+    width: 65%;
+    padding: 3% 5% 0px 40px;
+}
+.trsFoooterImg{
+    padding-bottom: 5%;
+}
+.TSRFooterPart1Sub1menuTitle{
+    color: white;
+    font-weight: 500;
+}
+.TSRFooterPart1Sub1menuDesc{
+    color: white;
+    font-weight: 400;
+}
+
+
+.TSRFooterPart2{
+    width: 35%;
+}
+.TSRFooterPart2Img{
+    width: 100%;
+}
+
+.TSRFooterPart1Sub1{
+    display: flex;
+}
+.TSRFooterPart1Sub1-1{
+    width: 33.33%;
+}
+.TSRFooterPart1Sub1-2{
+    width: 33.33%;
+}
+.TSRFooterPart1Sub1-3{
+    width: 33.33%;
+}
+
+.TSRFooterPart1Sub2{
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.footerMoreTextNew{
+    background-color: #1d1d1d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+}

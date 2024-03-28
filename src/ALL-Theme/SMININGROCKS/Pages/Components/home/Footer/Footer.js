@@ -1,10 +1,11 @@
 import React from 'react'
 import './Footer.css'
-import { FaFacebookF } from "react-icons/fa";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaYoutube } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import { TfiYoutube } from "react-icons/tfi";
 
 export default function Footer() {
 
@@ -12,55 +13,66 @@ export default function Footer() {
 
     return (
         <div>
-            {/* <div className='footerTopMain'>
-                <p className='foTopTitle'>Let's Smile Together</p>
-                <div className='inputMain'>
-                    <input type='text' placeholder='Email Address' className='foInputBox' />
-                    <div>
-                        <button className='footerSignupBtn'>SIGN UP</button>
+            <div className='TSRFooterMain'>
+                <div className='TSRFooterPart1'>
+                    <div style={{ paddingBlock: '70px' }}>
+                        <img src='https://pipeline-theme-fashion.myshopify.com/cdn/shop/files/Mezzo_White.png?v=1652288798&width=230' className='trsFoooterImg' />
+                        <div className='TSRFooterPart1Sub1'>
+                            <div className='TSRFooterPart1Sub1-1'>
+                                <p className='TSRFooterPart1Sub1menuTitle'>COLLECTIONS</p>
+                                <p className='TSRFooterPart1Sub1menuDesc'>Fringe</p>
+                                <p className='TSRFooterPart1Sub1menuDesc'>Shoreside</p>
+                                <p className='TSRFooterPart1Sub1menuDesc'>Wayfarer</p>
+                            </div>
+                            <div className='TSRFooterPart1Sub1-2'>
+                                <p className='TSRFooterPart1Sub1menuTitle'>HELPFUL LINKS</p>
+                                <p className='TSRFooterPart1Sub1menuDesc'>About Us</p>
+                                <p className='TSRFooterPart1Sub1menuDesc'>Our Locations</p>
+                                <p className='TSRFooterPart1Sub1menuDesc'>Mezzo News</p>
+                                <p className='TSRFooterPart1Sub1menuDesc'>Contact Us</p>
+                                <p className='TSRFooterPart1Sub1menuDesc'>Theme features</p>
+                            </div>
+                            <div className='TSRFooterPart1Sub1-2'>
+                                <p className='TSRFooterPart1Sub1menuTitle'>THIS IS A DEMO</p>
+                                <p className='TSRFooterPart1Sub1menuDesc'>This store is a demo of the Pipeline theme. The products from this store are from the catalog of Brochu Walker</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <p className='foTopDescription'>Get early access to new products and special offers!</p>
-            </div> */}
-            <div className='footerBottomMain'>
-                <div className='footerIconMain'>
-                    <div className='footerFace'>
-                        <FaFacebookF style={{ color: '#7d7f85' }} />
-                    </div>
-                    <div className='footerTwi'>
-                        <FaTwitter style={{ color: '#7d7f85' }} />
-                    </div>
-                    <div className='footerInsta'>
-                        <AiFillInstagram style={{ color: '#7d7f85' }} />
-                    </div>
-                    <div className='footerYou'>
-                        <FaYoutube style={{ color: '#7d7f85' }} />
-                    </div>
-                </div>
-                <div className='footerMoreOption'>
-                    <p className='footerMoreOptionData' onClick={() => { navigation('/contactUs'); window.scrollTo(0, 0); }}>CONTACT US</p>
-                    <p className='footerMoreOptionData' onClick={() => {navigation('/faq'); window.scrollTo(0, 0); }}>FAQ</p>
-                    <p className='footerMoreOptionData' onClick={() => {navigation('/servicePolicy'); window.scrollTo(0, 0); }}>SERVICE POLICY</p>
-                    {/* <p className='footerMoreOptionData' onClick={() => navigation('/press')}>PRESS</p> */}
-                </div>
-                <div className='footerMoreText'>
-                    <p style={{
-                        color: '#7d7f85',
-                        fontSize: '12px',
-                        fontWeight: 500,
-                        marginInline: '15px'
-                    }}>© 2023, Sonasons</p>
 
-                    <p style={{
-                        color: '#7d7f85',
-                        fontSize: '12px',
-                        fontWeight: 500,
-                        cursor: 'pointer'
-                    }}>Terms & Privacy</p>
+                    <div className='TSRFooterPart1Sub2'>
+                        <p style={{ fontSize: '40px', color: 'white', marginBlock: '50px' , fontFamily: 'Tenor Sans, sans-serif'}}>STAY IN TOUCH.</p>
+                        <div style={{ display: 'flex' }}>
+                            <FaTwitter style={{ margin: '5px', cursor: 'pointer', color: 'white' }} />
+                            <FaFacebookF style={{ margin: '5px', cursor: 'pointer', color: 'white' }} />
+                            <FaInstagram style={{ margin: '5px', cursor: 'pointer', color: 'white' }} />
+                            <TfiYoutube style={{ margin: '5px', cursor: 'pointer', color: 'white' }} />
+                        </div>
+                    </div>
+                </div>
+                <div className='TSRFooterPart2'>
+                    <img src='https://pipeline-theme-fashion.myshopify.com/cdn/shop/files/210128_BW_PF21_S219059.jpg?v=1671215731&width=768' className='TSRFooterPart2Img' />
+                    
+                    <p style={{color: 'white', fontSize: '20px', marginTop: '40px'}}>OUR WEEKLY NEWSLETTER</p>
+                    <p>SKIP TO THE DETAILS</p>
+                    <p>Join to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
                 </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <img src='https://smilingrocks.com/cdn/shop/t/157/assets/passport.svg?v=152807140915720846441675380017' style={{ height: '80px', cursor: 'pointer', paddingBlock: '10px' }} />
+            <div className='footerMoreTextNew'>
+                <div>
+                    <select>
+                        <option>Heloo</option>
+                        <option>Heloo</option>
+                        <option>Heloo</option>
+                        <option>Heloo</option>
+                    </select>
+                </div>
+                <div>
+                    <p style={{ color: 'rgba(223, 223, 223, 0.9)', fontSize: '14px' }}>© PIPELINE CLEAN 2024
+                        FRINGE
+                        SHORESIDE
+                        WAYFARER
+                        POWERED BY SHOPIFY</p>
+                </div>
             </div>
         </div>
     )

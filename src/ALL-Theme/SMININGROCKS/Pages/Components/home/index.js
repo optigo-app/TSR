@@ -273,15 +273,15 @@ export default function Home() {
         {/* <DaimondEveyone /> */}
         <ShopByCategory />
         <SmilingBrides />
-        <FeaturedCollection />
-        <div style={{ marginTop: '60px' }}>
+        {/* <FeaturedCollection /> */}
+        {/* <div style={{ marginTop: '60px' }}>
           <SustainAbility />
-        </div>
-        <ShopifySection />
-        {/* <ShopOurInstagram /> */}
+        </div> */}
+        {/* <ShopifySection /> */}
+        <ShopOurInstagram />
         <Footer />
       </div>
-      <div>
+      {/* <div>
         <p style={{
           paddingBlock: '30px',
           margin: '0px',
@@ -292,7 +292,7 @@ export default function Home() {
           fontWeight: 500,
           letterSpacing: '1px'
         }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
-      </div>
+      </div> */}
     </div>
   )
 }
