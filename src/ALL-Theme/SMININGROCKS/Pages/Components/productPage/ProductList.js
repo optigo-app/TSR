@@ -229,7 +229,6 @@ const ProductList = () => {
     }
 
     if (paramnameSetting(getnewMenuData.label) === "category") {
-
       const data = ProductApiData2.filter((pd) => pd && pd.CategoryName === paramdataSetting(getnewMenuData.label))
       if (data) {
         setNewProData(data)
@@ -1457,7 +1456,7 @@ const ProductList = () => {
 
       <div
         style={{
-          backgroundColor: "#c0bbb1",
+          // backgroundColor: "#c0bbb1",
           height: "100%",
           width: "100%",
           // paddingBottom: "100px",
@@ -1485,9 +1484,9 @@ const ProductList = () => {
                 }}
                 className="smilingWebProductListSideBar"
               >
-                <ul className="d-flex">
+                <ul style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
                   <li className="finejwelery me-4" id="finejwelery">Filters</li>
-                  <li className="finejwelery" id="finejwelery" onClick={() => handlePageReload()}>All</li>
+                  <li className="finejwelery" id="finejwelery" onClick={() => handlePageReload()}>All Jwelery</li>
                 </ul>
                 <div>
                   {NewFilterData().map((ele, index) => (
