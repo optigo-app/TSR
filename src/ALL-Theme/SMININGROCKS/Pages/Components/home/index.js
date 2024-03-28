@@ -13,11 +13,6 @@ import SustainAbility from '../sustainAbility/SustainAbility';
 import ShopOurInstagram from './shopOurInstagram/ShopOurInstagram';
 import Footer from './Footer/Footer';
 import axios from 'axios';
-import { Button, Dialog } from '@mui/material';
-import { IoMdMail } from "react-icons/io";
-import { FaMobileAlt } from "react-icons/fa";
-import { IoClose } from "react-icons/io5";
-import { useNavigate } from 'react-router-dom';
 import { CommonAPI } from '../../../Utils/API/CommonAPI';
 
 export default function Home() {
