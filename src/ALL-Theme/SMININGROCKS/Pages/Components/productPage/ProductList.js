@@ -229,7 +229,6 @@ const ProductList = () => {
     }
 
     if (paramnameSetting(getnewMenuData.label) === "category") {
-
       const data = ProductApiData2.filter((pd) => pd && pd.CategoryName === paramdataSetting(getnewMenuData.label))
       if (data) {
         setNewProData(data)
