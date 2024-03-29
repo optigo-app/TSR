@@ -44,47 +44,9 @@ export default function Header() {
   const [menul1data, setMenul1data] = useState([])
   const [menul2data, setMenul2data] = useState([])
 
-  // const [newMenu1Data,setNewMenu1Data] = useState([])
-  // const [newMenu2Data,setNewMenu2Data] = useState([])
-  // const [newMenu3Data,setNewMenu3Data] = useState([])
-
   const setNewMenuData = useSetRecoilState(newMenuData)
-  // console.log("menu1Index",finalData?.map((fd)=>fd?.param1)[menu1Index])
 
   const separateData = (menuData) => {
-    // let tempMenu0data = [];
-    // let tempMenu1data = [];
-    // let tempMenu2data = [];
-
-    // menuData?.forEach(item => {
-    //     // Extract data for menu0data
-    //     let menu0 = {
-    //         menuname: item.menuname,
-    //         param0dataname: item.param0dataname,
-    //         param0dataid: item.param0dataid,
-    //         param0name: item.param0name,
-    //         param0id: item.param0id
-    //     };
-    //     tempMenu0data.push(menu0);
-
-    //     // Extract data for menu1data
-    //     let menu1 = {
-    //         param1id: item.param1id,
-    //         param1name: item.param1name,
-    //         param1dataid: item.param1dataid,
-    //         param1dataname: item.param1dataname
-    //     };
-    //     tempMenu1data.push(menu1);
-
-    //     // Extract data for menu2data
-    //     let menu2 = {
-    //         param2id: item.param2id,
-    //         param2name: item.param2name,
-    //         param2dataid: item.param2dataid,
-    //         param2dataname: item.param2dataname
-    //     };
-    //     tempMenu2data.push(menu2);
-    // });
 
     let tempMenu0data = Array.from(new Set(menuData?.map(item => JSON.stringify({
       menuname: item.menuname,
@@ -125,102 +87,6 @@ export default function Header() {
   useEffect(() => {
     separateData();
   }, []);
-
-
-  const handelmenu1 = (param) => {
-    localStorage.setItem('productDataShow', 'true');
-    setIsDropdownOpen(false)
-    navigation("/productpage")
-    setHeaderData(param)
-  }
-
-  const handelMenu0 = () => {
-    setIsDropdownOpen(false)
-    navigation("/productpage")
-  }
-
-
-  const handelmenu2 = (param) => {
-    setIsDropdownOpen(false)
-    navigation("/productpage")
-    setHeaderData2(param)
-  }
-
-  // const transformData = (data) => {
-
-  //   const transformedData = data?.reduce((acc, item) => {
-  //     const existingItem = acc.find(i => i.lavelid === item.levelid);
-  //     if (existingItem) {
-  //       const existingParam1 = existingItem.param1.find(p => p.param1dataid === item.param1dataid);
-  //       if (existingParam1) {
-  //         if (item.param2id) {
-  //           const existingParam2 = existingParam1.param2.find(p => p.param2dataid === item.param2dataid);
-  //           if (existingParam2) {
-  //             // If param2dataid already exists, do nothing
-  //           } else {
-  //             // Add new param2
-  //             existingParam1.param2.push({
-  //               param2id: item.param2id,
-  //               param2name: item.param2name,
-  //               param2dataid: item.param2dataid,
-  //               param2dataname: item.param2dataname
-  //             })
-  //           }
-  //         }
-  //       } else {
-  //         const newItem = {
-  //           param1id: item.param1id,
-  //           param1name: item.param1name,
-  //           param1dataid: item.param1dataid,
-  //           param1dataname: item.param1dataname,
-  //           param2: []
-  //         };
-  //         if (item.param2id) {
-  //           newItem.param2.push({
-  //             param2id: item.param2id,
-  //             param2name: item.param2name,
-  //             param2dataid: item.param2dataid,
-  //             param2dataname: item.param2dataname
-  //           });
-  //         }
-  //         existingItem.param1.push(newItem);
-  //       }
-  //     } else {
-  //       const newItem = {
-  //         lavelid: item.levelid,
-  //         menuname: item.menuname,
-  //         link: item.link || '',
-  //         param0id: item.param0id || '',
-  //         param0name: item.param0name || '',
-  //         param0dataid: item.param0dataid || '',
-  //         param0dataname: item.param0dataname || '',
-  //         param1: []
-  //       };
-  //       if (item.param1id) {
-  //         const newParam1 = {
-  //           param1id: item.param1id,
-  //           param1name: item.param1name,
-  //           param1dataid: item.param1dataid,
-  //           param1dataname: item.param1dataname,
-  //           param2: []
-  //         };
-  //         if (item.param2id) {
-  //           newParam1.param2.push({
-  //             param2id: item.param2id,
-  //             param2name: item.param2name,
-  //             param2dataid: item.param2dataid,
-  //             param2dataname: item.param2dataname
-  //           });
-  //         }
-  //         newItem.param1.push(newParam1);
-  //       }
-  //       acc.push(newItem);
-  //     }
-  //     return acc;
-  //   }, []);
-
-  //   setFinalData(transformedData);
-  // };
 
   const transformData = (data) => {
     const transformedData = data?.reduce((acc, item) => {
@@ -347,15 +213,7 @@ export default function Header() {
     }
   }, [islogin])
 
-  const toggleList = () => {
-    setIsOpen(!isOpen);
-  };
-  const toggleListCollection = () => {
-    setIsOpenCollection(!isOpenCollection);
-  };
-  const toggleListBouti = () => {
-    setIsOpenBouti(!isOpenBouti);
-  };
+
 
 
   const toggleOverlay = () => {
@@ -397,17 +255,17 @@ export default function Header() {
 
   const [openCart, setOpenCart] = useState(false);
   const toggleCartDrawer = (isOpen) => (event) => {
-    if (isB2bFlag === 1) {
+    // if (isB2bFlag === 1) {
       navigation('/CartPage');
-    } else {
-      if (
-        event.type === 'keydown' &&
-        (event.key === 'Tab' || event.key === 'Shift')
-      ) {
-        return;
-      }
-      setOpenCart(isOpen);
-    }
+    // } else {
+    // if (
+    //   event.type === 'keydown' &&
+    //   (event.key === 'Tab' || event.key === 'Shift')
+    // ) {
+    //   return;
+    // }
+    // setOpenCart(isOpen);
+    // }
   };
 
 
@@ -504,284 +362,6 @@ export default function Header() {
           </div>
         </>
       )}
-
-      {drawerShowOverlay && (
-        <>
-          <div className="smlingDraweOverlay">
-            <div
-              style={{
-                display: "flex",
-                margin: "20px",
-              }}
-            >
-              <div
-                style={{
-                  width: "20%",
-                  display: "flex",
-                  alignItems: "center",
-                }}
-              >
-                <IoClose
-                  style={{
-                    height: "30px",
-                    width: "30px",
-                    color: "black",
-                    cursor: "pointer",
-                  }}
-                  onClick={toggleDrawerOverlay}
-                />
-              </div>
-              <div
-                style={{
-                  width: "60%",
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <a href="/">
-                  <img src={titleImg} className="MainlogogMobileImage" />
-                </a>
-              </div>
-              {islogin === 'true' && (<div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  width: "20%",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <Badge
-                  badgeContent={getWishListCount}
-                  overlap={"rectangular"}
-                  color="secondary"
-                  style={{ marginInline: '5px' }}
-                  className="smilingHeaderWhishlistIcon"
-                >
-                  <Tooltip title="WishList">
-                    <li style={{ listStyle: 'none' }} onClick={() => navigation("/myWishList")}>
-                      <PiStarThin
-                        style={{
-                          height: "25px",
-                          cursor: "pointer",
-                          width: "25px",
-                          color: "white",
-                        }}
-                        className="mobileViewSmilingTop1Icone"
-                      />
-                    </li>
-                  </Tooltip>
-                </Badge>
-
-                <li onClick={toggleOverlay} style={{ listStyle: 'none', width: '40px', textAlign: 'center' }}>
-                  <IoSearchOutline
-                    style={{
-                      height: "20px", cursor: "pointer", width: "20px",
-                      color: "white",
-                      marginRight: '9px'
-                    }}
-                    className="mobileViewSmilingTop2Icone"
-                  />
-                </li>
-
-                <Badge
-                  badgeContent={getCartListCount}
-                  overlap={"rectangular"}
-                  color="secondary"
-                  style={{ marginInline: '10px' }}
-                >
-                  <Tooltip title="Cart">
-                    <li
-                      // onClick={() => alert(isB2bFlag)}
-                      onClick={toggleCartDrawer(true)}
-                      style={{
-                        marginLeft: "-10px",
-                        cursor: "pointer",
-                        listStyle: 'none',
-                        marginTop: "0px",
-                      }}
-                    >
-                      {/* <PiStarFourThin
-                        style={{
-                          cursor: "pointer",
-                          height: "30px",
-                          width: "30px",
-                          color: "white",
-
-                        }}
-                        className="mobileViewSmilingTop3Icone"
-
-                      /> */}
-                      <ShoppingCartOutlinedIcon
-                        sx={{ height: '30px', width: '30px' }}
-                      />
-                    </li>
-                  </Tooltip>
-                </Badge>
-
-              </div>)}
-            </div>
-            <div className="smlingDraweOverlayMain">
-              <div className="drawrTitlediv">
-                <p
-                  style={{
-                    margin: "0px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                  className="drawrTitlem"
-                  onClick={toggleList}
-                >
-                  FINE JEWELLERY<span>{isOpen ? "-" : "+"}</span>
-                </p>
-                <ul className={`my-list-fineJewe ${isOpen ? "open" : ""}`}>
-                  <li style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
-                    {
-                      menul0data?.map((md) => (
-                        <span style={{ fontSize: '12.5px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 0.4, cursor: 'pointer' }}
-                          onClick={() => handelNewMenuData({ "label": "param0", "data": md })}
-                        >
-                          {capitalizeText(md?.menuname)}
-                        </span>
-                      ))
-                    }
-                  </li>
-                </ul>
-              </div>
-              <div className="drawrTitlediv" style={{ marginTop: "20px" }}>
-                <p
-                  style={{
-                    margin: "0px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                  className="drawrTitlem"
-
-                  onClick={toggleListCollection}
-                >
-                  COLLECTION<span>{isOpenCollection ? "-" : "+"}</span>
-                </p>
-
-                <ul
-                  className={`my-list-fineJewe ${isOpenCollection ? "open" : ""
-                    }`}
-                >
-                  <li style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
-                    {
-                      menul1data?.map((md) => (
-                        <span style={{ fontSize: '12.5px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 0.4, cursor: 'pointer' }}
-                          onClick={() => handelNewMenuData({ "label": "param1", "data": md })}
-                        >
-                          {capitalizeText(md?.param1dataname)}
-                        </span>
-                      ))
-                    }
-                  </li>
-                </ul>
-              </div>
-              <div className="drawrTitlediv" style={{ marginTop: "20px" }}>
-                <p
-                  style={{
-                    margin: "0px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                  className="drawrTitlem"
-                  onClick={toggleListBouti}
-                >
-                  BOUTIQUE<span>{isOpenBouti ? "-" : "+"}</span>
-                </p>
-
-                <ul className={`my-list-fineJewe ${isOpenBouti ? "open" : ""}`}>
-                  <li style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
-                    {
-                      menul2data?.map((md) => (
-                        <span style={{ fontSize: '12.5px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 0.4, cursor: 'pointer' }}
-                          onClick={() => handelNewMenuData({ "label": "param2", "data": md })}
-                        >
-                          {capitalizeText(md?.param2dataname)}
-                        </span>
-                      ))
-                    }
-                  </li>
-                </ul>
-              </div>
-              <div onClick={() => { toggleDrawerOverlay(); navigation("/impact"); }}>
-                <p className="drawrTitle">IMPACT</p>
-              </div>
-              <div onClick={() => { toggleDrawerOverlay(); navigation("/aboutUs"); }}>
-                <p className="drawrTitle">ABOUT US</p>
-              </div>
-              <div
-                style={{
-                  marginTop: "20px",
-                }}
-              >
-                {islogin === 'true' && (
-                  <div
-                    style={{ cursor: "pointer", color: 'white' }}
-                    onClick={() => { toggleDrawerOverlay(); navigation("/account"); }}
-                  >
-                    <p style={{ color: "white", margin: "0px", fontSize: '12px', fontWeight: 500 }}>{ACCOUNT}</p>
-                  </div>
-                )
-                }
-
-                {islogin === 'false' && (
-                  <div
-                    style={{ cursor: "pointer", color: 'white' }}
-                    onClick={() => { toggleDrawerOverlay(); navigation("/LoginOption"); }}
-                  >
-                    <p style={{ color: "white", margin: "0px", fontSize: '12px', fontWeight: 500 }}>{LOGIN}</p>
-                  </div>
-                )
-                }
-                <p
-                  style={{ color: "white", marginTop: "10px", fontSize: '13px', fontWeight: 500, letterSpacing: '1' }}
-                  onClick={() => { toggleDrawerOverlay(); navigation("/myWishList"); }}
-                >
-                  Wishlist
-                </p>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  borderBottom: "1px solid white",
-                  alignItems: "end",
-                }}
-              >
-                <input
-                  type="text"
-                  placeholder="Search"
-                  style={{
-                    width: "100%",
-                    borderBottom: "1px solid white",
-                    border: "none",
-                    outline: "none",
-                    backgroundColor: "rgba(192, 187, 177, 1.8)",
-                    marginTop: "15px",
-                    fontWeight: 500,
-                    color: "white",
-                  }}
-                  className="mobileSideBarSearch"
-                />
-                <IoSearchOutline
-                  style={{
-                    height: "20px",
-                    cursor: "pointer",
-                    color: "white",
-                    width: "20px",
-                    marginInline: "5px",
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-
-
-
       <Drawer
         open={openSearchDrawer}
         onClose={() => {
@@ -902,7 +482,6 @@ export default function Header() {
       </Drawer>
 
       <div className="sminingHeaderWeb ">
-
         <div className="gorjanaHeader">
           <div className="gorjanaTopHeader">
             <PiMapPinLight style={{ height: "25px", width: "40px" }} />
@@ -923,12 +502,13 @@ export default function Header() {
                 <ul className="gorjanaHeaderMenu">
                   {islogin === "true" &&
                     <li
-                      className="nav-li-shop-main"
+                      className="gorjana-Menu-item "
+                      // nav-li-shop-main
                       onMouseEnter={handleDropdownOpen}
                       onMouseLeave={handleDropdownClose}
                     >
                       <span
-                        className="nav-li-smining"
+                        className="gorjana-Menu-item"
                         style={{
                           display: "flex",
                           alignItems: "center",
@@ -944,67 +524,20 @@ export default function Header() {
 
 
                   <li
-                    className="nav-li-smining"
+                    className="gorjana-Menu-item"
                     style={{ cursor: "pointer" }}
                     onClick={() => navigation("/impact")}
                   >
                     {IMPACT}
                   </li>
-                </ul>
-                <ul className="nav-ul-shop">
+
                   <li
-                    className="nav-li-smining"
                     style={{ cursor: "pointer" }}
+                    className="gorjana-Menu-item"
                     onClick={() => navigation("/aboutUs")}
                   >
                     {ABOUT_US}
                   </li>
-
-
-                  {islogin === "true" &&
-                    <>
-                      <Badge
-                        badgeContent={getWishListCount}
-                        overlap={"rectangular"}
-                        color="secondary"
-                      >
-                        <Tooltip title="WishList">
-                          <li onClick={() => navigation("/myWishList")}>
-                            <PiStarThin
-                              style={{
-                                height: "20px",
-                                cursor: "pointer",
-                                width: "20px",
-                              }}
-                            />
-                          </li>
-                        </Tooltip>
-                      </Badge>
-                      <li onClick={toggleOverlay} style={{}}>
-                        <IoSearchOutline
-                          style={{ height: "20px", cursor: "pointer", width: "20px" }}
-                        />
-                      </li>
-                      <Badge
-                        badgeContent={getCartListCount}
-                        overlap={"rectangular"}
-                        color="secondary"
-                      >
-                        <Tooltip title="Cart">
-                          <li
-                            onClick={toggleCartDrawer(true)}
-                            style={{
-                              marginLeft: "-10px",
-                              cursor: "pointer",
-                              marginTop: "0px",
-                            }}
-                          >
-                            <ShoppingCartOutlinedIcon
-                              sx={{ height: '30px', width: '30px' }}
-                            />
-                          </li>
-                        </Tooltip>
-                      </Badge></>}
 
 
                   <li
@@ -1017,10 +550,58 @@ export default function Header() {
                   >
                     Jewelry
                   </li>
-                 
-                
                 </ul>
+
+
                 <div className="gorjanaHeaderMenuIconeWeb">
+                  <ul className="nav-ul-shop">
+                    {islogin === "true" &&
+                      <>
+                        <Badge
+                          badgeContent={getWishListCount}
+                          overlap={"rectangular"}
+                          color="secondary"
+                        >
+                          <Tooltip title="WishList">
+                            <li onClick={() => navigation("/myWishList")}>
+                              <PiStarThin
+                                style={{
+                                  height: "20px",
+                                  cursor: "pointer",
+                                  width: "20px",
+                                }}
+                              />
+                            </li>
+                          </Tooltip>
+                        </Badge>
+                        <li onClick={toggleOverlay} style={{}}>
+                          <IoSearchOutline
+                            style={{ height: "20px", cursor: "pointer", width: "20px" }}
+                          />
+                        </li>
+                        <Badge
+                          badgeContent={getCartListCount}
+                          overlap={"rectangular"}
+                          color="secondary"
+                        >
+                          <Tooltip title="Cart">
+                            <li
+                              onClick={toggleCartDrawer(true)}
+                              style={{
+                                marginLeft: "-10px",
+                                cursor: "pointer",
+                                marginTop: "0px",
+                              }}
+                            >
+                              <ShoppingCartOutlinedIcon
+                                sx={{ height: '30px', width: '30px' }}
+                              />
+                            </li>
+                          </Tooltip>
+                        </Badge></>
+                    }
+                  </ul>
+
                   <IoSearch
                     style={{
                       height: "25px",
@@ -1059,6 +640,8 @@ export default function Header() {
                     onClick={() => { setOpenYourBagDrawer(true); setOpenSearchDrawer(false); }}
                   />
                 </div>
+
+
                 <div className="gorjanaHeaderMenuIconeMobile">
                   <IoSearch className="gorHeaderMobileIcoen" />
                   <HiOutlineShoppingBag className="gorHeaderMobileIcoen" />
@@ -1068,162 +651,30 @@ export default function Header() {
             </div>
           </div>
         </div>
-
-        {/* <div className="Smining-Top-Header ">
-          <div
-            style={{
-              width: "33.33%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <a href="/">
-              <img src={titleImg} />
-            </a>
-          </div>
-          <div
-            style={{
-              width: "33.33%",
-              display: "flex",
-            }}
-          >
-            <ul className="nav-ul-shop">
-              {islogin === "true" &&
-                <li
-                  className="nav-li-shop-main"
-                  onMouseEnter={handleDropdownOpen}
-                  onMouseLeave={handleDropdownClose}
-                >
-                  <span
-                    className="nav-li-smining"
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      fontWeight: 500,
-                    }}
-                  >
-                    SHOP
-                    <RiArrowDropDownLine
-                      style={{ width: "20px", height: "20px" }}
-                    />
-                  </span>
-                </li>}
-              <li
-                className="nav-li-smining"
-                style={{ cursor: "pointer" }}
-                onClick={() => navigation("/impact")}
-              >
-                {IMPACT}
-              </li>
-            </ul>
-            <ul className="nav-ul-shop">
-              <li
-                className="nav-li-smining"
-                style={{ cursor: "pointer" }}
-                onClick={() => navigation("/aboutUs")}
-              >
-                {ABOUT_US}
-              </li>
-
-              {islogin === "true" ? (
-                <li
-                  className="nav-li-smining"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => navigation("/account")}
-                >
-                  {ACCOUNT}
-                </li>
-              ) : (
-                <li
-                  className="nav-li-smining"
-                  style={{ cursor: "pointer" }}
-                  onClick={() => navigation('/LoginOption')}
-                >
-                  {LOGIN}
-                </li>
-              )}
-              {islogin === "true" &&
-                <>
-                  <Badge
-                    badgeContent={getWishListCount}
-                    overlap={"rectangular"}
-                    color="secondary"
-                  >
-                    <Tooltip title="WishList">
-                      <li onClick={() => navigation("/myWishList")}>
-                        <PiStarThin
-                          style={{
-                            height: "20px",
-                            cursor: "pointer",
-                            width: "20px",
-                          }}
-                        />
-                      </li>
-                    </Tooltip>
-                  </Badge>
-                  <li onClick={toggleOverlay} style={{}}>
-                    <IoSearchOutline
-                      style={{ height: "20px", cursor: "pointer", width: "20px" }}
-                    />
-                  </li>
-                  <Badge
-                    badgeContent={getCartListCount}
-                    overlap={"rectangular"}
-                    color="secondary"
-                  >
-                    <Tooltip title="Cart">
-                      <li
-                        onClick={toggleCartDrawer(true)}
-                        style={{
-                          marginLeft: "-10px",
-                          cursor: "pointer",
-                          marginTop: "0px",
-                        }}
-                      >
-                        <ShoppingCartOutlinedIcon
-                          sx={{ height: '30px', width: '30px' }}
-                        />
-                      </li>
-                    </Tooltip>
-                  </Badge></>}
-            </ul>
-          </div>
-
-          <div
-            style={{
-              width: "33.33%",
-              display: "flex",
-              justifyContent: "flex-end",
-            }}
-          >
-
-          </div>
-        </div> */}
       </div>
 
 
       <div
+        onMouseEnter={handleDropdownOpen}
+        onMouseLeave={handleDropdownClose}
+        className={`shop-dropdown ${isDropdownOpen ? "open" : ""} ${isHeaderFixed ? "fixed" : ""
+          }`}
+      >
+        <div
+          style={{
+            display: "flex",
+            padding: "50px",
+            color: "#7d7f85",
+            backgroundColor: "white",
+            // flexDirection: "column",
+            gap: "50px",
+            justifyContent: 'space-between'
+          }}
           onMouseEnter={handleDropdownOpen}
           onMouseLeave={handleDropdownClose}
-          className={`shop-dropdown ${isDropdownOpen ? "open" : ""} ${isHeaderFixed ? "fixed" : ""
-            }`}
         >
-          <div
-            style={{
-              display: "flex",
-              padding: "50px",
-              color: "#7d7f85",
-              backgroundColor: "white",
-              // flexDirection: "column",
-              gap: "50px",
-              justifyContent: 'space-between'
-            }}
-            onMouseEnter={handleDropdownOpen}
-            onMouseLeave={handleDropdownClose}
-          >
 
-            {/* <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          {/* <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {finalData?.map((fd, i) => (
                 <span
                   className="level0Menu"
@@ -1276,63 +727,63 @@ export default function Header() {
               ))}
             </div>  */}
 
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '50px' }}>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span style={{ fontSize: '13px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 1, fontWeight: 600 }}>FINE JEWELRY</span>
+          <div style={{ display: 'flex', flexDirection: 'row', gap: '50px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <span style={{ fontSize: '13px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 1, fontWeight: 600 }}>FINE JEWELRY</span>
+              <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px' }}>
+                {
+                  menul0data?.map((md) => (
+                    <span style={{ fontSize: '12.5px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 0.4, cursor: 'pointer' }}
+                      onClick={() => handelNewMenuData({ "label": "param0", "data": md })}
+                    >
+                      {capitalizeText(md?.menuname)}
+                    </span>
+                  ))
+                }
+              </span>
+            </div>
+            <div>
+              <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #e1e1e1', paddingLeft: '30px' }}>
+                <span style={{ fontSize: '13px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 1, fontWeight: 600 }}>COLLECTIONS</span>
                 <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px' }}>
                   {
-                    menul0data?.map((md) => (
+                    menul1data?.map((md) => (
                       <span style={{ fontSize: '12.5px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 0.4, cursor: 'pointer' }}
-                        onClick={() => handelNewMenuData({ "label": "param0", "data": md })}
+                        onClick={() => handelNewMenuData({ "label": "param1", "data": md })}
                       >
-                        {capitalizeText(md?.menuname)}
+                        {capitalizeText(md?.param1dataname)}
                       </span>
                     ))
                   }
                 </span>
               </div>
-              <div>
-                <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #e1e1e1', paddingLeft: '30px' }}>
-                  <span style={{ fontSize: '13px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 1, fontWeight: 600 }}>COLLECTIONS</span>
-                  <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px' }}>
-                    {
-                      menul1data?.map((md) => (
-                        <span style={{ fontSize: '12.5px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 0.4, cursor: 'pointer' }}
-                          onClick={() => handelNewMenuData({ "label": "param1", "data": md })}
-                        >
-                          {capitalizeText(md?.param1dataname)}
-                        </span>
-                      ))
-                    }
-                  </span>
-                </div>
-              </div>
-              
-              <div>
-                <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #e1e1e1', paddingLeft: '30px', width: '130%' }}>
-                  <span style={{ fontSize: '13px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 1, fontWeight: 600 }}>BOUTIQUE</span>
-                  <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px', height: '350px', flexWrap: 'wrap' }}>
-                    {
-                      menul2data?.map((md) => (
-                        <span style={{ fontSize: '12.5px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 0.4, cursor: 'pointer' }}
-                          onClick={() => handelNewMenuData({ "label": "param2", "data": md })}
-                        >
-                          {capitalizeText(md?.param2dataname)}
-                        </span>
-                      ))
-                    }
-                  </span>
-                </div>
-              </div>
             </div>
 
-            {/* <div style={{ display: 'flex', gap: '15px' }}>
+            <div>
+              <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #e1e1e1', paddingLeft: '30px', width: '130%' }}>
+                <span style={{ fontSize: '13px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 1, fontWeight: 600 }}>BOUTIQUE</span>
+                <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px', height: '350px', flexWrap: 'wrap' }}>
+                  {
+                    menul2data?.map((md) => (
+                      <span style={{ fontSize: '12.5px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 0.4, cursor: 'pointer' }}
+                        onClick={() => handelNewMenuData({ "label": "param2", "data": md })}
+                      >
+                        {capitalizeText(md?.param2dataname)}
+                      </span>
+                    ))
+                  }
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* <div style={{ display: 'flex', gap: '15px' }}>
               <img src={menu2Img} alt="#" style={{ height: '250px', width: '300px', objectFit: 'cover' }} />
               <img src={menu1Img} alt="#" style={{ height: '250px', width: '300px', objectFit: 'cover' }} />
             </div> */}
 
-          </div>
         </div>
+      </div>
 
       <div
         style={{
@@ -1464,134 +915,6 @@ export default function Header() {
             }
           </div>
         </div>
-
-        {!drawerShowOverlay && (
-          <div
-            div
-            className={`Smining-Top-Header-fixed-main ${isHeaderFixed ? "fixed" : ""
-              } ${serachsShowOverlay ? "searchoverly" : ""}`}
-          >
-            <div
-              className="Smining-Top-Header-fixed"
-              style={{ display: "flex" }}
-            >
-              <div
-                style={{ display: "flex", margin: "5px", alignItems: "center" }}
-                className="mobileViewFirstDiv1"
-              >
-                {drawerShowOverlay ? (
-                  <IoClose
-                    style={{
-                      height: "30px",
-                      width: "30px",
-                      color: "black",
-                      cursor: "pointer",
-                    }}
-                    onClick={toggleDrawerOverlay}
-                  />
-                ) : (
-                  <MenuIcon
-                    style={{ fontSize: "35px", color: "#7d7f85" }}
-                    onClick={toggleDrawerOverlay}
-                    className="muIconeMobileHeader"
-
-                  />
-                )}
-              </div>
-              <div
-                className="mobileViewFirstDiv2"
-              >
-                <a href="/">
-                  <img src={titleImg} className="MainlogogMobileImage" />
-                </a>
-              </div>
-              {islogin === "false" && (
-                <div style={{
-                  display: 'flex',
-                  justifyContent: 'flex-end',
-                  width: '33.33%',
-                  marginRight: '15px'
-                }}>
-                  <li
-                    className="nav-li-smining"
-                    style={{ cursor: "pointer", color: '#7d7f85' }}
-                    onClick={() => navigation('/LoginOption')}
-                  >
-                    {LOGIN}
-                  </li>
-                </div>
-              )}
-              {islogin === "true" &&
-                <div className="mobileViewFirstDiv3" style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <Badge
-                    badgeContent={getWishListCount}
-                    overlap={"rectangular"}
-                    color="secondary"
-                    style={{ marginInline: '5px' }}
-                    className="smilingHeaderWhishlistIcon"
-                  >
-                    <Tooltip title="WishList">
-                      <li style={{ listStyle: 'none' }} onClick={() => navigation("/myWishList")}>
-                        <PiStarThin
-                          style={{
-                            height: "25px",
-                            cursor: "pointer",
-                            width: "25px",
-                            color: "#7d7f85",
-                          }}
-                          className="mobileViewSmilingTop1Icone"
-                        />
-                      </li>
-                    </Tooltip>
-                  </Badge>
-
-                  <li onClick={toggleOverlay} style={{ listStyle: 'none', textAlign: 'center', marginInline: '10px' }}>
-                    <IoSearchOutline
-                      style={{
-                        height: "20px", cursor: "pointer", width: "20px",
-                        color: "#7d7f85",
-                      }}
-                      className="mobileViewSmilingTop2Icone"
-                    />
-                  </li>
-                  <Badge
-                    badgeContent={getCartListCount}
-                    overlap={"rectangular"}
-                    color="secondary"
-                    style={{ marginInline: '10px' }}
-                  >
-                    <Tooltip title="Cart">
-                      <li
-                        onClick={toggleCartDrawer(true)}
-                        style={{
-                          marginLeft: "-10px",
-                          cursor: "pointer",
-                          listStyle: 'none',
-                          marginTop: "0px",
-                        }}
-                      >
-                        {/* <PiStarFourThin
-                          style={{
-                            cursor: "pointer",
-                            height: "30px",
-                            width: "30px",
-                            color: "#7d7f85",
-                          }}
-                          className="mobileViewSmilingTop3Icone"
-
-                        /> */}
-                        <ShoppingCartOutlinedIcon
-                          sx={{ height: '30px', width: '30px', color: '#7d7f85' }}
-                        />
-                      </li>
-                    </Tooltip>
-                  </Badge>
-
-                </div>
-              }
-            </div>
-          </div>
-        )}
       </div>
 
       <Cart open={openCart} toggleCartDrawer={toggleCartDrawer} />

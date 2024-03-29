@@ -33,6 +33,8 @@ export default function MyWishList() {
         })
 
     }
+
+    console.log('whiccccccccccccccccccccccc', wishlistData);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -200,10 +202,7 @@ export default function MyWishList() {
 
 
     return (
-        <div className='paddingTopMobileSet' style={{
-            backgroundColor: '#c0bbb1',
-            paddingTop: '110px'
-        }}>
+        <div className='paddingTopMobileSet' style={{ paddingTop: '130px' }}>
             {isLoading && (
                 <div className="loader-overlay">
                     <CircularProgress className='loadingBarManage' />
@@ -216,8 +215,8 @@ export default function MyWishList() {
                     {wishlistData?.length !== 0 && <div className='smilingListTopButton'>
                         {/* <button className='smiTopShareBtn'>SHARE WISHLIST</button> */}
                         <button className='smiTopClearBtn' onClick={handleRemoveAllWishList}>CLEAR ALL</button>
-                        <button className='smiTopAddAllBtn' onClick={handleAddAll}>ADD TO CART ALL</button>
-                        <button className='smiTopAddAllBtn' onClick={() => navigation('/productpage')}>Show ProductList</button>
+                        <button className='smiTopClearBtn' onClick={handleAddAll}>ADD TO CART ALL</button>
+                        <button className='smiTopClearBtn' onClick={() => navigation('/productpage')}>Show ProductList</button>
                     </div>}
 
                     <div className='smiWishLsitBoxMain'>
@@ -234,19 +233,28 @@ export default function MyWishList() {
                                         <IoClose style={{ height: '30px', width: '30px', cursor: 'pointer', color: 'rgb(0 0 0 / 66%)' }} onClick={() => handleRemoveWichList(item)} />
                                     </div>
                                     <img src={`${imageURL}/${yKey}/${item.DefaultImageName}`} className='smiWishLsitBoxImge' style={{ cursor: 'pointer' }} alt='Wishlist item' onClick={() => handelProductSubmit(item)} />
-                                   
-                                    <p className='smiWishLsitBoxDesc1'>{item.designno}</p>
-                                    <p className='smiWishLsitBoxDesc2'>{item.mastermanagement_goldtypename} / {item.mastermanagement_goldcolorname} / {item.ActualGrossweight} <br /> {isPriseShow == 1 && <p>$ {item.TotalUnitCost}</p>}</p>
-                                    <p className='smiWishLsitBoxDesc3' onClick={() => handleAddToCart(item.autocode)}>ADD TO CART +</p>
+                                    
+                                    <p className='smiWishLsitBoxTitltLine'>{item.TitleLine}</p>
+
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginInline: '2%' }}>
+                                        <p className='smiWishLsitBoxDesc1'>{item.designno}</p>
+                                        {isPriseShow == 1 && <p className='smiWishLsitBoxDescPrice'>$ {item.TotalUnitCost}</p>}
+                                    </div>
+
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginInline: '2%' }}>
+                                        <p className='smiWishLsitBoxDesc2'>GWT: {item.ActualGrossweight}</p>
+                                        <p className='smiWishLsitBoxDesc2'>DWT: {item.totaldiamondweight}</p>
+                                    </div>
+                                    {/* <p className='smiWishLsitBoxDesc2'>{item.totaldiamondweight} / {item.ActualGrossweight}</p> */}
+                                    {/* <p className='smiWishLsitBoxDesc2'>{item.mastermanagement_goldtypename} / {item.mastermanagement_goldcolorname} / {item.ActualGrossweight}</p> */}
+                                    <div style={{ display: 'flex', justifyContent: 'center', marginBlock: '15px' }}>
+                                        <button className='smiWishLsitBoxDesc3' onClick={() => handleAddToCart(item.autocode)}>ADD TO CART +</button>
+                                    </div>
                                 </div>
                             ))}
                     </div>
                     <Footer />
                 </div>
-
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
-                <p style={{ margin: '0px', fontWeight: 500, width: '100px', color: 'white', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
             </div>
         </div>
     )

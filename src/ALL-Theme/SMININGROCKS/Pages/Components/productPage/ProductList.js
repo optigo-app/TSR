@@ -1956,9 +1956,9 @@ const ProductList = () => {
             <Footer />
           </div>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
+        {/* <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
           <p style={{ margin: '0px', fontWeight: 500, width: '100px', color: 'white', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
-        </div>
+        </div> */}
       </div>
 
     </div >

@@ -5,31 +5,34 @@
 
 
 .smling-forgot-main {
-    background-color: white;
+    padding: 7% 0px 8% 0px;
 }
 
 .labGrowForgot {
-    width: 420px;
+    width: 430px;
     margin: 10px;
 }
 
 .submitBtnForgot {
-    height: 60px;
-    width: 420px;
-    color: white;
-    background-color: #7d7f85;
-    border: 0;
+    height: 40px;
+    width: 430px;
+    border: 1px solid black;
     margin-top: 10px;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 1;
+    font-size: 14px;
+    color: #424242;
+    font-weight: 600!important;
+    letter-spacing: 1px;
     transition: all 0.5s ease;
-}
-
-.submitBtnForgot:hover {
+    font-family: 'Harmonia';
+    cursor: pointer;
     background-color: white;
-    color: #7d7f85;
-    border: 1px solid #7d7f85;
+}
+.submitBtnForgot:hover{
+    background-color: rgba(66, 66, 66, 0.05);
+}
+.clicked {
+    border-color: red;
+    /* Change border color when clicked */
 }
 
 .cancleForgot {
@@ -60,15 +63,9 @@
     width: 100%;
 }
 
-.cancleBtn{
+.cancleBtn {
     margin-top: 10px;
 }
-
-.submitBtnForgot:focus,
-.submitBtnForgot.focused {
-    border-color: red; /* Change the border color to red when focused */
-}
-
 
 @media screen and (max-width: 950px) {
     .AuthScreenMainTitle {
@@ -82,7 +79,7 @@
     }
 
     .smling-forgot-main {
-        margin-inline: 2%!important;
+        margin-inline: 2% !important;
     }
 
 
@@ -95,20 +92,20 @@
 
     .submitBtnForgot {
         width: 50%;
-        height: 50px!important;
+        height: 50px !important;
 
     }
-   
+
 }
 
 @media screen and (max-width: 500px) {
 
     .submitBtnForgot {
         width: 70%;
-        height: 40px!important;
+        height: 40px !important;
     }
 
-    .AuthScreenSubTitle{
-        margin-top: -65px!important;
+    .AuthScreenSubTitle {
+        margin-top: -65px !important;
     }
 }

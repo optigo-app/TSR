@@ -5,6 +5,7 @@
 
 
 .smling-register-main {
+    margin-inline: 6%;
     background-color: white;
 }
 
@@ -13,23 +14,23 @@
     margin: 10px;
 }
 
-.createBtnRegister{
-    height: 60px;
-    width: 420px;
-    color: white;
-    background-color: #7d7f85;
-    border: 0;
-    margin-top: 10px;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 1;
-    transition: all 0.5s ease;
-}
 
-.createBtnRegister:hover{
+.createBtnRegister {
+    height: 40px;
+    width: 430px;
+    border: 1px solid black;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #424242;
+    font-weight: 600!important;
+    letter-spacing: 1px;
+    transition: all 0.5s ease;
+    font-family: 'Harmonia';
+    cursor: pointer;
     background-color: white;
-    color: #7d7f85;
-    border: 1px solid #7d7f85;
+}
+.createBtnRegister:hover{
+    background-color: rgba(66, 66, 66, 0.05);
 }
 
 .SmilingSignInHere{

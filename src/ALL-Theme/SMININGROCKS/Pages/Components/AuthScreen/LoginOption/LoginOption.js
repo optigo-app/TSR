@@ -11,31 +11,26 @@ export default function LoginOption() {
     const navigation = useNavigate();
 
     return (
-        <div className='paddingTopMobileSet' style={{
-            backgroundColor: '#c0bbb1',
-            paddingTop: '110px'
-        }}>
-            <div className='loginDailog'>
-                <div>
-                    <p className='loginDiTile'>Log in or sign up in seconds</p>
-                    <p style={{ textAlign: 'center' }}>Use your email or mobile no to continue with the organization.</p>
-                    <div className='smilingLoginOptionMain'>
-                        <div className='loginMail' onClick={() => navigation('/ContinueWithEmail')}>
-                            <IoMdMail style={{ height: '25px', width: '25px' }} />
-                            <p style={{ margin: '0px', fontSize: '20px', fontWeight: 500, paddingLeft: '25px' }}>Continue with email</p>
+        <div className='paddingTopMobileSet' style={{ backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
+            <div>
+                <div className='loginDailog'>
+                    <div className='optionLoginMain'>
+                        <p className='loginDiTile'>Log in or sign up in seconds</p>
+                        <p style={{ textAlign: 'center', fontFamily: 'Harmonia' ,marginTop: '0px'}}>Use your email or mobile no to continue with the organization.</p>
+                        <div className='smilingLoginOptionMain'>
+                            <div className='loginMail' onClick={() => navigation('/ContinueWithEmail')}>
+                                <IoMdMail style={{ height: '25px', width: '25px' }} />
+                                <p style={{ margin: '0px', fontSize: '20px', fontWeight: 500, paddingLeft: '25px' }}>Continue with email</p>
+                            </div>
+                            <div className='loginMobile' onClick={() => navigation('/ContimueWithMobile')}>
+                                <FaMobileAlt style={{ height: '25px', width: '25px', marginRight: '10px' }} />
+                                <p style={{ margin: '0px', fontSize: '20px', fontWeight: 500, paddingLeft: '25px' }}>Log in with mobile</p>
+                            </div>
                         </div>
-                        <div className='loginMobile' onClick={() => navigation('/ContimueWithMobile')}>
-                            <FaMobileAlt style={{ height: '25px', width: '25px', marginRight: '10px' }} />
-                            <p style={{ margin: '0px', fontSize: '20px', fontWeight: 500, paddingLeft: '25px' }}>Log in with mobile</p>
-                        </div>
+                        <p style={{ marginTop: '40px', fontSize: '14px', textAlign: 'center' }}>By continuing, you agree to our Terms of Use. Read our Privacy Policy.</p>
                     </div>
-                    <p style={{ marginTop: '40px', fontSize: '14px' , textAlign: 'center' }}>By continuing, you agree to our Terms of Use. Read our Privacy Policy.</p>
                 </div>
                 <Footer />
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
-                <p style={{ margin: '0px', fontWeight: 500, width: '100px', color: 'white', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
             </div>
         </div>
     )

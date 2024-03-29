@@ -15,7 +15,7 @@ export default function Footer() {
         <div>
             <div className='TSRFooterMain'>
                 <div className='TSRFooterPart1'>
-                    <div style={{ paddingBlock: '70px' }}>
+                    <div style={{ paddingBlock: '110px' }}>
                         <img src='https://pipeline-theme-fashion.myshopify.com/cdn/shop/files/Mezzo_White.png?v=1652288798&width=230' className='trsFoooterImg' />
                         <div className='TSRFooterPart1Sub1'>
                             <div className='TSRFooterPart1Sub1-1'>
@@ -40,7 +40,7 @@ export default function Footer() {
                     </div>
 
                     <div className='TSRFooterPart1Sub2'>
-                        <p style={{ fontSize: '40px', color: 'white', marginBlock: '50px' , fontFamily: 'Tenor Sans, sans-serif'}}>STAY IN TOUCH.</p>
+                        <p style={{ fontSize: '35px', color: 'white', marginBlock: '60px', fontFamily: 'Tenor Sans, sans-serif' }}>STAY IN TOUCH.</p>
                         <div style={{ display: 'flex' }}>
                             <FaTwitter style={{ margin: '5px', cursor: 'pointer', color: 'white' }} />
                             <FaFacebookF style={{ margin: '5px', cursor: 'pointer', color: 'white' }} />
@@ -51,19 +51,21 @@ export default function Footer() {
                 </div>
                 <div className='TSRFooterPart2'>
                     <img src='https://pipeline-theme-fashion.myshopify.com/cdn/shop/files/210128_BW_PF21_S219059.jpg?v=1671215731&width=768' className='TSRFooterPart2Img' />
-                    
-                    <p style={{color: 'white', fontSize: '20px', marginTop: '40px'}}>OUR WEEKLY NEWSLETTER</p>
-                    <p>SKIP TO THE DETAILS</p>
-                    <p>Join to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
+                    <div style={{ padding: '60px 0px 0px 60px' }}>
+                        <p style={{ color: 'white', fontFamily: 'Harmonia', fontSize: '13px', letterSpacing: '1px', margin: '40px 0px 0px 0px' }}>OUR WEEKLY NEWSLETTER</p>
+                        <p className='TSRFooterPart2Desc2'>SKIP TO THE DETAILS</p>
+                        <p style={{ fontFamily: 'Harmonia', margin: '0px', color: 'white' }}>Join to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
+
+                        <input type='text' placeholder="your-email@gxample.com" className='TSRFooterPart2Input' />
+                    </div>
                 </div>
             </div>
             <div className='footerMoreTextNew'>
                 <div>
-                    <select>
-                        <option>Heloo</option>
-                        <option>Heloo</option>
-                        <option>Heloo</option>
-                        <option>Heloo</option>
+                    <select className='forrterSelectionMain'>
+                        <option>UNITED STATES (US $)</option>
+                        <option>UNITED KINGDOM (GB £)</option>
+                        <option>CANADA (CA $)</option>
                     </select>
                 </div>
                 <div>
