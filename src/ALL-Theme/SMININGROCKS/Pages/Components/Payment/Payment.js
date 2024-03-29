@@ -234,9 +234,6 @@ export default function Payment() {
                 </div>
                 <Footer />
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
-                <p style={{ margin: '0px', fontWeight: 500, width: '100px', color: 'white', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
-            </div>
         </div>
     )
 }

@@ -146,7 +146,7 @@ export default function ForgotPass() {
                         marginTop: '15px',
                         fontSize: '40px',
                         color: '#7d7f85',
-                        fontFamily: 'FreightDispProBook-Regular,Times New Roman,serif'
+                        fontFamily: 'Harmonia'
                     }}
                     
                     className='AuthScreenMainTitle'
@@ -156,7 +156,7 @@ export default function ForgotPass() {
                         marginTop: '-60px',
                         fontSize: '15px',
                         color: '#7d7f85',
-                        fontFamily: 'FreightDispProBook-Regular,Times New Roman,serif'
+                        fontFamily: 'Harmonia'
                     }} 
                     
                     className='AuthScreenSubTitle'
@@ -229,9 +229,6 @@ export default function ForgotPass() {
                     <Footer />
 
                 </div>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
-                <p style={{ margin: '0px', fontWeight: 500, width: '100px', color: 'white', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
             </div>
         </div>
     )

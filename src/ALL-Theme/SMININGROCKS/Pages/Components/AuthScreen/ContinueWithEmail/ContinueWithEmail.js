@@ -11,6 +11,7 @@ export default function ContinueWithEmail() {
     const [emailError, setEmailError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigation = useNavigate();
+    const [isClicked, setIsClicked] = useState(false);
 
     // const validateEmail = (email) => {
     //     const regex = /^[a-zA-Z][\w@$&#]*@[a-zA-Z]+\.[a-zA-Z]+$/;
@@ -60,7 +61,7 @@ export default function ContinueWithEmail() {
                 p: encodedCombinedValue
             };
             const response = await CommonAPI(body);
-            console.log('ressssssss',response);
+            console.log('ressssssss', response);
             if (response.Data.rd[0].stat === 1) {
                 navigation('/LoginWithEmail', { state: { email: trimmedEmail } });
             } else {
@@ -74,33 +75,33 @@ export default function ContinueWithEmail() {
     };
 
     return (
-        <div className='paddingTopMobileSet' style={{ backgroundColor: '#c0bbb1', paddingTop: '110px' }}>
+        <div className='paddingTopMobileSet' style={{ backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
             {isLoading && (
                 <div className="loader-overlay">
                     <CircularProgress className='loadingBarManage' />
                 </div>
             )}
-            <div style={{ backgroundColor: '#c0bbb1' }}>
+            <div>
                 <div className='smling-forgot-main'>
                     <p style={{
                         textAlign: 'center',
                         paddingBlock: '60px',
                         marginTop: '15px',
-                        fontSize: '40px',
-                        color: '#7d7f85',
-                        fontFamily: 'FreightDispProBook-Regular,Times New Roman,serif'
+                        fontSize: '25px',
+                        // color: '#7d7f85',
+                        fontFamily: 'Harmonia'
                     }}
                         className='AuthScreenMainTitle'
                     >Continue With Email</p>
                     <p style={{
                         textAlign: 'center',
-                        marginTop: '-60px',
+                        marginTop: '-70px',
                         fontSize: '15px',
-                        color: '#7d7f85',
-                        fontFamily: 'FreightDispProBook-Regular,Times New Roman,serif'
+                        // color: '#7d7f85',
+                        fontFamily: 'Harmonia'
                     }}
-                    
-                    className='AuthScreenSubTitle'
+
+                        className='AuthScreenSubTitle'
                     >We'll check if you have an account, and help create one if you don't.</p>
 
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -109,7 +110,8 @@ export default function ContinueWithEmail() {
                             id="outlined-basic"
                             label="Email"
                             variant="outlined"
-                            className='labGrowForgot'
+                            className={`labGrowForgot ${isClicked ? 'clicked' : ''}`}
+                            // InputProps={{ style: { height: '50px' } }} 
                             style={{ margin: '15px' }}
                             value={email}
                             onKeyDown={(event) => {
@@ -118,28 +120,17 @@ export default function ContinueWithEmail() {
                                 }
                             }}
                             onChange={handleEmailChange}
+                            onFocus={() => setIsClicked(true)}
+                            onBlur={() => setIsClicked(false)}
                             error={!!emailError}
                             helperText={emailError}
                         />
 
-                          {/* <button
-                            className={`submitBtnForgot ${buttonFocused ? 'focused' : ''}`}
-                            onClick={handleSubmit}
-                            onFocus={() => setButtonFocused(true)}
-                            onBlur={() => setButtonFocused(false)}
-                            style={{borderColor: 'red'}}
-                        >
-
-                        </button> */}
-
                         <button type='submit' className='submitBtnForgot' onClick={handleSubmit}>SUBMIT</button>
-                        <Button style={{marginTop: '10px' ,color: 'gray'}} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
+                        <Button style={{ marginTop: '10px', color: '#424242', fontFamily: 'Harmonia' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
                     </div>
-                    <Footer />
                 </div>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
-                <p style={{ margin: '0px', fontWeight: 500, width: '100px', color: 'white', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
+                <Footer />
             </div>
         </div>
     );

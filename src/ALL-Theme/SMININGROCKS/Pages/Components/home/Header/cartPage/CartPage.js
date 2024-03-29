@@ -596,7 +596,7 @@ export default function CartPage() {
     <>
       <div
         className="paddingTopMobileSet"
-        style={{ backgroundColor: "#c0bbb1", paddingTop: "110px" }}
+        style={{ paddingTop: "130px" }}
       >
         {isLoading && (
           <div className="loader-overlay">
@@ -630,7 +630,7 @@ export default function CartPage() {
                     List View
                   </button>
                   <button
-                    className="smiTopAddAllBtn"
+                    className="smiTopClearBtn"
                     onClick={() => handleChange(1)}
                   >
                     Image View
@@ -642,7 +642,7 @@ export default function CartPage() {
                     CLEAR ALL
                   </button>
                   <button
-                    className="smiTopAddAllBtn"
+                    className="smiTopClearBtn"
                     onClick={() => navigation("/productpage")}
                   >
                     Show ProductList

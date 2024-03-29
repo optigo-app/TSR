@@ -23,7 +23,7 @@ export default function AboutUs() {
                     textAlign: 'center',
                     fontSize: '40px',
                     color: 'white',
-                    fontFamily: 'FreightDispProBook-Regular,Times New Roman,serif'
+                    fontFamily: 'Harmonia'
                 }}>About Us</p>
             </div>
             <div className='daimondsEveryAbout'>

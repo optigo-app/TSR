@@ -170,22 +170,21 @@ export default function LoginWithEmail() {
         }
     }
     return (
-        <div className='paddingTopMobileSet' style={{ backgroundColor: '#c0bbb1', paddingTop: '110px' }}>
+        <div className='paddingTopMobileSet' style={{ backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
             <ToastContainer />
             {isLoading && (
                 <div className="loader-overlay">
                     <CircularProgress className='loadingBarManage' />
                 </div>
             )}
-            <div style={{ backgroundColor: '#c0bbb1' }}>
+            <div>
                 <div className='smling-forgot-main'>
                     <p style={{
                         textAlign: 'center',
                         paddingBlock: '60px',
                         marginTop: '15px',
-                        fontSize: '40px',
-                        color: '#7d7f85',
-                        fontFamily: 'FreightDispProBook-Regular,Times New Roman,serif'
+                        fontSize: '25px',
+                        fontFamily: 'Harmonia'
                     }}
                         className='AuthScreenMainTitle'
                     >Login With Password</p>
@@ -194,7 +193,7 @@ export default function LoginWithEmail() {
                         marginTop: '-80px',
                         fontSize: '15px',
                         color: '#7d7f85',
-                        fontFamily: 'FreightDispProBook-Regular,Times New Roman,serif'
+                        fontFamily: 'Harmonia'
                     }}
                         className='AuthScreenSubTitle'
                     >using {email}</p>
@@ -234,18 +233,15 @@ export default function LoginWithEmail() {
                         />
 
                         <button className='submitBtnForgot' onClick={handleSubmit}>Login</button>
-                        <Button style={{ marginTop: '10px', color: 'gray' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
+                        <Button style={{ marginTop: '10px', color: '#424242' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
 
-                        <button type='submit' className='SmilingLoginCodeBtn' onClick={handleNavigation}>Login With a Code instead on email</button>
-                        <p style={{ textAlign: 'center' }}>Go passwordless! we'll send you an email.</p>
+                        <button type='submit' className='submitBtnForgot' onClick={handleNavigation}>Login With a Code instead on email</button>
+                        <p style={{ textAlign: 'center', fontFamily: 'Harmonia', fontSize: '14px' }}>Go passwordless! we'll send you an email.</p>
 
-                        <p style={{ color: 'blue', cursor: 'pointer' }} onClick={handleForgotPassword}>Forgot Password ?</p>
+                        <p style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline' }} onClick={handleForgotPassword}>Forgot Password ?</p>
                     </div>
-                    <Footer />
                 </div>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
-                <p style={{ margin: '0px', fontWeight: 500, width: '100px', color: 'white', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
+                <Footer />
             </div>
         </div>
     );

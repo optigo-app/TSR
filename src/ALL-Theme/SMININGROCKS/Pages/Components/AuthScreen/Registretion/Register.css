@@ -6,6 +6,7 @@
 
 .smling-register-main {
     background-color: white;
+    padding-bottom: 3%;
 }
 
 .labgrowRegister {
@@ -14,22 +15,21 @@
 }
 
 .createBtnRegister {
-    height: 60px;
-    width: 420px;
-    color: white;
-    background-color: #7d7f85;
-    border: 0;
+    height: 40px;
+    width: 450px;
+    border: 1px solid black;
     margin-top: 10px;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 1;
+    font-size: 14px;
+    color: #424242;
+    font-weight: 600!important;
+    letter-spacing: 1px;
     transition: all 0.5s ease;
-}
-
-.createBtnRegister:hover {
+    font-family: 'Harmonia';
+    cursor: pointer;
     background-color: white;
-    color: #7d7f85;
-    border: 1px solid #7d7f85;
+}
+.createBtnRegister:hover{
+    background-color: rgba(66, 66, 66, 0.05);
 }
 
 .SmilingSignInHere {
