@@ -251,3 +251,103 @@
         font-size: 12px;
     }
 }
+
+
+
+
+.TSRFooterMain{
+    background-color: #424242;
+    display: flex;
+}
+
+.TSRFooterPart1{
+    width: 60%;
+    padding: 3% 5% 0px 40px;
+}
+.trsFoooterImg{
+    padding-bottom: 5%;
+}
+.TSRFooterPart1Sub1menuTitle{
+    color: white;
+    font-weight: 600;
+    font-size: 13px;
+    font-style: normal;
+    letter-spacing: 0.09em;
+}
+.TSRFooterPart1Sub1menuDesc{
+    color: white;
+    font-weight: 300;
+    font-size: 14px;
+    margin-right: 40px;
+    letter-spacing: 1px;
+    font-family: 'Harmonia';
+}
+
+
+.TSRFooterPart2{
+    width: 40%;
+    background-color: #4f4f4f;
+}
+.TSRFooterPart2Img{
+    width: 100%;
+    height: 50%;
+}
+.TSRFooterPart2Desc2{
+    font-family: "Tenor Sans", sans-serif;
+    color: white;
+    font-size: 32px;
+    letter-spacing: 3px;
+    margin: 10px 0px 20px 0px;
+}
+.TSRFooterPart2Input{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 90%;
+    border-bottom: 1px solid white;
+    color: white;
+    margin-top: 30px;
+    height: 30px;
+}
+.TSRFooterPart2Input::placeholder{
+    color: #bebebe;
+    padding-bottom: 5px;
+}
+
+
+.TSRFooterPart1Sub1{
+    display: flex;
+}
+.TSRFooterPart1Sub1-1{
+    width: 33.33%;
+}
+.TSRFooterPart1Sub1-2{
+    width: 33.33%;
+}
+.TSRFooterPart1Sub1-3{
+    width: 33.33%;
+}
+
+.TSRFooterPart1Sub2{
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.footerMoreTextNew{
+    background-color: #1d1d1d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+}
+
+.forrterSelectionMain{
+    height: 40px;
+    width: 200px;
+    padding: 5px;
+    background-color: transparent;
+    color: #bebebe;
+}

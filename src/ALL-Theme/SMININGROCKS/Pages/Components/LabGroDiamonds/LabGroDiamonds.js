@@ -21,7 +21,7 @@ export default function LabGroDiamonds() {
                     textAlign: 'center',
                     fontSize: '40px',
                     color: 'white',
-                    fontFamily: 'FreightDispProBook-Regular,Times New Roman,serif'
+                    fontFamily: 'Harmonia'
                 }}>Lab Grown Diamonds</p>
             </div>
             <div className='labGrowMain'>

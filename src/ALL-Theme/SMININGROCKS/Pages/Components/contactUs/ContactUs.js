@@ -12,7 +12,7 @@ export default function ContactUs() {
         }}>
             <div>
                 <div style={{ marginBlock: '20px' }}>
-                    <p style={{ fontSize: '40px', color: 'white', textAlign: 'center', fontFamily: 'FreightDispProBook-Regular,Times New Roman,serif' }}>Contact Us</p>
+                    <p style={{ fontSize: '40px', color: 'white', textAlign: 'center', fontFamily: 'Harmonia' }}>Contact Us</p>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                         <p style={{ color: 'white', width: '300px', textAlign: 'center', fontSize: '15px' }}>Have a comment, suggestion or queestion? Feel free to reach out to us and we’ll getback to you as soon as possible.</p>
                     </div>
@@ -89,9 +89,6 @@ export default function ContactUs() {
                     <SmilingRock />
                     <Footer />
                 </div>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
-                <p style={{ margin: '0px', fontWeight: 500, width: '100px', color: 'white', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
             </div>
         </div>
     )

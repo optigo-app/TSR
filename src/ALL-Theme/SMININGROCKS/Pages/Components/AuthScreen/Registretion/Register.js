@@ -227,21 +227,20 @@ export default function Register() {
   
 
   return (
-    <div className='paddingTopMobileSet' style={{ backgroundColor: '#c0bbb1', paddingTop: '110px' }}>
+    <div className='paddingTopMobileSet' style={{ paddingTop: '110px' ,backgroundColor: 'rgba(66, 66, 66, 0.05)'}}>
       {isLoading && (
         <div className="loader-overlay">
           <CircularProgress className='loadingBarManage' />
         </div>
       )}
-      <div style={{ backgroundColor: '#c0bbb1' }}>
+      <div>
         <div className='smling-register-main'>
           <p style={{
             textAlign: 'center',
-            paddingBlock: '60px',
+            paddingTop: '60px',
             marginTop: '15px',
-            fontSize: '40px',
-            color: '#7d7f85',
-            fontFamily: 'FreightDispProBook-Regular,Times New Roman,serif'
+            fontSize: '25px',
+            fontFamily: 'Harmonia'
           }}
             className='AuthScreenRegisterMainTitle'
           >Register</p>
@@ -375,13 +374,10 @@ export default function Register() {
               <input type='checkbox' />
               <p style={{ margin: '5px' }}>Subscribe to our newsletter</p>
             </div> */}
-            <Button style={{marginTop: '10px' ,color: 'gray'}} onClick={() => navigation('/LoginOption')}>BACK</Button>
+            <Button style={{marginTop: '10px' ,color: '#424242',fontFamily: 'Harmonia'}} onClick={() => navigation('/LoginOption')}>BACK</Button>
           </div>
-          <Footer />
         </div>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
-        <p style={{ margin: '0px', fontWeight: 500, width: '100px', color: 'white', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
+          <Footer />
       </div>
     </div>
   );

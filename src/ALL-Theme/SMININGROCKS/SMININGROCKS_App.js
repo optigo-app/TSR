@@ -69,11 +69,11 @@ export default function SMININGROCKS_App() {
         <>
         <ToastContainer/>
         <div>
-            {/* {(location.pathname === "/accountledgertable" ||
+            {(location.pathname === "/accountledgertable" ||
                 location.pathname === "/accountledgerexcel" ||
                 location.pathname === "/accountledgerdebit" ||
                 location.pathname === "/accountledgercredit") ?
-                null : <Header />} */}
+                null : <Header />}
             <div>
                 <Routes>
                     <Route path="/" element={<Home />} />

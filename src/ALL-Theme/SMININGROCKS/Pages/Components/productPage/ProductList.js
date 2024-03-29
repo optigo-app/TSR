@@ -119,6 +119,7 @@ const ProductList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+
       const data = JSON.parse(localStorage.getItem("allproductlist"));
       const loginUserDetail = JSON.parse(localStorage.getItem('loginUserDetail'));
 
@@ -1341,11 +1342,13 @@ const ProductList = () => {
                   }}
                 >
                   <span
-                    style={{
-                      fontFamily: "TT Commons, sans-serif",
-                      fontSize: "12px",
-                      opacity: "0.7",
-                    }}
+                  className="filtercategoryLable"
+                    // style={{
+                    //   fontFamily: "Harmonia, sans-serif",
+                    //   fontSize: "13px",
+                    //   fontWeight:'500px',
+                    //   color:'#424242'
+                    // }}
                   >
                     {ele.label}
                   </span>
@@ -1356,6 +1359,7 @@ const ProductList = () => {
                     flexDirection: "column",
                     gap: "4px",
                   }}
+                  className="filterListData"
                 >
                   {ele.label === "PRICE" &&
                     <div>
@@ -1389,35 +1393,37 @@ const ProductList = () => {
                       style={{
                         display: "flex",
                         alignItems: "center",
+                        justifyContent:"space-between",
                         gap: "12px",
                       }}
                       key={i}
                     >
+                       <small
+                        // style={{
+                        //   fontFamily: "TT Commons, sans-serif",
+                        //   color: "#7f7d85",
+                        //   textTransform: "lowercase",
+                        // }}
+                        className="sidebarfilterText"
+                      >
+                        {flist}
+                      </small>
                       <Checkbox
                         name={`checkbox${index + 1}${i + 1}`}
                         checked={
                           filterChecked[`checkbox${index + 1}${i + 1}`]
                             ?.checked
                         }
-                        style={{
-                          color: "#7f7d85",
-                          padding: 0,
-                          width: "10px",
-                        }}
+                        // style={{
+                        //   color: "#e3e3e3",
+                        //   padding: 0,
+                        //   width: "10px",
+                        // }}
                         onClick={(e) =>
                           handleCheckboxChange(e, ele, flist)
                         }
                         size="small"
                       />
-                      <small
-                        style={{
-                          fontFamily: "TT Commons, sans-serif",
-                          color: "#7f7d85",
-                          textTransform: "lowercase",
-                        }}
-                      >
-                        {flist}
-                      </small>
                     </div>
                   ))}
                 </AccordionDetails>
@@ -1476,15 +1482,8 @@ const ProductList = () => {
               className="smilingProductSubMain"
               style={{ width: "100%", display: "flex" }}
             >
-              <div
-                style={{
-                  width: "20%",
-                  margin: "0px 100px 0px 0px",
-                  padding: "100px 0px 40px 50px",
-                }}
-                className="smilingWebProductListSideBar"
-              >
-                <ul style={{display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
+              <div className="smilingWebProductListSideBar">
+                <ul style={{display:'flex',flexDirection:'row',justifyContent:'space-between', padding:'0px 0px 0px 28px'}}>
                   <li className="finejwelery me-4" id="finejwelery">Filters</li>
                   <li className="finejwelery" id="finejwelery" onClick={() => handlePageReload()}>All Jwelery</li>
                 </ul>
@@ -1523,11 +1522,13 @@ const ProductList = () => {
                           }}
                         >
                           <span
-                            style={{
-                              fontFamily: "TT Commons, sans-serif",
-                              fontSize: "12px",
-                              opacity: "0.7",
-                            }}
+                          className="filtercategoryLable"
+                            // style={{
+                            //   fontFamily: "Harmonia, sans-serif",
+                            //   fontSize: "13px",
+                            //   fontWeight:'500px',
+                            //   color:'#424242'
+                            // }}
                           >
                             {ele.label}
                           </span>
@@ -1538,6 +1539,7 @@ const ProductList = () => {
                             flexDirection: "column",
                             gap: "4px",
                           }}
+                          className="filterListData"
                         >
                           {ele.label === "PRICE" &&
                             <div>
@@ -1627,35 +1629,38 @@ const ProductList = () => {
                               style={{
                                 display: "flex",
                                 alignItems: "center",
+                                justifyContent:"space-between",
                                 gap: "12px",
                               }}
                               key={i}
                             >
+                               <small
+                               className="sidebarfilterText"
+                                // style={{
+                                //   fontFamily: "TT Commons, sans-serif",
+                                //   color: "#7f7d85",
+                                //   textTransform: "lowercase",
+                                // }}
+                              >
+                                {flist}
+                              </small>
                               <Checkbox
                                 name={`checkbox${index + 1}${i + 1}`}
                                 checked={
                                   filterChecked[`checkbox${index + 1}${i + 1}`]
                                     ?.checked
                                 }
-                                style={{
-                                  color: "#7f7d85",
-                                  padding: 0,
-                                  width: "10px",
-                                }}
+                                // style={{
+                                //   color: "#7f7d85",
+                                //   padding: 0,
+                                //   width: "10px",
+                                // }}
+                                className="filterCheckBox"
                                 onClick={(e) =>
                                   handleCheckboxChange(e, ele, flist)
                                 }
                                 size="small"
                               />
-                              <small
-                                style={{
-                                  fontFamily: "TT Commons, sans-serif",
-                                  color: "#7f7d85",
-                                  textTransform: "lowercase",
-                                }}
-                              >
-                                {flist}
-                              </small>
                             </div>
                           ))}
                         </AccordionDetails>
@@ -1769,28 +1774,19 @@ const ProductList = () => {
                     <option value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</option>
                   </select>
                 </div>
-                <div
-                  style={{
-                    width: "100%",
-                    // border: "1px solid #e1e1e1",
-                    display: "flex",
-                    // justifyContent: "center",
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                  }}
-                  className="smilingAllProductDataMainMobile"
-                >
+                <div className="smilingAllProductDataMainMobile">
                   {/* RollOverImageName */}
                   {/* {(newProData.length ? newProData : finalDataOfDisplaying())?.map((products, i) => ( */}
                   {(newProData?.length ? newProData : ProductApiData2)?.map((products, i) => (
                     <div
                       style={{
-                        width: "33.33%",
-                        border: "1px solid #e1e1e1",
+                        width: "28%",
+                        // border: "1px solid #e1e1e1",
                         textAlign: "center",
                         color: "#7d7f85",
                         position: "relative",
                         zIndex: 0,
+                        margin:'10px'
                       }}
                       className="smilingProductImageBox"
                     >
@@ -1798,7 +1794,7 @@ const ProductList = () => {
                       {products?.designno === "S24705" && <p id="labelTag_0002388" className="instockP">IN STOCK</p>}
                       {products?.designno === "MCJ2" && <p id="labelTag_0002388" className="instockP">IN STOCK</p>}
 
-                      <div onClick={() => handelProductSubmit(products)}>
+                      <div onClick={() => handelProductSubmit(products)} style={{boxShadow:"rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px"}}>
                         <img
                           className="prod_img"
                           src={
@@ -1816,48 +1812,47 @@ const ProductList = () => {
                         />
                       </div>
                       <div className="productTitleLine" onClick={() => handelProductSubmit(products)}>
-                        <p
-                          style={{
-                            fontSize: "13px",
-                            textTransform: "uppercase",
-                            fontWeight: "500",
-                            cursor: "pointer",
-                            textoverflow: "ellipsis",
-                            overflow: "hidden",
-                            whiteSpace: "nowrap",
-                            padding: '0 15px',
-                            minHeight: '19.5px',
-                            margin: '3px'
-                          }}
-                          className="smilingProductDeatilTitleMobile"
-                        >
-                          {products?.TitleLine} -<span style={{ fontWeight: 600 }}> {products?.designno} </span>
+                        <p className="smilingProductDeatilTitleMobile" >
+                          {products?.TitleLine} -<span> {products?.designno} </span>
                         </p>
                       </div>
-                      <div style={{}}>
-                        <div className="mobileDeatilDiv1" style={{ display: 'flex', justifyContent: 'center' }}>
+                      <div className="customizeDetails" style={{display:'flex'}}>
+                        {/* <div className="mobileDeatilDiv1"> */}
                           {ismetalWShow === 1 &&
+                          <>
                             <div>
-                              <p style={{ margin: '0px', fontSize: '13px' }}>NWT : <span style={{ fontWeight: 600, marginRight: '15px' }}>{products?.netwt}</span></p>
-                            </div>}
-                          {isGrossWShow === 1 && <div>
+                              <p style={{ margin: '0px', fontSize: '13px' }}>NWT : <span>{products?.netwt}</span></p>
+                            </div>
+                              <Divider className="dividerLine" orientation="vertical" variant="middle" flexItem />
+                              </>
+                            }
+                          {isGrossWShow === 1 && 
+                            <>
+                          <div>
+                            <p style={{ margin: '0px', fontSize: '13px' }}>GWT : <span>{products?.Grossweight}</span></p>
+                          </div>
+                          <Divider className="dividerLine" orientation="vertical" variant="middle" flexItem />
+                          </>
+                          }
 
-                            <p style={{ margin: '0px', fontSize: '13px' }}>GWT : <span style={{ fontWeight: 600, marginRight: '10px' }}>{products?.Grossweight}</span></p>
-                          </div>}
-
-                        </div>
-                        <div className="mobileDeatilDiv2" style={{ display: 'flex', justifyContent: 'center' }}>
+                        {/* </div> */}
+                        {/* <div className="mobileDeatilDiv2"> */}
                           {((isDaaimongWShow || isDaaimongWShow) === 1 && (products?.diamondweight !== 0 || products?.diamondpcs !== 0)) && <div>
-                            <p style={{ margin: '0px', fontSize: '13px' }}>DWT : <span style={{ fontWeight: 600, marginRight: '10px' }}>{(isDaaimongWShow === 1 && products?.diamondweight !== 0) && products?.diamondweight + '/'}  {(isDaaimonPShow === 1 && products?.diamondpcs !== 0) && products?.diamondpcs}</span></p>
+                            <p style={{ margin: '0px', fontSize: '13px' }}>DWT : <span>{(isDaaimongWShow === 1 && products?.diamondweight !== 0) && products?.diamondweight + '/'}  {(isDaaimonPShow === 1 && products?.diamondpcs !== 0) && products?.diamondpcs}</span></p>
                           </div>}
-
-                          {((isStoneWShow || isStonePShow) === 1 && (products?.totalcolorstoneweight !== 0 || products?.totalcolorstonepcs !== 0)) && <div>
-                            <p style={{ margin: '0px', fontSize: '13px' }}>CWT : <span style={{ fontWeight: 600, marginRight: '10px' }}>{(isStoneWShow === 1 && products?.totalcolorstoneweight !== 0) && products?.totalcolorstoneweight + '/'}  {(isStonePShow === 1 && products?.totalcolorstonepcs !== 0) && products?.totalcolorstonepcs}</span></p>
-                          </div>}
+                          {((isStoneWShow || isStonePShow) === 1 && (products?.totalcolorstoneweight !== 0 || products?.totalcolorstonepcs !== 0)) &&
+                          <>
+                          <Divider className="dividerLine" orientation="vertical" variant="middle" flexItem />
+                          <div>
+                            <p style={{ margin: '0px', fontSize: '13px' }}>CWT : <span>{(isStoneWShow === 1 && products?.totalcolorstoneweight !== 0) && products?.totalcolorstoneweight + '/'}  {(isStonePShow === 1 && products?.totalcolorstonepcs !== 0) && products?.totalcolorstonepcs}</span></p>
+                          </div>
+                          </> 
+                          }
                         </div>
 
+                      {/* </div> */}
                         <div>
-                          <p style={{ fontSize: "14px", fontWeight: 'bold' }}>
+                          <p className="priceQuality">
                             {isMetalTCShow === 1 && products?.MetalTypeName}-{products?.MetalColorName}{products?.MetalPurity}
                             {isPriceShow === 1 &&
                               <span>
@@ -1868,7 +1863,6 @@ const ProductList = () => {
                             }
                           </p>
                         </div>
-                      </div>
 
                       <div style={{ position: "absolute", zIndex: 999999, top: 0, right: 0, display: 'flex' }}>
                         <div>
@@ -1955,9 +1949,9 @@ const ProductList = () => {
             <Footer />
           </div>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
+        {/* <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
           <p style={{ margin: '0px', fontWeight: 500, width: '100px', color: 'white', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
-        </div>
+        </div> */}
       </div>
 
     </div >

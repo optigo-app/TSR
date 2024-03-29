@@ -11,7 +11,7 @@ export default function ServicePolicy() {
         }}>
             <div>
                 <div style={{ paddingBlock: '60px' }}>
-                    <p style={{ fontSize: '40px', color: 'white', textAlign: 'center', fontFamily: 'FreightDispProBook-Regular,Times New Roman,serif' }}>SERVICE POLICY</p>
+                    <p style={{ fontSize: '40px', color: 'white', textAlign: 'center', fontFamily: 'Harmonia' }}>SERVICE POLICY</p>
                 </div>
                 <div className='smiling-ServicePolicyMain'>
                     <div className='smiling-ServiPolicySubMain'>
@@ -67,9 +67,9 @@ export default function ServicePolicy() {
                     <Footer />
                 </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
+            {/* <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
                 <p style={{ margin: '0px', fontWeight: 500, width: '100px', color: 'white', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
-            </div>
+            </div> */}
         </div>
     )
 }

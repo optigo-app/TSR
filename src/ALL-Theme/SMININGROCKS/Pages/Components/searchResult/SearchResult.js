@@ -44,7 +44,7 @@ export default function SearchResult() {
                 fontSize: '40px',
                 color: 'white',
                 textAlign: 'center',
-                fontFamily: 'FreightDispProBook-Regular,Times New Roman,serif',
+                fontFamily: 'Harmonia',
                 paddingBlock: '30px'
             }}>Search Results for "{location.state?.searchText}"</p>
             <div className='smilingSearchResultMain'>
@@ -57,9 +57,6 @@ export default function SearchResult() {
                 ))}
                 <SmilingRock />
                 <Footer />
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
-                <p style={{ margin: '0px', fontWeight: 500, width: '100px', color: 'white', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
             </div>
         </div>
     )
