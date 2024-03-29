@@ -119,6 +119,7 @@ const ProductList = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      
       const data = JSON.parse(localStorage.getItem("allproductlist"));
       const loginUserDetail = JSON.parse(localStorage.getItem('loginUserDetail'));
 
