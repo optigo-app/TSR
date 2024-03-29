@@ -58,7 +58,7 @@ export default function ContimueWithMobile() {
                 p: encodedCombinedValue
             };
             const response = await CommonAPI(body);
-            console.log('resssssssssssss',response);
+            console.log('resssssssssssss', response);
             if (response.Data.Table1[0].stat === '1') {
                 navigation('/LoginWithMobileCode', { mobileNo: mobileNo });
                 localStorage.setItem('registerMobile', mobileNo)
@@ -75,30 +75,29 @@ export default function ContimueWithMobile() {
     };
 
     return (
-        <div className='paddingTopMobileSet' style={{ backgroundColor: '#c0bbb1', paddingTop: '110px' }}>
+        <div className='paddingTopMobileSet' style={{ backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
             {isLoading && (
                 <div className="loader-overlay">
                     <CircularProgress className='loadingBarManage' />
                 </div>
             )}
-            <div style={{ backgroundColor: '#c0bbb1' }}>
+            <div>
                 <div className='smling-forgot-main'>
                     <p style={{
                         textAlign: 'center',
                         paddingBlock: '60px',
                         marginTop: '15px',
-                        fontSize: '40px',
-                        color: '#7d7f85',
-                        fontFamily: 'FreightDispProBook-Regular,Times New Roman,serif'
+                        fontSize: '25px',
+                        fontFamily: 'Harmonia'
                     }}
                         className='AuthScreenMainTitle'
                     >Continue With Mobile</p>
                     <p style={{
                         textAlign: 'center',
-                        marginTop: '-60px',
+                        marginTop: '-70px',
                         fontSize: '15px',
                         color: '#7d7f85',
-                        fontFamily: 'FreightDispProBook-Regular,Times New Roman,serif'
+                        fontFamily: 'Harmonia'
                     }}
                         className='AuthScreenSubTitle'
                     >We'll check if you have an account, and help create one if you don't.</p>
@@ -125,13 +124,10 @@ export default function ContimueWithMobile() {
                         <button className='submitBtnForgot' onClick={handleSubmit}>
                             SUBMIT
                         </button>
-                        <Button style={{ marginTop: '10px', color: 'gray' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
+                        <Button style={{ marginTop: '10px', color: '#424242',fontFamily: 'Harmonia'  }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
                     </div>
-                    <Footer />
                 </div>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
-                <p style={{ margin: '0px', fontWeight: 500, width: '100px', color: 'white', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
+                <Footer />
             </div>
         </div>
     );

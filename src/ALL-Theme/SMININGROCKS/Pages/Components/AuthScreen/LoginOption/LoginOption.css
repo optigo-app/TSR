@@ -1,10 +1,15 @@
 
-.loginDailog{
+
+.optionLoginMain{
     background-color: white;
-    padding: 15px;
+    width: 30%;
 }
-
-
+.loginDailog{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10% 0px 8% 0px;
+}
 .smilingLoginOptionMain{
     display: flex;
     flex-direction: column;
@@ -16,30 +21,38 @@
     font-weight: 600;
     margin-top: 25px;
     text-align: center;
+    font-family: 'Harmonia';
 }
 .loginMail{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #888;
-    color: white;
+    border: 1px solid black;
     margin-inline: 7px;
-    height: 55px;
+    height: 45px;
     cursor: pointer;
-    width: 25%;
+    width: 75%;
     margin-top: 30px;
 }
+.loginMail:hover{
+    background-color: rgba(66, 66, 66, 0.05);
+}
+
+
+
 .loginMobile{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #888;
-    color: white;
+    border: 1px solid black;
     margin-inline: 7px;
-    height: 55px;
+    height: 45px;
     cursor: pointer;
     margin-top: 25px;
-    width: 25%;
+    width: 75%;
+}
+.loginMobile:hover{
+    background-color: rgba(66, 66, 66, 0.05);
 }
 
 @media screen and (max-width: 1150px) {
