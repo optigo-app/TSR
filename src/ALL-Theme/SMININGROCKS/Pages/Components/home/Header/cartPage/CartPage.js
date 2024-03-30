@@ -95,6 +95,7 @@ export default function CartPage() {
   let currencySymbol = JSON.parse(localStorage.getItem('CURRENCYCOMBO'))
 
   useEffect(()=>{
+    window.scrollTo(0, 0);
     const data = JSON.parse(localStorage.getItem("getPriceData"))
     setGetPriceData(data)
   },[])
@@ -627,13 +628,13 @@ export default function CartPage() {
                     className="smiTopClearBtn"
                     onClick={() => handleChange(0)}
                   >
-                    List View
+                    LIST VIEW
                   </button>
                   <button
                     className="smiTopClearBtn"
                     onClick={() => handleChange(1)}
                   >
-                    Image View
+                    IMAGE VIEW
                   </button>
                   <button
                     className="smiTopClearBtn"
@@ -645,7 +646,7 @@ export default function CartPage() {
                     className="smiTopClearBtn"
                     onClick={() => navigation("/productpage")}
                   >
-                    Show ProductList
+                    SHOW PRODUCTLIST
                   </button>
                   <button
                     className="placeOrderCartPageBtnMobile"
@@ -653,7 +654,7 @@ export default function CartPage() {
                       navigation("/Delivery");
                     }}
                   >
-                    Place Order
+                    PLACE ORDER
                   </button>
                 </div>
                 <div
@@ -685,7 +686,7 @@ export default function CartPage() {
                 display: "flex",
               }}
             >
-              <div className="smilingCartDeatilSub2">
+              <div className="smilingCartDeatilSub2" style={{marginBottom: cartListData?.length === 0 && '15%'}}>
                 {cartListData?.length === 0 ? (
                   !isLoading && (
                     <div

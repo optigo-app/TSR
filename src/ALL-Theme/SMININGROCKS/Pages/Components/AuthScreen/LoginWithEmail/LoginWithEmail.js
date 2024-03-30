@@ -178,67 +178,69 @@ export default function LoginWithEmail() {
                 </div>
             )}
             <div>
-                <div className='smling-forgot-main'>
-                    <p style={{
-                        textAlign: 'center',
-                        paddingBlock: '60px',
-                        marginTop: '15px',
-                        fontSize: '25px',
-                        fontFamily: 'Harmonia'
-                    }}
-                        className='AuthScreenMainTitle'
-                    >Login With Password</p>
-                    <p style={{
-                        textAlign: 'center',
-                        marginTop: '-80px',
-                        fontSize: '15px',
-                        color: '#7d7f85',
-                        fontFamily: 'Harmonia'
-                    }}
-                        className='AuthScreenSubTitle'
-                    >using {email}</p>
+                <div className='smling-forgot-main-Color'>
+                    <div className='smling-forgot-main'>
+                        <p style={{
+                            textAlign: 'center',
+                            paddingBlock: '60px',
+                            marginTop: '15px',
+                            fontSize: '25px',
+                            fontFamily: 'Harmonia'
+                        }}
+                            className='AuthScreenMainTitle'
+                        >Login With Password</p>
+                        <p style={{
+                            textAlign: 'center',
+                            marginTop: '-80px',
+                            fontSize: '15px',
+                            color: '#7d7f85',
+                            fontFamily: 'Harmonia'
+                        }}
+                            className='AuthScreenSubTitle'
+                        >using {email}</p>
 
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <TextField
-                            autoFocus
-                            id="outlined-confirm-password-input"
-                            label="Password"
-                            type={showConfirmPassword ? 'text' : 'password'}
-                            autoComplete="current-password"
-                            className='labgrowRegister'
-                            style={{ margin: '15px' }}
-                            value={confirmPassword}
-                            onChange={(e) => handleInputChange(e, setConfirmPassword, 'confirmPassword')}
-                            error={!!errors.confirmPassword}
-                            helperText={errors.confirmPassword}
-                            onKeyDown={(event) => {
-                                if (event.key === 'Enter') {
-                                    handleSubmit();
-                                }
-                            }}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={() => handleTogglePasswordVisibility('confirmPassword')}
-                                            onMouseDown={handleMouseDownConfirmPassword}
-                                            edge="end"
-                                        >
-                                            {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <TextField
+                                autoFocus
+                                id="outlined-confirm-password-input"
+                                label="Password"
+                                type={showConfirmPassword ? 'text' : 'password'}
+                                autoComplete="current-password"
+                                className='labgrowRegister'
+                                style={{ margin: '15px' }}
+                                value={confirmPassword}
+                                onChange={(e) => handleInputChange(e, setConfirmPassword, 'confirmPassword')}
+                                error={!!errors.confirmPassword}
+                                helperText={errors.confirmPassword}
+                                onKeyDown={(event) => {
+                                    if (event.key === 'Enter') {
+                                        handleSubmit();
+                                    }
+                                }}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={() => handleTogglePasswordVisibility('confirmPassword')}
+                                                onMouseDown={handleMouseDownConfirmPassword}
+                                                edge="end"
+                                            >
+                                                {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
 
-                        <button className='submitBtnForgot' onClick={handleSubmit}>Login</button>
-                        <Button style={{ marginTop: '10px', color: '#424242' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
+                            <button className='submitBtnForgot' onClick={handleSubmit}>Login</button>
+                            <Button style={{ marginTop: '10px', color: '#424242' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
 
-                        <button type='submit' className='submitBtnForgot' onClick={handleNavigation}>Login With a Code instead on email</button>
-                        <p style={{ textAlign: 'center', fontFamily: 'Harmonia', fontSize: '14px' }}>Go passwordless! we'll send you an email.</p>
+                            <button type='submit' className='submitBtnForgot' onClick={handleNavigation}>Login With a Code instead on email</button>
+                            <p style={{ textAlign: 'center', fontFamily: 'Harmonia', fontSize: '14px' }}>Go passwordless! we'll send you an email.</p>
 
-                        <p style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline' }} onClick={handleForgotPassword}>Forgot Password ?</p>
+                            <p style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline', paddingBottom: '50px' }} onClick={handleForgotPassword}>Forgot Password ?</p>
+                        </div>
                     </div>
                 </div>
                 <Footer />
