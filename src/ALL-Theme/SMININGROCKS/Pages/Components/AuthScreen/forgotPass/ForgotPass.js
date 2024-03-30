@@ -108,8 +108,8 @@ export default function ForgotPass() {
                     "p": encodedCombinedValue
                 }
                 const response = await CommonAPI(body);
-                console.log('ressssssssssssss',response);
-                if (response.Data.rd[0].stat === 1) { 
+                console.log('ressssssssssssss', response);
+                if (response.Data.rd[0].stat === 1) {
                     navigation('/ContinueWithEmail');
                 } else {
                     alert(response.Data.rd[0].stat_msg);
@@ -126,109 +126,102 @@ export default function ForgotPass() {
 
 
     return (
-        <div className='paddingTopMobileSet' style={{
-            backgroundColor: '#c0bbb1',
-            paddingTop: '110px'
-        }}>
+        <div className='paddingTopMobileSet' style={{ backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
             {isLoading && (
                 <div className="loader-overlay">
                     <CircularProgress className='loadingBarManage' />
                 </div>
             )}
 
-            <div style={{
-                backgroundColor: '#c0bbb1'
-            }}>
-                <div className='smling-forgot-main'>
-                    <p style={{
-                        textAlign: 'center',
-                        paddingBlock: '60px',
-                        marginTop: '15px',
-                        fontSize: '40px',
-                        color: '#7d7f85',
-                        fontFamily: 'Harmonia'
-                    }}
-                    
-                    className='AuthScreenMainTitle'
-                    >Forgot Your Password</p>
-                    <p style={{
-                        textAlign: 'center',
-                        marginTop: '-60px',
-                        fontSize: '15px',
-                        color: '#7d7f85',
-                        fontFamily: 'Harmonia'
-                    }} 
-                    
-                    className='AuthScreenSubTitle'
-                    >{}</p>
+            <div>
+                <div className='smling-forgot-main-Color'>
 
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <TextField
-                            autoFocus
-                            id="outlined-password-input"
-                            label="Password"
-                            type={showPassword ? 'text' : 'password'}
-                            autoComplete="current-password"
-                            className='labgrowRegister'
-                            style={{ margin: '15px' }}
-                            value={password}
-                            onChange={handlePasswordChange}
-                            onKeyDown={(event) => {
-                                if (event.key === 'Enter') {
-                                    handleSubmit();
-                                }
-                            }}
-                            error={!!passwordError}
-                            helperText={passwordError}
-                            InputProps={{
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={() => handleTogglePasswordVisibility('password')}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                        >
-                                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
+                    <div className='smling-forgot-main'>
+                        <p style={{
+                            textAlign: 'center',
+                            fontSize: '25px',
+                            fontFamily: 'Harmonia'
+                        }}
 
-                        <TextField
-                            id="outlined-confirm-password-input"
-                            label="Confirm Password"
-                            type={showConfirmPassword ? 'text' : 'password'}
-                            autoComplete="current-password"
-                            className='labgrowRegister'
-                            style={{ margin: '15px' }}
-                            value={confirmPassword}
-                            onChange={(e) => handleInputChange(e, setConfirmPassword, 'confirmPassword')}
-                            error={!!errors.confirmPassword}
-                            helperText={errors.confirmPassword}
-                            InputProps={{ // Set InputProps for icon
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={() => handleTogglePasswordVisibility('confirmPassword')}
-                                            onMouseDown={handleMouseDownConfirmPassword}
-                                            edge="end"
-                                        >
-                                            {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
+                            className='AuthScreenMainTitle'
+                        >Forgot Your Password</p>
+                        <p style={{
+                            textAlign: 'center',
+                            fontSize: '15px',
+                            color: '#7d7f85',
+                            fontFamily: 'Harmonia'
+                        }}
 
-                        <button className='createBtnRegister' onClick={handleSubmit}>Change Password</button>
-                        <Button style={{marginTop: '10px' ,color: 'gray'}} onClick={() => navigation('/')}>CANCEL</Button>
+                            className='AuthScreenSubTitle'
+                        >{ }</p>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <TextField
+                                autoFocus
+                                id="outlined-password-input"
+                                label="Password"
+                                type={showPassword ? 'text' : 'password'}
+                                autoComplete="current-password"
+                                className='labgrowRegister'
+                                style={{ margin: '15px' }}
+                                value={password}
+                                onChange={handlePasswordChange}
+                                onKeyDown={(event) => {
+                                    if (event.key === 'Enter') {
+                                        handleSubmit();
+                                    }
+                                }}
+                                error={!!passwordError}
+                                helperText={passwordError}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={() => handleTogglePasswordVisibility('password')}
+                                                onMouseDown={handleMouseDownPassword}
+                                                edge="end"
+                                            >
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+
+                            <TextField
+                                id="outlined-confirm-password-input"
+                                label="Confirm Password"
+                                type={showConfirmPassword ? 'text' : 'password'}
+                                autoComplete="current-password"
+                                className='labgrowRegister'
+                                style={{ margin: '15px' }}
+                                value={confirmPassword}
+                                onChange={(e) => handleInputChange(e, setConfirmPassword, 'confirmPassword')}
+                                error={!!errors.confirmPassword}
+                                helperText={errors.confirmPassword}
+                                InputProps={{ // Set InputProps for icon
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={() => handleTogglePasswordVisibility('confirmPassword')}
+                                                onMouseDown={handleMouseDownConfirmPassword}
+                                                edge="end"
+                                            >
+                                                {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+
+                            <button className='createBtnRegister' onClick={handleSubmit}>Change Password</button>
+                            <Button style={{ marginTop: '10px', color: 'gray', paddingBottom: '50px' }} onClick={() => navigation('/')}>CANCEL</Button>
+                        </div>
                     </div>
-                    <Footer />
-
                 </div>
+                <Footer />
             </div>
         </div>
     )

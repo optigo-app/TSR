@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './Video.css';
+import './TopBanner.css';
 import demovide from '../../../assets/Video/demo2.mp4';
 
-export default function Video() {
+export default function TopBanner() {
   const [loading, setLoading] = useState(true);
 
   const handleImageLoad = () => {

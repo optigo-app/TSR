@@ -142,12 +142,17 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+.TsrInstaMain{
+    margin-inline: 10%;
+}
 .groInstaImagesMain{
     width: 25%;
+}
+.groInstaImagesMainSub{
+    padding: 5px;
     overflow: hidden; 
     position: relative; 
-    padding: 7px;
-
 }
 .groInstaImages{
     width: 100%;
@@ -157,7 +162,6 @@
 }
 .gorInstaTitle{
     font-size: 30px;
-    padding-inline: 15%;
     margin: 0px;
     font-family: 'Freight Big Pro,serif';
 }

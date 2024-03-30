@@ -161,48 +161,50 @@ export default function LoginWithEmailCode() {
                 </div>
             )}
             <div>
-                <div className='smling-forgot-main'>
-                    <p style={{
-                        textAlign: 'center',
-                        paddingBlock: '60px',
-                        marginTop: '15px',
-                        fontSize: '25px',
-                        fontFamily: 'Harmonia'
-                    }}
-                        className='AuthScreenMainTitle'
-                    >Login With Code</p>
-                    <p style={{
-                        textAlign: 'center',
-                        marginTop: '-80px',
-                        fontSize: '15px',
-                        color: '#7d7f85',
-                        fontFamily: 'Harmonia'
-                    }}
-                        className='AuthScreenSubTitle'
-                    >Last step! To secure your account, enter the code we just sent to {email}.</p>
+                <div className='smling-forgot-main-Color'>
+                    <div className='smling-forgot-main'>
+                        <p style={{
+                            textAlign: 'center',
+                            paddingBlock: '60px',
+                            marginTop: '15px',
+                            fontSize: '25px',
+                            fontFamily: 'Harmonia'
+                        }}
+                            className='AuthScreenMainTitle'
+                        >Login With Code</p>
+                        <p style={{
+                            textAlign: 'center',
+                            marginTop: '-80px',
+                            fontSize: '15px',
+                            color: '#7d7f85',
+                            fontFamily: 'Harmonia'
+                        }}
+                            className='AuthScreenSubTitle'
+                        >Last step! To secure your account, enter the code we just sent to {email}.</p>
 
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
-                        <TextField
-                            autoFocus
-                            id="outlined-basic"
-                            label="Enter Code"
-                            variant="outlined"
-                            className='labgrowRegister'
-                            style={{ margin: '15px' }}
-                            onKeyDown={(event) => {
-                                if (event.key === 'Enter') {
-                                    handleSubmit();
-                                }
-                            }}
-                            value={mobileNo}
-                            onChange={(e) => handleInputChange(e, setMobileNo, 'mobileNo')}
-                            error={!!errors.mobileNo}
-                            helperText={errors.mobileNo}
-                        />
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
+                            <TextField
+                                autoFocus
+                                id="outlined-basic"
+                                label="Enter Code"
+                                variant="outlined"
+                                className='labgrowRegister'
+                                style={{ margin: '15px' }}
+                                onKeyDown={(event) => {
+                                    if (event.key === 'Enter') {
+                                        handleSubmit();
+                                    }
+                                }}
+                                value={mobileNo}
+                                onChange={(e) => handleInputChange(e, setMobileNo, 'mobileNo')}
+                                error={!!errors.mobileNo}
+                                helperText={errors.mobileNo}
+                            />
 
-                        <button className='submitBtnForgot' onClick={handleSubmit}>Login</button>
-                        <p style={{ marginTop: '10px' }}>Didn't get the code ? {resendTimer === 0 ? <span style={{ fontWeight: 500, color: 'blue', textDecoration: 'underline', cursor: 'pointer' }} onClick={handleResendCode}>Resend Code</span> : <span>Resend in {Math.floor(resendTimer / 60).toString().padStart(2, '0')}:{(resendTimer % 60).toString().padStart(2, '0')}</span>}</p>
-                        <Button style={{ marginTop: '10px', color: 'gray', fontFamily: 'Harmonia' , fontFamily: 'Harmonia' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
+                            <button className='submitBtnForgot' onClick={handleSubmit}>Login</button>
+                            <p style={{ marginTop: '10px' }}>Didn't get the code ? {resendTimer === 0 ? <span style={{ fontWeight: 500, color: 'blue', textDecoration: 'underline', cursor: 'pointer' }} onClick={handleResendCode}>Resend Code</span> : <span>Resend in {Math.floor(resendTimer / 60).toString().padStart(2, '0')}:{(resendTimer % 60).toString().padStart(2, '0')}</span>}</p>
+                            <Button style={{ marginTop: '10px', color: 'gray', fontFamily: 'Harmonia', fontFamily: 'Harmonia' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
+                        </div>
                     </div>
                 </div>
                 <Footer />

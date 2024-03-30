@@ -125,20 +125,19 @@
 }
 
 .browseBtnMore {
-    height: 50px;
-    width: 220px;
+    height: 45px;
+    width: 240px;
     border: none;
     outline: none;
-    background-color: #7d7f85;
-    color: white;
     font-size: 15px;
     font-weight: 500;
+    border: 1px solid black;
+    background-color: white;
+    cursor: pointer;
 }
 
 .browseBtnMore:hover {
-    background-color: white;
-    color: #7d7f85;
-    border: 1px solid #7d7f85;
+    background-color: rgba(66, 66, 66, 0.05);
 }
 
 .css-1aquho2-MuiTabs-indicator {

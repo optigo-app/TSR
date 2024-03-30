@@ -130,8 +130,13 @@
 
 .gor-image-scroll-content {
     display: inline-block;
-    overflow: auto;
-    object-fit: cover;
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer and Edge */
+}
+
+.gor-image-scroll-content::-webkit-scrollbar {
+    display: none; /* Webkit (Chrome, Safari, etc.) */
 }
 
 .gor-image-wrapper {

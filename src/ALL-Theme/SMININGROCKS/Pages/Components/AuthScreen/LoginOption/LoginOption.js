@@ -16,7 +16,7 @@ export default function LoginOption() {
                 <div className='loginDailog'>
                     <div className='optionLoginMain'>
                         <p className='loginDiTile'>Log in or sign up in seconds</p>
-                        <p style={{ textAlign: 'center', fontFamily: 'Harmonia' ,marginTop: '0px'}}>Use your email or mobile no to continue with the organization.</p>
+                        <p style={{ textAlign: 'center', fontFamily: 'Harmonia' ,marginTop: '0px', fontSize: '14px'}}>Use your email or mobile no to continue with the organization.</p>
                         <div className='smilingLoginOptionMain'>
                             <div className='loginMail' onClick={() => navigation('/ContinueWithEmail')}>
                                 <IoMdMail style={{ height: '25px', width: '25px' }} />
