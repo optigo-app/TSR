@@ -1278,7 +1278,7 @@ export default function CartPage() {
                             Add Order Remark
                           </button>
                         </div>
-                      </div>}
+                      </div>)}
                   </div>
                 )}
               </div>

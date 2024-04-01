@@ -1810,7 +1810,7 @@ const ProductList = () => {
                   }}
                   className="smilingFilterweb"
                 >
-                  <Select
+                  <select
                     size="small"
                     onChange={handleSortChange}
                     value={selectedSortOption}
