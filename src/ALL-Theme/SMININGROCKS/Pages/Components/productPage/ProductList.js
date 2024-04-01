@@ -121,58 +121,149 @@ const ProductList = () => {
     setpriceDataApi(data)
   }, [])
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+
+  //     const data = JSON.parse(localStorage.getItem("allproductlist"));
+  //     const loginUserDetail = JSON.parse(localStorage.getItem('loginUserDetail'));
+
+  //     const updatedData = await Promise?.all(data?.map(async (product) => {
+  //       const newPriceData = priceDataApi?.rd?.find(
+  //         (pda) =>
+  //           pda.A === product.autocode &&
+  //           pda.B === product.designno &&
+  //           pda.D === loginUserDetail?.cmboMetalType
+  //       );
+
+  //       const newPriceData1 = priceDataApi?.rd1?.find(
+  //         (pda) =>
+  //           pda.A === product.autocode &&
+  //           pda.B === product.designno &&
+  //           pda.H === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[0] &&
+  //           pda.J === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[1]
+  //       );
+
+
+  //       const newPriceData2 = priceDataApi?.rd2?.find(
+  //         (pda) =>
+  //           pda.A === product.autocode &&
+  //           pda.B === product.designno &&
+  //           pda.H === loginUserDetail?.cmboCSQualityColor?.split('#@#')[0].toUpperCase() &&
+  //           pda.J === loginUserDetail?.cmboCSQualityColor?.split('#@#')[1].toUpperCase()
+  //       );
+
+  //       let price = 0;
+  //       let isLoading = true;
+  //       let markup = 0;
+  //       let metalrd = 0;
+  //       let diard1 = 0;
+  //       let csrd2 = 0;
+
+  //       if (newPriceData || newPriceData1 || newPriceData2) {
+  //         price = (newPriceData?.Z ?? 0) + (newPriceData1?.S ?? 0) + (newPriceData2?.S ?? 0);
+  //         metalrd = newPriceData?.Z
+  //         diard1 = newPriceData1?.S
+  //         csrd2 = newPriceData2?.S ?? 0
+  //         markup = newPriceData?.AB
+  //         isLoading = false;
+  //       }
+  //       else {
+  //         isLoading = false;
+  //       }
+
+  //       return { ...product, price, isLoading, markup, metalrd, diard1, csrd2 };
+  //     }));
+
+  //     localStorage.setItem("allproductlist", JSON.stringify(updatedData));
+  //     setProductApiData2(updatedData);
+  //   };
+
+  //   fetchData();
+  // }, [priceDataApi]);
+
   useEffect(() => {
     const fetchData = async () => {
-
       const data = JSON.parse(localStorage.getItem("allproductlist"));
       const loginUserDetail = JSON.parse(localStorage.getItem('loginUserDetail'));
+      const storeInit = JSON.parse(localStorage.getItem('storeInit'));
 
+      // let newRd = [];
       const updatedData = await Promise?.all(data?.map(async (product) => {
         const newPriceData = priceDataApi?.rd?.find(
           (pda) =>
+           storeInit?.IsMetalCustomization === 1
+            ?
             pda.A === product.autocode &&
             pda.B === product.designno &&
             pda.D === loginUserDetail?.cmboMetalType
+            :
+            pda.A === product.autocode &&
+            pda.B === product.designno
         );
 
-        const newPriceData1 = priceDataApi?.rd1?.find(
+        const newPriceData1 = priceDataApi?.rd1?.filter(
           (pda) =>
+
+           storeInit?.IsDiamondCustomization === 1
+            ?
             pda.A === product.autocode &&
             pda.B === product.designno &&
             pda.H === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[0] &&
             pda.J === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[1]
-        );
+            :
+            pda.A === product.autocode &&
+            pda.B === product.designno
 
+        ).reduce((acc, obj) => acc + obj.S, 0)
 
-        const newPriceData2 = priceDataApi?.rd2?.find(
+        // const newPriceData11 = priceDataApi?.rd1?.filter(
+        //   (pda) =>
+        //     pda.A === product.autocode &&
+        //     pda.B === product.designno &&
+        //     pda.H === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[0] &&
+        //     pda.J === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[1]
+        // )
+        // if(newPriceData1){
+        //   newRd.push(newPriceData1);
+        // }
+
+        // console.log("newPriceData11",newPriceData11)
+
+        
+
+        const newPriceData2 = priceDataApi?.rd2?.filter(
           (pda) =>
+
+          storeInit?.IsCsCustomization === 1
+            ? 
             pda.A === product.autocode &&
             pda.B === product.designno &&
             pda.H === loginUserDetail?.cmboCSQualityColor?.split('#@#')[0].toUpperCase() &&
             pda.J === loginUserDetail?.cmboCSQualityColor?.split('#@#')[1].toUpperCase()
-        );
+            :
+            pda.A === product.autocode &&
+            pda.B === product.designno
+
+        ).reduce((acc, obj) => acc + obj.S, 0)
 
         let price = 0;
-        let isLoading = true;
         let markup = 0;
         let metalrd = 0;
         let diard1 = 0;
         let csrd2 = 0;
 
-        if (newPriceData || newPriceData1 || newPriceData2) {
-          price = (newPriceData?.Z ?? 0) + (newPriceData1?.S ?? 0) + (newPriceData2?.S ?? 0);
+        if(newPriceData || newPriceData1 || newPriceData2) {
+          price = (newPriceData?.Z ?? 0) + (newPriceData1 ?? 0) + (newPriceData2 ?? 0);
           metalrd = newPriceData?.Z
-          diard1 = newPriceData1?.S
-          csrd2 = newPriceData2?.S ?? 0
+          diard1 = newPriceData1 ?? 0
+          csrd2 = newPriceData2 ?? 0
           markup = newPriceData?.AB
-          isLoading = false;
-        }
-        else {
-          isLoading = false;
         }
 
-        return { ...product, price, isLoading, markup, metalrd, diard1, csrd2 };
+        return { ...product, price, markup, metalrd, diard1, csrd2 }
       }));
+
+      // console.log("newRd",newRd);
 
       localStorage.setItem("allproductlist", JSON.stringify(updatedData));
       setProductApiData2(updatedData);
@@ -180,6 +271,7 @@ const ProductList = () => {
 
     fetchData();
   }, [priceDataApi]);
+
   const toggleDeatilList = () => {
     setIsOpenDetail(!isOpenDetail)
   };
