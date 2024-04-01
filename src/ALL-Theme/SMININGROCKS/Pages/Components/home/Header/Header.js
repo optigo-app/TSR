@@ -307,6 +307,24 @@ export default function Header() {
 
   const [openSearchDrawer, setOpenSearchDrawer] = useState(false);
   const [openYourBagDrawer, setOpenYourBagDrawer] = useState(false);
+  const setIsLoginState = useSetRecoilState(loginState)
+
+  
+  const handleLogout = () => {
+    setIsLoginState('false')
+    localStorage.setItem('LoginUser', 'false');
+    localStorage.removeItem('storeInit');
+    localStorage.removeItem('loginUserDetail');
+    localStorage.removeItem('remarks');
+    localStorage.removeItem('selectedAddressId');
+    localStorage.removeItem('orderNumber');
+    localStorage.removeItem('registerEmail');
+    localStorage.removeItem('UploadLogicalPath');
+    localStorage.removeItem('remarks');
+    localStorage.removeItem('registerMobile');
+    navigation('/')
+    window.location.reload();
+}
 
 
   return (
@@ -501,7 +519,6 @@ export default function Header() {
               {islogin === "true" &&
                 <li
                   className="gorjana-Menu-item "
-                  // nav-li-shop-main
                   onMouseEnter={handleDropdownOpen}
                   onMouseLeave={handleDropdownClose}
                 >
@@ -536,18 +553,6 @@ export default function Header() {
               >
                 {ABOUT_US}
               </li>
-
-
-              <li
-                className="gorjana-Menu-item"
-                onClick={() => {
-                  // setRecoilBlurFlag(true)
-                  // setRecoilSideNavListItem('Jewelry')
-                  // setRecoilSideNavListFlag(true)
-                }}
-              >
-                Jewelry
-              </li>
             </ul>
 
 
@@ -567,7 +572,7 @@ export default function Header() {
                     <li
                       className="gorjana-Menu-item"
                       style={{ cursor: "pointer" }}
-                      onClick={() => navigation("/account")}
+                      onClick={handleLogout}
                     >
                       Log Out
                     </li>
@@ -589,10 +594,10 @@ export default function Header() {
                       badgeContent={getWishListCount}
                       overlap={"rectangular"}
                       color="secondary"
+                      className="gorjana-Menu-item"
                     >
                       <Tooltip title="WishList">
                         <li
-                          className="gorjana-Menu-item"
                           onClick={() => navigation("/myWishList")}>
                           <PiStarThin
                             style={{
@@ -616,6 +621,7 @@ export default function Header() {
                       badgeContent={getCartListCount}
                       overlap={"rectangular"}
                       color="secondary"
+                      className="gorjana-Menu-item"
                     >
                       <Tooltip title="Cart">
                         <li
@@ -624,7 +630,6 @@ export default function Header() {
                             cursor: "pointer",
                             listStyle: 'none',
                           }}
-                          className="gorjana-Menu-item"
                         >
                           <HiOutlineShoppingBag
                             style={{

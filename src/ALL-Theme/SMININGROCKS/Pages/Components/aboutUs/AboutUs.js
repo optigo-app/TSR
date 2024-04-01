@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './AboutUs.css'
 import Header from '../home/Header/Header'
 import ContactForm from '../contactForm/ContactForm'
@@ -7,8 +7,13 @@ import demo1img from '../../assets/demoImg1.jpg'
 import demo2img from '../../assets/demoimg2.jpg'
 
 export default function AboutUs() {
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
+
     return (
-        <div className='paddingTopMobileSet' style={{paddingTop: '110px'}}>
+        <div className='paddingTopMobileSet' style={{ paddingTop: '110px' }}>
             {/* https://cdn.accentuate.io/19336364132/3641674891364/Stocksy_txpdd2f673ddEJ200_Medium_1086442.jpg?1733x1155 */}
             <div>
                 <img

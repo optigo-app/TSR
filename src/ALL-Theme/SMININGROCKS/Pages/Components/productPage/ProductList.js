@@ -1342,13 +1342,13 @@ const ProductList = () => {
                   }}
                 >
                   <span
-                  className="filtercategoryLable"
-                    // style={{
-                    //   fontFamily: "Harmonia, sans-serif",
-                    //   fontSize: "13px",
-                    //   fontWeight:'500px',
-                    //   color:'#424242'
-                    // }}
+                    className="filtercategoryLable"
+                  // style={{
+                  //   fontFamily: "Harmonia, sans-serif",
+                  //   fontSize: "13px",
+                  //   fontWeight:'500px',
+                  //   color:'#424242'
+                  // }}
                   >
                     {ele.label}
                   </span>
@@ -1393,12 +1393,12 @@ const ProductList = () => {
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        justifyContent:"space-between",
+                        justifyContent: "space-between",
                         gap: "12px",
                       }}
                       key={i}
                     >
-                       <small
+                      <small
                         // style={{
                         //   fontFamily: "TT Commons, sans-serif",
                         //   color: "#7f7d85",
@@ -1447,15 +1447,18 @@ const ProductList = () => {
     let sortedData = [...ProductApiData2];
 
     if (selectedOption === 'PRICE HIGH TO LOW') {
-      sortedData.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
+      sortedData.sort((a, b) => ((b?.UnitCost ?? 0) + (b?.price ?? 0) + (b?.markup ?? 0)) - ((a?.UnitCost ?? 0) + (a?.price ?? 0) + (a?.markup ?? 0)));
     } else if (selectedOption === 'PRICE LOW TO HIGH') {
-      sortedData.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
+      sortedData.sort((a, b) => ((a?.UnitCost ?? 0) + (a?.price ?? 0) + (a?.markup ?? 0)) - ((b?.UnitCost ?? 0) + (b?.price ?? 0) + (b?.markup ?? 0)));
     } else {
       sortedData = [...ProductApiData2];
     }
     setProductApiData2(sortedData);
   };
 
+
+
+  console.log('ddddddddddddd', ProductApiData2);
 
   return (
     <div id="top">
@@ -1483,7 +1486,7 @@ const ProductList = () => {
               style={{ width: "100%", display: "flex" }}
             >
               <div className="smilingWebProductListSideBar">
-                <ul style={{display:'flex',flexDirection:'row',justifyContent:'space-between', padding:'0px 0px 0px 28px'}}>
+                <ul style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '0px 0px 0px 28px' }}>
                   <li className="finejwelery me-4" id="finejwelery">Filters</li>
                   <li className="finejwelery" id="finejwelery" onClick={() => handlePageReload()}>All Jwelery</li>
                 </ul>
@@ -1522,13 +1525,13 @@ const ProductList = () => {
                           }}
                         >
                           <span
-                          className="filtercategoryLable"
-                            // style={{
-                            //   fontFamily: "Harmonia, sans-serif",
-                            //   fontSize: "13px",
-                            //   fontWeight:'500px',
-                            //   color:'#424242'
-                            // }}
+                            className="filtercategoryLable"
+                          // style={{
+                          //   fontFamily: "Harmonia, sans-serif",
+                          //   fontSize: "13px",
+                          //   fontWeight:'500px',
+                          //   color:'#424242'
+                          // }}
                           >
                             {ele.label}
                           </span>
@@ -1629,18 +1632,18 @@ const ProductList = () => {
                               style={{
                                 display: "flex",
                                 alignItems: "center",
-                                justifyContent:"space-between",
+                                justifyContent: "space-between",
                                 gap: "12px",
                               }}
                               key={i}
                             >
-                               <small
-                               className="sidebarfilterText"
-                                // style={{
-                                //   fontFamily: "TT Commons, sans-serif",
-                                //   color: "#7f7d85",
-                                //   textTransform: "lowercase",
-                                // }}
+                              <small
+                                className="sidebarfilterText"
+                              // style={{
+                              //   fontFamily: "TT Commons, sans-serif",
+                              //   color: "#7f7d85",
+                              //   textTransform: "lowercase",
+                              // }}
                               >
                                 {flist}
                               </small>
@@ -1728,7 +1731,9 @@ const ProductList = () => {
                       onChange={handleSortChange}
                       value={selectedSortOption}
                     >
-                      <option value="None">Normal</option>
+                      <option value="None">Recommended</option>
+                      <option value="None">New</option>
+                      <option value="None">In stock</option>
                       <option value="PRICE HIGH TO LOW">PRICE HIGH TO LOW</option>
                       <option value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</option>
                     </select>
@@ -1769,7 +1774,9 @@ const ProductList = () => {
                     onChange={handleSortChange}
                     value={selectedSortOption}
                   >
-                    <option value="None">Normal</option>
+                    <option value="None">Recommended</option>
+                    <option value="None">New</option>
+                    <option value="None">In stock</option>
                     <option value="PRICE HIGH TO LOW">PRICE HIGH TO LOW</option>
                     <option value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</option>
                   </select>
@@ -1786,7 +1793,7 @@ const ProductList = () => {
                         color: "#7d7f85",
                         position: "relative",
                         zIndex: 0,
-                        margin:'10px'
+                        margin: '10px'
                       }}
                       className="smilingProductImageBox"
                     >
@@ -1794,7 +1801,7 @@ const ProductList = () => {
                       {products?.designno === "S24705" && <p id="labelTag_0002388" className="instockP">IN STOCK</p>}
                       {products?.designno === "MCJ2" && <p id="labelTag_0002388" className="instockP">IN STOCK</p>}
 
-                      <div onClick={() => handelProductSubmit(products)} style={{boxShadow:"rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px"}}>
+                      <div onClick={() => handelProductSubmit(products)} style={{ boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px" }}>
                         <img
                           className="prod_img"
                           src={
@@ -1816,53 +1823,53 @@ const ProductList = () => {
                           {products?.TitleLine} -<span> {products?.designno} </span>
                         </p>
                       </div>
-                      <div className="customizeDetails" style={{display:'flex'}}>
+                      <div className="customizeDetails" style={{ display: 'flex' }}>
                         {/* <div className="mobileDeatilDiv1"> */}
-                          {ismetalWShow === 1 &&
+                        {ismetalWShow === 1 &&
                           <>
                             <div>
                               <p style={{ margin: '0px', fontSize: '13px' }}>NWT : <span>{products?.netwt}</span></p>
                             </div>
-                              <Divider className="dividerLine" orientation="vertical" variant="middle" flexItem />
-                              </>
-                            }
-                          {isGrossWShow === 1 && 
-                            <>
-                          <div>
-                            <p style={{ margin: '0px', fontSize: '13px' }}>GWT : <span>{products?.Grossweight}</span></p>
-                          </div>
-                          <Divider className="dividerLine" orientation="vertical" variant="middle" flexItem />
+                            <Divider className="dividerLine" orientation="vertical" variant="middle" flexItem />
                           </>
-                          }
+                        }
+                        {isGrossWShow === 1 &&
+                          <>
+                            <div>
+                              <p style={{ margin: '0px', fontSize: '13px' }}>GWT : <span>{products?.Grossweight}</span></p>
+                            </div>
+                            <Divider className="dividerLine" orientation="vertical" variant="middle" flexItem />
+                          </>
+                        }
 
                         {/* </div> */}
                         {/* <div className="mobileDeatilDiv2"> */}
-                          {((isDaaimongWShow || isDaaimongWShow) === 1 && (products?.diamondweight !== 0 || products?.diamondpcs !== 0)) && <div>
-                            <p style={{ margin: '0px', fontSize: '13px' }}>DWT : <span>{(isDaaimongWShow === 1 && products?.diamondweight !== 0) && products?.diamondweight + '/'}  {(isDaaimonPShow === 1 && products?.diamondpcs !== 0) && products?.diamondpcs}</span></p>
-                          </div>}
-                          {((isStoneWShow || isStonePShow) === 1 && (products?.totalcolorstoneweight !== 0 || products?.totalcolorstonepcs !== 0)) &&
+                        {((isDaaimongWShow || isDaaimongWShow) === 1 && (products?.diamondweight !== 0 || products?.diamondpcs !== 0)) && <div>
+                          <p style={{ margin: '0px', fontSize: '13px' }}>DWT : <span>{(isDaaimongWShow === 1 && products?.diamondweight !== 0) && products?.diamondweight + '/'}  {(isDaaimonPShow === 1 && products?.diamondpcs !== 0) && products?.diamondpcs}</span></p>
+                        </div>}
+                        {((isStoneWShow || isStonePShow) === 1 && (products?.totalcolorstoneweight !== 0 || products?.totalcolorstonepcs !== 0)) &&
                           <>
-                          <Divider className="dividerLine" orientation="vertical" variant="middle" flexItem />
-                          <div>
-                            <p style={{ margin: '0px', fontSize: '13px' }}>CWT : <span>{(isStoneWShow === 1 && products?.totalcolorstoneweight !== 0) && products?.totalcolorstoneweight + '/'}  {(isStonePShow === 1 && products?.totalcolorstonepcs !== 0) && products?.totalcolorstonepcs}</span></p>
-                          </div>
-                          </> 
-                          }
-                        </div>
+                            <Divider className="dividerLine" orientation="vertical" variant="middle" flexItem />
+                            <div>
+                              <p style={{ margin: '0px', fontSize: '13px' }}>CWT : <span>{(isStoneWShow === 1 && products?.totalcolorstoneweight !== 0) && products?.totalcolorstoneweight + '/'}  {(isStonePShow === 1 && products?.totalcolorstonepcs !== 0) && products?.totalcolorstonepcs}</span></p>
+                            </div>
+                          </>
+                        }
+                      </div>
 
                       {/* </div> */}
-                        <div>
-                          <p className="priceQuality">
-                            {isMetalTCShow === 1 && products?.MetalTypeName}-{products?.MetalColorName}{products?.MetalPurity}
-                            {isPriceShow === 1 &&
-                              <span>
-                                /
-                                {currencySym?.Currencysymbol}
-                                {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}
-                              </span>
-                            }
-                          </p>
-                        </div>
+                      <div>
+                        <p className="priceQuality">
+                          {isMetalTCShow === 1 && products?.MetalTypeName}-{products?.MetalColorName}{products?.MetalPurity}
+                          {isPriceShow === 1 &&
+                            <span>
+                              /
+                              {currencySym?.Currencysymbol}
+                              {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}
+                            </span>
+                          }
+                        </p>
+                      </div>
 
                       <div style={{ position: "absolute", zIndex: 999999, top: 0, right: 0, display: 'flex' }}>
                         <div>
