@@ -1,3 +1,4 @@
+
 .smilingCartPageMain {
     background-color: white;
 }
@@ -30,11 +31,11 @@
 
 
 .smiling-cartPageBoxMain {
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     position: relative;
     /* margin: 5px; */
     /* width: 47%; */
-    border-radius: 5px;
+    /* border-radius: 5px; */
     overflow: hidden;
     /* max-height: 250px; */
 }
@@ -190,7 +191,7 @@
 .cartProdSection .cartProdpart{
     padding: 15px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Four columns with equal width */
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px; 
 }
 
@@ -212,7 +213,7 @@
 .mainCartContainer{
     display: flex;
     gap:30px;
-    margin-bottom: -150px;
+    padding-bottom: 10px;
 }
 
 .resproDet{
@@ -222,9 +223,88 @@
 
 .resCon{
  width:30%;
- height: 900px;
+ height: 600px;
  overflow-y: scroll;
 }
+
+.resCon::-webkit-scrollbar {
+    width: .5em;
+    background-color: lightgray;
+    border-radius: 5px;
+ }
+ .resCon::-webkit-scrollbar-thumb {
+    background-color: #333333;
+    height: 5rem;
+    border-radius: 5px;
+ }
+
+.cartImageContainer {
+    width: 100%;
+    height: 220px;
+    background-size: cover;
+    object-fit: cover;
+    border-radius: 8px;
+    background-position: center;
+}
+
+.cartPageCards {
+    width: 230px;
+    height: auto;
+    max-width: 230px;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.cartPageCards:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.CartPage-image {
+    position: relative;
+}
+
+.CartPage-image {
+    width: 100%;
+    height: auto;
+}
+
+.remove_icon {
+    position: absolute;
+    top: 2px;
+    right: 3px;
+    opacity: .3;
+    width: 20px;
+    cursor: pointer;
+}
+.remove_icon:hover{
+    opacity: .8;
+}
+
+.cart-features {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    font-size: 12px;
+    border-top: 1px solid #f0f0f0;
+    color: rgb(125, 127, 133);
+}
+
+.cartDeatails-features {
+    display: flex;
+    align-items: center;
+}
+
+.cartDeatails-features p {
+    margin: 0 0 5px 8px;
+}
+
+.feature-titleHead {
+    font-weight: bold;
+    color: rgb(125, 127, 133);
+}
+
+
 
 @media (max-width: 1284px){
     .popUpcontainer{
