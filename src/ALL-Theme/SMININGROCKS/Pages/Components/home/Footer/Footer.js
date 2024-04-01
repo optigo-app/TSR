@@ -12,7 +12,7 @@ export default function Footer() {
     const navigation = useNavigate();
 
     return (
-        <div>
+        <div style={{marginTop:'20px'}}>
             <div className='TSRFooterMain'>
                 <div className='TSRFooterPart1'>
                     <div style={{ paddingBlock: '110px' }}>

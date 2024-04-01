@@ -3,7 +3,7 @@ import './proddetail.css'
 import Header from '../home/Header/Header'
 import Footer from '../home/Footer/Footer'
 import SmilingRock from '../home/smiling_Rock/SmilingRock'
-import { Checkbox, Divider, Skeleton } from '@mui/material'
+import { Checkbox, Divider, Skeleton, Tooltip } from '@mui/material'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import filterData from '../../jsonFile/M_4_95oztttesi0o50vr.json'
@@ -69,7 +69,10 @@ const ProdDetail = () => {
   const [mtrdData, setMtrdData] = useState([])
   const [dqcData, setDqcData] = useState([])
   const [csqcData, setCsqcData] = useState([])
-  const [getPriceData, setGetPriceData] = useState([])
+  const [getPriceData, setGetPriceData] = useState([]);
+
+  const [addToCartFlag,setAddToCartFlag] =useState(false)
+  const [addToWishListFlag,setAddToWishListFlag] =useState()
 
 
   const setCartCount = useSetRecoilState(CartListCounts)
@@ -596,17 +599,23 @@ const ProdDetail = () => {
     getCartAndWishListData()
   }, [])
 
-  const handelCart = async (event) => {
+  useEffect(()=>{
+  if(productData?.checkFlag){
+    setAddToCartFlag(true)
+  }
+  },[productData])
+
+  const handelCart = async () => {
 
     try {
-      setCartFlag(event.target.checked)
+      // setCartFlag(event.target.checked)
 
-      if (event.target.checked === true) {
+      if (addToCartFlag) {
         const storeInit = JSON.parse(localStorage.getItem("storeInit"))
         const UserEmail = localStorage.getItem("registerEmail")
         const Customer_id = JSON.parse(localStorage.getItem("loginUserDetail"));
 
-        productData.wishCheck = event.target.checked;
+        productData.checkFlag = addToCartFlag;
         localStorage.setItem("srProductsData", JSON.stringify(productData))
         const product = productData
 
@@ -837,7 +846,7 @@ const ProdDetail = () => {
         const UserEmail = localStorage.getItem("registerEmail")
         const Customer_id = JSON.parse(localStorage.getItem("loginUserDetail"));
 
-        productData.wishCheck = false;
+        productData.checkFlag = addToCartFlag;
         localStorage.setItem("srProductsData", JSON.stringify(productData))
 
         let prod = productData
@@ -872,6 +881,9 @@ const ProdDetail = () => {
 
   }
 
+  useEffect(()=>{
+    handelCart()
+  },[addToCartFlag])
 
   const handelWishList = async (event) => {
 
@@ -1174,8 +1186,7 @@ const ProdDetail = () => {
 
   }, [mtrdData, dqcData, csqcData, sizeMarkup, metalUpdatedPrice, diaUpdatedPrice, colUpdatedPrice])
 
-  console.log("priceData", productData, productData?.price);
-
+  console.log("priceData", productData, productData?.price)
 
   return (
     <div
@@ -1196,7 +1207,7 @@ const ProdDetail = () => {
       >
         <div className="prodDetailWhitecont">
           <div className="product-detail-container">
-            <div className="srprodetail1">
+            <div className="srprodetail1" >
               {/* {!imgLoading */}
 
               {imgLoading && (
@@ -1241,10 +1252,11 @@ const ProdDetail = () => {
                   alt={""}
                   style={{
                     width: "100%",
+                    height:'80%',
                     zindex: -1,
                     position: "relative",
-                    objectFit: "cover",
-                    marginLeft: "51px",
+                    objectFit: "contain",
+                    marginLeft: "120px",
                     display: imgLoading ? "none" : "block",
                   }}
                   className='smilingDeatilPageMainImage'
@@ -1336,10 +1348,11 @@ const ProdDetail = () => {
                     <span
                       style={{
                         // textTransform: "uppercase",
-                        fontSize: "13px",
+                        fontSize: "16px",
                         color: "#424242",
                         fontFamily: 'Harmonia',
-                        fontWeight:'600'
+                        fontWeight:'600',
+                        letterSpacing:'2px'
                       }}
                       
                     >
@@ -1347,33 +1360,33 @@ const ProdDetail = () => {
                     </span>
                     <span
                       style={{
-                        fontSize: "13px",
+                        fontSize: "16px",
                         color: "#424242",
                         fontFamily: 'Harmonia',
                         // fontWeight:'600'
                       }}
                     >
-                      Metal Purity : <span style={{fontWeight:'bold'}}>{mtTypeOption ? mtTypeOption.split(" ")[1] : productData?.MetalPurity}</span>
+                      Metal Purity : <span style={{fontWeight:'bold',letterSpacing:'2px'}}>{mtTypeOption ? mtTypeOption.split(" ")[1] : productData?.MetalPurity}</span>
                     </span>
                     <sapn
                       style={{
-                        fontSize: "13px",
+                        fontSize: "16px",
                         color: "#424242",
                         fontFamily: 'Harmonia',
                         // fontWeight:'600'
                       }}
                     >
-                      Metal Color : <span style={{fontWeight:'bold'}}>{selectedColor ? selectedColor : productData?.MetalColorName}</span>
+                      Metal Color : <span style={{fontWeight:'bold',letterSpacing:'2.2px'}}>{selectedColor ? selectedColor : productData?.MetalColorName}</span>
                     </sapn>
                     <sapn
                       style={{
-                        fontSize: "13px",
+                        fontSize: "16px",
                         color: "#424242",
                         fontFamily: 'Harmonia',
                         // fontWeight:'600'
                       }}
                     >
-                      Diamond Quality Color: <span style={{fontWeight:'bold'}}>{diaQColOpt ? diaQColOpt : `${productData?.diamondquality}-${productData?.diamondcolorname}`}</span>
+                      Diamond Quality Color: <span style={{fontWeight:'bold',letterSpacing:'2.2px'}}>{diaQColOpt ? diaQColOpt : `${productData?.diamondquality}-${productData?.diamondcolorname}`}</span>
                     </sapn>
                   </div>
                   {/* {productData?.IsColorWiseImageExists !== null && (
@@ -1449,16 +1462,21 @@ const ProdDetail = () => {
                     }}
                   >
                     <label style={{ 
-                       fontSize: "13px",
+                       fontSize: "15px",
                         color: "#424242",
-                        fontFamily: 'Harmonia'
+                        fontFamily: 'Harmonia',
                         }}>
                       METAL TYPE:
                     </label>
                     {mtrdData.U === 1 ?
-                      <span style={{ fontSize: "13px",
+                      <span style={{ 
+                        fontSize: "16px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',}}>
+                        fontFamily: 'Harmonia',
+                        fontWeight:'bold',
+                        letterSpacing:'2.2px'
+
+                        }}>
                         {`${productData.MetalPurity} ${productData.MetalTypeName}`}
                       </span>
                       :
@@ -1469,6 +1487,9 @@ const ProdDetail = () => {
                           fontSize: "13px",
                           color: "#424242",
                           fontFamily: 'Harmonia',
+                          fontWeight:'bold',
+                        letterSpacing:'2.2px'
+
                         }}
                         defaultValue={mtTypeOption}
                         onChange={(e) => {
@@ -1504,16 +1525,19 @@ const ProdDetail = () => {
                       }}
                     >
                       <label style={{ 
-                        fontSize: "13px",
+                        fontSize: "15px",
                         color: "#424242",
                         fontFamily: 'Harmonia'
                         }}>
                         METAL COLOR:
                       </label>
                       {mtrdData.U === 1 ?
-                        <span style={{ fontSize: "13px",
+                        <span style={{ fontSize: "16px",
                         color: "#424242",
-                        fontFamily: 'Harmonia'}}>
+                        fontFamily: 'Harmonia',
+                        fontWeight:'bold',
+                        letterSpacing:'2.2px'
+                        }}>
                           {productData.MetalColorName}
                         </span>
                         :
@@ -1522,8 +1546,10 @@ const ProdDetail = () => {
                             border: "none",
                             outline: "none",
                             fontSize: "13px",
-                        color: "#424242",
-                        fontFamily: 'Harmonia',
+                            color: "#424242",
+                            fontFamily: 'Harmonia',
+                            fontWeight:'bold',
+                            letterSpacing:'2.2px'
                           }}
                           onChange={(e) => handleColorSelection(e.target.value)}
                         >
@@ -1550,15 +1576,19 @@ const ProdDetail = () => {
                       borderTop:'1px solid #42424233'
                     }}
                   >
-                    <label style={{ fontSize: "13px",
+                    <label style={{ fontSize: "15px",
                         color: "#424242",
                         fontFamily: 'Harmonia',}}>
                       DAIMOND :
                     </label>
                     {mtrdData?.U === 1 ?
-                      <span style={{ fontSize: "13px",
-                      color: "#424242",
-                      fontFamily: 'Harmonia',}}>
+                      <span style={{ 
+                        fontSize: "16px",
+                        color: "#424242",
+                        fontFamily: 'Harmonia',
+                        fontWeight:'bold',
+                        letterSpacing:'2.2px'
+                      }}>
                         {`${productData.diamondquality}_${productData.diamondcolorname}`}
                       </span>
                       :
@@ -1567,8 +1597,10 @@ const ProdDetail = () => {
                           border: "none",
                           outline: "none",
                           fontSize: "13px",
-                        color: "#424242",
-                        fontFamily: 'Harmonia',
+                          color: "#424242",
+                          fontFamily: 'Harmonia',
+                          fontWeight:'bold',
+                          letterSpacing:'2.2px'
                         }}
                         defaultValue={diaQColOpt}
                         onChange={(e) => setDiaQColOpt(e.target.value)}
@@ -1604,16 +1636,23 @@ const ProdDetail = () => {
 
                     }}
                   >
-                    <label style={{ fontSize: "13px",
+                    <label style={{ 
+                        fontSize: "15px",
                         color: "#424242",
-                        fontFamily: 'Harmonia'}}>
+                        fontFamily: 'Harmonia'
+                        }}>
                       COLOR STONE:
                     </label>
                     {
                       mtrdData.U === 1 ?
-                        <span style={{ fontSize: "13px",
-                        color: "#424242",
-                        fontFamily: 'Harmonia',}}>
+                        <span style={{ 
+                          fontSize: "16px",
+                          color: "#424242",
+                          fontFamily: 'Harmonia',
+                          fontWeight:'bold',
+                          letterSpacing:'2.2px'
+
+                        }}>
                           {`${productData.colorstonequality}-${productData?.colorstonecolorname}`}
                         </span>
                         :
@@ -1622,8 +1661,11 @@ const ProdDetail = () => {
                             border: "none",
                             outline: "none",
                             fontSize: "13px",
-                        color: "#424242",
-                        fontFamily: 'Harmonia',
+                            color: "#424242",
+                            fontFamily: 'Harmonia',
+                            fontWeight:'bold',
+                            letterSpacing:'2.2px'
+
                           }}
                           onChange={(e) => setCSQOpt(e.target.value)}
                           defaultValue={cSQopt}
@@ -1648,18 +1690,21 @@ const ProdDetail = () => {
                         borderTop:'1px solid #42424233'
                       }}
                     >
-                      <label style={{fontSize: "13px",
+                      <label style={{
+                        fontSize: "15px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',}}>
+                        fontFamily: 'Harmonia',
+                        }}>
                         SIZE:
                       </label>
                       <select
                         style={{
                           border: "none",
                           outline: "none",
-                          fontSize: "13px",
-                        color: "#424242",
-                        fontFamily: 'Harmonia',
+                          fontSize: "16px",
+                          color: "#424242",
+                          fontFamily: 'Harmonia',
+                          fontWeight:'bold'
                         }}
                         onChange={(e) => handelSize(e.target.value)}
                         defaultValue={
@@ -1879,7 +1924,7 @@ const ProdDetail = () => {
                     {/* Price: <span style={{ fontWeight: '500', fontSize: '16px' }}>{currencySymbol?.Currencysymbol}{`${(productData?.price - grandTotal) === 0 ? "Not Availabel" : (productData?.price - grandTotal)?.toFixed(2)}`}</span> */}
                     {/* Price: <span style={{ fontWeight: '500', fontSize: '16px' }}>{currencySymbol?.Currencysymbol}{`${productData?.UnitCost + (productData?.price - grandTotal)?.toFixed(2)}`}</span> */}
                     {currencySymbol?.Currencysymbol}
-                    <span style={{ fontWeight: 'bold', fontSize: '22px' }}>{`${((productData?.UnitCost) + (mtrdData?.Z ?? 0) + (dqcData?.S ?? 0) + (csqcData?.S ?? 0) + (sizeMarkup ?? 0) + metalUpdatedPrice() + diaUpdatedPrice() + colUpdatedPrice()).toFixed(2)}`}</span>
+                    <span style={{ fontWeight: 'bold', fontSize: '22px',letterSpacing:'2.2px'}}>{`${((productData?.UnitCost) + (mtrdData?.Z ?? 0) + (dqcData?.S ?? 0) + (csqcData?.S ?? 0) + (sizeMarkup ?? 0) + metalUpdatedPrice() + diaUpdatedPrice() + colUpdatedPrice()).toFixed(2)}`}</span>
                   </p>
                 </div>}
 
@@ -1891,7 +1936,7 @@ const ProdDetail = () => {
 
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
 
-                  <div style={{ marginLeft: "-12px", display: 'flex', alignItems: 'center' }}>
+                  {/* <div style={{ marginLeft: "-12px", display: 'flex', alignItems: 'center' }}>
                     <Checkbox
                       icon={
                         <StarBorderIcon
@@ -1908,7 +1953,7 @@ const ProdDetail = () => {
                     <span style={{ fontSize: "16px", color: "#7d7f85" }}>
                       Add To Wishlist
                     </span>
-                  </div>
+                  </div> */}
 
                   {/* <Divider
                     orientation="vertical"
@@ -1920,7 +1965,7 @@ const ProdDetail = () => {
                     }}
                   /> */}
 
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
+                  {/* <div style={{ display: 'flex', alignItems: 'center', gap: '7px' }}>
                     <Checkbox
                       icon={
                         <LocalMallOutlinedIcon
@@ -1944,7 +1989,30 @@ const ProdDetail = () => {
                     <span style={{ fontSize: "16px", color: "#7d7f85" }}>
                       Add To Cart
                     </span>
+                  </div> */}
+                  <span className='containercartwish'>
+                  <div className='addtocartcont' onClick={() => setAddToCartFlag(!addToCartFlag)}>
+                    <span className='addtocarttxt'>{addToCartFlag? "REMOVE FROM CART" :"ADD TO CART"}</span>
                   </div>
+                  <div className='wishlistcont'>
+                    <Tooltip title={"WishList"}>
+                      <Checkbox
+                        icon={
+                          <StarBorderIcon
+                            sx={{ fontSize: "25px", color: "#d2815f" }}
+                          />
+                        }
+                        checkedIcon={
+                          <StarIcon sx={{ fontSize: "25px", color: "#d2815f" }} />
+                        }
+                        disableRipple={true}
+                        checked={WishListFlag}
+                        onChange={(e) => handelWishList(e)}
+                      />
+                    </Tooltip>
+                    </div>
+                  </span>
+
                 </div>
 
                 {/* <div
@@ -2461,9 +2529,9 @@ const ProdDetail = () => {
             </div>
           </div> */}
           {/* <SmilingRock /> */}
-          <Footer />
         </div>
       </div>
+          <Footer />
     </div >
   );
 }

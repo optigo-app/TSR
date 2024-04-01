@@ -101,8 +101,8 @@
 }
 
 .prodDetailWhitecont {
-    max-width: 1674px;
-    background-color: white;
+    /* max-width: 1674px; */
+    /* background-color: white; */
     width: 100%;
 }
 
@@ -143,17 +143,18 @@
 }
 
 .srprodetail1 {
-    width: 60%
+    width: 50%
 }
 
 .srprodetail2 {
-    width: 40%;
+    width: 50%;
     display: flex;
     justify-content: center;
 }
 
 .srprodetail2-cont {
-    margin: 120px 150px 0px;
+    margin: 50px 150px 0px;
+    width:50%
 }
 
 .srthumb_images {
@@ -200,7 +201,7 @@
 }
 .smilingProdutDetltTitle {
     text-align: start !important;
-    font-size: 32px;
+    font-size: 40px;
     font-family: "Tenor Sans", sans-serif;
     font-weight: 400;
     font-style: normal;
@@ -211,6 +212,53 @@
     color: #424242;
     font-size: 14px;
     font-family: 'Harmonia';
+}
+
+.containercartwish{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:12px
+    /* margin-top: 120.4x; */
+}
+
+.addtocartcont{
+    border:1px solid #d2815f;
+    width:80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:3%;
+    
+}
+
+.addtocartcont:hover{
+    background-color: #d2815f0d;
+}
+
+
+
+.addtocarttxt{
+    color:#d2815f;
+    font-family: 'Harmonia';
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+.wishlistcont{
+    border:1px solid #d2815f;
+    width:20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:0.4%;
+    border-radius: 2px;
+}
+
+.wishlistcont:hover{
+    background-color: #d2815f0d;
 }
 
 @media screen and (max-width:1731px) {
@@ -287,7 +335,7 @@
     }
 
     .srprodetail2-cont {
-        margin: 120px 50px 0px;
+        margin: 50px 50px 0px;
     }
 }
 

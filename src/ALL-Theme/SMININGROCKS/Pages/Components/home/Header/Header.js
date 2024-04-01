@@ -525,14 +525,12 @@ export default function Header() {
 
                   <li
                     className="gorjana-Menu-item"
-                    style={{ cursor: "pointer" }}
                     onClick={() => navigation("/impact")}
                   >
                     {IMPACT}
                   </li>
 
                   <li
-                    style={{ cursor: "pointer" }}
                     className="gorjana-Menu-item"
                     onClick={() => navigation("/aboutUs")}
                   >
