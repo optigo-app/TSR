@@ -66,12 +66,12 @@
 
 .smilingAllProductDataMainMobile {
     width: 100%;
-    /* border: 1px solid #e1e1e1; */
+    height: 100%;
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
+    gap: 20px;
 }
 
 .minmaxvalpl {
@@ -85,7 +85,6 @@
 
 .smilingWebProductListSideBar {
     width: 15%;
-    /* margin: 0px 100px 0px 0px; */
     padding: 82px 0px 40px 100px;
 }
 
@@ -258,6 +257,10 @@
 }
 
 @media screen and (max-width: 500px) {
+    .listing-card {
+        width: 301px;
+        max-width: 301;
+    }
     .smilingAllProductDataMainMobile {
         display: flex !important;
         flex-direction: column !important;
