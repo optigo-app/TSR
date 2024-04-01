@@ -82,49 +82,52 @@ export default function ContimueWithMobile() {
                 </div>
             )}
             <div>
-                <div className='smling-forgot-main'>
-                    <p style={{
-                        textAlign: 'center',
-                        paddingBlock: '60px',
-                        marginTop: '15px',
-                        fontSize: '25px',
-                        fontFamily: 'Harmonia'
-                    }}
-                        className='AuthScreenMainTitle'
-                    >Continue With Mobile</p>
-                    <p style={{
-                        textAlign: 'center',
-                        marginTop: '-70px',
-                        fontSize: '15px',
-                        color: '#7d7f85',
-                        fontFamily: 'Harmonia'
-                    }}
-                        className='AuthScreenSubTitle'
-                    >We'll check if you have an account, and help create one if you don't.</p>
+                <div className='smling-forgot-main-Color'>
 
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <TextField
-                            autoFocus
-                            id="outlined-basic"
-                            label="Enetr Mobile No"
-                            variant="outlined"
-                            className='labgrowRegister'
-                            onKeyDown={(event) => {
-                                if (event.key === 'Enter') {
-                                    handleSubmit();
-                                }
-                            }}
-                            style={{ margin: '15px' }}
-                            value={mobileNo}
-                            onChange={(e) => handleInputChange(e, setMobileNo, 'mobileNo')}
-                            error={!!errors.mobileNo}
-                            helperText={errors.mobileNo}
-                        />
+                    <div className='smling-forgot-main'>
+                        <p style={{
+                            textAlign: 'center',
+                            paddingBlock: '60px',
+                            marginTop: '15px',
+                            fontSize: '25px',
+                            fontFamily: 'Harmonia'
+                        }}
+                            className='AuthScreenMainTitle'
+                        >Continue With Mobile</p>
+                        <p style={{
+                            textAlign: 'center',
+                            marginTop: '-70px',
+                            fontSize: '15px',
+                            color: '#7d7f85',
+                            fontFamily: 'Harmonia'
+                        }}
+                            className='AuthScreenSubTitle'
+                        >We'll check if you have an account, and help create one if you don't.</p>
 
-                        <button className='submitBtnForgot' onClick={handleSubmit}>
-                            SUBMIT
-                        </button>
-                        <Button style={{ marginTop: '10px', color: '#424242',fontFamily: 'Harmonia'  }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <TextField
+                                autoFocus
+                                id="outlined-basic"
+                                label="Enetr Mobile No"
+                                variant="outlined"
+                                className='labgrowRegister'
+                                onKeyDown={(event) => {
+                                    if (event.key === 'Enter') {
+                                        handleSubmit();
+                                    }
+                                }}
+                                style={{ margin: '15px' }}
+                                value={mobileNo}
+                                onChange={(e) => handleInputChange(e, setMobileNo, 'mobileNo')}
+                                error={!!errors.mobileNo}
+                                helperText={errors.mobileNo}
+                            />
+
+                            <button className='submitBtnForgot' onClick={handleSubmit}>
+                                SUBMIT
+                            </button>
+                            <Button style={{ marginTop: '10px', color: '#424242', fontFamily: 'Harmonia' , paddingBottom: '50px' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
+                        </div>
                     </div>
                 </div>
                 <Footer />

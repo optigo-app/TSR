@@ -22,6 +22,7 @@ import { accountDetailPage, accountDetailPages, accountValidation } from '../../
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
     useEffect(() => {
+        window.scrollTo(0, 0);
         a11yProps(1)
     }, [])
 

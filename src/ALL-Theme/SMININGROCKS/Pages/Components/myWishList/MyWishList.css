@@ -52,11 +52,12 @@
     text-align: center;
     color: #212529;
     font-size: 14px;
+    height: 30px;
 }
 
 .smiWishLsitBoxMain {
     display: flex;
-    margin-inline: 5%;
+    margin-inline: 10%;
     margin-top: 50px;
     flex-wrap: wrap;
     margin-bottom: 5%;
@@ -64,7 +65,7 @@
 
 .smiWishLsitBox {
     border: 1px solid #ccc;
-    width: 21%;
+    width: 24.2%;
     position: relative;
     margin: 5px;
 }

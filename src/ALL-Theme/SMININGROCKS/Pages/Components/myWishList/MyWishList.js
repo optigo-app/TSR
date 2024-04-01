@@ -19,6 +19,7 @@ export default function MyWishList() {
     const [userEmail, setUserEmail] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isPriseShow, setIsPriceShow] = useState('');
+    const [cuurencySymbol, setCuurencySymbol] = useState('');
     const setCartCount = useSetRecoilState(CartListCounts)
     const setWishCount = useSetRecoilState(WishListCounts)
     const navigation = useNavigate();
@@ -31,11 +32,14 @@ export default function MyWishList() {
                 setWishCount(res.WishCount)
             }
         })
-
     }
 
-    console.log('whiccccccccccccccccccccccc', wishlistData);
     useEffect(() => {
+        window.scrollTo(0, 0);
+        const storeInit = JSON.parse(localStorage.getItem('CURRENCYCOMBO'));
+        const { Currencysymbol } = storeInit;
+        setCuurencySymbol(Currencysymbol);
+
         const fetchData = async () => {
             try {
                 wishlistData.length === 0 && setIsLoading(true);
@@ -216,12 +220,12 @@ export default function MyWishList() {
                         {/* <button className='smiTopShareBtn'>SHARE WISHLIST</button> */}
                         <button className='smiTopClearBtn' onClick={handleRemoveAllWishList}>CLEAR ALL</button>
                         <button className='smiTopClearBtn' onClick={handleAddAll}>ADD TO CART ALL</button>
-                        <button className='smiTopClearBtn' onClick={() => navigation('/productpage')}>Show ProductList</button>
+                        <button className='smiTopClearBtn' onClick={() => navigation('/productpage')}>SHOW PRODUCTLIST</button>
                     </div>}
 
-                    <div className='smiWishLsitBoxMain'>
+                    <div className='smiWishLsitBoxMain'  style={{marginBottom: wishlistData?.length === 0 && '15%'}}>
                         {wishlistData?.length === 0 ? !isLoading &&
-                            <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                            <div style={{ width: '100%',marginTop:'80px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                                 <p style={{ margin: '0px', fontSize: '20px', fontWeight: 500 }}>No Data Available</p>
                                 <p>Please First Add To Wishlist Data</p>
                                 <button className='browseBtnMore' onClick={() => navigation('/productpage')}>BROWSE OUR COLLECTION</button>
@@ -238,7 +242,7 @@ export default function MyWishList() {
 
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginInline: '2%' }}>
                                         <p className='smiWishLsitBoxDesc1'>{item.designno}</p>
-                                        {isPriseShow == 1 && <p className='smiWishLsitBoxDescPrice'>$ {item.TotalUnitCost}</p>}
+                                        {isPriseShow == 1 && <p className='smiWishLsitBoxDescPrice'>{cuurencySymbol} {item.TotalUnitCost}</p>}
                                     </div>
 
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginInline: '2%' }}>

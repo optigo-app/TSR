@@ -1,0 +1,146 @@
+.antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    margin: 150px 50px 0px 50px;
+    color: #4a5568;
+}
+.main-ProdcutListConatiner{
+    font-family: 'Harmonia' !important;
+}
+
+.background-image-container {
+    width: 100%;
+    height: 320px;
+    background-size: cover;
+    object-fit: cover;
+    background-position: center;
+}
+
+.listing-card {
+    width: 380px;
+    height: auto;
+    /* max-height: 58vh; */
+    max-width: 380px;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.listing-card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.listing-image {
+    position: relative;
+}
+
+.listing-img {
+    width: 100%;
+    height: auto;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 20px;
+}
+
+.cart-icon {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 20px;
+}
+
+.listing-details {
+    padding: 12px;
+}
+
+.productDetails {
+    margin: 5px;
+}
+
+.property-type {
+    text-transform: uppercase;
+    font-size: .875rem;
+    font-weight: 700;
+    letter-spacing: .025em;
+    opacity: 0.9;
+    color: #1F1919;
+    width:350px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.price {
+    font-size: 1.445rem;
+    color: #1F1919;
+}
+
+.address {
+    color: #4a5568;
+}
+
+.productDesignDetails {
+    display: flex;
+    height: 18px;
+    align-items: center;
+}
+
+.designlistDetails {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    border-top: 1px solid #cbd5e0;
+    color: #1F1919;
+}
+
+.listing-features {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    font-size: 14.5px;
+    border-top: 1px solid #cbd5e0;
+    color: #4a5568;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+}
+
+.feature p {
+    margin: 0 0 5px 8px;
+}
+
+.feature-count {
+    font-weight: bold;
+    color: #2d3748;
+}
+
+.listing-realtor {
+    padding: 16px;
+    border-top: 1px solid #cbd5e0;
+    display: flex;
+    align-items: center;
+}
+
+
+/* @media screen and (max-width: 500px) {
+    .listing-card {
+        width: 311px;
+        max-width: 311;
+    }
+    .property-type {
+        width:290px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+} */

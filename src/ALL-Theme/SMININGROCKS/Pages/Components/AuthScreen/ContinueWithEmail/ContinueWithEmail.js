@@ -82,52 +82,54 @@ export default function ContinueWithEmail() {
                 </div>
             )}
             <div>
-                <div className='smling-forgot-main'>
-                    <p style={{
-                        textAlign: 'center',
-                        paddingBlock: '60px',
-                        marginTop: '15px',
-                        fontSize: '25px',
-                        // color: '#7d7f85',
-                        fontFamily: 'Harmonia'
-                    }}
-                        className='AuthScreenMainTitle'
-                    >Continue With Email</p>
-                    <p style={{
-                        textAlign: 'center',
-                        marginTop: '-70px',
-                        fontSize: '15px',
-                        // color: '#7d7f85',
-                        fontFamily: 'Harmonia'
-                    }}
+                <div className='smling-forgot-main-Color'>
+                    <div className='smling-forgot-main'>
+                        <p style={{
+                            textAlign: 'center',
+                            paddingBlock: '60px',
+                            marginTop: '15px',
+                            fontSize: '25px',
+                            // color: '#7d7f85',
+                            fontFamily: 'Harmonia'
+                        }}
+                            className='AuthScreenMainTitle'
+                        >Continue With Email</p>
+                        <p style={{
+                            textAlign: 'center',
+                            marginTop: '-70px',
+                            fontSize: '15px',
+                            // color: '#7d7f85',
+                            fontFamily: 'Harmonia'
+                        }}
 
-                        className='AuthScreenSubTitle'
-                    >We'll check if you have an account, and help create one if you don't.</p>
+                            className='AuthScreenSubTitle'
+                        >We'll check if you have an account, and help create one if you don't.</p>
 
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <TextField
-                            autoFocus
-                            id="outlined-basic"
-                            label="Email"
-                            variant="outlined"
-                            className={`labGrowForgot ${isClicked ? 'clicked' : ''}`}
-                            // InputProps={{ style: { height: '50px' } }} 
-                            style={{ margin: '15px' }}
-                            value={email}
-                            onKeyDown={(event) => {
-                                if (event.key === 'Enter') {
-                                    handleSubmit();
-                                }
-                            }}
-                            onChange={handleEmailChange}
-                            onFocus={() => setIsClicked(true)}
-                            onBlur={() => setIsClicked(false)}
-                            error={!!emailError}
-                            helperText={emailError}
-                        />
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <TextField
+                                autoFocus
+                                id="outlined-basic"
+                                label="Email"
+                                variant="outlined"
+                                className={`labGrowForgot ${isClicked ? 'clicked' : ''}`}
+                                // InputProps={{ style: { height: '50px' } }} 
+                                style={{ margin: '15px' }}
+                                value={email}
+                                onKeyDown={(event) => {
+                                    if (event.key === 'Enter') {
+                                        handleSubmit();
+                                    }
+                                }}
+                                onChange={handleEmailChange}
+                                onFocus={() => setIsClicked(true)}
+                                onBlur={() => setIsClicked(false)}
+                                error={!!emailError}
+                                helperText={emailError}
+                            />
 
-                        <button type='submit' className='submitBtnForgot' onClick={handleSubmit}>SUBMIT</button>
-                        <Button style={{ marginTop: '10px', color: '#424242', fontFamily: 'Harmonia' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
+                            <button type='submit' className='submitBtnForgot' onClick={handleSubmit}>SUBMIT</button>
+                            <Button style={{ marginTop: '10px', color: '#424242', fontFamily: 'Harmonia', paddingBottom: '50px' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
+                        </div>
                     </div>
                 </div>
                 <Footer />

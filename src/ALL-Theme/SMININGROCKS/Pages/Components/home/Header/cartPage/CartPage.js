@@ -82,32 +82,35 @@ export default function CartPage() {
   const [mtrdData, setMtrdData] = useState([]);
   const [dqcData, setDqcData] = useState([]);
   const [csqcData, setCsqcData] = useState([]);
-  const [selectedColor, setSelectedColor] = useState()
-  const [getPriceData, setGetPriceData] = useState([])
+  const [selectedColor, setSelectedColor] = useState();
+  const [getPriceData, setGetPriceData] = useState([]);
 
-  const [dialogOpen, setDialogOpen] = useState(false)
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const setCartCount = useSetRecoilState(CartListCounts);
   const setWishCount = useSetRecoilState(WishListCounts);
-//   const getPriceData = useRecoilValue(priceData);
+  //   const getPriceData = useRecoilValue(priceData);
 
   const navigation = useNavigate();
   let currencySymbol = JSON.parse(localStorage.getItem('CURRENCYCOMBO'))
 
-  useEffect(()=>{
+  useEffect(() => {
+    window.scrollTo(0, 0);
     const data = JSON.parse(localStorage.getItem("getPriceData"))
     setGetPriceData(data)
-  },[])
+  }, [])
 
   useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("getPriceData"));
+    setGetPriceData(data);
+  }, []);
 
+  useEffect(() => {
     if (!cartListData && cartListData.length === 0) {
       setProdSelectData();
       setCartSelectData();
     }
-
-  }, [])
-
+  }, []);
 
   const getCountFunc = async () => {
     await GetCount().then((res) => {
@@ -125,16 +128,13 @@ export default function CartPage() {
     }
   }, [cartListData, cartSelectData]);
 
-
   useEffect(() => {
-    console.log('getPriceDatagetPriceData',getPriceData);
     let mtrd = getPriceData?.rd?.filter(
       (ele) =>
         ele?.A === cartSelectData?.autocode &&
         ele?.B === cartSelectData?.designno &&
         ele?.D === mtTypeOption
     );
-
 
     if (mtrd && mtrd.length > 0) {
       setMtrdData(mtrd[0] ?? []);
@@ -174,10 +174,8 @@ export default function CartPage() {
     let csQualColor = `${cartSelectData?.colorstonequality}-${cartSelectData?.colorstonecolor}`;
     setCSQOpt(csQualColor);
 
-    setSelectedColor(cartSelectData?.metalcolorname)
-
-  }, [cartSelectData])
-
+    setSelectedColor(cartSelectData?.metalcolorname);
+  }, [cartSelectData]);
 
   useEffect(() => {
     getCountFunc();
@@ -384,8 +382,7 @@ export default function CartPage() {
     }
   };
 
-
-  const [remarks, setRemarks] = useState(cartSelectData?.Remarks || '');
+  const [remarks, setRemarks] = useState(cartSelectData?.Remarks || "");
   const handleInputChangeRemarks = (event, index) => {
     let { value } = event.target;
     setRemarks(value);
@@ -414,7 +411,7 @@ export default function CartPage() {
         };
         const response = await CommonAPI(body);
         if (response.Data.rd[0].stat === 1) {
-          await getCartData()
+          await getCartData();
           toast.success("Add remark successfully");
         } else {
           alert("Error");
@@ -427,7 +424,9 @@ export default function CartPage() {
     }
   };
 
-  const [lastEnteredQuantity, setLastEnteredQuantity] = useState(cartSelectData?.Quantity || "");
+  const [lastEnteredQuantity, setLastEnteredQuantity] = useState(
+    cartSelectData?.Quantity || ""
+  );
   useEffect(() => {
     setLastEnteredQuantity(cartSelectData?.Quantity || "");
   }, [cartSelectData]);
@@ -436,7 +435,6 @@ export default function CartPage() {
     let { value } = event.target;
     setLastEnteredQuantity(value);
   };
-
 
   const handleUpdateQuantity = async (num) => {
     try {
@@ -456,7 +454,7 @@ export default function CartPage() {
       };
       const response = await CommonAPI(body);
       if (response.Data.rd[0].stat === 1) {
-        await getCartData()
+        await getCartData();
         toast.success("QTY change successfully");
       } else {
         alert("Error");
@@ -464,7 +462,6 @@ export default function CartPage() {
     } catch (error) {
       console.error("Error:", error);
     } finally {
-
     }
   };
 
@@ -511,40 +508,39 @@ export default function CartPage() {
   };
 
   useEffect(() => {
-    const prodData = JSON.parse(localStorage.getItem("allproductlist"))
-    let isCartData = cartSelectData ? cartSelectData : cartListData[0]
+    const prodData = JSON.parse(localStorage.getItem("allproductlist"));
+    let isCartData = cartSelectData ? cartSelectData : cartListData[0];
 
     const finalProdData = prodData.filter(
       (pd) =>
         pd?.designno === isCartData?.designno &&
         pd?.autocode === isCartData?.autocode
-    )[0]
+    )[0];
 
     if (finalProdData) {
-      setProdSelectData(finalProdData)
+      setProdSelectData(finalProdData);
     }
-  }, [cartSelectData, cartListData])
+  }, [cartSelectData, cartListData]);
 
-
-  const [sizeMarkup, setSizeMarkup] = useState()
+  const [sizeMarkup, setSizeMarkup] = useState();
 
   const handelSize = (data) => {
-    const selectedSize = sizeData.find((size) => size.sizename === data)
+    const selectedSize = sizeData.find((size) => size.sizename === data);
     if (selectedSize) {
       setSizeMarkup(selectedSize?.MarkUp);
     }
     setSizeOption(data);
     const filteredData = getAllFilterSizeData?.filter(
       (item) => item.sizename === data
-    )
+    );
     const filteredDataMetal = filteredData?.filter(
       (item) => item.DiamondStoneTypeName === "METAL"
-    )
+    );
     const filteredDataDaimond = filteredData?.filter(
       (item) => item.DiamondStoneTypeName === "DIAMOND"
-    )
-    setMetalFilterData(filteredDataMetal)
-    setDaimondFiletrData(filteredDataDaimond)
+    );
+    setMetalFilterData(filteredDataMetal);
+    setDaimondFiletrData(filteredDataDaimond);
   };
 
   const handleColorSelection = (color) => {
@@ -587,17 +583,14 @@ export default function CartPage() {
     //     }
   };
 
-  console.log('cartSelectData', cartSelectData?.UnitCost);
-  console.log('dqcData', dqcData?.S);
-  console.log('csqcData', csqcData?.S);
-  console.log('mtrdData', mtrdData?.Z);
+  console.log("cartSelectData", cartSelectData?.UnitCost);
+  console.log("dqcData", dqcData?.S);
+  console.log("csqcData", csqcData?.S);
+  console.log("mtrdData", mtrdData?.Z);
 
   return (
     <>
-      <div
-        className="paddingTopMobileSet"
-        style={{ paddingTop: "130px" }}
-      >
+      <div className="paddingTopMobileSet" style={{ paddingTop: "130px" }}>
         {isLoading && (
           <div className="loader-overlay">
             <CircularProgress className="loadingBarManage" />
@@ -627,13 +620,13 @@ export default function CartPage() {
                     className="smiTopClearBtn"
                     onClick={() => handleChange(0)}
                   >
-                    List View
+                    LIST VIEW
                   </button>
                   <button
                     className="smiTopClearBtn"
                     onClick={() => handleChange(1)}
                   >
-                    Image View
+                    IMAGE VIEW
                   </button>
                   <button
                     className="smiTopClearBtn"
@@ -645,7 +638,7 @@ export default function CartPage() {
                     className="smiTopClearBtn"
                     onClick={() => navigation("/productpage")}
                   >
-                    Show ProductList
+                    SHOW PRODUCTLIST
                   </button>
                   <button
                     className="placeOrderCartPageBtnMobile"
@@ -653,7 +646,7 @@ export default function CartPage() {
                       navigation("/Delivery");
                     }}
                   >
-                    Place Order
+                    PLACE ORDER
                   </button>
                 </div>
                 <div
@@ -661,12 +654,12 @@ export default function CartPage() {
                   style={{
                     display: "flex",
                     justifyContent: "flex-end",
-                    margin: "-50px 25px 0px 20px",
+                    margin: "-50px 70px 0px 20px",
                     paddingBottom: "50px",
                   }}
                 >
                   <button
-                    className="placeOrderCartPageBtn"
+                    className="smiTopClearBtn"
                     onClick={(event) => {
                       navigation("/Delivery");
                     }}
@@ -685,7 +678,7 @@ export default function CartPage() {
                 display: "flex",
               }}
             >
-              <div className="smilingCartDeatilSub2">
+              <div className="smilingCartDeatilSub2" style={{ marginBottom: cartListData?.length === 0 && '15%' }}>
                 {cartListData?.length === 0 ? (
                   !isLoading && (
                     <div
@@ -739,7 +732,7 @@ export default function CartPage() {
                               }}
                             />
 
-                            <div style={{ width: '550px' }}>
+                            <div style={{ width: "550px" }}>
                               <div
                                 style={{
                                   width: "100%",
@@ -751,267 +744,266 @@ export default function CartPage() {
                                 <div
                                   style={{
                                     fontSize: "40px",
-                                    fontFamily: "FreightDisp Pro Medium",
+                                    fontFamily: "Harmonia",
                                     color: "#7d7f85",
                                     lineHeight: "40px",
                                     marginBottom: "14px",
-                                    textOverflow: 'ellipsis',
-                                    overflow: 'hidden',
-                                    whiteSpace: 'none',
-                                    height: '40px',
-                                    width: '70%'
+                                    textOverflow: "ellipsis",
+                                    overflow: "hidden",
+                                    whiteSpace: "none",
+                                    height: "40px",
+                                    width: "70%",
                                   }}
                                   className="prodTitleLine"
                                 >
                                   {prodSelectData?.TitleLine}
                                 </div>
 
-
                                 <div
                                   style={{
-                                    borderTop: "1px solid #e1e1e1",
                                     marginInline: "-10px",
                                     padding: "20px",
                                   }}
                                 >
-                                  <div
+                                  {isProductCuFlag === 1 && <div
                                     style={{
-                                      display: "flex",
-                                      justifyContent: "space-between",
-                                      marginTop: "12px",
+                                      borderTop: "1px solid #e1e1e1",
+                                      marginInline: "-10px",
+                                      padding: "20px 20px 20px 0px",
                                     }}
                                   >
-                                    {isMetalCutoMizeFlag == 1 && (
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          flexDirection: "column",
-                                          width: "49%",
-                                        }}
-                                      >
-                                        <label
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        flexWrap: 'wrap',
+                                        marginTop: "12px",
+                                      }}
+                                    >
+                                      {isMetalCutoMizeFlag == 1 && (
+                                        <div
                                           style={{
-                                            fontSize: "12.5px",
-                                            color: "#7d7f85",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            width: "45%",
                                           }}
                                         >
-                                          METAL COLOR:
-                                        </label>
-                                        <select
-                                          style={{
-                                            border: "none",
-                                            outline: "none",
-                                            color: "#7d7f85",
-                                            fontSize: "12.5px",
-                                          }}
-                                          value={selectedColor}
-                                          onChange={(e) =>
-                                            setSelectedColor(e.target.value)
-                                          }
-                                        >
-                                          {metalColorData.map((colorItem) => (
-                                            <option
-                                              key={colorItem.ColorId}
-                                              value={colorItem.metalcolorname}
-                                            >
-                                              {colorItem.metalcolorname}
-                                            </option>
-                                          ))}
-                                        </select>
-                                      </div>
-                                    )}
-
-                                    {/* <Divider orientation='horizontal' sx={{backgroundColor:'black',width:'1px'}}/> */}
-
-                                    {isMetalCutoMizeFlag == 1 && (
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          flexDirection: "column",
-                                          width: "49%",
-                                        }}
-                                      >
-                                        <label
-                                          style={{
-                                            fontSize: "12.5px",
-                                            color: "#7d7f85",
-                                          }}
-                                        >
-                                          METAL TYPE:
-                                        </label>
-                                        <select
-                                          style={{
-                                            border: "none",
-                                            outline: "none",
-                                            color: "#7d7f85",
-                                            fontSize: "12.5px",
-                                          }}
-                                          // value={mtTypeOption ?? cartSelectData?.metal}
-                                          value={mtTypeOption}
-                                          onChange={(e) =>
-                                            setmtTypeOption(e.target.value)
-                                          }
-                                        >
-                                          {metalType.map((data, index) => (
-                                            <option
-                                              key={index}
-                                              value={data.metalType}
-                                            >
-                                              {data.metaltype}
-                                            </option>
-                                          ))}
-                                        </select>
-                                      </div>
-                                    )}
-                                  </div>
-
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      justifyContent: "space-between",
-                                    }}
-                                  >
-                                    {isDaimondCstoFlag == 1 && (
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          flexDirection: "column",
-                                          width: "49%",
-                                          marginTop: "30px",
-                                        }}
-                                      >
-                                        <label
-                                          style={{
-                                            fontSize: "12.5px",
-                                            color: "#7d7f85",
-                                          }}
-                                        >
-                                          DAIMOND :
-                                        </label>
-                                        <select
-                                          style={{
-                                            border: "none",
-                                            outline: "none",
-                                            color: "#7d7f85",
-                                            fontSize: "12.5px",
-                                          }}
-                                          value={diaQColOpt}
-                                          onChange={(e) =>
-                                            setDiaQColOpt(e.target.value)
-                                          }
-                                        >
-                                          {colorData?.map((colorItem) => (
-                                            <option
-                                              key={colorItem.ColorId}
-                                              value={`${colorItem.Quality}_${colorItem.color}`}
-                                            >
-                                              {`${colorItem.Quality}_${colorItem.color}`}
-                                            </option>
-                                          ))}
-                                        </select>
-                                      </div>
-                                    )}
-
-                                    {isCColrStoneCustFlag == 1 && (
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          flexDirection: "column",
-                                          width: "49%",
-                                          marginTop: "20px",
-                                        }}
-                                      >
-                                        <label
-                                          style={{
-                                            fontSize: "12.5px",
-                                            color: "#7d7f85",
-                                            marginTop: "10px",
-                                          }}
-                                        >
-                                          COLOR STONE:
-                                        </label>
-                                        <select
-                                          style={{
-                                            border: "none",
-                                            outline: "none",
-                                            color: "#7d7f85",
-                                            fontSize: "12.5px",
-                                          }}
-                                          value={cSQopt}
-                                          onChange={(e) =>
-                                            setCSQOpt(e.target.value)
-                                          }
-                                        >
-                                          {DaimondQualityColor.map(
-                                            (data, index) => (
+                                          <label
+                                            style={{
+                                              fontSize: "12.5px",
+                                              color: "#7d7f85",
+                                            }}
+                                          >
+                                            METAL TYPE:
+                                          </label>
+                                          <select
+                                            style={{
+                                              border: "none",
+                                              outline: "none",
+                                              color: "#7d7f85",
+                                              fontSize: "12.5px",
+                                            }}
+                                            // value={mtTypeOption ?? cartSelectData?.metal}
+                                            value={mtTypeOption}
+                                            onChange={(e) =>
+                                              setmtTypeOption(e.target.value)
+                                            }
+                                          >
+                                            {metalType.map((data, index) => (
                                               <option
                                                 key={index}
-                                                value={`${data.Quality}-${data.color}`}
+                                                value={data.metalType}
                                               >
-                                                {`${data.Quality}-${data.color}`}
+                                                {data.metaltype}
                                               </option>
-                                            )
-                                          )}
-                                        </select>
-                                      </div>
-                                    )}
-                                  </div>
+                                            ))}
+                                          </select>
+                                        </div>
+                                      )}
 
-                                  {(sizeData?.length !== 0 ||
-                                    (productData?.DefaultSize &&
-                                      productData.DefaultSize.length !==
-                                      0)) && (
-                                      <div
-                                        style={{
-                                          display: "flex",
-                                          flexDirection: "column",
-                                          width: "49%",
-                                          marginTop: "30px",
-                                        }}
-                                      >
-                                        <label
+                                      {isMetalCutoMizeFlag == 1 && (
+                                        <div
                                           style={{
-                                            fontSize: "12.5px",
-                                            color: "#7d7f85",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            width: "45%",
                                           }}
                                         >
-                                          SIZE:
-                                        </label>
-                                        <select
+                                          <label
+                                            style={{
+                                              fontSize: "12.5px",
+                                              color: "#7d7f85",
+                                            }}
+                                          >
+                                            METAL COLOR:
+                                          </label>
+                                          <select
+                                            style={{
+                                              border: "none",
+                                              outline: "none",
+                                              color: "#7d7f85",
+                                              fontSize: "12.5px",
+                                            }}
+                                            value={selectedColor}
+                                            onChange={(e) =>
+                                              setSelectedColor(e.target.value)
+                                            }
+                                          >
+                                            {metalColorData.map((colorItem) => (
+                                              <option
+                                                key={colorItem.ColorId}
+                                                value={colorItem.metalcolorname}
+                                              >
+                                                {colorItem.metalcolorname}
+                                              </option>
+                                            ))}
+                                          </select>
+                                        </div>
+                                      )}
+
+
+                                      {isDaimondCstoFlag == 1 && (
+                                        <div
                                           style={{
-                                            border: "none",
-                                            outline: "none",
-                                            color: "#7d7f85",
-                                            fontSize: "12.5px",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            width: "45%",
+                                            marginTop: "30px",
                                           }}
-                                          onChange={(e) =>
-                                            handelSize(e.target.value)
-                                          }
-                                          defaultValue={
-                                            productData && productData.DefaultSize
-                                              ? productData.DefaultSize
-                                              : sizeData.find(
-                                                (size) =>
-                                                  size.IsDefaultSize === 1
-                                              )?.id
-                                          }
                                         >
-                                          {sizeData?.map((size) => (
-                                            <option
-                                              key={size.id}
-                                              value={size.sizename} // Pass sizename as value
-                                              selected={
-                                                productData &&
-                                                productData.DefaultSize ===
-                                                size.sizename
+                                          <label
+                                            style={{
+                                              fontSize: "12.5px",
+                                              color: "#7d7f85",
+                                            }}
+                                          >
+                                            DAIMOND :
+                                          </label>
+                                          <select
+                                            style={{
+                                              border: "none",
+                                              outline: "none",
+                                              color: "#7d7f85",
+                                              fontSize: "12.5px",
+                                            }}
+                                            value={diaQColOpt}
+                                            onChange={(e) =>
+                                              setDiaQColOpt(e.target.value)
+                                            }
+                                          >
+                                            {colorData?.map((colorItem) => (
+                                              <option
+                                                key={colorItem.ColorId}
+                                                value={`${colorItem.Quality}_${colorItem.color}`}
+                                              >
+                                                {`${colorItem.Quality}_${colorItem.color}`}
+                                              </option>
+                                            ))}
+                                          </select>
+                                        </div>
+                                      )}
+
+                                      {isCColrStoneCustFlag == 1 && (
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            width: "4%",
+                                            marginTop: "20px",
+                                          }}
+                                        >
+                                          <label
+                                            style={{
+                                              fontSize: "12.5px",
+                                              color: "#7d7f85",
+                                              marginTop: "10px",
+                                            }}
+                                          >
+                                            COLOR STONE:
+                                          </label>
+                                          <select
+                                            style={{
+                                              border: "none",
+                                              outline: "none",
+                                              color: "#7d7f85",
+                                              fontSize: "12.5px",
+                                            }}
+                                            value={cSQopt}
+                                            onChange={(e) =>
+                                              setCSQOpt(e.target.value)
+                                            }
+                                          >
+                                            {DaimondQualityColor.map(
+                                              (data, index) => (
+                                                <option
+                                                  key={index}
+                                                  value={`${data.Quality}_${data.color}`}
+                                                >
+                                                  {`${data.Quality}_${data.color}`}
+                                                </option>
+                                              )
+                                            )}
+                                          </select>
+                                        </div>
+                                      )}
+
+                                      {(sizeData?.length !== 0 ||
+                                        (productData?.DefaultSize &&
+                                          productData.DefaultSize.length !==
+                                          0)) && (
+                                          <div
+                                            style={{
+                                              display: "flex",
+                                              flexDirection: "column",
+                                              width: "45%",
+                                              marginTop: "30px",
+                                            }}
+                                          >
+                                            <label
+                                              style={{
+                                                fontSize: "12.5px",
+                                                color: "#7d7f85",
+                                              }}
+                                            >
+                                              SIZE:
+                                            </label>
+                                            <select
+                                              style={{
+                                                border: "none",
+                                                outline: "none",
+                                                color: "#7d7f85",
+                                                fontSize: "12.5px",
+                                              }}
+                                              onChange={(e) =>
+                                                handelSize(e.target.value)
+                                              }
+                                              defaultValue={
+                                                productData && productData.DefaultSize
+                                                  ? productData.DefaultSize
+                                                  : sizeData.find(
+                                                    (size) =>
+                                                      size.IsDefaultSize === 1
+                                                  )?.id
                                               }
                                             >
-                                              {size.sizename}
-                                            </option>
-                                          ))}
-                                        </select>
-                                      </div>
-                                    )}
+                                              {sizeData?.map((size) => (
+                                                <option
+                                                  key={size.id}
+                                                  value={size.sizename} // Pass sizename as value
+                                                  selected={
+                                                    productData &&
+                                                    productData.DefaultSize ===
+                                                    size.sizename
+                                                  }
+                                                >
+                                                  {size.sizename}
+                                                </option>
+                                              ))}
+                                            </select>
+                                          </div>
+                                        )}
+                                    </div>
+                                  </div>}
                                 </div>
                               </div>
                               <div
@@ -1052,7 +1044,7 @@ export default function CartPage() {
                                       textAlign: "center",
                                       outline: "none",
                                       width: "80px",
-                                      height: "35px",
+                                      height: "30px",
                                       border: "1px solid #7d7f85",
                                     }}
                                     maxLength={2}
@@ -1106,116 +1098,187 @@ export default function CartPage() {
                         </div>
                       </div>
                     )}
-                    {!isLoading && <div className="cartProdSection resCon">
-                      <div
-                        // style={{
-                        //   display: "flex",
-                        //   flexWrap: "wrap",
-                        //   height: "565px",
-                        //   overflowY: "auto",
-                        // }}
-                        className="cartProdpart"
-                      >
-                        {cartListData?.map((item, index) => (
-                          <div
-                            key={item.id}
-                            className="smiling-cartPageBoxMain"
-                            onClick={() => {
-                              setCartSelectData(item);
-                              getSizeData(item.autocode)
-                              window.innerWidth <= 1080 && setDialogOpen(true)
-                            }}
-                          >
-                            <div
-                              style={{
-                                cursor: "pointer",
-                                position: "absolute",
-                                right: "0px",
-                                top: "0px",
-                                backgroundColor: "black",
-                                borderRadius: "2px",
-                                opacity: "0.8",
-                              }}
-                              onClick={() => handleRemove(item)}
-                            >
-                              <CloseIcon
-                                sx={{ color: "white", fontSize: "22px" }}
-                              />
-                            </div>
-                            <img
-                              src={`${imageURL}/${yKey}/${item.DefaultImageName}`}
-                              alt="#"
-                              className="cartImageShow"
-                            />
-                            <div
-                              className="smilingCartBox1"
-                              style={{ padding: "5px" }}
-                            >
-                              <div
-                                style={{
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <p style={{ margin: "0px", fontSize: "12px" }}>
-                                  NWT :{" "}
-                                  <span style={{ fontWeight: 600 }}>
-                                    {item?.MetalWeight}
-                                  </span>
-                                </p>
-                                <p style={{ margin: "0px", fontSize: "12px" }}>
-                                  DWT :{" "}
-                                  <span style={{ fontWeight: 600 }}>
-                                    {item?.Rec_DiamondWeight} /{" "}
-                                    {item?.totaldiamondpcs}
-                                  </span>
-                                </p>
-                              </div>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                }}
-                              >
-                                <p style={{ margin: "0px", fontSize: "12px" }}>
-                                  CWT :{" "}
-                                  <span style={{ fontWeight: 600 }}>
-                                    {item?.Rec_CSWeight} /{" "}
-                                    {item?.totalcolorstonepcs}
-                                  </span>
-                                </p>
-                                <p style={{ margin: "0px", fontSize: "12px" }}>
-                                  GWT :{" "}
-                                  <span style={{ fontWeight: 600 }}>
-                                    {item?.grossweight}
-                                  </span>
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-
-                      <textarea
-                        label="Enter Remarks"
-                        variant="outlined"
-                        placeholder="Enter Order Remark"
-                        value={Mainremarks}
-                        rows={4}
-                        onChange={(e) => handleInputChangeMainRemarks(e)}
-                        className="YourCartPageMainRemkarBox"
-                        style={{ marginTop: "30px" }}
-                      />
-                      <div className="addRemkarMainBottom">
-                        <button
-                          onClick={submitMainRemrks}
-                          className="SmilingAddRemkarBtn"
-                          style={{ marginTop: "10px" }}
+                    {!isLoading && (
+                      <div className="cartProdSection resCon">
+                        <div
+                          // style={{
+                          //   display: "flex",
+                          //   flexWrap: "wrap",
+                          //   height: "565px",
+                          //   overflowY: "auto",
+                          // }}
+                          className="cartProdpart"
                         >
-                          Add Order Remark
-                        </button>
-                      </div>
-                    </div>}
+                          {cartListData?.map((item, index) => (
+                            <div
+                              key={item.id}
+                              className="smiling-cartPageBoxMain"
+                              onClick={() => {
+                                setCartSelectData(item);
+                                getSizeData(item.autocode);
+                                window.innerWidth <= 1080 &&
+                                  setDialogOpen(true);
+                              }}
+                            >
+                              <div className="cartPageCards">
+                                <div className="CartPage-image">
+                                  <div
+                                    className="cartImageContainer"
+                                    style={{
+                                      backgroundImage: `url(${imageURL}/${yKey}/${item.DefaultImageName})`,
+                                    }}
+                                  ></div>
+                                  <div
+                                    className="remove_icon"
+                                    onClick={() => handleRemove(item)}
+                                  >
+                                    <CloseIcon
+                                      // sx={{ color: "white", fontSize: "22px" }}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="cart-features">
+                                  <div>
+                                    <div className="cartDeatails-features">
+                                      <p>
+                                        <span className="feature-count">
+                                          NWT :{" "}
+                                        </span>{" "}
+                                        {item?.MetalWeight}
+                                      </p>
+                                    </div>
+                                    <div className="feature">
+                                      <p>
+                                        <span className="feature-titleHead">
+                                          DWT :{" "}
+                                        </span>{" "}
+                                        {item?.Rec_DiamondWeight} /{" "}
+                                        {item?.totaldiamondpcs}
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <div className="feature">
+                                      <p>
+                                        <span className="feature-count">
+                                          GWT :{" "}
+                                        </span>{" "}
+                                        {item?.grossweight}
+                                      </p>
+                                    </div>
+                                    <div className="feature">
+                                      <p>
+                                        <span className="feature-count">
+                                          CWT :{" "}
+                                        </span>{" "}
+                                        {item?.Rec_CSWeight} /{" "}
+                                        {item?.totalcolorstonepcs}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            // <div
+                            //   key={item.id}
+                            //   className="smiling-cartPageBoxMain"
+                            //   onClick={() => {
+                            //     setCartSelectData(item);
+                            //     getSizeData(item.autocode)
+                            //     window.innerWidth <= 1080 && setDialogOpen(true)
+                            //   }}
+                            // >
+                            //   <div
+                            //     style={{
+                            //       cursor: "pointer",
+                            //       position: "absolute",
+                            //       right: "0px",
+                            //       top: "0px",
+                            //       backgroundColor: "black",
+                            //       borderRadius: "2px",
+                            //       opacity: "0.8",
+                            //     }}
+                            //     onClick={() => handleRemove(item)}
+                            //   >
+                            //     <CloseIcon
+                            //       sx={{ color: "white", fontSize: "22px" }}
+                            //     />
+                            //   </div>
+                            //   <img
+                            //     src={`${imageURL}/${yKey}/${item.DefaultImageName}`}
+                            //     alt="#"
+                            //     className="cartImageShow"
+                            //   />
+                            //   <div
+                            //     className="smilingCartBox1"
+                            //     style={{ padding: "5px" }}
+                            //   >
+                            //     <div
+                            //       style={{
+                            //         display: "flex",
+                            //         justifyContent: "space-between",
+                            //       }}
+                            //     >
+                            //       <p style={{ margin: "0px", fontSize: "12px" }}>
+                            //         NWT :{" "}
+                            //         <span style={{ fontWeight: 600 }}>
+                            //           {item?.MetalWeight}
+                            //         </span>
+                            //       </p>
+                            //       <p style={{ margin: "0px", fontSize: "12px" }}>
+                            //         DWT :{" "}
+                            //         <span style={{ fontWeight: 600 }}>
+                            //           {item?.Rec_DiamondWeight} /{" "}
+                            //           {item?.totaldiamondpcs}
+                            //         </span>
+                            //       </p>
+                            //     </div>
+                            //     <div
+                            //       style={{
+                            //         display: "flex",
+                            //         justifyContent: "space-between",
+                            //       }}
+                            //     >
+                            //       <p style={{ margin: "0px", fontSize: "12px" }}>
+                            //         CWT :{" "}
+                            //         <span style={{ fontWeight: 600 }}>
+                            //           {item?.Rec_CSWeight} /{" "}
+                            //           {item?.totalcolorstonepcs}
+                            //         </span>
+                            //       </p>
+                            //       <p style={{ margin: "0px", fontSize: "12px" }}>
+                            //         GWT :{" "}
+                            //         <span style={{ fontWeight: 600 }}>
+                            //           {item?.grossweight}
+                            //         </span>
+                            //       </p>
+                            //     </div>
+                            //   </div>
+                            // </div>
+                          ))}
+                        </div>
+
+                        <textarea
+                          label="Enter Remarks"
+                          variant="outlined"
+                          placeholder="Enter Order Remark"
+                          value={Mainremarks}
+                          rows={4}
+                          onChange={(e) => handleInputChangeMainRemarks(e)}
+                          className="YourCartPageMainRemkarBox"
+                          style={{ marginTop: "30px" }}
+                        />
+                        <div className="addRemkarMainBottom">
+                          <button
+                            onClick={submitMainRemrks}
+                            className="SmilingAddRemkarBtn"
+                            style={{ marginTop: "10px" }}
+                          >
+                            Add Order Remark
+                          </button>
+                        </div>
+                      </div>)}
                   </div>
                 )}
               </div>
@@ -1352,7 +1415,7 @@ export default function CartPage() {
                     <div
                       style={{
                         fontSize: "40px",
-                        fontFamily: "FreightDisp Pro Medium",
+                        fontFamily: "Harmonia",
                         color: "#7d7f85",
                         lineHeight: "40px",
                         marginBottom: "14px",
@@ -1540,50 +1603,50 @@ export default function CartPage() {
                       {(sizeData?.length !== 0 ||
                         (productData?.DefaultSize &&
                           productData.DefaultSize.length !== 0)) && (
-                          <div
-                            style={{
-                              display: "flex",
-                              flexDirection: "column",
-                              width: "49%",
-                              marginTop: "30px",
-                            }}
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: "49%",
+                            marginTop: "30px",
+                          }}
+                        >
+                          <label
+                            style={{ fontSize: "12.5px", color: "#7d7f85" }}
                           >
-                            <label
-                              style={{ fontSize: "12.5px", color: "#7d7f85" }}
-                            >
-                              SIZE:
-                            </label>
-                            <select
-                              style={{
-                                border: "none",
-                                outline: "none",
-                                color: "#7d7f85",
-                                fontSize: "12.5px",
-                              }}
-                              onChange={(e) => handelSize(e.target.value)}
-                              defaultValue={
-                                productData && productData.DefaultSize
-                                  ? productData.DefaultSize
-                                  : sizeData.find(
+                            SIZE:
+                          </label>
+                          <select
+                            style={{
+                              border: "none",
+                              outline: "none",
+                              color: "#7d7f85",
+                              fontSize: "12.5px",
+                            }}
+                            onChange={(e) => handelSize(e.target.value)}
+                            defaultValue={
+                              productData && productData.DefaultSize
+                                ? productData.DefaultSize
+                                : sizeData.find(
                                     (size) => size.IsDefaultSize === 1
                                   )?.id
-                              }
-                            >
-                              {sizeData?.map((size) => (
-                                <option
-                                  key={size.id}
-                                  value={size.sizename} // Pass sizename as value
-                                  selected={
-                                    productData &&
-                                    productData.DefaultSize === size.sizename
-                                  }
-                                >
-                                  {size.sizename}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                        )}
+                            }
+                          >
+                            {sizeData?.map((size) => (
+                              <option
+                                key={size.id}
+                                value={size.sizename} // Pass sizename as value
+                                selected={
+                                  productData &&
+                                  productData.DefaultSize === size.sizename
+                                }
+                              >
+                                {size.sizename}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div

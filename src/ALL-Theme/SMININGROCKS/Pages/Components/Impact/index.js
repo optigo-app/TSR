@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./index.css";
 import i1 from "../../assets/Impact/campaign/banner.webp";
 import Campaign from "./campaign/Campaign";
 import Header from "../home/Header/Header";
 import Explore from "./Explore/Explore";
 
-const index = () => {
+const Index = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
+
   return (
     <>
       <div style={{ paddingTop: '110px' }}>
@@ -32,7 +37,7 @@ const index = () => {
           }}
           className="main-front-container"
         >
-          <img src="https://www.highspeedtraining.co.uk/hub/wp-content/uploads/2021/07/Class-planting-plants-1.jpg" alt="..." style={{width:'100%'}} />
+          <img src="https://www.highspeedtraining.co.uk/hub/wp-content/uploads/2021/07/Class-planting-plants-1.jpg" alt="..." style={{ width: '100%' }} />
 
           <div
             style={{
@@ -108,12 +113,12 @@ const index = () => {
               </small>
             </p>
           </div>
-          <Explore/>
-          
+          <Explore />
+
         </div>
       </div>
     </>
   );
 };
 
-export default index;
+export default Index;

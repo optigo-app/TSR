@@ -43,13 +43,13 @@ export default function Register() {
   useEffect(() => {
     const storedEmail = location.state?.email;
     const routeMobileNo = location.state?.mobileNo;
-    
+
     if (routeMobileNo) {
       setMobileNo(routeMobileNo);
       mobileNoRef.current.disabled = true;
     }
-  
-    if(storedEmail) {
+
+    if (storedEmail) {
       setEmail(storedEmail);
       emailRef.current.disabled = true;
     }
@@ -128,13 +128,13 @@ export default function Register() {
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[^\w\d\s]).{8,}$/;
     return passwordRegex.test(value);
   };
-  
+
   const handlePasswordChange = (event) => {
     const { value } = event.target;
     setPassword(value);
     if (!value.trim()) {
       setPasswordError('Password is required')
-    }else if (!validatePassword(value)) {
+    } else if (!validatePassword(value)) {
       setPasswordError('Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character!');
     } else if (value === confirmPassword) {
       setErrors(prevErrors => ({ ...prevErrors, confirmPassword: '' }));
@@ -159,9 +159,9 @@ export default function Register() {
     if (!mobileNo.trim()) {
       errors.mobileNo = 'Mobile No. is required';
     } else if (!/^\d{10}$/.test(mobileNo.trim())) {
-      errors.mobileNo =  'Enter Valid mobile number';
-    } 
-    
+      errors.mobileNo = 'Enter Valid mobile number';
+    }
+
     if (!email.trim()) {
       errors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -170,9 +170,9 @@ export default function Register() {
     if (!password.trim()) {
       setPasswordError('Password is required');
       errors.password = 'Password is required';
-    }else if (!validatePassword(password)) {
-      errors.password =  'Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character!';
-    } 
+    } else if (!validatePassword(password)) {
+      errors.password = 'Password must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character!';
+    }
 
     if (!confirmPassword.trim()) {
       errors.confirmPassword = 'Confirm Password is required';
@@ -195,7 +195,7 @@ export default function Register() {
           "p": encodedCombinedValue
         }
         const response = await CommonAPI(body);
-        console.log('ressssssssssssssssss',response);
+        console.log('ressssssssssssssssss', response);
         if (response.Data.rd[0].stat === 1) {
           localStorage.setItem('LoginUser', 'true')
           localStorage.setItem('loginUserDetail', JSON.stringify(response.Data?.rd[0]));
@@ -224,160 +224,160 @@ export default function Register() {
 
 
 
-  
+
 
   return (
-    <div className='paddingTopMobileSet' style={{ paddingTop: '110px' ,backgroundColor: 'rgba(66, 66, 66, 0.05)'}}>
+    <div className='paddingTopMobileSet' style={{ paddingTop: '110px', backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
       {isLoading && (
         <div className="loader-overlay">
           <CircularProgress className='loadingBarManage' />
         </div>
       )}
       <div>
-        <div className='smling-register-main'>
-          <p style={{
-            textAlign: 'center',
-            paddingTop: '60px',
-            marginTop: '15px',
-            fontSize: '25px',
-            fontFamily: 'Harmonia'
-          }}
-            className='AuthScreenRegisterMainTitle'
-          >Register</p>
+        <div className='smling-forgot-main-Color-register'>
+          <div className='smling-register-main'>
+            <p style={{
+              textAlign: 'center',
+              fontSize: '25px',
+              fontFamily: 'Harmonia'
+            }}
+              className='AuthScreenRegisterMainTitle'
+            >Register</p>
 
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <TextField
-              autoFocus
-              id="outlined-basic"
-              label="First Name"
-              variant="outlined"
-              className='labgrowRegister'
-              style={{ margin: '15px' }}
-              autoComplete="new-FirstName" 
-              value={firstName}
-              inputRef={firstNameRef}
-              onKeyDown={(e) => handleKeyDown(e, lastNameRef)}
-              onChange={(e) => handleInputChange(e, setFirstName, 'firstName')}
-              error={!!errors.firstName}
-              helperText={errors.firstName}
-            />
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <TextField
+                autoFocus
+                id="outlined-basic"
+                label="First Name"
+                variant="outlined"
+                className='labgrowRegister'
+                style={{ margin: '15px' }}
+                autoComplete="new-FirstName"
+                value={firstName}
+                inputRef={firstNameRef}
+                onKeyDown={(e) => handleKeyDown(e, lastNameRef)}
+                onChange={(e) => handleInputChange(e, setFirstName, 'firstName')}
+                error={!!errors.firstName}
+                helperText={errors.firstName}
+              />
 
-            <TextField
-              id="outlined-basic"
-              label="Last Name"
-              variant="outlined"
-              className='labgrowRegister'
-              style={{ margin: '15px' }}
-              autoComplete="new-LastName" 
-              value={lastName}
-              inputRef={lastNameRef}
-              onKeyDown={(e) => handleKeyDown(e, mobileNoRef)}
-              onChange={(e) => handleInputChange(e, setLastName, 'lastName')}
-              error={!!errors.lastName}
-              helperText={errors.lastName}
-            />
+              <TextField
+                id="outlined-basic"
+                label="Last Name"
+                variant="outlined"
+                className='labgrowRegister'
+                style={{ margin: '15px' }}
+                autoComplete="new-LastName"
+                value={lastName}
+                inputRef={lastNameRef}
+                onKeyDown={(e) => handleKeyDown(e, mobileNoRef)}
+                onChange={(e) => handleInputChange(e, setLastName, 'lastName')}
+                error={!!errors.lastName}
+                helperText={errors.lastName}
+              />
 
-            <TextField
-              id="outlined-basic"
-              label="Mobile No."
-              variant="outlined"
-              className='labgrowRegister'
-              style={{ margin: '15px' }}
-              value={mobileNo}
-              inputRef={mobileNoRef}
-              onKeyDown={(e) => handleKeyDown(e, emailRef)}
-              onChange={(e) => handleInputChange(e, setMobileNo, 'mobileNo')}
-              error={!!errors.mobileNo}
-              helperText={errors.mobileNo}
-            />
+              <TextField
+                id="outlined-basic"
+                label="Mobile No."
+                variant="outlined"
+                className='labgrowRegister'
+                style={{ margin: '15px' }}
+                value={mobileNo}
+                inputRef={mobileNoRef}
+                onKeyDown={(e) => handleKeyDown(e, emailRef)}
+                onChange={(e) => handleInputChange(e, setMobileNo, 'mobileNo')}
+                error={!!errors.mobileNo}
+                helperText={errors.mobileNo}
+              />
 
-            <TextField
-              id="outlined-basic"
-              label="Email"
-              autoComplete="ne-Email" 
-              variant="outlined"
-              className='labgrowRegister'
-              style={{ margin: '15px' }}
-              value={email}
-              inputRef={emailRef}
-              onKeyDown={(e) => handleKeyDown(e, passwordRef)}
-              onChange={(e) => handleInputChange(e, setEmail, 'email')}
-              error={!!errors.email}
-              helperText={errors.email}
-            />
+              <TextField
+                id="outlined-basic"
+                label="Email"
+                autoComplete="ne-Email"
+                variant="outlined"
+                className='labgrowRegister'
+                style={{ margin: '15px' }}
+                value={email}
+                inputRef={emailRef}
+                onKeyDown={(e) => handleKeyDown(e, passwordRef)}
+                onChange={(e) => handleInputChange(e, setEmail, 'email')}
+                error={!!errors.email}
+                helperText={errors.email}
+              />
 
-            <TextField
-              id="outlined-password-input"
-              label="Password"
-              autoComplete="enter-NewPass-Word" 
-              type={showPassword ? 'text' : 'password'}
-              className='labgrowRegister'
-              style={{ margin: '15px' }}
-              value={password}
-              onChange={handlePasswordChange}
-              error={!!passwordError}
-              helperText={passwordError}
-              inputRef={passwordRef}
-              onKeyDown={(e) => handleKeyDown(e, confirmPasswordRef)}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={() => handleTogglePasswordVisibility('password')}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
+              <TextField
+                id="outlined-password-input"
+                label="Password"
+                autoComplete="enter-NewPass-Word"
+                type={showPassword ? 'text' : 'password'}
+                className='labgrowRegister'
+                style={{ margin: '15px' }}
+                value={password}
+                onChange={handlePasswordChange}
+                error={!!passwordError}
+                helperText={passwordError}
+                inputRef={passwordRef}
+                onKeyDown={(e) => handleKeyDown(e, confirmPasswordRef)}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => handleTogglePasswordVisibility('password')}
+                        onMouseDown={handleMouseDownPassword}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
 
-            <TextField
-              id="outlined-confirm-password-input"
-              label="Confirm Password"
-              autoComplete="Enetr-NewConfirm-Pass" 
-              type={showConfirmPassword ? 'text' : 'password'}
-              className='labgrowRegister'
-              style={{ margin: '15px' }}
-              value={confirmPassword}
-              inputRef={confirmPasswordRef}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') {
-                  handleSubmit();
-                }
-              }}
-              onChange={(e) => handleInputChange(e, setConfirmPassword, 'confirmPassword')}
-              error={!!errors.confirmPassword}
-              helperText={errors.confirmPassword}
-              InputProps={{ // Set InputProps for icon
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={() => handleTogglePasswordVisibility('confirmPassword')}
-                      onMouseDown={handleMouseDownConfirmPassword}
-                      edge="end"
-                    >
-                      {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
+              <TextField
+                id="outlined-confirm-password-input"
+                label="Confirm Password"
+                autoComplete="Enetr-NewConfirm-Pass"
+                type={showConfirmPassword ? 'text' : 'password'}
+                className='labgrowRegister'
+                style={{ margin: '15px' }}
+                value={confirmPassword}
+                inputRef={confirmPasswordRef}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    handleSubmit();
+                  }
+                }}
+                onChange={(e) => handleInputChange(e, setConfirmPassword, 'confirmPassword')}
+                error={!!errors.confirmPassword}
+                helperText={errors.confirmPassword}
+                InputProps={{ // Set InputProps for icon
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={() => handleTogglePasswordVisibility('confirmPassword')}
+                        onMouseDown={handleMouseDownConfirmPassword}
+                        edge="end"
+                      >
+                        {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
 
-            <button className='createBtnRegister' onClick={handleSubmit}>CREATE ACCOUNT</button>
+              <button className='createBtnRegister' onClick={handleSubmit}>CREATE ACCOUNT</button>
 
-            {/* <div style={{ display: 'flex', marginTop: '10px' }}>
+              {/* <div style={{ display: 'flex', marginTop: '10px' }}>
               <input type='checkbox' />
               <p style={{ margin: '5px' }}>Subscribe to our newsletter</p>
             </div> */}
-            <Button style={{marginTop: '10px' ,color: '#424242',fontFamily: 'Harmonia'}} onClick={() => navigation('/LoginOption')}>BACK</Button>
+              <Button style={{ marginTop: '10px', color: '#424242', fontFamily: 'Harmonia' }} onClick={() => navigation('/LoginOption')}>BACK</Button>
+            </div>
           </div>
         </div>
-          <Footer />
+        <Footer />
       </div>
     </div>
   );

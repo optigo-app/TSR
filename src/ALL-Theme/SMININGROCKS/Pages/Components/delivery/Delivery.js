@@ -559,8 +559,8 @@ export default function Delivery() {
             <div className='smilingDelivery'>
                 <div className='smilingOrderMain'>
                     <div className='smilingdeliverBox1'>
-                        <p style={{ fontSize: '30px', fontWeight: 500, color: 'gray' }}>Delivery</p>
-                        <p>Order Will be delivered to selected address</p>
+                        <p style={{ fontSize: '30px', fontWeight: 500, color: 'gray', fontFamily: 'Harmonia' }}>Delivery</p>
+                        <p style={{fontFamily: 'Harmonia'}}>Order Will be delivered to selected address</p>
                         <div className='smilingDeliveyAddressMain' style={{ display: 'flex', flexWrap: 'wrap' }}>
                             {
                                 addressData?.map((item, index) => (

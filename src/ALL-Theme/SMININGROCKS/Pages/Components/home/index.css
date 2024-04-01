@@ -46,16 +46,8 @@
 
   
 @media screen and (max-width: 1440px) {
-
-    .homeMain {
-        margin-inline: 2%;
-
-    }
-
-   
     .paddingTopMobileSet{
         padding-top: 1px!important;
     }
-
 
 }
