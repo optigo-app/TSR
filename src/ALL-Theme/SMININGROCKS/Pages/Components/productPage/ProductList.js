@@ -2,13 +2,14 @@ import React, { useCallback, useEffect, useState } from "react";
 import Footer from "../home/Footer/Footer";
 import SmilingRock from "../home/smiling_Rock/SmilingRock";
 import "./product.css";
+import "./ProductListCard.css";
 import { json, useFetcher, useLocation, useNavigate } from "react-router-dom";
 import prodListData from "../../jsonFile/Productlist_4_95oztttesi0o50vr.json";
 // import prodListData from "../../jsonFile/testingFile/Productlist_4_95oztttesi0o50vr_Original.json";
 import filterData from "../../jsonFile/M_4_95oztttesi0o50vr.json";
 import PriceData from "../../jsonFile/Productlist_4_95oztttesi0o50vr_8.json";
 // import PriceData from "../../jsonFile/testingFile/Productlist_4_95oztttesi0o50vr_8_Original.json";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Checkbox, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Slider } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Checkbox, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Select, Slider } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -25,6 +26,8 @@ import { toast } from "react-toastify";
 
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 function valuetext(value) {
   return `${value}°C`;
@@ -36,7 +39,7 @@ const minDistance = 10;
 const ProductList = () => {
 
   const ProductData2 = [];
-
+  const [imageUrl, setImageUrl] = useState('https://cdnfs.optigoapps.com/content-global3/gstoreTHO8349NSI2EA6VQP/Design_Image/4EECAB68AEMDAwMzg4NQ==/Red_Medium/0003885_04012024185657737.png');
   const [isOpenDetail, setIsOpenDetail] = useState(false)
   const [ProductApiData, setProductApiData] = useState([])
   const [ProductApiData2, setProductApiData2] = useState([])
@@ -101,7 +104,8 @@ const ProductList = () => {
   const [isStonePShow, setIsStonePShow] = useState('');
   const [isMetalTCShow, setIsMetalTCShow] = useState('');
   const [isPriceShow, setIsPriceShow] = useState('');
-
+  const [updatedColorImage, setUpdateColorImage] = useState({});
+  const [isShowColorImg, setIsColorImg] = useState(false);
 
   useEffect(() => {
     setNewProData(getSearchData)
@@ -1243,6 +1247,7 @@ const ProductList = () => {
     }
 
   };
+  // console.log("hovwer---", hoveredImageUrls);
 
   const handleMouseLeave = (index) => {
     setHoveredImageUrls(prevState => {
@@ -1252,6 +1257,51 @@ const ProductList = () => {
     });
   };
 
+  function convertPath(path) {
+    return path.replace(/\\/g, '/');
+  }
+
+  // const handleColorSelection = (product, index, color) => {
+  //   console.log('index--', index);
+  //   console.log('product--', product);
+  //   console.log('color--', color);
+  //   let uploadPath = localStorage.getItem('UploadLogicalPath');
+  //   const storedDataAll = localStorage.getItem('storeInit');
+  //   const data = JSON.parse(storedDataAll);
+  //   const colorWiseImageData = JSON.parse(localStorage.getItem('colorDataImages'));
+  //   const productAutoCode = product?.autocode;
+  //   const productColorName = color;
+  //   console.log("coor--", productColorName);
+
+  //   if (!colorWiseImageData) {
+  //     return [];
+  //   }
+
+  //   if (data.IsColorWiseImages === 1) {
+  //     const matchingData = [];
+  //     colorWiseImageData.forEach(imageDataItem => {
+  //       if (productAutoCode == imageDataItem.autocode && productColorName == imageDataItem.colorname) {
+  //         matchingData.push({
+  //           imagePath: uploadPath + '/' + data.ukey + convertPath(imageDataItem.imagepath)
+  //         });
+  //       }
+  //     });
+  //     let imageData = matchingData[0]
+  //     console.log("image Data-", imageData);
+  //       setUpdateColorImage(prevHoveredImageUrls => {
+  //         return { ...prevHoveredImageUrls, [index]: imageData?.imagePath };
+  //       });
+  //       setHoveredImageUrls(prevHoveredImageUrls => {
+  //         return { ...prevHoveredImageUrls, [index]: "https://cdnfs.optigoapps.com/content-global3/gstoreTHO8349NSI2EA6VQP/Design_Image/7D7C3D45D8MDAwMzkxMg==/DesignMetalColorImage/White Gold/Red_Original/0003912_19032024174101026.jpg" };
+  //       });
+  //       return imageData;
+  //   } else {
+  //     setUpdateColorImage({});
+  //     return [];
+  //   }
+  // };
+
+  // console.log("updated image---", updatedColorImage);
 
 
   const [state, setState] = React.useState({
@@ -1342,13 +1392,13 @@ const ProductList = () => {
                   }}
                 >
                   <span
-                  className="filtercategoryLable"
-                    // style={{
-                    //   fontFamily: "Harmonia, sans-serif",
-                    //   fontSize: "13px",
-                    //   fontWeight:'500px',
-                    //   color:'#424242'
-                    // }}
+                    className="filtercategoryLable"
+                  // style={{
+                  //   fontFamily: "Harmonia, sans-serif",
+                  //   fontSize: "13px",
+                  //   fontWeight:'500px',
+                  //   color:'#424242'
+                  // }}
                   >
                     {ele.label}
                   </span>
@@ -1393,12 +1443,12 @@ const ProductList = () => {
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        justifyContent:"space-between",
+                        justifyContent: "space-between",
                         gap: "12px",
                       }}
                       key={i}
                     >
-                       <small
+                      <small
                         // style={{
                         //   fontFamily: "TT Commons, sans-serif",
                         //   color: "#7f7d85",
@@ -1441,8 +1491,8 @@ const ProductList = () => {
     setProductApiData2(data);
   }, [ProductApiData2]);
 
-  const handleSortChange = (e) => {
-    const selectedOption = e.target.value;
+  const handleSortChange = (event) => {
+    const selectedOption = event.target.value;
     setSelectedSortOption(selectedOption);
     let sortedData = [...ProductApiData2];
 
@@ -1459,7 +1509,6 @@ const ProductList = () => {
 
   return (
     <div id="top">
-
       <div
         style={{
           // backgroundColor: "#c0bbb1",
@@ -1483,7 +1532,7 @@ const ProductList = () => {
               style={{ width: "100%", display: "flex" }}
             >
               <div className="smilingWebProductListSideBar">
-                <ul style={{display:'flex',flexDirection:'row',justifyContent:'space-between', padding:'0px 0px 0px 28px'}}>
+                <ul style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '0px 0px 0px 28px' }}>
                   <li className="finejwelery me-4" id="finejwelery">Filters</li>
                   <li className="finejwelery" id="finejwelery" onClick={() => handlePageReload()}>All Jwelery</li>
                 </ul>
@@ -1522,13 +1571,13 @@ const ProductList = () => {
                           }}
                         >
                           <span
-                          className="filtercategoryLable"
-                            // style={{
-                            //   fontFamily: "Harmonia, sans-serif",
-                            //   fontSize: "13px",
-                            //   fontWeight:'500px',
-                            //   color:'#424242'
-                            // }}
+                            className="filtercategoryLable"
+                          // style={{
+                          //   fontFamily: "Harmonia, sans-serif",
+                          //   fontSize: "13px",
+                          //   fontWeight:'500px',
+                          //   color:'#424242'
+                          // }}
                           >
                             {ele.label}
                           </span>
@@ -1629,18 +1678,18 @@ const ProductList = () => {
                               style={{
                                 display: "flex",
                                 alignItems: "center",
-                                justifyContent:"space-between",
+                                justifyContent: "space-between",
                                 gap: "12px",
                               }}
                               key={i}
                             >
-                               <small
-                               className="sidebarfilterText"
-                                // style={{
-                                //   fontFamily: "TT Commons, sans-serif",
-                                //   color: "#7f7d85",
-                                //   textTransform: "lowercase",
-                                // }}
+                              <small
+                                className="sidebarfilterText"
+                              // style={{
+                              //   fontFamily: "TT Commons, sans-serif",
+                              //   color: "#7f7d85",
+                              //   textTransform: "lowercase",
+                              // }}
                               >
                                 {flist}
                               </small>
@@ -1756,190 +1805,176 @@ const ProductList = () => {
                   }}
                   className="smilingFilterweb"
                 >
-                  <select
-                    style={{
-                      width: "20%",
-                      height: '40px',
-                      border: '1px solid lightgray',
-                      borderRadius: '5px',
-                      paddingBottom: '10px',
-                      outline: "none",
-                      fontSize: "13px ",
-                    }}
+                  <Select
+                    size="small"
                     onChange={handleSortChange}
                     value={selectedSortOption}
+                    displayEmpty
                   >
-                    <option value="None">Normal</option>
-                    <option value="PRICE HIGH TO LOW">PRICE HIGH TO LOW</option>
-                    <option value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</option>
-                  </select>
+                    <MenuItem disabled value="None">
+                      Select Sorting Option
+                    </MenuItem>
+                    <MenuItem value="PRICE HIGH TO LOW">PRICE HIGH TO LOW</MenuItem>
+                    <MenuItem value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</MenuItem>
+                  </Select>
                 </div>
                 <div className="smilingAllProductDataMainMobile">
                   {/* RollOverImageName */}
                   {/* {(newProData.length ? newProData : finalDataOfDisplaying())?.map((products, i) => ( */}
                   {(newProData?.length ? newProData : ProductApiData2)?.map((products, i) => (
-                    <div
-                      style={{
-                        width: "28%",
-                        // border: "1px solid #e1e1e1",
-                        textAlign: "center",
-                        color: "#7d7f85",
-                        position: "relative",
-                        zIndex: 0,
-                        margin:'10px'
-                      }}
-                      className="smilingProductImageBox"
-                    >
-                      {products?.designno === "S24705E" && <p id="labelTag_0002388" className="instockP">IN STOCK</p>}
-                      {products?.designno === "S24705" && <p id="labelTag_0002388" className="instockP">IN STOCK</p>}
-                      {products?.designno === "MCJ2" && <p id="labelTag_0002388" className="instockP">IN STOCK</p>}
+                    <div className="main-ProdcutListConatiner">
+                      <div className="listing-card">
+                        <div className="listing-image">
+                          <div
+                            onClick={() => handelProductSubmit(products)}
+                            className="background-image-container"
+                            style={{
+                              backgroundImage: `url(${hoveredImageUrls[i] ? hoveredImageUrls[i] :
+                                (products?.MediumImagePath ?
+                                  (products?.imagepath + products?.MediumImagePath?.split(",")[0]) :
+                                  notFound
+                                )
+                                })`
+                            }}
+                            onMouseEnter={() => handleHoverImageShow(products?.MediumImagePath?.split(",")[0], i, products?.RollOverImageName, products?.imagepath)}
+                            //onMouseEnter={() => handleHoverImageShow(products?.MediumImagePath?.split(",")[0], i, isColorWiseImageShow === 1 ? products?.ColorWiseRollOverImageName : products?.RollOverImageName, products?.imagepath)}
+                            onMouseLeave={() => handleMouseLeave(i)}
+                          ></div>
+                          <div className="cart-icon">
+                            <Checkbox
+                              icon={
+                                <LocalMallOutlinedIcon
+                                  sx={{ fontSize: "22px", color: "#000" }}
+                                />
+                              }
+                              checkedIcon={
+                                <LocalMallIcon
+                                  sx={{ fontSize: "22px", color: "#f0d85e" }}
+                                />
+                              }
+                              disableRipple={true}
+                              sx={{ padding: "5px" }}
 
-                      <div onClick={() => handelProductSubmit(products)} style={{boxShadow:"rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px"}}>
-                        <img
-                          className="prod_img"
-                          src={
-                            hoveredImageUrls[i] ? hoveredImageUrls[i] : // Check if hover image URL exists
-                              (products?.MediumImagePath ?
-                                (products?.imagepath + products?.MediumImagePath?.split(",")[0])
-                                :
-                                notFound)
-                          }
-                          onMouseEnter={() => handleHoverImageShow(products?.MediumImagePath?.split(",")[0], i, products?.RollOverImageName, products?.imagepath)}
-                          // onMouseEnter={() => handleHoverImageShow(products?.MediumImagePath?.split(",")[0], i, isColorWiseImageShow === 1 ? products?.ColorWiseRollOverImageName : products?.RollOverImageName, products?.imagepath)}
-                          onMouseLeave={() => handleMouseLeave(i)}
-                          style={{ objectFit: 'cover' }}
-                          alt="#"
-                        />
-                      </div>
-                      <div className="productTitleLine" onClick={() => handelProductSubmit(products)}>
-                        <p className="smilingProductDeatilTitleMobile" >
-                          {products?.TitleLine} -<span> {products?.designno} </span>
-                        </p>
-                      </div>
-                      <div className="customizeDetails" style={{display:'flex'}}>
-                        {/* <div className="mobileDeatilDiv1"> */}
-                          {ismetalWShow === 1 &&
-                          <>
-                            <div>
-                              <p style={{ margin: '0px', fontSize: '13px' }}>NWT : <span>{products?.netwt}</span></p>
-                            </div>
-                              <Divider className="dividerLine" orientation="vertical" variant="middle" flexItem />
-                              </>
-                            }
-                          {isGrossWShow === 1 && 
-                            <>
-                          <div>
-                            <p style={{ margin: '0px', fontSize: '13px' }}>GWT : <span>{products?.Grossweight}</span></p>
+                              checked={products?.checkFlag}
+                              onChange={(e) => handelCartList(e, products)}
+                            />
                           </div>
-                          <Divider className="dividerLine" orientation="vertical" variant="middle" flexItem />
-                          </>
-                          }
+                          <div className="image-overlay">
+                            <Checkbox
+                              icon={
+                                <FavoriteBorderIcon
+                                  sx={{ fontSize: "22px", color: "#000" }}
+                                />
+                              }
+                              checkedIcon={
+                                <FavoriteIcon
+                                  sx={{ fontSize: "22px", color: "#e31b23" }}
+                                />
+                              }
+                              disableRipple={true}
+                              sx={{ padding: "5px" }}
 
-                        {/* </div> */}
-                        {/* <div className="mobileDeatilDiv2"> */}
-                          {((isDaaimongWShow || isDaaimongWShow) === 1 && (products?.diamondweight !== 0 || products?.diamondpcs !== 0)) && <div>
-                            <p style={{ margin: '0px', fontSize: '13px' }}>DWT : <span>{(isDaaimongWShow === 1 && products?.diamondweight !== 0) && products?.diamondweight + '/'}  {(isDaaimonPShow === 1 && products?.diamondpcs !== 0) && products?.diamondpcs}</span></p>
-                          </div>}
-                          {((isStoneWShow || isStonePShow) === 1 && (products?.totalcolorstoneweight !== 0 || products?.totalcolorstonepcs !== 0)) &&
-                          <>
-                          <Divider className="dividerLine" orientation="vertical" variant="middle" flexItem />
-                          <div>
-                            <p style={{ margin: '0px', fontSize: '13px' }}>CWT : <span>{(isStoneWShow === 1 && products?.totalcolorstoneweight !== 0) && products?.totalcolorstoneweight + '/'}  {(isStonePShow === 1 && products?.totalcolorstonepcs !== 0) && products?.totalcolorstonepcs}</span></p>
+                              checked={products?.wishCheck}
+                              onChange={(e) => handelWishList(e, products)}
+                            />
                           </div>
-                          </> 
-                          }
                         </div>
-
-                      {/* </div> */}
-                        <div>
-                          <p className="priceQuality">
-                            {isMetalTCShow === 1 && products?.MetalTypeName}-{products?.MetalColorName}{products?.MetalPurity}
-                            {isPriceShow === 1 &&
-                              <span>
-                                /
-                                {currencySym?.Currencysymbol}
-                                {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}
-                              </span>
-                            }
+                        <div className="listing-details" onClick={() => handelProductSubmit(products)}>
+                          <p className="productDetails property-type">
+                            {products?.TitleLine}
                           </p>
+                          <div>
+                            {isPriceShow === 1 &&
+                              <p className="productDetails price">{currencySym?.Currencysymbol}
+                                {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}</p>
+                            }
+                            <span className="productDesignDetails">
+                              <p className="productDetails address">{products?.designno}</p>
+                              <Divider
+                                className="dividerLine"
+                                orientation="vertical"
+                                variant="middle"
+                                flexItem
+                              />
+                              <p className="productDetails address"> {isMetalTCShow === 1 && products?.MetalTypeName}-{products?.MetalColorName}{products?.MetalPurity}</p>
+                            </span>
+                          </div>
                         </div>
-
-                      <div style={{ position: "absolute", zIndex: 999999, top: 0, right: 0, display: 'flex' }}>
-                        <div>
-                          <Checkbox
-                            icon={
-                              <StarBorderIcon
-                                sx={{ fontSize: "22px", color: "#ffd200" }}
-                              />
+                        <div className="listing-features">
+                          <div>
+                            {ismetalWShow === 1 &&
+                              <div className="feature">
+                                <p>
+                                  <span className="feature-count">NWT : </span> {products?.netwt}
+                                </p>
+                              </div>
                             }
-                            checkedIcon={
-                              <StarIcon
-                                sx={{ fontSize: "22px", color: "#ffd200" }}
-                              />
+                            {((isDaaimongWShow || isDaaimongWShow) === 1 && (products?.diamondweight !== 0 || products?.diamondpcs !== 0)) &&
+                              <div className="feature">
+                                <p>
+                                  <span className="feature-count">DWT : </span> {(isDaaimongWShow === 1 && products?.diamondweight !== 0) && products?.diamondweight + '/'}  {(isDaaimonPShow === 1 && products?.diamondpcs !== 0) && products?.diamondpcs}
+                                </p>
+                              </div>
                             }
-                            disableRipple={true}
-                            sx={{ padding: "5px" }}
-
-                            checked={products?.wishCheck}
-                            onChange={(e) => handelWishList(e, products)}
-                          />
+                          </div>
+                          <div>
+                            {isGrossWShow === 1 &&
+                              <div className="feature">
+                                <p>
+                                  <span className="feature-count">GWT : </span> {products?.Grossweight}
+                                </p>
+                              </div>
+                            }
+                            {((isStoneWShow || isStonePShow) === 1 && (products?.totalcolorstoneweight !== 0 || products?.totalcolorstonepcs !== 0)) &&
+                              <div className="feature">
+                                <p>
+                                  <span className="feature-count">CWT : </span> {(isStoneWShow === 1 && products?.totalcolorstoneweight !== 0) && products?.totalcolorstoneweight + '/'}  {(isStonePShow === 1 && products?.totalcolorstonepcs !== 0) && products?.totalcolorstonepcs}
+                                </p>
+                              </div>
+                            }
+                          </div>
                         </div>
-                        <div>
-                          <Checkbox
-                            icon={
-                              <LocalMallOutlinedIcon
-                                sx={{ fontSize: "22px", color: "#ffd200" }}
-                              />
-                            }
-                            checkedIcon={
-                              <LocalMallIcon
-                                sx={{ fontSize: "22px", color: "#ffd200" }}
-                              />
-                            }
-                            disableRipple={true}
-                            sx={{ padding: "5px" }}
-
-                            checked={products?.checkFlag}
-                            onChange={(e) => handelCartList(e, products)}
-                          />
-                        </div>
+                        {/* {products?.IsColorWiseImageExists !== null && (
+                          <div
+                            style={{
+                              display: "flex",
+                              gap: "8px",
+                              justifyContent: "center",
+                              alignItems: "center",
+                              marginBottom: "12px",
+                            }}
+                          >
+                            <div
+                              style={{
+                                width: "9px",
+                                height: "9px",
+                                backgroundColor: "#c8c8c8",
+                                borderRadius: "50%",
+                              }}
+                              onClick={() => handleColorSelection(products, i, 'White Gold')}
+                            ></div>
+                            <div
+                              style={{
+                                width: "9px",
+                                height: "9px",
+                                backgroundColor: "#ffcfbc",
+                                borderRadius: "50%",
+                              }}
+                              onClick={(e) => handleColorSelection(products, i, 'Rose Gold')}
+                            ></div>
+                            <div
+                              style={{
+                                width: "9px",
+                                height: "9px",
+                                backgroundColor: "#e0be77",
+                                borderRadius: "50%",
+                              }}
+                              onClick={(e) => handleColorSelection(products, i, 'Yellow Gold')}
+                            >
+                            </div>
+                          </div>
+                        )} */}
                       </div>
-                      {/* {products?.IsColorWiseImageExists !== null && (
-                        <div
-                          style={{
-                            display: "flex",
-                            gap: "8px",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            marginBottom: "12px",
-                          }}
-                        >
-                          <div
-                            style={{
-                              width: "9px",
-                              height: "9px",
-                              backgroundColor: "#c8c8c8",
-                              borderRadius: "50%",
-                            }}
-                          ></div>
-                          <div
-                            style={{
-                              width: "9px",
-                              height: "9px",
-                              backgroundColor: "#ffcfbc",
-                              borderRadius: "50%",
-                            }}
-                          ></div>
-                          <div
-                            style={{
-                              width: "9px",
-                              height: "9px",
-                              backgroundColor: "#e0be77",
-                              borderRadius: "50%",
-                            }}
-                          ></div>
-                        </div>
-                      )} */}
                     </div>
                   ))}
                 </div>
