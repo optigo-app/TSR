@@ -527,7 +527,8 @@ export default function Header() {
                       display: "flex",
                       alignItems: "center",
                       fontWeight: 500,
-                      fontFamily: 'Harmonia'
+                      fontFamily: 'Harmonia',
+                      height: '70px'
                     }}
                   >
                     Shop
