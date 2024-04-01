@@ -1497,15 +1497,18 @@ const ProductList = () => {
     let sortedData = [...ProductApiData2];
 
     if (selectedOption === 'PRICE HIGH TO LOW') {
-      sortedData.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
+      sortedData.sort((a, b) => ((b?.UnitCost ?? 0) + (b?.price ?? 0) + (b?.markup ?? 0)) - ((a?.UnitCost ?? 0) + (a?.price ?? 0) + (a?.markup ?? 0)));
     } else if (selectedOption === 'PRICE LOW TO HIGH') {
-      sortedData.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
+      sortedData.sort((a, b) => ((a?.UnitCost ?? 0) + (a?.price ?? 0) + (a?.markup ?? 0)) - ((b?.UnitCost ?? 0) + (b?.price ?? 0) + (b?.markup ?? 0)));
     } else {
       sortedData = [...ProductApiData2];
     }
     setProductApiData2(sortedData);
   };
 
+
+
+  console.log('ddddddddddddd', ProductApiData2);
 
   return (
     <div id="top">
@@ -1777,7 +1780,9 @@ const ProductList = () => {
                       onChange={handleSortChange}
                       value={selectedSortOption}
                     >
-                      <option value="None">Normal</option>
+                      <option value="None">Recommended</option>
+                      <option value="None">New</option>
+                      <option value="None">In stock</option>
                       <option value="PRICE HIGH TO LOW">PRICE HIGH TO LOW</option>
                       <option value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</option>
                     </select>
@@ -1811,12 +1816,12 @@ const ProductList = () => {
                     value={selectedSortOption}
                     displayEmpty
                   >
-                    <MenuItem disabled value="None">
-                      Select Sorting Option
-                    </MenuItem>
-                    <MenuItem value="PRICE HIGH TO LOW">PRICE HIGH TO LOW</MenuItem>
-                    <MenuItem value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</MenuItem>
-                  </Select>
+                    <option value="None">Recommended</option>
+                    <option value="None">New</option>
+                    <option value="None">In stock</option>
+                    <option value="PRICE HIGH TO LOW">PRICE HIGH TO LOW</option>
+                    <option value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</option>
+                  </select>
                 </div>
                 <div className="smilingAllProductDataMainMobile">
                   {/* RollOverImageName */}

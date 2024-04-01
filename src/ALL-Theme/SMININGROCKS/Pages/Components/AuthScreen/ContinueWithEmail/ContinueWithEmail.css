@@ -4,8 +4,15 @@
 }
 
 
-.smling-forgot-main {
-    padding: 7% 0px 8% 0px;
+.smling-forgot-main {    
+    background-color: white;
+    width: 30%;
+}
+.smling-forgot-main-Color{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10% 0px 8% 0px;
 }
 
 .labGrowForgot {

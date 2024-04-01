@@ -217,12 +217,12 @@ export default function ShopOurInstagram() {
         },
         {
             id: 5,
-            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/657892984528c10b7bb7fc84/80d2f720-9910-11ee-9092-e3ed476e4383.jpg?format=webp'
+            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6578e9d47892d5abf60635de/7fa9bbc0-9944-11ee-a79b-53ded4dd0460.jpg?format=webp'
         },
-
+        
         {
             id: 6,
-            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6578e9d47892d5abf60635de/7fa9bbc0-9944-11ee-a79b-53ded4dd0460.jpg?format=webp'
+            iamge: 'https://www.gorjana.com/cdn/shop/files/Feature-Zoey_1.jpg?v=1700154326&%3Bwidth=700&em-format=avif'
         },
         {
             id: 7,
@@ -260,64 +260,23 @@ export default function ShopOurInstagram() {
 
     return (
         <div style={{ filter: open && 'blur(10px)' }}>
-            <div style={{ marginBlock: '100px' }}>
+            <div className='TsrInstaMain' style={{ marginBlock: '100px' }}>
                 <p className='gorInstaTitle'>@gorjana</p>
                 <div className='gorInstaMain'>
                     {
                         InstaImages.map((data, index) =>
                             <>
                                 <div key={index} className='groInstaImagesMain'>
-                                    <img src={data.iamge} className='groInstaImages' onClick={() => handleOpen(data.iamge)} />
-                                    <div className='gorInstaIconeMain'>
-                                        <FaInstagram style={{ color: 'white', height: '25px', width: '25px' }} />
+                                    <div className='groInstaImagesMainSub'>
+                                        <img src={data.iamge} className='groInstaImages' onClick={() => handleOpen(data.iamge)} />
+                                        <div className='gorInstaIconeMain'>
+                                            <FaInstagram style={{ color: 'white', height: '25px', width: '25px' }} />
+                                        </div>
                                     </div>
                                 </div>
                             </>
                         )
                     }
-
-                    {/* <div className='groInstaImagesMain'>
-                        <img src='https://media-library.stackla.com/10/shopify-1538490427/2023-12/6578e9d47892d5abf60635de/7fa9bbc0-9944-11ee-a79b-53ded4dd0460.jpg?format=webp' className='groInstaImages' />
-                        <div className='gorInstaIconeMain'>
-                            <FaInstagram style={{ color: 'white', height: '25px', width: '25px' }} />
-                        </div>
-                    </div>
-                    <div className='groInstaImagesMain'>
-                        <img src='https://media-library.stackla.com/10/shopify-1538490427/2023-12/6577a388f4a19ea9810c9ad7/0e6f4e10-9882-11ee-a36d-71a09dbf5f20.jpg?format=webp' className='groInstaImages' />
-                        <div className='gorInstaIconeMain'>
-                            <FaInstagram style={{ color: 'white', height: '25px', width: '25px' }} />
-                        </div>
-                    </div>
-                    <div className='groInstaImagesMain'>
-                        <img src='https://media-library.stackla.com/10/shopify-1538490427/2023-12/6577a388f4a19ea9810c9ad8/0e6fea50-9882-11ee-a36d-71a09dbf5f20.jpg?format=webp' className='groInstaImages' />
-                        <div className='gorInstaIconeMain'>
-                            <FaInstagram style={{ color: 'white', height: '25px', width: '25px' }} />
-                        </div>
-                    </div>
-                    <div className='groInstaImagesMain'>
-                        <img src='https://media-library.stackla.com/10/shopify-1538490427/2023-12/6578e9d47892d5abf60635de/7fa9bbc0-9944-11ee-a79b-53ded4dd0460.jpg?format=webp' className='groInstaImages' />
-                        <div className='gorInstaIconeMain'>
-                            <FaInstagram style={{ color: 'white', height: '25px', width: '25px' }} />
-                        </div>
-                    </div>
-                    <div className='groInstaImagesMain'>
-                        <img src='https://media-library.stackla.com/10/shopify-1538490427/2023-12/6578e9d47892d5abf60635de/7fa9bbc0-9944-11ee-a79b-53ded4dd0460.jpg?format=webp' className='groInstaImages' />
-                        <div className='gorInstaIconeMain'>
-                            <FaInstagram style={{ color: 'white', height: '25px', width: '25px' }} />
-                        </div>
-                    </div>
-                    <div className='groInstaImagesMain'>
-                        <img src='https://media-library.stackla.com/10/shopify-1538490427/2023-12/6577a388f4a19ea9810c9ad7/0e6f4e10-9882-11ee-a36d-71a09dbf5f20.jpg?format=webp' className='groInstaImages' />
-                        <div className='gorInstaIconeMain'>
-                            <FaInstagram style={{ color: 'white', height: '25px', width: '25px' }} />
-                        </div>
-                    </div>
-                    <div className='groInstaImagesMain'>
-                        <img src='https://media-library.stackla.com/10/shopify-1538490427/2023-12/6577a388f4a19ea9810c9ad8/0e6fea50-9882-11ee-a36d-71a09dbf5f20.jpg?format=webp' className='groInstaImages' />
-                        <div className='gorInstaIconeMain'>
-                            <FaInstagram style={{ color: 'white', height: '25px', width: '25px' }} />
-                        </div>
-                    </div> */}
                 </div>
             </div>
             <Modal

@@ -1,18 +1,3 @@
-.sminingHeaderWeb {
-    height: 110px;
-    position: absolute;
-    width: 100%;
-}
-
-
-.smilingCartRemoveBtn {
-    height: 40px;
-    width: 100px;
-    border: none;
-    background-color: lightgray;
-    font-weight: 500;
-}
-
 .YourCartMainRemkarBoxSingle {
     height: 40px;
     width: 240px;
@@ -244,7 +229,6 @@
 
 .shop-dropdown.open.fixed {
     position: fixed;
-    top: 0;
     box-shadow: 0 2px 5px rgba(20, 19, 19, 0.1);
     z-index: 1000;
     transform: translateY(0px);
@@ -892,10 +876,6 @@
     align-items: center;
 }
 
-.gorjanaHederImage {
-    cursor: pointer;
-}
-
 .gorjanaHeaderSubMenuMain {
     display: flex;
     justify-content: space-between;
@@ -905,16 +885,18 @@
 
 .gorajanaBottomHeaderMain {
     display: flex;
-    justify-content: space-between;
-    padding: 20px;
+    padding: 10px 20px 5px 70px;
     background-color: white;
 }
 
 .gorjanaImgMenuMain {
+    height: 60px;
     display: flex;
-    margin-left: 44px;
-    margin-top: 2px;
-    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+}
+.gorjanaHederImage {
+    cursor: pointer;
 }
 
 .gorjanaHeaderMenu {
@@ -928,8 +910,9 @@
 .gorjana-Menu-item {
     margin: 0px;
     margin-inline: 20px;
-    font-family: inherit;
-    font-size: 14px;
+    font-family: 'Harmonia';
+    font-size: 13px;
+    font-weight: 500;
     color: inherit;
     cursor: pointer;
 }
@@ -1050,9 +1033,6 @@
         justify-content: flex-end;
     }
 
-    .gorjanaImgMenuMain {
-        margin-left: 15px;
-    }
 }
 
 
@@ -1065,3 +1045,7 @@
     }
 
 }
+
+
+
+

@@ -229,17 +229,17 @@ export default function Header() {
   const [isHeaderFixed, setIsHeaderFixed] = useState(false);
   const [isHeaderFixedDropShow, setIsHeaderFixedDropShow] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      setIsHeaderFixed(scrollPosition > 100);
-      setIsHeaderFixedDropShow(scrollPosition > 100);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollPosition = window.scrollY;
+  //     setIsHeaderFixed(scrollPosition > 100);
+  //     setIsHeaderFixedDropShow(scrollPosition > 100);
+  //   };
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -256,7 +256,7 @@ export default function Header() {
   const [openCart, setOpenCart] = useState(false);
   const toggleCartDrawer = (isOpen) => (event) => {
     // if (isB2bFlag === 1) {
-      navigation('/CartPage');
+    navigation('/CartPage');
     // } else {
     // if (
     //   event.type === 'keydown' &&
@@ -307,6 +307,24 @@ export default function Header() {
 
   const [openSearchDrawer, setOpenSearchDrawer] = useState(false);
   const [openYourBagDrawer, setOpenYourBagDrawer] = useState(false);
+  const setIsLoginState = useSetRecoilState(loginState)
+
+  
+  const handleLogout = () => {
+    setIsLoginState('false')
+    localStorage.setItem('LoginUser', 'false');
+    localStorage.removeItem('storeInit');
+    localStorage.removeItem('loginUserDetail');
+    localStorage.removeItem('remarks');
+    localStorage.removeItem('selectedAddressId');
+    localStorage.removeItem('orderNumber');
+    localStorage.removeItem('registerEmail');
+    localStorage.removeItem('UploadLogicalPath');
+    localStorage.removeItem('remarks');
+    localStorage.removeItem('registerMobile');
+    navigation('/')
+    window.location.reload();
+}
 
 
   return (
@@ -377,7 +395,7 @@ export default function Header() {
       >
         <div style={{ paddingTop: '150px' }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <h1 style={{ color: 'black', marginLeft: '40%', fontFamily: 'Freight Big Pro, sans-serif', fontWeight: 400 }}>Search</h1>
+            <h1 style={{ color: 'black', marginLeft: '40%', fontFamily: 'Harmonia', fontWeight: 400 }}>Search</h1>
             <CloseRoundedIcon
               style={{ fontSize: "32px", marginLeft: '30%', cursor: 'pointer' }}
               onClick={() => {
@@ -418,7 +436,7 @@ export default function Header() {
       >
         <div style={{ paddingTop: '150px' }}>
           <div className="gorYourBagTopHeader">
-            <h1 style={{ color: 'black', marginLeft: '30%', fontFamily: 'Freight Big Pro,serif', fontWeight: 400 }}>Your Bag (1)</h1>
+            <h1 style={{ color: 'black', marginLeft: '30%', fontFamily: 'Harmonia', fontWeight: 400 }}>Your Bag (1)</h1>
             <CloseRoundedIcon
               style={{ fontSize: "32px", marginLeft: '30%', cursor: 'pointer' }}
               onClick={() => {
@@ -431,7 +449,7 @@ export default function Header() {
               <img alt="" src="https://cdn.shopify.com/s/files/1/0015/3849/0427/files/RE-1811-202-G_1_641d250d-bdec-4856-9232-5c453e35e89c.jpg?v=1700605683&width=832&height=1109&crop=center" className="gorBagimge" />
               <div style={{ width: '100%' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <p style={{ margin: '0px', fontSize: '17px', fontFamily: 'Freight Big Pro,serif' }}>Bespoke Plate Adjustable Bracelet (gold)</p>
+                  <p style={{ margin: '0px', fontSize: '17px', fontFamily: 'Harmonia' }}>Bespoke Plate Adjustable Bracelet (gold)</p>
                   <p style={{ margin: '0px', fontSize: '15px' }}>$150</p>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -445,7 +463,7 @@ export default function Header() {
             </div>
 
             <div>
-              <p style={{ fontSize: '32px', marginTop: '50px', fontFamily: 'Freight Big Pro,serif', textAlign: 'center' }}>Don't Forget These</p>
+              <p style={{ fontSize: '32px', marginTop: '50px', fontFamily: 'Harmonia', textAlign: 'center' }}>Don't Forget These</p>
               <div style={{ display: 'flex' }}>
                 <div style={{ marginInline: '20px' }}>
                   <div style={{ position: 'relative', zIndex: '-1', width: 'fit-content' }}>
@@ -481,184 +499,180 @@ export default function Header() {
         </div>
       </Drawer>
 
-      <div className="sminingHeaderWeb ">
-        <div className="gorjanaHeader">
-          <div className="gorjanaTopHeader">
-            <PiMapPinLight style={{ height: "25px", width: "40px" }} />
-            <a href="/pages/store-locator" style={{ fontSize: "12px" }}>
-              Find a Store Near You
-            </a>
-          </div>
-          <div className="gorajanaBottomHeaderMain">
-            <div className="gorjanaImgMenuMain">
-              <img
-                alt=""
-                src="https://www.gorjana.com/cdn/shop/t/1511/assets/logo-light.svg?v=36596364826355077531701378483&em-format=avif"
-                width="172px"
-                className="gorjanaHederImage"
-                onClick={() => navigation("/")}
-              />
-              <div className="gorjanaHeaderSubMenuMain">
-                <ul className="gorjanaHeaderMenu">
-                  {islogin === "true" &&
-                    <li
-                      className="gorjana-Menu-item "
-                      // nav-li-shop-main
-                      onMouseEnter={handleDropdownOpen}
-                      onMouseLeave={handleDropdownClose}
-                    >
-                      <span
-                        className="gorjana-Menu-item"
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          fontWeight: 500,
-                        }}
-                      >
-                        SHOP
-                        <RiArrowDropDownLine
-                          style={{ width: "20px", height: "20px" }}
-                        />
-                      </span>
-                    </li>}
-
-
-                  <li
-                    className="gorjana-Menu-item"
-                    style={{ cursor: "pointer" }}
-                    onClick={() => navigation("/impact")}
-                  >
-                    {IMPACT}
-                  </li>
-
-                  <li
-                    style={{ cursor: "pointer" }}
-                    className="gorjana-Menu-item"
-                    onClick={() => navigation("/aboutUs")}
-                  >
-                    {ABOUT_US}
-                  </li>
-
-
-                  <li
-                    className="gorjana-Menu-item"
-                    onClick={() => {
-                      // setRecoilBlurFlag(true)
-                      // setRecoilSideNavListItem('Jewelry')
-                      // setRecoilSideNavListFlag(true)
-                    }}
-                  >
-                    Jewelry
-                  </li>
-                </ul>
-
-
-                <div className="gorjanaHeaderMenuIconeWeb">
-                  <ul className="nav-ul-shop">
-                    {islogin === "true" &&
-                      <>
-                        <Badge
-                          badgeContent={getWishListCount}
-                          overlap={"rectangular"}
-                          color="secondary"
-                        >
-                          <Tooltip title="WishList">
-                            <li onClick={() => navigation("/myWishList")}>
-                              <PiStarThin
-                                style={{
-                                  height: "20px",
-                                  cursor: "pointer",
-                                  width: "20px",
-                                }}
-                              />
-                            </li>
-                          </Tooltip>
-                        </Badge>
-                        <li onClick={toggleOverlay} style={{}}>
-                          <IoSearchOutline
-                            style={{ height: "20px", cursor: "pointer", width: "20px" }}
-                          />
-                        </li>
-                        <Badge
-                          badgeContent={getCartListCount}
-                          overlap={"rectangular"}
-                          color="secondary"
-                        >
-                          <Tooltip title="Cart">
-                            <li
-                              onClick={toggleCartDrawer(true)}
-                              style={{
-                                marginLeft: "-10px",
-                                cursor: "pointer",
-                                marginTop: "0px",
-                              }}
-                            >
-                              <ShoppingCartOutlinedIcon
-                                sx={{ height: '30px', width: '30px' }}
-                              />
-                            </li>
-                          </Tooltip>
-                        </Badge></>
-                    }
-                  </ul>
-
-                  <IoSearch
+      <div className="gorjanaHeader">
+        <div className="gorjanaTopHeader">
+          <PiMapPinLight style={{ height: "20px", width: "40px" }} />
+          <a href="/pages/store-locator" style={{ fontSize: "12px", color: 'black', fontFamily: 'Harmonia' }}>
+            Find a Store Near You
+          </a>
+        </div>
+        <div className="gorajanaBottomHeaderMain">
+          <img
+            alt=""
+            src={titleImg}
+            width="172px"
+            className="gorjanaHederImage"
+            onClick={() => navigation("/")}
+          />
+          <div className="gorjanaHeaderSubMenuMain">
+            <ul className="gorjanaHeaderMenu">
+              {islogin === "true" &&
+                <li
+                  className="gorjana-Menu-item "
+                  onMouseEnter={handleDropdownOpen}
+                  onMouseLeave={handleDropdownClose}
+                >
+                  <span
                     style={{
-                      height: "25px",
-                      cursor: "pointer",
-                      width: "25px",
-                      marginInline: "15px",
+                      display: "flex",
+                      alignItems: "center",
+                      fontWeight: 500,
+                      fontFamily: 'Harmonia'
                     }}
+                  >
+                    Shop
+                    <RiArrowDropDownLine
+                      style={{ width: "20px", height: "20px" }}
+                    />
+                  </span>
+                </li>}
 
-                    onClick={() => { setOpenSearchDrawer(true); setOpenYourBagDrawer(false); }}
-                  />
-                  {islogin === "true" ? (
+
+              <li
+                className="gorjana-Menu-item"
+                style={{ cursor: "pointer" }}
+                onClick={() => navigation("/impact")}
+              >
+                {IMPACT}
+              </li>
+
+              <li
+                style={{ cursor: "pointer" }}
+                className="gorjana-Menu-item"
+                onClick={() => navigation("/aboutUs")}
+              >
+                {ABOUT_US}
+              </li>
+            </ul>
+
+
+            <div className="gorjanaHeaderMenuIconeWeb">
+              <ul className="gorjanaHeaderMenu">
+
+                {islogin === "true" ? (
+                  <>
                     <li
-                      className="nav-li-smining"
+                      className="gorjana-Menu-item"
                       style={{ cursor: "pointer" }}
                       onClick={() => navigation("/account")}
                     >
                       {ACCOUNT}
                     </li>
-                  ) : (
+
                     <li
-                      className="nav-li-smining"
+                      className="gorjana-Menu-item"
                       style={{ cursor: "pointer" }}
-                      onClick={() => navigation('/LoginOption')}
+                      onClick={handleLogout}
                     >
-                      {LOGIN}
+                      Log Out
                     </li>
-                  )}
-                  <HiOutlineShoppingBag
-                    style={{
-                      height: "25px",
-                      cursor: "pointer",
-                      width: "25px",
-                      marginInline: "15px",
-                    }}
+                  </>
+                ) : (
+                  <li
+                    className="gorjana-Menu-item"
+                    style={{ cursor: "pointer", marginInline: '10px' }}
+                    onClick={() => navigation('/LoginOption')}
 
-                    onClick={() => { setOpenYourBagDrawer(true); setOpenSearchDrawer(false); }}
-                  />
-                </div>
+                  >
+                    {LOGIN}
+                  </li>
+                )}
+
+                {islogin === "true" &&
+                  <>
+                    <Badge
+                      badgeContent={getWishListCount}
+                      overlap={"rectangular"}
+                      color="secondary"
+                      className="gorjana-Menu-item"
+                    >
+                      <Tooltip title="WishList">
+                        <li
+                          onClick={() => navigation("/myWishList")}>
+                          <PiStarThin
+                            style={{
+                              height: "20px",
+                              cursor: "pointer",
+                              width: "20px",
+                            }}
+                          />
+                        </li>
+                      </Tooltip>
+                    </Badge>
+                    <li
+                      className="gorjana-Menu-item"
+                      onClick={toggleOverlay} style={{}}>
+                      <IoSearchOutline
+                        style={{ height: "20px", cursor: "pointer", width: "20px" }}
+                      />
+                    </li>
+
+                    <Badge
+                      badgeContent={getCartListCount}
+                      overlap={"rectangular"}
+                      color="secondary"
+                      className="gorjana-Menu-item"
+                    >
+                      <Tooltip title="Cart">
+                        <li
+                          onClick={toggleCartDrawer(true)}
+                          style={{
+                            cursor: "pointer",
+                            listStyle: 'none',
+                          }}
+                        >
+                          <HiOutlineShoppingBag
+                            style={{
+                              height: "25px",
+                              cursor: "pointer",
+                              width: "25px",
+                            }}
+                          // onClick={() => { setOpenYourBagDrawer(true); setOpenSearchDrawer(false); }}
+                          />
+                        </li>
+                      </Tooltip>
+                    </Badge>
+                  </>
+                }
+              </ul>
+
+              {/* 
+              <IoSearch
+                style={{
+                  height: "25px",
+                  cursor: "pointer",
+                  width: "25px",
+                  marginInline: "10px",
+                }}
+
+                onClick={() => { setOpenSearchDrawer(true); setOpenYourBagDrawer(false); }}
+              /> */}
+            </div>
 
 
-                <div className="gorjanaHeaderMenuIconeMobile">
-                  <IoSearch className="gorHeaderMobileIcoen" />
-                  <HiOutlineShoppingBag className="gorHeaderMobileIcoen" />
-                  <IoMenuOutline className="gorHeaderMobileIcoen" />
-                </div>
-              </div>
+            <div className="gorjanaHeaderMenuIconeMobile">
+              <IoSearch className="gorHeaderMobileIcoen" />
+              <HiOutlineShoppingBag className="gorHeaderMobileIcoen" />
+              <IoMenuOutline className="gorHeaderMobileIcoen" />
             </div>
           </div>
         </div>
-      </div>
-
+      </div >
 
       <div
         onMouseEnter={handleDropdownOpen}
         onMouseLeave={handleDropdownClose}
-        className={`shop-dropdown ${isDropdownOpen ? "open" : ""} ${isHeaderFixed ? "fixed" : ""
-          }`}
+        className={`shop-dropdown ${isDropdownOpen ? "open" : ""}  fixed`}
       >
         <div
           style={{
@@ -729,11 +743,11 @@ export default function Header() {
 
           <div style={{ display: 'flex', flexDirection: 'row', gap: '50px' }}>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span style={{ fontSize: '13px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 1, fontWeight: 600 }}>FINE JEWELRY</span>
+              <span style={{ fontSize: '13px', fontFamily: 'Harmonia', letterSpacing: 1, fontWeight: 600 }}>FINE JEWELRY</span>
               <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px' }}>
                 {
                   menul0data?.map((md) => (
-                    <span style={{ fontSize: '12.5px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 0.4, cursor: 'pointer' }}
+                    <span style={{ fontSize: '12.5px', fontFamily: 'Harmonia', letterSpacing: 0.4, cursor: 'pointer' }}
                       onClick={() => handelNewMenuData({ "label": "param0", "data": md })}
                     >
                       {capitalizeText(md?.menuname)}
@@ -744,11 +758,11 @@ export default function Header() {
             </div>
             <div>
               <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #e1e1e1', paddingLeft: '30px' }}>
-                <span style={{ fontSize: '13px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 1, fontWeight: 600 }}>COLLECTIONS</span>
+                <span style={{ fontSize: '13px', fontFamily: 'Harmonia', letterSpacing: 1, fontWeight: 600 }}>COLLECTIONS</span>
                 <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px' }}>
                   {
                     menul1data?.map((md) => (
-                      <span style={{ fontSize: '12.5px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 0.4, cursor: 'pointer' }}
+                      <span style={{ fontSize: '12.5px', fontFamily: 'Harmonia', letterSpacing: 0.4, cursor: 'pointer' }}
                         onClick={() => handelNewMenuData({ "label": "param1", "data": md })}
                       >
                         {capitalizeText(md?.param1dataname)}
@@ -761,11 +775,11 @@ export default function Header() {
 
             <div>
               <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #e1e1e1', paddingLeft: '30px', width: '130%' }}>
-                <span style={{ fontSize: '13px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 1, fontWeight: 600 }}>BOUTIQUE</span>
+                <span style={{ fontSize: '13px', fontFamily: 'Harmonia', letterSpacing: 1, fontWeight: 600 }}>BOUTIQUE</span>
                 <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px', height: '350px', flexWrap: 'wrap' }}>
                   {
                     menul2data?.map((md) => (
-                      <span style={{ fontSize: '12.5px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 0.4, cursor: 'pointer' }}
+                      <span style={{ fontSize: '12.5px', fontFamily: 'Harmonia', letterSpacing: 0.4, cursor: 'pointer' }}
                         onClick={() => handelNewMenuData({ "label": "param2", "data": md })}
                       >
                         {capitalizeText(md?.param2dataname)}
@@ -782,138 +796,6 @@ export default function Header() {
               <img src={menu1Img} alt="#" style={{ height: '250px', width: '300px', objectFit: 'cover' }} />
             </div> */}
 
-        </div>
-      </div>
-
-      <div
-        style={{
-          top: 0,
-          width: "100%",
-          zIndex: "100",
-        }}
-        className="mobileHeaderSmining"
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "20px",
-          }}
-          className="smilingMobileSubDiv"
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-            }}
-            className="mobileViewFirstDiv1"
-          >
-            <MenuIcon
-              style={{ fontSize: "35px", color: "white" }}
-              className="muIconeMobileHeader"
-              onClick={toggleDrawerOverlay}
-            />
-          </div>
-          <div
-            className="mobileViewFirstDiv2"
-          >
-            <a href="/">
-              <img src={titleImg} className="MainlogogMobileImage" />
-            </a>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-            }}
-
-            className="mobileViewFirstDiv3"
-          >
-
-            {islogin === "false" && (
-              <li
-                className="nav-li-smining"
-                style={{ cursor: "pointer", color: 'black', marginRight: '15px' }}
-                onClick={() => navigation('/LoginOption')}
-              >
-                {LOGIN}
-              </li>
-            )}
-
-
-            {islogin === "true" &&
-              <div className="mobileHeaderFixedMobileLastDiv" style={{ display: 'flex' }}>
-                <Badge
-                  badgeContent={getWishListCount}
-                  overlap={"rectangular"}
-                  color="secondary"
-                  style={{ marginInline: '6px' }}
-                  className="smilingHeaderWhishlistIcon"
-                >
-                  <Tooltip title="WishList">
-                    <li style={{ listStyle: 'none' }} onClick={() => navigation("/myWishList")}>
-                      <PiStarThin
-                        style={{
-                          height: "25px",
-                          cursor: "pointer",
-                          width: "25px",
-                          color: "white",
-                        }}
-                        className="mobileViewSmilingTop1Icone"
-                      />
-                    </li>
-                  </Tooltip>
-                </Badge>
-
-                <li onClick={toggleOverlay} style={{ listStyle: 'none', width: '40px', textAlign: 'center', marginInline: '10px' }}>
-                  <IoSearchOutline
-                    style={{
-                      height: "20px", cursor: "pointer", width: "20px",
-                      color: "white",
-                    }}
-                    className="mobileViewSmilingTop2Icone"
-                  />
-                </li>
-
-
-                <Badge
-                  badgeContent={getCartListCount}
-                  overlap={"rectangular"}
-                  color="secondary"
-                  style={{ marginInline: '10px' }}
-                >
-                  <Tooltip title="Cart">
-                    <li
-                      onClick={toggleCartDrawer(true)}
-                      style={{
-                        marginLeft: "-10px",
-                        cursor: "pointer",
-                        listStyle: 'none',
-                        marginTop: "0px",
-                      }}
-                    >
-                      {/* <PiStarFourThin
-                        style={{
-                          cursor: "pointer",
-                          height: "30px",
-                          width: "30px",
-                          color: "white",
-
-                        }}
-                        className="mobileViewSmilingTop3Icone"
-
-                      /> */}
-                      <ShoppingCartOutlinedIcon
-                        sx={{ height: '30px', width: '30px', color: "white" }}
-                      />
-                    </li>
-                  </Tooltip>
-                </Badge>
-
-              </div>
-            }
-          </div>
         </div>
       </div>
 

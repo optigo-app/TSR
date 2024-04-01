@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './index.css';
-import Video from './topVideo/Video';
 import SmilingRock from './smiling_Rock/SmilingRock';
 import FestiveFinds from './FestiveFind/FestiveFinds';
 import DaimondEveyone from './DaimondsEveryone/DaimondEveyone';
@@ -14,11 +13,13 @@ import ShopOurInstagram from './shopOurInstagram/ShopOurInstagram';
 import Footer from './Footer/Footer';
 import axios from 'axios';
 import { CommonAPI } from '../../../Utils/API/CommonAPI';
+import TopBanner from './topBanner/TopBanner';
 
 export default function Home() {
 
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchData = async () => {
       // const APIURL = 'http://zen/api/';
       const APIURL = 'https://api.optigoapps.com/test/store.aspx';
@@ -267,32 +268,13 @@ export default function Home() {
   return (
     <div>
       <div className='homeMain'>
-        <Video />
-        <SmilingRock />
+        <TopBanner />
         <FestiveFinds />
-        {/* <DaimondEveyone /> */}
         <ShopByCategory />
         <SmilingBrides />
-        {/* <FeaturedCollection /> */}
-        {/* <div style={{ marginTop: '60px' }}>
-          <SustainAbility />
-        </div> */}
-        {/* <ShopifySection /> */}
-        <ShopOurInstagram />
+        <ShopOurInstagram /> 
         <Footer />
       </div>
-      {/* <div>
-        <p style={{
-          paddingBlock: '30px',
-          margin: '0px',
-          textAlign: 'center',
-          color: 'white',
-          cursor: 'pointer',
-          fontSize: '13px',
-          fontWeight: 500,
-          letterSpacing: '1px'
-        }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
-      </div> */}
     </div>
   )
 }
