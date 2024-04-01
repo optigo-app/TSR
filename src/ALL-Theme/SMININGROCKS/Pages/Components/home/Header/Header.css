@@ -117,6 +117,7 @@
     display: flex;
     align-items: center;
     gap: 28px;
+    text-transform: uppercase;
     font-size: 13px;
     margin-left: -2em;
     margin-top: 15px;
@@ -874,8 +875,6 @@
     display: flex;
     align-items: center;
 }
-
-
 
 .gorjanaHeaderSubMenuMain {
     display: flex;

@@ -133,47 +133,51 @@ export default function Payment() {
                         <IoArrowBackOutline style={{ height: '40px', width: '60px', cursor: 'pointer' }} onClick={() => navigation('/Delivery')} />
 
                         <div className='smilingPaySub1Box1'>
-                            <p style={{ fontSize: '25px', fontWeight: 500, color: '#5e5e5e' }}>Payment Card Method</p>
+                            {/* <p style={{ fontSize: '25px', fontWeight: 500, color: '#5e5e5e' }}>Payment Card Method</p> */}
 
-                            <div style={{ marginTop: '40px' }}>
-                                <p style={{ fontSize: '25px', fontWeight: 500, color: '#5e5e5e' }}>Billing Address</p>
-                                <p className='AddressTitle'>Name : <span className='AdressData'>{selectedAdd.shippingfirstname} {selectedAdd.shippinglastname}</span></p>
-                                <p className='AddressTitle'>Address : <span className='AdressData'>{selectedAdd.street}</span></p>
-                                <p className='AddressTitle'>City : <span className='AdressData'>{selectedAdd.city}-{selectedAdd.zip}</span></p>
-                                <p className='AddressTitle'>State : <span className='AdressData'>{selectedAdd.state},{selectedAdd.country}</span></p>
-                                <p className='AddressTitle'>Mobile : <span className='AdressData'>{selectedAdd.shippingmobile}</span></p>
-                            </div>
-                        </div>
-                        <div className='smilingPaySub1Box2'>
-                            <p style={{ fontSize: '25px', fontWeight: 500, color: '#5e5e5e' }}>Order Summary</p>
-                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <p>Subtotal</p>
-                                <p>0.00</p>
-                            </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <p>Estimated Tax</p>
-                                <p>0.00</p>
-                            </div>
-                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <p>Estimated Total</p>
-                                <p>0.00</p>
+                            <div className='smilingPaySub1Box1Sub1'>
+                                <p style={{ fontSize: '25px', fontWeight: 500, color: '#5e5e5e', margin: '0px 0px 5px 0px', fontFamily: 'Harmonia'  }}>Billing Address</p>
+                                <div style={{}}>
+                                    <p className='AddressTitle'>Name : <span className='AdressData'>{selectedAdd.shippingfirstname} {selectedAdd.shippinglastname}</span></p>
+                                    <p className='AddressTitle'>Address : <span className='AdressData'>{selectedAdd.street}</span></p>
+                                    <p className='AddressTitle'>City : <span className='AdressData'>{selectedAdd.city}-{selectedAdd.zip}</span></p>
+                                    <p className='AddressTitle'>State : <span className='AdressData'>{selectedAdd.state},{selectedAdd.country}</span></p>
+                                    <p className='AddressTitle'>Mobile : <span className='AdressData'>{selectedAdd.shippingmobile}</span></p>
+                                </div>
                             </div>
 
-                            <p style={{ fontSize: '25px', fontWeight: 500, color: '#5e5e5e' }}>Shipping Address</p>
-                            <div style={{ marginTop: '0px' }}>
-                                <p style={{ fontSize: '25px', margin: '0px', fontWeight: 500, color: '#5e5e5e' }}>{selectedAdd.shippingfirstname} {selectedAdd.shippinglastname}</p>
+                            <div className="smilingPaySub1Box1Sub2">
+                                <p style={{ fontSize: '25px', fontWeight: 500, color: '#5e5e5e', margin: '0px 0px 5px 0px', fontFamily: 'Harmonia'  }}>Shipping Address</p>
+                                <p style={{ fontSize: '20px', margin: '0px', fontWeight: 500, color: '#5e5e5e' , fontFamily: 'Harmonia' }}>{selectedAdd.shippingfirstname} {selectedAdd.shippinglastname}</p>
                                 <p className='AddressTitle'><span className='AdressData'>{selectedAdd.street}</span></p>
                                 <p className='AddressTitle'><span className='AdressData'>{selectedAdd.city}-{selectedAdd.zip}</span></p>
                                 <p className='AddressTitle'><span className='AdressData'>{selectedAdd.state},{selectedAdd.country}</span></p>
                                 <p className='AddressTitle'><span className='AdressData'>{selectedAdd.shippingmobile}</span></p>
                             </div>
                         </div>
+                        <div className='smilingPaySub1Box2'>
+                            <p style={{ fontSize: '25px', fontWeight: 500, color: '#5e5e5e', fontFamily: 'Harmonia'  }}>Order Summary</p>
+                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <p className='smilingPaySub1Box2P'>Subtotal</p>
+                                <p>0.00</p>
+                            </div>
+                            <div  style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <p className='smilingPaySub1Box2P'>Estimated Tax</p>
+                                <p>0.00</p>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <p className='smilingPaySub1Box2P' >Estimated Total</p>
+                                <p>0.00</p>
+                            </div>
+
+
+                        </div>
                     </div>
 
                     <div className='smilingPaymentBtn'>
                         <button onClick={handlePayment} className='paymentBtn'>PAY ON ACCOUNT</button>
                     </div>
-                    
+
                     {/* <div style={{ display: 'flex', justifyContent: 'center',marginTop: '-100px' }}>
                         <img src='http://gstore.orail.co.in/assets/newfolder/images/account/blue-box.jpg' className='smilingPayentImg' />
                     </div> */}
@@ -227,7 +231,7 @@ export default function Payment() {
                         <p style={{ color: 'blue', textDecoration: 'underline', marginTop: '10px', textAlign: 'center' }} onClick={() => navigation('/Delivery')}>Cancel</p>
                     </div>
 
-                   
+
                     {/* <div style={{ display: 'flex', justifyContent: 'center',marginTop: '-100px' }}>
                         <img src='http://gstore.orail.co.in/assets/newfolder/images/account/blue-box.jpg' className='smilingPayentImg' />
                     </div> */}

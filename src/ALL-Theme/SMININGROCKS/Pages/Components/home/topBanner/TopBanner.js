@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import './TopBanner.css';
 import demovide from '../../../assets/Video/demo2.mp4';
+import { useNavigate } from 'react-router-dom';
 
 export default function TopBanner() {
   const [loading, setLoading] = useState(true);
-
+  const navigation = useNavigate();
+  
   const handleImageLoad = () => {
     setLoading(false);
   };
@@ -36,7 +38,7 @@ export default function TopBanner() {
             marginTop: '-30px',
             fontWeight: 300
           }}>Fine jewelry for every style and occasion.</p>
-          <p className='gorjanaFavBoxLink'>Shop File Jewelry</p>
+          <p className='gorjanaFavBoxLink' onClick={() => navigation('/productPage')}>Shop File Jewelry</p>
         </div>
       </div>
       <div className='gorjanaFave1Mobile'>

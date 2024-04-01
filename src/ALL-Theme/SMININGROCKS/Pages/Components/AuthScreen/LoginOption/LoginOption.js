@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './LoginOption.css'
 import { IoClose } from 'react-icons/io5';
 import { FaMobileAlt } from 'react-icons/fa';
@@ -9,6 +9,10 @@ import Footer from '../../home/Footer/Footer';
 export default function LoginOption() {
 
     const navigation = useNavigate();
+
+    useEffect(() =>{
+        window.scrollTo(0, 0);
+    },[])
 
     return (
         <div className='paddingTopMobileSet' style={{ backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
