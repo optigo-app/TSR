@@ -6,7 +6,7 @@ import { AiFillInstagram } from "react-icons/ai";
 import { FaYoutube } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { TfiYoutube } from "react-icons/tfi";
-import footerLogo from '../../../assets/sonasons_white.png'
+import footerLogo from '../../../assets/SONASONS_White(2X).png'
 
 export default function Footer() {
 
