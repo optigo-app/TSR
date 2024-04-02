@@ -18,7 +18,8 @@ import titleImg from "../../../assets/title/sonasons.png"
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { HiOutlineShoppingBag } from "react-icons/hi2";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-
+import menu1Img from '../../../assets/45.jpg'
+import menu2Img from '../../../assets/456.jpg'
 
 export default function Header() {
   const navigation = useNavigate();
@@ -221,28 +222,7 @@ export default function Header() {
     setSerachShowOverlay(!serachsShowOverlay);
   };
 
-  const toggleDrawerOverlay = () => {
-    setDrawerShowOverlay(!drawerShowOverlay);
-  };
-
-
-  const [isHeaderFixed, setIsHeaderFixed] = useState(false);
-  const [isHeaderFixedDropShow, setIsHeaderFixedDropShow] = useState(false);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const scrollPosition = window.scrollY;
-  //     setIsHeaderFixed(scrollPosition > 100);
-  //     setIsHeaderFixedDropShow(scrollPosition > 100);
-  //   };
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => {
-  //     window.removeEventListener('scroll', handleScroll);
-  //   };
-  // }, []);
-
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
   const handleDropdownOpen = () => {
     setIsDropdownOpen(true);
   };
@@ -309,7 +289,7 @@ export default function Header() {
   const [openYourBagDrawer, setOpenYourBagDrawer] = useState(false);
   const setIsLoginState = useSetRecoilState(loginState)
 
-  
+
   const handleLogout = () => {
     setIsLoginState('false')
     localStorage.setItem('LoginUser', 'false');
@@ -324,38 +304,14 @@ export default function Header() {
     localStorage.removeItem('registerMobile');
     navigation('/')
     window.location.reload();
-}
+  }
 
 
   return (
     <>
       {serachsShowOverlay && (
         <>
-          <div className="smlingSearchoverlay">
-            <div className="smlingTopSerachOver">
-              <IoSearchOutline style={{ height: "15px", width: "15px", marginRight: "10px" }} />
-              <input
-                type="text"
-                placeholder="Enter Design Number End Click Enter"
-                value={searchText}
-                autoFocus
-                onChange={(e) => setSearchText(e.target.value)}
-                className="serachinputBoxOverly"
-                onKeyPress={handleKeyPress}
-              />
-              <IoClose
-                style={{
-                  height: "30px",
-                  width: "30px",
-                  color: "#7d7f85",
-                  cursor: "pointer",
-                }}
-                onClick={toggleOverlay}
-              />
-            </div>
-          </div>
-
-          <div className={`smlingSearchoverlayNew ${isHeaderFixedDropShow ? "fixed" : ""}`}>
+          <div className="smlingSearchoverlayNew  fixed">
             <div className="smlingTopSerachOver-Fixed">
               <IoSearchOutline style={{ height: "15px", width: "15px", marginRight: "10px" }} />
               <input
@@ -380,6 +336,7 @@ export default function Header() {
           </div>
         </>
       )}
+
       <Drawer
         open={openSearchDrawer}
         onClose={() => {
@@ -668,7 +625,7 @@ export default function Header() {
             </div>
           </div>
         </div>
-      </div >
+      </div > 
 
       <div
         onMouseEnter={handleDropdownOpen}
@@ -677,78 +634,20 @@ export default function Header() {
       >
         <div
           style={{
-            display: "flex",
             padding: "50px",
             color: "#7d7f85",
             backgroundColor: "white",
-            // flexDirection: "column",
-            gap: "50px",
-            justifyContent: 'space-between'
           }}
           onMouseEnter={handleDropdownOpen}
           onMouseLeave={handleDropdownClose}
         >
-
-          {/* <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              {finalData?.map((fd, i) => (
-                <span
-                  className="level0Menu"
-                  onMouseEnter={() => setMenu1Index(i)}
-                  onClick={() => handelMenu0()}
-                >
-                  {fd?.menuname}
-                </span>
-              ))}
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '12px',
-                paddingLeft: '20px'
-              }}
-            >
-              {
-                // finalData?.map((fd) => (
-                finalData?.map((fd) => fd?.param1)[menu1Index]?.map((fd1, i) => (
-                  <span className="level0Menu"
-                    onClick={() => {
-                      handelmenu1({ label1: fd1?.param1name, value1: fd1?.param1dataname })
-                      setMenu1Data({ label1: fd1?.param1name, value1: fd1?.param1dataname })
-                    }}
-                    onMouseEnter={() => {
-                      setMenu2Index(i)
-                      setMenu1Data({ label1: fd1?.param1name, value1: fd1?.param1dataname })
-                    }}>{fd1?.param1dataname}</span>
-                ))
-                //  ))
-              }
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '12px',
-                paddingLeft: '20px'
-              }}
-            >
-              {finalData[menu1Index]?.param1?.map((fd) => fd)[menu2Index]?.param2?.map((fd1) => (
-                <span className="level2Menu"
-                  onClick={() => {
-                    setMenu2Data({ label1: menu1Data?.label1, value1: menu1Data?.value1, label2: fd1?.param2name, value2: fd1?.param2dataname })
-                    handelmenu2({ label1: menu1Data?.label1, value1: menu1Data?.value1, label2: fd1?.param2name, value2: fd1?.param2dataname })
-
-                  }}>{fd1?.param2dataname}</span>
-              ))}
-            </div>  */}
-
           <div style={{ display: 'flex', flexDirection: 'row', gap: '50px' }}>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span style={{ fontSize: '13px', fontFamily: 'Harmonia', letterSpacing: 1, fontWeight: 600 }}>FINE JEWELRY</span>
+            <div style={{ display: 'flex', flexDirection: 'column', width: '200%' }}>
+              <span style={{ fontSize: '13px',height:'25px', fontFamily: 'Harmonia', letterSpacing: 1, color: '#4d4d4d', fontWeight: 600, borderBottom: '1px solid #e1e1e1' }}>FINE JEWELRY</span>
               <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px' }}>
                 {
                   menul0data?.map((md) => (
-                    <span style={{ fontSize: '12.5px', fontFamily: 'Harmonia', letterSpacing: 0.4, cursor: 'pointer' }}
+                    <span style={{ fontSize: '12.5px', fontFamily: 'Harmonia', letterSpacing: 0.4, cursor: 'pointer', color:'#4d4d4d' }}
                       onClick={() => handelNewMenuData({ "label": "param0", "data": md })}
                     >
                       {capitalizeText(md?.menuname)}
@@ -757,45 +656,41 @@ export default function Header() {
                 }
               </span>
             </div>
-            <div>
-              <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #e1e1e1', paddingLeft: '30px' }}>
-                <span style={{ fontSize: '13px', fontFamily: 'Harmonia', letterSpacing: 1, fontWeight: 600 }}>COLLECTIONS</span>
-                <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px' }}>
-                  {
-                    menul1data?.map((md) => (
-                      <span style={{ fontSize: '12.5px', fontFamily: 'Harmonia', letterSpacing: 0.4, cursor: 'pointer' }}
-                        onClick={() => handelNewMenuData({ "label": "param1", "data": md })}
-                      >
-                        {capitalizeText(md?.param1dataname)}
-                      </span>
-                    ))
-                  }
-                </span>
-              </div>
+            <div style={{ display: 'flex', flexDirection: 'column', paddingLeft: '30px', width: '200%' }}>
+              <span style={{ fontSize: '13px',height:'25px', fontFamily: 'Harmonia', letterSpacing: 1, fontWeight: 600, color: '#4d4d4d', borderBottom: '1px solid #e1e1e1' }}>COLLECTIONS</span>
+              <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px' }}>
+                {
+                  menul1data?.map((md) => (
+                    <span style={{ fontSize: '12.5px', fontFamily: 'Harmonia', letterSpacing: 0.4, cursor: 'pointer', color:'#4d4d4d' }}
+                      onClick={() => handelNewMenuData({ "label": "param1", "data": md })}
+                    >
+                      {capitalizeText(md?.param1dataname)}
+                    </span>
+                  ))
+                }
+              </span>
             </div>
-
-            <div>
-              <div style={{ display: 'flex', flexDirection: 'column', borderLeft: '1px solid #e1e1e1', paddingLeft: '30px', width: '130%' }}>
-                <span style={{ fontSize: '13px', fontFamily: 'Harmonia', letterSpacing: 1, fontWeight: 600 }}>BOUTIQUE</span>
-                <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px', height: '350px', flexWrap: 'wrap' }}>
-                  {
-                    menul2data?.map((md) => (
-                      <span style={{ fontSize: '12.5px', fontFamily: 'Harmonia', letterSpacing: 0.4, cursor: 'pointer' }}
-                        onClick={() => handelNewMenuData({ "label": "param2", "data": md })}
-                      >
-                        {capitalizeText(md?.param2dataname)}
-                      </span>
-                    ))
-                  }
-                </span>
-              </div>
+            <div style={{ display: 'flex', flexDirection: 'column', paddingLeft: '30px', width: '200%' }}>
+              <span style={{ fontSize: '13px',height:'25px', fontFamily: 'Harmonia', letterSpacing: 1, fontWeight: 600, color: '#4d4d4d', borderBottom: '1px solid #e1e1e1' }}>BOUTIQUE</span>
+              <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px', height: '350px', flexWrap: 'wrap' }}>
+                {
+                  menul2data?.map((md) => (
+                    <span style={{ fontSize: '12.5px', fontFamily: 'Harmonia', letterSpacing: 0.4, cursor: 'pointer', color:'#4d4d4d'
+                   }}
+                      onClick={() => handelNewMenuData({ "label": "param2", "data": md })}
+                    >
+                      {capitalizeText(md?.param2dataname)}
+                    </span>
+                  ))
+                }
+              </span>
+            </div>
+            <div style={{ display: 'flex', gap: '15px' }}>
+              <img src={menu2Img} className="showShopByDataImg1" alt="#" style={{ height: '250px', width: '300px', objectFit: 'cover' }} />
+              <img src={menu1Img} className="showShopByDataImg2" alt="#" style={{ height: '250px', width: '300px', objectFit: 'cover' }} />
             </div>
           </div>
 
-          {/* <div style={{ display: 'flex', gap: '15px' }}>
-              <img src={menu2Img} alt="#" style={{ height: '250px', width: '300px', objectFit: 'cover' }} />
-              <img src={menu1Img} alt="#" style={{ height: '250px', width: '300px', objectFit: 'cover' }} />
-            </div> */}
 
         </div>
       </div>

@@ -56,8 +56,8 @@ export default function ChangePassword() {
     const validatePassword = (value) => {
         const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[^\w\d\s]).{8,}$/;
         return passwordRegex.test(value);
-      };
-      
+    };
+
     const handlePasswordChange = (event) => {
         const { value } = event.target;
         setPassword(value);
@@ -132,13 +132,13 @@ export default function ChangePassword() {
                 }
                 const response = await CommonAPI(body);
 
-                console.log('response',response);
+                console.log('response', response);
                 if (response.Data.rd[0].stat === 1) {
                     localStorage.setItem('LoginUser', 'false');
                     naviagation('/')
                     window.location.reload()
                 } else {
-                    alert(response.Data.rd[0].stat_msg);
+                    setErrors(prevErrors => ({ ...prevErrors, oldPassword: 'Enter Valid Old Password' }));
                 }
             } catch (error) {
                 console.error('Error:', error);

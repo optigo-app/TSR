@@ -44,6 +44,7 @@ const ProdDetail = () => {
   const [isDaimondCstoFlag, setIsDaimondCstoFlag] = useState('');
   const [isCColrStoneCustFlag, setIsCColrStoneCustFlag] = useState('');
   const [isPriseShow, setIsPriceShow] = useState()
+  const [isProductCuFlag, setIsProductCuFlag] = useState("");
 
   const [sizeOption, setSizeOption] = useState();
   const [diaQColOpt, setDiaQColOpt] = useRecoilState(diamondQualityColorG);
@@ -74,6 +75,9 @@ const ProdDetail = () => {
   const [addToCartFlag,setAddToCartFlag] =useState(false)
   const [addToWishListFlag,setAddToWishListFlag] =useState()
 
+  const [designUniqueNO, setDesignUnicNo] = useState('');
+  const [uploadLogicPath, setUploadLogicPath] = useState('');
+  const [uKey, setUkey] = useState('');
 
   const setCartCount = useSetRecoilState(CartListCounts)
   const setWishCount = useSetRecoilState(WishListCounts)
@@ -354,11 +358,13 @@ const ProdDetail = () => {
     const storedData = localStorage.getItem('designsetlist');
     const jsonData = JSON.parse(storedData);
     const filteredData = jsonData.filter(item => item.autocode === autoCode);
-    // console.log('fffffffffffffffffffffffffffffffffff', filteredData);
-    if (filteredData.DefaultImageName) {
-      // console.log('fffffffffffffffffffffffffffffffffff', filteredData);
-      setCompleteBackImage(filteredData.DefaultImageName);
+    if (filteredData.length > 0) {
+      const num = filteredData[0].designsetuniqueno;
+      const defaultImage = filteredData[0].DefaultImageName;
+      setCompleteBackImage(defaultImage);
+      setDesignUnicNo(num);
     }
+
   }
 
   useEffect(() => {
@@ -407,40 +413,38 @@ const ProdDetail = () => {
     return path.replace(/\\/g, '/');
   }
 
+  function checkImageAvailability(imageUrl) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = imageUrl;
+    });
+  }
 
   useEffect(() => {
     let uploadPath = localStorage.getItem('UploadLogicalPath');
     const storedDataAll = localStorage.getItem('storeInit');
     const data = JSON.parse(storedDataAll);
     setShowEcateDesign(data.IsEcatDesignset);
-
+    setIsProductCuFlag(data.IsProductWebCustomization)
     if (data.IsColorWiseImages === 1) {
       const filteredData = colorImageData.filter(item => item.colorname.toLowerCase() === selectedColor.toLowerCase());
       if (filteredData.length > 0) {
-        const correctedData = filteredData.map(item => {
-          return {
-            ...item,
-            imagepath: convertPath(item.imagepath)
-          };
-        });
-
-        correctedData.forEach(item => {
-          item.imagepath = uploadPath + '/' + data.ukey + item.imagepath;
-        });
-
-        correctedData.forEach((item, index) => {
-          correctedData[index] = item;
-        });
-
-        setTimeout(() => {
+        const correctedData = [];
+        Promise.all(filteredData.map(async (item) => {
+          const imageUrl = uploadPath + '/' + data.ukey + convertPath(item.imagepath);
+          const isAvailable = await checkImageAvailability(imageUrl);
+          if (isAvailable) {
+            correctedData.push({ ...item, imagepath: imageUrl });
+          }
+        })).then(() => {
           setUpdateColorImage(correctedData);
-        }, 100);
-
+        });
       } else {
         setUpdateColorImage('');
       }
     }
-
   }, [selectedColor])
 
   const handleColorSelection = (color) => {
@@ -455,36 +459,25 @@ const ProdDetail = () => {
         const correctedData = filteredData.map(item => {
           return {
             ...item,
-            imagepath: convertPath(item.imagepath)
+            imagepath: uploadPath + '/' + data.ukey + convertPath(item.imagepath)
           };
         });
+        setUpdateColorImage(correctedData);
 
-        correctedData.forEach(item => {
-          item.imagepath = uploadPath + '/' + data.ukey + item.imagepath;
-        });
-
-        correctedData.forEach((item, index) => {
-          correctedData[index] = item;
-        });
-
-        setTimeout(() => {
-          setUpdateColorImage(correctedData);
-        }, 100);
+        const selectedColorData = colorImageData.find(item => item.colorname === selectedColor);
+        if (selectedColorData) {
+          const correctedImagePath = convertPath(selectedColorData.imagepath);
+          let path = uploadPath + '/' + data.ukey + correctedImagePath
+          setSelectedImagePath(path);
+        } else {
+          setSelectedImagePath('');
+        }
       } else {
         setUpdateColorImage('');
       }
-
-
-      const selectedColorData = colorImageData.find(item => item.colorname === selectedColor);
-      if (selectedColorData) {
-        const correctedImagePath = convertPath(selectedColorData.imagepath);
-        let path = uploadPath + '/' + data.ukey + correctedImagePath
-        setSelectedImagePath(path);
-      } else {
-        setSelectedImagePath('');
-      }
     }
   };
+
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -2152,14 +2145,20 @@ const ProdDetail = () => {
                   }
                 </div>
               </div>
-              <img src='https://cdn.accentuate.io/3204707942500/4121939443812/Essentials%20(2).jpg?2048x1950' style={{ width: '800px' }} />
+              <img
+                src={`${uploadLogicPath}/${uKey}/Photo_original/designmanagement_designset/${designUniqueNO}/${completeBackImage}`}
+                style={{ width: '800px' }}
+              />
             </div>
           }
 
           {(designSetList.length !== 0 && showIcateDesign === 1) &&
             <div className='smilingCompleteLookMainMobile' style={{ position: 'relative', marginInline: '5%', marginBottom: '7%', marginTop: '20px' }}>
-              <div style={{display: 'flex' ,justifyContent: 'center'}}>
-                <img src='https://cdn.accentuate.io/3204707942500/4121939443812/Essentials%20(2).jpg?2048x1950' className='smilingCompleteLookMainMobileImg'/>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <img
+                  src={`${uploadLogicPath}/${uKey}/Photo_original/designmanagement_designset/${designUniqueNO}/${completeBackImage}`}
+                  className='smilingCompleteLookMainMobileImg'
+                />
               </div>
               <div className='similiarBrand' style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginBottom: '100px', marginTop: !(productData?.OriginalImagePath) && '120px' }}>
                 <div style={{ marginBottom: '12px' }}>

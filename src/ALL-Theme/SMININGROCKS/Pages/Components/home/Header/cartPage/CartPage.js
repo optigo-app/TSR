@@ -583,10 +583,6 @@ export default function CartPage() {
     //     }
   };
 
-  console.log("cartSelectData", cartSelectData?.UnitCost);
-  console.log("dqcData", dqcData?.S);
-  console.log("csqcData", csqcData?.S);
-  console.log("mtrdData", mtrdData?.Z);
 
   return (
     <>
@@ -751,7 +747,7 @@ export default function CartPage() {
                                     textOverflow: "ellipsis",
                                     overflow: "hidden",
                                     whiteSpace: "none",
-                                    height: "40px",
+                                    height: "46px",
                                     width: "70%",
                                   }}
                                   className="prodTitleLine"
@@ -788,12 +784,7 @@ export default function CartPage() {
                                             width: "45%",
                                           }}
                                         >
-                                          <label
-                                            style={{
-                                              fontSize: "12.5px",
-                                              color: "#7d7f85",
-                                            }}
-                                          >
+                                          <label className="cartPageDropdownLabel">
                                             METAL TYPE:
                                           </label>
                                           <select
@@ -829,12 +820,7 @@ export default function CartPage() {
                                             width: "45%",
                                           }}
                                         >
-                                          <label
-                                            style={{
-                                              fontSize: "12.5px",
-                                              color: "#7d7f85",
-                                            }}
-                                          >
+                                          <label className="cartPageDropdownLabel" >
                                             METAL COLOR:
                                           </label>
                                           <select
@@ -843,6 +829,8 @@ export default function CartPage() {
                                               outline: "none",
                                               color: "#7d7f85",
                                               fontSize: "12.5px",
+                                              fontFamily: "Harmonia",
+
                                             }}
                                             value={selectedColor}
                                             onChange={(e) =>
@@ -871,12 +859,7 @@ export default function CartPage() {
                                             marginTop: "30px",
                                           }}
                                         >
-                                          <label
-                                            style={{
-                                              fontSize: "12.5px",
-                                              color: "#7d7f85",
-                                            }}
-                                          >
+                                          <label className="cartPageDropdownLabel">
                                             DAIMOND :
                                           </label>
                                           <select
@@ -885,6 +868,8 @@ export default function CartPage() {
                                               outline: "none",
                                               color: "#7d7f85",
                                               fontSize: "12.5px",
+                                              fontFamily: "Harmonia",
+
                                             }}
                                             value={diaQColOpt}
                                             onChange={(e) =>
@@ -910,15 +895,10 @@ export default function CartPage() {
                                             flexDirection: "column",
                                             width: "4%",
                                             marginTop: "20px",
+
                                           }}
                                         >
-                                          <label
-                                            style={{
-                                              fontSize: "12.5px",
-                                              color: "#7d7f85",
-                                              marginTop: "10px",
-                                            }}
-                                          >
+                                          <label className="cartPageDropdownLabel">
                                             COLOR STONE:
                                           </label>
                                           <select
@@ -927,6 +907,8 @@ export default function CartPage() {
                                               outline: "none",
                                               color: "#7d7f85",
                                               fontSize: "12.5px",
+                                              fontFamily: "Harmonia",
+
                                             }}
                                             value={cSQopt}
                                             onChange={(e) =>
@@ -957,14 +939,10 @@ export default function CartPage() {
                                               flexDirection: "column",
                                               width: "45%",
                                               marginTop: "30px",
+
                                             }}
                                           >
-                                            <label
-                                              style={{
-                                                fontSize: "12.5px",
-                                                color: "#7d7f85",
-                                              }}
-                                            >
+                                            <label className="cartPageDropdownLabel">
                                               SIZE:
                                             </label>
                                             <select
@@ -973,6 +951,8 @@ export default function CartPage() {
                                                 outline: "none",
                                                 color: "#7d7f85",
                                                 fontSize: "12.5px",
+                                                fontFamily: "Harmonia",
+
                                               }}
                                               onChange={(e) =>
                                                 handelSize(e.target.value)
@@ -1011,6 +991,7 @@ export default function CartPage() {
                                   marginTop: "20px",
                                   color: "#7d7f85",
                                   fontSize: "14px",
+                                  fontFamily: 'Harmonia'
                                 }}
                               >
                                 Price :{" "}
@@ -1018,6 +999,7 @@ export default function CartPage() {
                                   style={{
                                     fontWeight: "500",
                                     fontSize: "16px",
+
                                   }}
                                 >
                                   {currencySymbol?.Currencysymbol}
@@ -1133,7 +1115,7 @@ export default function CartPage() {
                                     onClick={() => handleRemove(item)}
                                   >
                                     <CloseIcon
-                                      // sx={{ color: "white", fontSize: "22px" }}
+                                    // sx={{ color: "white", fontSize: "22px" }}
                                     />
                                   </div>
                                 </div>
@@ -1417,7 +1399,7 @@ export default function CartPage() {
                         fontSize: "40px",
                         fontFamily: "Harmonia",
                         color: "#7d7f85",
-                        lineHeight: "40px",
+                        lineHeight: "46px",
                         marginBottom: "14px",
                       }}
                       className="prodTitleLine"
@@ -1455,7 +1437,10 @@ export default function CartPage() {
                             }}
                           >
                             <label
-                              style={{ fontSize: "12.5px", color: "#7d7f85" }}
+                              style={{
+                                fontSize: "12.5px", color: "#7d7f85",
+                                fontFamily: "Harmonia",
+                              }}
                             >
                               METAL COLOR:
                             </label>
@@ -1465,6 +1450,8 @@ export default function CartPage() {
                                 outline: "none",
                                 color: "#7d7f85",
                                 fontSize: "12.5px",
+                                fontFamily: "Harmonia",
+
                               }}
                               value={selectedColor}
                               onChange={(e) => setSelectedColor(e.target.value)}
@@ -1491,15 +1478,14 @@ export default function CartPage() {
                               width: "49%",
                             }}
                           >
-                            <label
-                              style={{ fontSize: "12.5px", color: "#7d7f85" }}
-                            >
+                            <label className="cartPageDropdownLabel">
                               METAL TYPE:
                             </label>
                             <select
                               style={{
                                 border: "none",
                                 outline: "none",
+                                fontFamily: "Harmonia",
                                 color: "#7d7f85",
                                 fontSize: "12.5px",
                               }}
@@ -1533,7 +1519,10 @@ export default function CartPage() {
                             }}
                           >
                             <label
-                              style={{ fontSize: "12.5px", color: "#7d7f85" }}
+                              style={{
+                                fontSize: "12.5px", color: "#7d7f85",
+                                fontFamily: "Harmonia",
+                              }}
                             >
                               DAIMOND :
                             </label>
@@ -1542,6 +1531,8 @@ export default function CartPage() {
                                 border: "none",
                                 outline: "none",
                                 color: "#7d7f85",
+                                fontFamily: "Harmonia",
+
                                 fontSize: "12.5px",
                               }}
                               value={diaQColOpt}
@@ -1572,6 +1563,7 @@ export default function CartPage() {
                               style={{
                                 fontSize: "12.5px",
                                 color: "#7d7f85",
+                                fontFamily: "Harmonia",
                                 marginTop: "10px",
                               }}
                             >
@@ -1582,6 +1574,8 @@ export default function CartPage() {
                                 border: "none",
                                 outline: "none",
                                 color: "#7d7f85",
+                                fontFamily: "Harmonia",
+
                                 fontSize: "12.5px",
                               }}
                               value={cSQopt}
@@ -1603,50 +1597,54 @@ export default function CartPage() {
                       {(sizeData?.length !== 0 ||
                         (productData?.DefaultSize &&
                           productData.DefaultSize.length !== 0)) && (
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            width: "49%",
-                            marginTop: "30px",
-                          }}
-                        >
-                          <label
-                            style={{ fontSize: "12.5px", color: "#7d7f85" }}
-                          >
-                            SIZE:
-                          </label>
-                          <select
+                          <div
                             style={{
-                              border: "none",
-                              outline: "none",
-                              color: "#7d7f85",
-                              fontSize: "12.5px",
+                              display: "flex",
+                              flexDirection: "column",
+                              width: "49%",
+                              marginTop: "30px",
                             }}
-                            onChange={(e) => handelSize(e.target.value)}
-                            defaultValue={
-                              productData && productData.DefaultSize
-                                ? productData.DefaultSize
-                                : sizeData.find(
+                          >
+                            <label
+                              style={{
+                                fontSize: "12.5px", color: "#7d7f85",
+                                fontFamily: "Harmonia",
+                              }}
+                            >
+                              SIZE:
+                            </label>
+                            <select
+                              style={{
+                                border: "none",
+                                outline: "none",
+                                color: "#7d7f85",
+                                fontFamily: "Harmonia",
+                                fontSize: "12.5px",
+                              }}
+                              onChange={(e) => handelSize(e.target.value)}
+                              defaultValue={
+                                productData && productData.DefaultSize
+                                  ? productData.DefaultSize
+                                  : sizeData.find(
                                     (size) => size.IsDefaultSize === 1
                                   )?.id
-                            }
-                          >
-                            {sizeData?.map((size) => (
-                              <option
-                                key={size.id}
-                                value={size.sizename} // Pass sizename as value
-                                selected={
-                                  productData &&
-                                  productData.DefaultSize === size.sizename
-                                }
-                              >
-                                {size.sizename}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                      )}
+                              }
+                            >
+                              {sizeData?.map((size) => (
+                                <option
+                                  key={size.id}
+                                  value={size.sizename} // Pass sizename as value
+                                  selected={
+                                    productData &&
+                                    productData.DefaultSize === size.sizename
+                                  }
+                                >
+                                  {size.sizename}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
                     </div>
                   </div>
                   <div
@@ -1654,10 +1652,15 @@ export default function CartPage() {
                       marginTop: "20px",
                       color: "#7d7f85",
                       fontSize: "14px",
+                      fontFamily: "Harmonia",
+
                     }}
                   >
                     Price :{" "}
-                    <span style={{ fontWeight: "500", fontSize: "16px" }}>
+                    <span style={{
+                      fontWeight: "500", fontSize: "16px",
+                      fontFamily: "Harmonia",
+                    }}>
                       {currencySymbol?.Currencysymbol}
                       {(
                         cartSelectData?.UnitCost +
