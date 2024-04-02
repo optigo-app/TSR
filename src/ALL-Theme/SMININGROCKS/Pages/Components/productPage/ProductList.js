@@ -1578,10 +1578,6 @@ const ProductList = () => {
 
   const [selectedSortOption, setSelectedSortOption] = useState('None');
 
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("allproductlist"));
-    setProductApiData2(data);
-  }, [ProductApiData2]);
 
   const handleSortChange = (event) => {
     const selectedOption = event.target.value;

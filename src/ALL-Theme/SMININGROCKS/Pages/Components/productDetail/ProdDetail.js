@@ -1186,7 +1186,7 @@ const ProdDetail = () => {
 
   }, [mtrdData, dqcData, csqcData, sizeMarkup, metalUpdatedPrice, diaUpdatedPrice, colUpdatedPrice])
 
-  console.log("priceData", productData, productData?.price)
+  console.log("priceData", mtrdData, dqcData, csqcData, sizeMarkup, metalUpdatedPrice(), diaUpdatedPrice(), colUpdatedPrice())
 
   return (
     <div
@@ -2237,16 +2237,22 @@ const ProdDetail = () => {
                       <div className="srAccContainer">
                         <div className="srFloat">
                           <span>
-                            <b>MetalPurity</b>: {productData?.MetalPurity}
+                            MetalPurity: <b>{productData?.MetalPurity}</b>
                           </span>
                           {/* <span>
                             <b>MetalWeight</b>: {productData?.MetalWeight}
                           </span> */}
                           <span>
-                            <b>GrossWeight</b>:
-                            {
-                              (productData?.Grossweight + (metalFilterData.length === 0 ? 0 : metalFilterData[0]?.Weight) + (daimondFilterData.length === 0 ? 0 : (daimondFilterData[0]?.Weight / 5))).toFixed(2)
-                            }
+                            GrossWeight:
+                            <b>{(
+                              productData?.Grossweight +
+                              (metalFilterData.length === 0
+                                ? 0
+                                : metalFilterData[0]?.Weight) +
+                              (daimondFilterData.length === 0
+                                ? 0
+                                : daimondFilterData[0]?.Weight / 5)
+                            ).toFixed(2)}</b>
                             {/* {daimondFilterData?.length && metalFilterData.length ? (
                               <>
                                 <b>GrossWeight</b>: {metalFilterData[0]?.Weight + (daimondFilterData[0]?.Weight / 5)}
@@ -2269,31 +2275,57 @@ const ProdDetail = () => {
                             ) : ''} */}
                           </span>
                           <span>
-                            <b>DiamondWeight</b>: {daimondFilterData?.length ? ((productData?.diamondweight + daimondFilterData[0]?.Weight)).toFixed(2) : productData?.diamondweight}
+                             DiamondWeight:{" "}
+                            <b>{daimondFilterData?.length
+                              ? (
+                                  productData?.diamondweight +
+                                  daimondFilterData[0]?.Weight
+                                ).toFixed(2)
+                              : productData?.diamondweight}</b>
                           </span>
                           <span>
-                            <b>Diamondpcs</b>: {daimondFilterData?.length ? (productData?.diamondpcs + daimondFilterData[0]?.pieces) : productData?.diamondpcs}
+                            Diamondpcs:{" "}
+                            <b>{daimondFilterData?.length
+                              ? productData?.diamondpcs +
+                                daimondFilterData[0]?.pieces
+                              : productData?.diamondpcs}</b>
                           </span>
                           <span>
-                            <b>NumberOfDiamonds</b>: {daimondFilterData?.length ? (productData?.diamondpcs + daimondFilterData[0]?.pieces) : productData?.diamondpcs}
+                            NumberOfDiamonds:{" "}
+                            <b>{daimondFilterData?.length
+                              ? productData?.diamondpcs +
+                                daimondFilterData[0]?.pieces
+                              : productData?.diamondpcs}</b>
                           </span>
                         </div>
                         <div className="srFloat">
                           <span>
-                            <b>Netwt</b>: {metalFilterData?.length ? ((productData?.netwt + metalFilterData[0]?.Weight)).toFixed(2) : productData?.netwt}
+                            Netwt:{" "}
+                            <b>{metalFilterData?.length
+                              ? (
+                                  productData?.netwt +
+                                  metalFilterData[0]?.Weight
+                                ).toFixed(2)
+                              : productData?.netwt}</b>
                           </span>
                           <span>
-                            <b>DiamondQuality</b>: {productData?.diamondquality}
+                            DiamondQuality: <b>{productData?.diamondquality}</b>
                           </span>
                           <span>
-                            <b>DiamondColorname</b>:{" "}
-                            {productData?.diamondcolorname}
+                            DiamondColorname:{" "}
+                            <b>{productData?.diamondcolorname}</b>
                           </span>
                           <span>
-                            <b>TotalDiamondWeight</b>:{daimondFilterData?.length ? ((productData?.diamondweight + daimondFilterData[0]?.Weight)).toFixed(2) : productData?.diamondweight}
+                            TotalDiamondWeight:
+                            <b>{daimondFilterData?.length
+                              ? (
+                                  productData?.diamondweight +
+                                  daimondFilterData[0]?.Weight
+                                ).toFixed(2)
+                              : productData?.diamondweight}</b>
                           </span>
                           <span>
-                            <b>DiamondSetting</b>: {productData?.diamondsetting}
+                            DiamondSetting: <b>{productData?.diamondsetting}</b>
                           </span>
                         </div>
                       </div>

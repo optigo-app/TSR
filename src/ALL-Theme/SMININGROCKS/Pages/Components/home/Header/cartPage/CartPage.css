@@ -326,7 +326,19 @@
     color: rgb(125, 127, 133);
 }
 
+/* @media (max-width: 1787px){
+    .resproDet{
+        display: flex;
+        width: 65%;
+    }
 
+    .rescon{
+        width: 35%;
+        height: 600px;
+        overflow-y: scroll;
+    }
+
+} */
 
 @media (max-width: 1284px){
     .popUpcontainer{
