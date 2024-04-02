@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import Footer from "../home/Footer/Footer";
 import SmilingRock from "../home/smiling_Rock/SmilingRock";
 import "./product.css";
-import "./ProductListCard.css";
 import { json, useFetcher, useLocation, useNavigate } from "react-router-dom";
 import prodListData from "../../jsonFile/Productlist_4_95oztttesi0o50vr.json";
 // import prodListData from "../../jsonFile/testingFile/Productlist_4_95oztttesi0o50vr_Original.json";
@@ -195,28 +194,28 @@ const ProductList = () => {
       const updatedData = await Promise?.all(data?.map(async (product) => {
         const newPriceData = priceDataApi?.rd?.find(
           (pda) =>
-           storeInit?.IsMetalCustomization === 1
-            ?
-            pda.A === product.autocode &&
-            pda.B === product.designno &&
-            pda.D === loginUserDetail?.cmboMetalType
-            :
-            pda.A === product.autocode &&
-            pda.B === product.designno
+            storeInit?.IsMetalCustomization === 1
+              ?
+              pda.A === product.autocode &&
+              pda.B === product.designno &&
+              pda.D === loginUserDetail?.cmboMetalType
+              :
+              pda.A === product.autocode &&
+              pda.B === product.designno
         );
 
         const newPriceData1 = priceDataApi?.rd1?.filter(
           (pda) =>
 
-           storeInit?.IsDiamondCustomization === 1
-            ?
-            pda.A === product.autocode &&
-            pda.B === product.designno &&
-            pda.H === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[0] &&
-            pda.J === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[1]
-            :
-            pda.A === product.autocode &&
-            pda.B === product.designno
+            storeInit?.IsDiamondCustomization === 1
+              ?
+              pda.A === product.autocode &&
+              pda.B === product.designno &&
+              pda.H === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[0] &&
+              pda.J === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[1]
+              :
+              pda.A === product.autocode &&
+              pda.B === product.designno
 
         ).reduce((acc, obj) => acc + obj.S, 0)
 
@@ -233,20 +232,20 @@ const ProductList = () => {
 
         // console.log("newPriceData11",newPriceData11)
 
-        
+
 
         const newPriceData2 = priceDataApi?.rd2?.filter(
           (pda) =>
 
-          storeInit?.IsCsCustomization === 1
-            ? 
-            pda.A === product.autocode &&
-            pda.B === product.designno &&
-            pda.H === loginUserDetail?.cmboCSQualityColor?.split('#@#')[0].toUpperCase() &&
-            pda.J === loginUserDetail?.cmboCSQualityColor?.split('#@#')[1].toUpperCase()
-            :
-            pda.A === product.autocode &&
-            pda.B === product.designno
+            storeInit?.IsCsCustomization === 1
+              ?
+              pda.A === product.autocode &&
+              pda.B === product.designno &&
+              pda.H === loginUserDetail?.cmboCSQualityColor?.split('#@#')[0].toUpperCase() &&
+              pda.J === loginUserDetail?.cmboCSQualityColor?.split('#@#')[1].toUpperCase()
+              :
+              pda.A === product.autocode &&
+              pda.B === product.designno
 
         ).reduce((acc, obj) => acc + obj.S, 0)
 
@@ -256,7 +255,7 @@ const ProductList = () => {
         let diard1 = 0;
         let csrd2 = 0;
 
-        if(newPriceData || newPriceData1 || newPriceData2) {
+        if (newPriceData || newPriceData1 || newPriceData2) {
           price = (newPriceData?.Z ?? 0) + (newPriceData1 ?? 0) + (newPriceData2 ?? 0);
           metalrd = newPriceData?.Z
           diard1 = newPriceData1 ?? 0
@@ -1623,7 +1622,7 @@ const ProductList = () => {
           className='paddingTopMobileSet'
         >
           <div>
-            {/* <div className="filterDivcontainer">
+            <div className="filterDivcontainer">
               <div className="part" style={{ flex: '20%' }}>
                 <div className="part-content">
                   Hide Filter
@@ -1644,12 +1643,12 @@ const ProductList = () => {
                   <AppsIcon />
                 </div>
               </div>
-            </div> */}
+            </div>
             <div className="smilingProductMain" id="smilingProductMain">
               <div
                 className="smilingProductSubMain"
                 style={{ width: "100%", display: "flex" }}
-              > 
+              >
                 <div className="smilingWebProductListSideBar">
                   <ul style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '0px 0px 0px 28px' }}>
                     <li className="finejwelery me-4" id="finejwelery">Filters</li>
@@ -1661,7 +1660,7 @@ const ProductList = () => {
                         <Accordion
                           elevation={0}
                           sx={{
-                            borderBottom: "1px solid #c7c8c9",
+                            borderBottom: "1px solid #ededed",
                             borderRadius: 0,
                             marginLeft: "28px",
                             "&.Mui-expanded": {
@@ -1841,7 +1840,7 @@ const ProductList = () => {
                 <div className="smilingMobileProductListSideBar">
 
                   <hr style={{ marginTop: "0px" }} />
-                  <div style={{ display: "flex", marginInline: "15px" }}>
+                  <div className="filterListMobileData" style={{ display: "flex", marginInline: "15px" }}>
                     <div style={{ width: "49%" }} onClick={toggleDrawerOverlay}>
 
                       <Drawer
@@ -1851,8 +1850,8 @@ const ProductList = () => {
                       >
                         {list("bottom")}
                       </Drawer>
-
                       <p
+                      className="filterTextData"
                         style={{
                           display: "flex",
                           justifyContent: "space-between",
@@ -1867,8 +1866,9 @@ const ProductList = () => {
                         FILTER<span>{isOpenDetail ? "-" : "+"}</span>
                       </p>
 
-                    </div>
+                      </div>
                     <hr
+                    className="filterDivider"
                       style={{
                         border: "none",
                         marginBottom: "0px",
@@ -2072,7 +2072,7 @@ const ProductList = () => {
                                   height: "9px",
                                   backgroundColor: "#c8c8c8",
                                   borderRadius: "50%",
-                                  cursor:'pointer'
+                                  cursor: 'pointer'
                                 }}
                                 onClick={() => handleColorSelection(products, i, 'White Gold')}
                               ></div>
@@ -2082,7 +2082,7 @@ const ProductList = () => {
                                   height: "9px",
                                   backgroundColor: "#ffcfbc",
                                   borderRadius: "50%",
-                                  cursor:'pointer'
+                                  cursor: 'pointer'
                                 }}
                                 onClick={(e) => handleColorSelection(products, i, 'Rose Gold')}
                               ></div>
@@ -2092,7 +2092,7 @@ const ProductList = () => {
                                   height: "9px",
                                   backgroundColor: "#e0be77",
                                   borderRadius: "50%",
-                                  cursor:'pointer'
+                                  cursor: 'pointer'
                                 }}
                                 onClick={(e) => handleColorSelection(products, i, 'Yellow Gold')}
                               >
