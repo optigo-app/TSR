@@ -1,4 +1,5 @@
 .smilingDelivery {
+    margin-inline: 6%;
     background-color: white;
 }
 
@@ -34,9 +35,10 @@
 }
 .addressData{
     margin: 0px;
-    font-family: 'Harmonia';
+    font-family: 'TTCommons-Medium,Helvetica,sans-serif';
     color: rgb(125, 127, 133);
     text-transform: capitalize;
+    /* font-family: "FreightDisp Pro Medium"; */
 }
 
 .deliveryAddressEdit{
@@ -77,7 +79,6 @@
     border-radius: 5px;
     font-weight: 500;
     margin-top: 10px;
-    font-family: 'Harmonia';
 }
 .smilingAddToAddressBtn:hover{
     background-color: lightgray;
@@ -92,7 +93,6 @@
     height: 35px;
     width: 100px;
     border: none;
-    outline: none;
     background-color: lightgray;
     font-weight: 500;
     margin-inline: 5px;
@@ -107,7 +107,6 @@
     height: 35px;
     width: 100px;
     border: none;
-    outline: none;
     background-color: lightgray;
     font-weight: 500;
     border-radius: 5px;
@@ -123,10 +122,6 @@
     padding: 10px;
 }
 
-
-.smilingMobileDeliveryBtnMain{
-    margin-bottom: 200px;
-}
 
 
 @media screen and (max-width: 900px) {
@@ -146,7 +141,6 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-bottom: 100px;
     }
 
     .smilingAddressPopupMain{

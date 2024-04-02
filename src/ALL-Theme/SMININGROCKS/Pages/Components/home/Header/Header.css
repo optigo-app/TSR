@@ -1,5 +1,5 @@
 .YourCartMainRemkarBoxSingle {
-    height: 40px;
+    height: 25px;
     width: 240px;
     resize: none;
 }
@@ -132,7 +132,7 @@
 
 .shop-dropdown {
     height: auto;
-    width: 100%;
+    width: 100% !important;
     position: absolute;
     background: #fff;
     top: 72px;
@@ -155,7 +155,6 @@
     position: absolute;
     z-index: 1;
     width: 88%;
-    margin-left: 6%;
     margin-top: 37px;
     transition: all 0.5s ease;
 
@@ -342,18 +341,6 @@
     align-self: center;
 }
 
-
-.smlingSearchoverlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 150%;
-    background-color: rgba(0, 0, 0, 0.40);
-    display: flex;
-    z-index: 999;
-}
-
 .smlingDraweOverlay {
     position: fixed;
     top: 0;
@@ -409,31 +396,21 @@
     margin: 0;
 }
 
-
-.smlingTopSerachOver {
-    height: 70px;
-    background-color: white;
-    width: 100%;
-    margin: 10px 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .serachinputBoxOverly {
     width: 95%;
-    height: 50px;
+    height: 120px;
     border: none;
     outline: none;
 }
 
 .smlingTopSerachOver-Fixed {
-    height: 60px;
+    height: 120px;
     background-color: white;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-inline: 15%;
 }
 
 .smlingSearchoverlayNew {
@@ -441,6 +418,7 @@
     transform: translateY(-200px);
     top: 0;
     left: 0;
+    transition: top 0.5s ease;
     width: 100%;
     height: 150%;
     background-color: rgba(0, 0, 0, 0.40);
@@ -540,7 +518,29 @@
 
 }
 
+@media screen and (max-width:1650px) {
+
+    .showShopByDataImg1{
+        height: 200px!important;
+        width: 250px!important;
+    }
+    .showShopByDataImg2{
+        height: 200px!important;
+        width: 250px!important;
+    }
+}
+
 @media screen and (max-width:1440px) {
+
+    
+    .showShopByDataImg1{
+        height: 130px!important;
+        width: 180px!important;
+    }
+    .showShopByDataImg2{
+        height: 130px!important;
+        width: 180px!important;
+    }
 
     .Smining-Top-Header-fixed {
         margin-inline: 10px !important;
@@ -661,7 +661,7 @@
         width: 70% !important;
     }
 
-   
+
 
     .smilingQualityMain {
         width: 95% !important;
@@ -730,10 +730,6 @@
         display: flex !important;
         justify-content: flex-end !important;
         width: 45% !important;
-    }
-
-    .smlingTopSerachOver {
-        margin: 0px !important;
     }
 
     .drawrTitle {
@@ -813,9 +809,9 @@
     border-radius: 10px;
 }
 
- .smilingCartTab1Main {
-    min-width: max-content!important;
-    width: max-content!important;
+.smilingCartTab1Main {
+    min-width: max-content !important;
+    width: max-content !important;
 
 }
 
@@ -867,6 +863,7 @@
     justify-content: flex-end;
     align-items: center;
 }
+
 .gorjanaHederImage {
     cursor: pointer;
 }
@@ -958,7 +955,7 @@
     width: 100px;
 }
 
-.gorForgotIconeDiv{
+.gorForgotIconeDiv {
     background-color: #f0f2f1;
     height: 50px;
     width: 50px;
@@ -969,11 +966,13 @@
     justify-content: center;
     align-items: center;
 }
-.gorBagForgetimage{
+
+.gorBagForgetimage {
     width: 180px;
     cursor: pointer;
 }
-.gorbagChecoutBtn{
+
+.gorbagChecoutBtn {
     height: 50px;
     width: 100%;
     margin-inline: 5%;
@@ -983,6 +982,7 @@
     background-color: #283045;
     margin-top: -20px;
 }
+
 @media screen and (min-width:1151px) {
     .gorjanaHeaderMenuIconeMobile {
         display: none;
@@ -1021,7 +1021,3 @@
     }
 
 }
-
-
-
-
