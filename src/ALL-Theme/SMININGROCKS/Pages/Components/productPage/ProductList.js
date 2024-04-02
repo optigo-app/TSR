@@ -9,7 +9,7 @@ import prodListData from "../../jsonFile/Productlist_4_95oztttesi0o50vr.json";
 import filterData from "../../jsonFile/M_4_95oztttesi0o50vr.json";
 import PriceData from "../../jsonFile/Productlist_4_95oztttesi0o50vr_8.json";
 // import PriceData from "../../jsonFile/testingFile/Productlist_4_95oztttesi0o50vr_8_Original.json";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Checkbox, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Select, Slider } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Card, CardContent, Checkbox, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Select, Slider, Typography } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -28,6 +28,10 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FilterListIcon from '@mui/icons-material/FilterList';
+import SortIcon from '@mui/icons-material/Sort';
+import GridViewIcon from '@mui/icons-material/GridView';
+import AppsIcon from '@mui/icons-material/Apps';
 
 function valuetext(value) {
   return `${value}°C`;
@@ -121,58 +125,149 @@ const ProductList = () => {
     setpriceDataApi(data)
   }, [])
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+
+  //     const data = JSON.parse(localStorage.getItem("allproductlist"));
+  //     const loginUserDetail = JSON.parse(localStorage.getItem('loginUserDetail'));
+
+  //     const updatedData = await Promise?.all(data?.map(async (product) => {
+  //       const newPriceData = priceDataApi?.rd?.find(
+  //         (pda) =>
+  //           pda.A === product.autocode &&
+  //           pda.B === product.designno &&
+  //           pda.D === loginUserDetail?.cmboMetalType
+  //       );
+
+  //       const newPriceData1 = priceDataApi?.rd1?.find(
+  //         (pda) =>
+  //           pda.A === product.autocode &&
+  //           pda.B === product.designno &&
+  //           pda.H === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[0] &&
+  //           pda.J === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[1]
+  //       );
+
+
+  //       const newPriceData2 = priceDataApi?.rd2?.find(
+  //         (pda) =>
+  //           pda.A === product.autocode &&
+  //           pda.B === product.designno &&
+  //           pda.H === loginUserDetail?.cmboCSQualityColor?.split('#@#')[0].toUpperCase() &&
+  //           pda.J === loginUserDetail?.cmboCSQualityColor?.split('#@#')[1].toUpperCase()
+  //       );
+
+  //       let price = 0;
+  //       let isLoading = true;
+  //       let markup = 0;
+  //       let metalrd = 0;
+  //       let diard1 = 0;
+  //       let csrd2 = 0;
+
+  //       if (newPriceData || newPriceData1 || newPriceData2) {
+  //         price = (newPriceData?.Z ?? 0) + (newPriceData1?.S ?? 0) + (newPriceData2?.S ?? 0);
+  //         metalrd = newPriceData?.Z
+  //         diard1 = newPriceData1?.S
+  //         csrd2 = newPriceData2?.S ?? 0
+  //         markup = newPriceData?.AB
+  //         isLoading = false;
+  //       }
+  //       else {
+  //         isLoading = false;
+  //       }
+
+  //       return { ...product, price, isLoading, markup, metalrd, diard1, csrd2 };
+  //     }));
+
+  //     localStorage.setItem("allproductlist", JSON.stringify(updatedData));
+  //     setProductApiData2(updatedData);
+  //   };
+
+  //   fetchData();
+  // }, [priceDataApi]);
+
   useEffect(() => {
     const fetchData = async () => {
-
       const data = JSON.parse(localStorage.getItem("allproductlist"));
       const loginUserDetail = JSON.parse(localStorage.getItem('loginUserDetail'));
+      const storeInit = JSON.parse(localStorage.getItem('storeInit'));
 
+      // let newRd = [];
       const updatedData = await Promise?.all(data?.map(async (product) => {
         const newPriceData = priceDataApi?.rd?.find(
           (pda) =>
+           storeInit?.IsMetalCustomization === 1
+            ?
             pda.A === product.autocode &&
             pda.B === product.designno &&
             pda.D === loginUserDetail?.cmboMetalType
+            :
+            pda.A === product.autocode &&
+            pda.B === product.designno
         );
 
-        const newPriceData1 = priceDataApi?.rd1?.find(
+        const newPriceData1 = priceDataApi?.rd1?.filter(
           (pda) =>
+
+           storeInit?.IsDiamondCustomization === 1
+            ?
             pda.A === product.autocode &&
             pda.B === product.designno &&
             pda.H === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[0] &&
             pda.J === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[1]
-        );
+            :
+            pda.A === product.autocode &&
+            pda.B === product.designno
 
+        ).reduce((acc, obj) => acc + obj.S, 0)
 
-        const newPriceData2 = priceDataApi?.rd2?.find(
+        // const newPriceData11 = priceDataApi?.rd1?.filter(
+        //   (pda) =>
+        //     pda.A === product.autocode &&
+        //     pda.B === product.designno &&
+        //     pda.H === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[0] &&
+        //     pda.J === loginUserDetail?.cmboDiaQualityColor?.split('#@#')[1]
+        // )
+        // if(newPriceData1){
+        //   newRd.push(newPriceData1);
+        // }
+
+        // console.log("newPriceData11",newPriceData11)
+
+        
+
+        const newPriceData2 = priceDataApi?.rd2?.filter(
           (pda) =>
+
+          storeInit?.IsCsCustomization === 1
+            ? 
             pda.A === product.autocode &&
             pda.B === product.designno &&
             pda.H === loginUserDetail?.cmboCSQualityColor?.split('#@#')[0].toUpperCase() &&
             pda.J === loginUserDetail?.cmboCSQualityColor?.split('#@#')[1].toUpperCase()
-        );
+            :
+            pda.A === product.autocode &&
+            pda.B === product.designno
+
+        ).reduce((acc, obj) => acc + obj.S, 0)
 
         let price = 0;
-        let isLoading = true;
         let markup = 0;
         let metalrd = 0;
         let diard1 = 0;
         let csrd2 = 0;
 
-        if (newPriceData || newPriceData1 || newPriceData2) {
-          price = (newPriceData?.Z ?? 0) + (newPriceData1?.S ?? 0) + (newPriceData2?.S ?? 0);
+        if(newPriceData || newPriceData1 || newPriceData2) {
+          price = (newPriceData?.Z ?? 0) + (newPriceData1 ?? 0) + (newPriceData2 ?? 0);
           metalrd = newPriceData?.Z
-          diard1 = newPriceData1?.S
-          csrd2 = newPriceData2?.S ?? 0
+          diard1 = newPriceData1 ?? 0
+          csrd2 = newPriceData2 ?? 0
           markup = newPriceData?.AB
-          isLoading = false;
-        }
-        else {
-          isLoading = false;
         }
 
-        return { ...product, price, isLoading, markup, metalrd, diard1, csrd2 };
+        return { ...product, price, markup, metalrd, diard1, csrd2 }
       }));
+
+      // console.log("newRd",newRd);
 
       localStorage.setItem("allproductlist", JSON.stringify(updatedData));
       setProductApiData2(updatedData);
@@ -180,6 +275,7 @@ const ProductList = () => {
 
     fetchData();
   }, [priceDataApi]);
+
   const toggleDeatilList = () => {
     setIsOpenDetail(!isOpenDetail)
   };
@@ -1247,6 +1343,7 @@ const ProductList = () => {
     }
 
   };
+
   // console.log("hovwer---", hoveredImageUrls);
 
   const handleMouseLeave = (index) => {
@@ -1257,51 +1354,47 @@ const ProductList = () => {
     });
   };
 
+
   function convertPath(path) {
     return path.replace(/\\/g, '/');
   }
 
-  // const handleColorSelection = (product, index, color) => {
-  //   console.log('index--', index);
-  //   console.log('product--', product);
-  //   console.log('color--', color);
-  //   let uploadPath = localStorage.getItem('UploadLogicalPath');
-  //   const storedDataAll = localStorage.getItem('storeInit');
-  //   const data = JSON.parse(storedDataAll);
-  //   const colorWiseImageData = JSON.parse(localStorage.getItem('colorDataImages'));
-  //   const productAutoCode = product?.autocode;
-  //   const productColorName = color;
-  //   console.log("coor--", productColorName);
+  const handleColorSelection = (product, index, color) => {
+    console.log('index--', index);
+    console.log('product--', product);
+    console.log('color--', color);
+    let uploadPath = localStorage.getItem('UploadLogicalPath');
+    const storedDataAll = localStorage.getItem('storeInit');
+    const data = JSON.parse(storedDataAll);
+    const colorWiseImageData = JSON.parse(localStorage.getItem('colorDataImages'));
+    const productAutoCode = product?.autocode;
+    const productColorName = color;
+    console.log("coor--", productColorName);
 
-  //   if (!colorWiseImageData) {
-  //     return [];
-  //   }
+    if (!colorWiseImageData) {
+      return [];
+    }
 
-  //   if (data.IsColorWiseImages === 1) {
-  //     const matchingData = [];
-  //     colorWiseImageData.forEach(imageDataItem => {
-  //       if (productAutoCode == imageDataItem.autocode && productColorName == imageDataItem.colorname) {
-  //         matchingData.push({
-  //           imagePath: uploadPath + '/' + data.ukey + convertPath(imageDataItem.imagepath)
-  //         });
-  //       }
-  //     });
-  //     let imageData = matchingData[0]
-  //     console.log("image Data-", imageData);
-  //       setUpdateColorImage(prevHoveredImageUrls => {
-  //         return { ...prevHoveredImageUrls, [index]: imageData?.imagePath };
-  //       });
-  //       setHoveredImageUrls(prevHoveredImageUrls => {
-  //         return { ...prevHoveredImageUrls, [index]: "https://cdnfs.optigoapps.com/content-global3/gstoreTHO8349NSI2EA6VQP/Design_Image/7D7C3D45D8MDAwMzkxMg==/DesignMetalColorImage/White Gold/Red_Original/0003912_19032024174101026.jpg" };
-  //       });
-  //       return imageData;
-  //   } else {
-  //     setUpdateColorImage({});
-  //     return [];
-  //   }
-  // };
+    if (data.IsColorWiseImages === 1) {
+      const matchingData = [];
+      colorWiseImageData.forEach(imageDataItem => {
+        if (productAutoCode == imageDataItem.autocode && productColorName == imageDataItem.colorname) {
+          matchingData.push({
+            imagePath: uploadPath + '/' + data.ukey + convertPath(imageDataItem.imagepath)
+          });
+        }
+      });
+      let imageData = matchingData[0]
+      console.log("image Data-", imageData);
+      setUpdateColorImage({ [index]: imageData?.imagePath.replace(/ /g, "%20") });
+      return imageData;
+    } else {
+      setUpdateColorImage({});
+      return [];
+    }
+  };
+  // console.log('updated image---', updatedColorImage);
 
-  // console.log("updated image---", updatedColorImage);
 
 
   const [state, setState] = React.useState({
@@ -1486,10 +1579,10 @@ const ProductList = () => {
 
   const [selectedSortOption, setSelectedSortOption] = useState('None');
 
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("allproductlist"));
-    setProductApiData2(data);
-  }, [ProductApiData2]);
+  // useEffect(() => {
+  //   const data = JSON.parse(localStorage.getItem("allproductlist"));
+  //   setProductApiData2(data);
+  // }, []);
 
   const handleSortChange = (event) => {
     const selectedOption = event.target.value;
@@ -1529,256 +1622,315 @@ const ProductList = () => {
           }}
           className='paddingTopMobileSet'
         >
-          <div className="smilingProductMain" id="smilingProductMain">
-            <div
-              className="smilingProductSubMain"
-              style={{ width: "100%", display: "flex" }}
-            >
-              <div className="smilingWebProductListSideBar">
-                <ul style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '0px 0px 0px 28px' }}>
-                  <li className="finejwelery me-4" id="finejwelery">Filters</li>
-                  <li className="finejwelery" id="finejwelery" onClick={() => handlePageReload()}>All Jwelery</li>
-                </ul>
-                <div>
-                  {NewFilterData().map((ele, index) => (
-                    <>
-                      <Accordion
-                        elevation={0}
-                        sx={{
-                          borderBottom: "1px solid #c7c8c9",
-                          borderRadius: 0,
-                          marginLeft: "28px",
-                          "&.Mui-expanded": {
-                            marginLeft: "28px",
-                          },
-                          "&.MuiPaper-root.MuiAccordion-root:last-of-type": {
-                            borderBottomLeftRadius: "0px",
-                            borderBottomRightRadius: "0px",
-                          },
-                          "&.MuiPaper-root.MuiAccordion-root:before": {
-                            background: "none",
-                          },
-                        }}
-                      >
-                        <AccordionSummary
-                          expandIcon={<ExpandMoreIcon sx={{ width: "20px" }} />}
-                          aria-controls="panel1-content"
-                          id="panel1-header"
+          <div>
+            {/* <div className="filterDivcontainer">
+              <div className="part" style={{ flex: '20%' }}>
+                <div className="part-content">
+                  Hide Filter
+                  <FilterListIcon />
+                </div>
+              </div>
+              <div className="divider"></div>
+              <div className="part" style={{ flex: '20%' }}>
+                <div className="part-content">
+                  Featured
+                  <SortIcon />
+                </div>
+              </div>
+              <div className="divider"></div>
+              <div className="part" style={{ flex: '80%', justifyContent: 'end' }}>
+                <div className="part-content">
+                  <GridViewIcon />
+                  <AppsIcon />
+                </div>
+              </div>
+            </div> */}
+            <div className="smilingProductMain" id="smilingProductMain">
+              <div
+                className="smilingProductSubMain"
+                style={{ width: "100%", display: "flex" }}
+              > 
+                <div className="smilingWebProductListSideBar">
+                  <ul style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '0px 0px 0px 28px' }}>
+                    <li className="finejwelery me-4" id="finejwelery">Filters</li>
+                    <li className="finejwelery" id="finejwelery" onClick={() => handlePageReload()}>All Jwelery</li>
+                  </ul>
+                  <div>
+                    {NewFilterData().map((ele, index) => (
+                      <>
+                        <Accordion
+                          elevation={0}
                           sx={{
-                            color: "#7f7d85",
+                            borderBottom: "1px solid #c7c8c9",
                             borderRadius: 0,
-
-                            "&.MuiAccordionSummary-root": {
-                              padding: 0,
+                            marginLeft: "28px",
+                            "&.Mui-expanded": {
+                              marginLeft: "28px",
+                            },
+                            "&.MuiPaper-root.MuiAccordion-root:last-of-type": {
+                              borderBottomLeftRadius: "0px",
+                              borderBottomRightRadius: "0px",
+                            },
+                            "&.MuiPaper-root.MuiAccordion-root:before": {
+                              background: "none",
                             },
                           }}
                         >
-                          <span
-                            className="filtercategoryLable"
-                          // style={{
-                          //   fontFamily: "Harmonia, sans-serif",
-                          //   fontSize: "13px",
-                          //   fontWeight:'500px',
-                          //   color:'#424242'
-                          // }}
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon sx={{ width: "20px" }} />}
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                            sx={{
+                              color: "#7f7d85",
+                              borderRadius: 0,
+
+                              "&.MuiAccordionSummary-root": {
+                                padding: 0,
+                              },
+                            }}
                           >
-                            {ele.label}
-                          </span>
-                        </AccordionSummary>
-                        <AccordionDetails
-                          sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            gap: "4px",
-                          }}
-                          className="filterListData"
-                        >
-                          {ele.label === "PRICE" &&
-                            <div>
-                              <Slider
-                                className='netWtSecSlider'
-                                getAriaLabel={() => 'Minimum distance'}
-                                value={value1}
-                                min={minPrice}
-                                max={maxPrice}
-                                size="small"
-                                onChange={handlePriceChange}
-                                valueLabelDisplay="auto"
-                                getAriaValueText={valuetext}
-                                disableSwap
-                              />
-                              <div className="d-flex w-100 justify-content-between align-items-center mt-1">
-                                <input value={value1[0]} className="minmaxvalpl" disabled />
-                                <input value={value1[1]} className="minmaxvalpl" disabled />
-                              </div>
-                            </div>}
-
-                          {ele.label === "NETWT" &&
-                            <div>
-                              <Slider
-                                className='netWtSecSlider'
-                                getAriaLabel={() => 'Minimum distance'}
-                                value={value2}
-                                min={minNetwt}
-                                max={maxNetwt}
-                                size="small"
-                                onChange={handleNetWtChange}
-                                valueLabelDisplay="auto"
-                                getAriaValueText={valuetext}
-                                disableSwap
-                              />
-                              <div className="d-flex w-100 justify-content-between align-items-center mt-1">
-                                <input value={value2[0]} className="minmaxvalpl" disabled />
-                                <input value={value2[1]} className="minmaxvalpl" disabled />
-                              </div>
-                            </div>
-                          }
-
-                          {ele.label === "GROSSWT" &&
-                            <div>
-                              <Slider
-                                className='netWtSecSlider'
-                                getAriaLabel={() => 'Minimum distance'}
-                                value={value3}
-                                min={minGrosswt}
-                                max={maxGrosswt}
-                                size="small"
-                                onChange={handlegrossWtChange}
-                                valueLabelDisplay="auto"
-                                getAriaValueText={valuetext}
-                                disableSwap
-                              />
-                              <div className="d-flex w-100 justify-content-between align-items-center mt-1">
-                                <input value={value3[0]} className="minmaxvalpl" disabled />
-                                <input value={value3[1]} className="minmaxvalpl" disabled />
-                              </div>
-                            </div>
-                          }
-
-                          {ele.label === "DIAMONDWT" &&
-                            <div>
-                              <Slider
-                                className='netWtSecSlider'
-                                getAriaLabel={() => 'Minimum distance'}
-                                value={value4}
-                                min={minDiamondWt}
-                                max={maxDiamondWt}
-                                size="small"
-                                onChange={handleDiamondChange}
-                                valueLabelDisplay="auto"
-                                getAriaValueText={valuetext}
-                                disableSwap
-                              />
-                              <div className="d-flex w-100 justify-content-between align-items-center mt-1">
-                                <input value={value4[0]} className="minmaxvalpl" disabled />
-                                <input value={value4[1]} className="minmaxvalpl" disabled />
-                              </div>
-                            </div>
-                          }
-
-                          {ele.filterList.map((flist, i) => (
-                            <div
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                                gap: "12px",
-                              }}
-                              key={i}
+                            <span
+                              className="filtercategoryLable"
+                            // style={{
+                            //   fontFamily: "Harmonia, sans-serif",
+                            //   fontSize: "13px",
+                            //   fontWeight:'500px',
+                            //   color:'#424242'
+                            // }}
                             >
-                              <small
-                                className="sidebarfilterText"
-                              // style={{
-                              //   fontFamily: "TT Commons, sans-serif",
-                              //   color: "#7f7d85",
-                              //   textTransform: "lowercase",
-                              // }}
+                              {ele.label}
+                            </span>
+                          </AccordionSummary>
+                          <AccordionDetails
+                            sx={{
+                              display: "flex",
+                              flexDirection: "column",
+                              gap: "4px",
+                            }}
+                            className="filterListData"
+                          >
+                            {ele.label === "PRICE" &&
+                              <div>
+                                <Slider
+                                  className='netWtSecSlider'
+                                  getAriaLabel={() => 'Minimum distance'}
+                                  value={value1}
+                                  min={minPrice}
+                                  max={maxPrice}
+                                  size="small"
+                                  onChange={handlePriceChange}
+                                  valueLabelDisplay="auto"
+                                  getAriaValueText={valuetext}
+                                  disableSwap
+                                />
+                                <div className="d-flex w-100 justify-content-between align-items-center mt-1">
+                                  <input value={value1[0]} className="minmaxvalpl" disabled />
+                                  <input value={value1[1]} className="minmaxvalpl" disabled />
+                                </div>
+                              </div>}
+
+                            {ele.label === "NETWT" &&
+                              <div>
+                                <Slider
+                                  className='netWtSecSlider'
+                                  getAriaLabel={() => 'Minimum distance'}
+                                  value={value2}
+                                  min={minNetwt}
+                                  max={maxNetwt}
+                                  size="small"
+                                  onChange={handleNetWtChange}
+                                  valueLabelDisplay="auto"
+                                  getAriaValueText={valuetext}
+                                  disableSwap
+                                />
+                                <div className="d-flex w-100 justify-content-between align-items-center mt-1">
+                                  <input value={value2[0]} className="minmaxvalpl" disabled />
+                                  <input value={value2[1]} className="minmaxvalpl" disabled />
+                                </div>
+                              </div>
+                            }
+
+                            {ele.label === "GROSSWT" &&
+                              <div>
+                                <Slider
+                                  className='netWtSecSlider'
+                                  getAriaLabel={() => 'Minimum distance'}
+                                  value={value3}
+                                  min={minGrosswt}
+                                  max={maxGrosswt}
+                                  size="small"
+                                  onChange={handlegrossWtChange}
+                                  valueLabelDisplay="auto"
+                                  getAriaValueText={valuetext}
+                                  disableSwap
+                                />
+                                <div className="d-flex w-100 justify-content-between align-items-center mt-1">
+                                  <input value={value3[0]} className="minmaxvalpl" disabled />
+                                  <input value={value3[1]} className="minmaxvalpl" disabled />
+                                </div>
+                              </div>
+                            }
+
+                            {ele.label === "DIAMONDWT" &&
+                              <div>
+                                <Slider
+                                  className='netWtSecSlider'
+                                  getAriaLabel={() => 'Minimum distance'}
+                                  value={value4}
+                                  min={minDiamondWt}
+                                  max={maxDiamondWt}
+                                  size="small"
+                                  onChange={handleDiamondChange}
+                                  valueLabelDisplay="auto"
+                                  getAriaValueText={valuetext}
+                                  disableSwap
+                                />
+                                <div className="d-flex w-100 justify-content-between align-items-center mt-1">
+                                  <input value={value4[0]} className="minmaxvalpl" disabled />
+                                  <input value={value4[1]} className="minmaxvalpl" disabled />
+                                </div>
+                              </div>
+                            }
+
+                            {ele.filterList.map((flist, i) => (
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "space-between",
+                                  gap: "12px",
+                                }}
+                                key={i}
                               >
-                                {flist}
-                              </small>
-                              <Checkbox
-                                name={`checkbox${index + 1}${i + 1}`}
-                                checked={
-                                  filterChecked[`checkbox${index + 1}${i + 1}`]
-                                    ?.checked
-                                }
+                                <small
+                                  className="sidebarfilterText"
                                 // style={{
+                                //   fontFamily: "TT Commons, sans-serif",
                                 //   color: "#7f7d85",
-                                //   padding: 0,
-                                //   width: "10px",
+                                //   textTransform: "lowercase",
                                 // }}
-                                className="filterCheckBox"
-                                onClick={(e) =>
-                                  handleCheckboxChange(e, ele, flist)
-                                }
-                                size="small"
-                              />
-                            </div>
-                          ))}
-                        </AccordionDetails>
-                      </Accordion>
-                    </>
-                  ))}
-                </div>
-              </div>
-              {/* for mobile */}
-              <div className="smilingMobileProductListSideBar">
-
-                <hr style={{ marginTop: "0px" }} />
-                <div style={{ display: "flex", marginInline: "15px" }}>
-                  <div style={{ width: "49%" }} onClick={toggleDrawerOverlay}>
-
-                    <Drawer
-                      anchor="bottom"
-                      open={isOpenDetail}
-                      onClose={toggleDetailDrawer}
-                    >
-                      {list("bottom")}
-                    </Drawer>
-
-                    <p
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        color: "#7d7f85",
-                        fontSize: "13px",
-                        fontWeight: 500,
-                        margin: "0px",
-                      }}
-                      // onClick={toggleDeatilList}
-                      onClick={toggleDetailDrawer}
-                    >
-                      FILTER<span>{isOpenDetail ? "-" : "+"}</span>
-                    </p>
-
+                                >
+                                  {flist}
+                                </small>
+                                <Checkbox
+                                  name={`checkbox${index + 1}${i + 1}`}
+                                  checked={
+                                    filterChecked[`checkbox${index + 1}${i + 1}`]
+                                      ?.checked
+                                  }
+                                  // style={{
+                                  //   color: "#7f7d85",
+                                  //   padding: 0,
+                                  //   width: "10px",
+                                  // }}
+                                  className="filterCheckBox"
+                                  onClick={(e) =>
+                                    handleCheckboxChange(e, ele, flist)
+                                  }
+                                  size="small"
+                                />
+                              </div>
+                            ))}
+                          </AccordionDetails>
+                        </Accordion>
+                      </>
+                    ))}
                   </div>
-                  <hr
-                    style={{
-                      border: "none",
-                      marginBottom: "0px",
-                      marginInline: "5px",
-                      borderLeft: "1px solid black",
-                      height: "50px",
-                      marginTop: "-16px",
-                    }}
-                  />
+                </div>
+                {/* for mobile */}
+                <div className="smilingMobileProductListSideBar">
+
+                  <hr style={{ marginTop: "0px" }} />
+                  <div style={{ display: "flex", marginInline: "15px" }}>
+                    <div style={{ width: "49%" }} onClick={toggleDrawerOverlay}>
+
+                      <Drawer
+                        anchor="bottom"
+                        open={isOpenDetail}
+                        onClose={toggleDetailDrawer}
+                      >
+                        {list("bottom")}
+                      </Drawer>
+
+                      <p
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          color: "#7d7f85",
+                          fontSize: "13px",
+                          fontWeight: 500,
+                          margin: "0px",
+                        }}
+                        // onClick={toggleDeatilList}
+                        onClick={toggleDetailDrawer}
+                      >
+                        FILTER<span>{isOpenDetail ? "-" : "+"}</span>
+                      </p>
+
+                    </div>
+                    <hr
+                      style={{
+                        border: "none",
+                        marginBottom: "0px",
+                        marginInline: "5px",
+                        borderLeft: "1px solid black",
+                        height: "50px",
+                        marginTop: "-16px",
+                      }}
+                    />
+                    <div
+                      style={{
+                        width: "49%",
+                        display: "flex",
+                        marginTop: "-15px",
+                        alignItems: "center",
+                      }}
+                    >
+                      <select
+                        style={{
+                          width: "100%",
+                          border: "none",
+                          outline: "none",
+                          fontSize: "13px ",
+                        }}
+                        onChange={handleSortChange}
+                        value={selectedSortOption}
+                      >
+                        <option value="None">Recommended</option>
+                        <option value="None">New</option>
+                        <option value="None">In stock</option>
+                        <option value="PRICE HIGH TO LOW">PRICE HIGH TO LOW</option>
+                        <option value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    width: "80%",
+                    display: "flex",
+                    flexDirection: 'column',
+                    justifyContent: "center",
+                    alignItems: "center",
+                    margin: "40px 50px 0px 0px",
+                  }}
+                  className="smilingProductImageMain"
+                  id="smilingProductImageMain"
+                >
                   <div
                     style={{
-                      width: "49%",
+                      width: "100%",
                       display: "flex",
-                      marginTop: "-15px",
-                      alignItems: "center",
+                      justifyContent: "flex-end",
+                      marginBottom: '10px'
                     }}
+                    className="smilingFilterweb"
                   >
                     <select
-                      style={{
-                        width: "100%",
-                        border: "none",
-                        outline: "none",
-                        fontSize: "13px ",
-                      }}
+                      size="small"
                       onChange={handleSortChange}
                       value={selectedSortOption}
+                      displayEmpty
                     >
                       <option value="None">Recommended</option>
                       <option value="None">New</option>
@@ -1787,206 +1939,175 @@ const ProductList = () => {
                       <option value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</option>
                     </select>
                   </div>
-                </div>
-              </div>
-              <div
-                style={{
-                  width: "80%",
-                  display: "flex",
-                  flexDirection: 'column',
-                  justifyContent: "center",
-                  alignItems: "center",
-                  margin: "40px 50px 0px 0px",
-                }}
-                className="smilingProductImageMain"
-                id="smilingProductImageMain"
-              >
-                <div
-                  style={{
-                    width: "100%",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    marginBottom: '10px'
-                  }}
-                  className="smilingFilterweb"
-                >
-                  <select
-                    size="small"
-                    onChange={handleSortChange}
-                    value={selectedSortOption}
-                    displayEmpty
-                  >
-                    <option value="None">Recommended</option>
-                    <option value="None">New</option>
-                    <option value="None">In stock</option>
-                    <option value="PRICE HIGH TO LOW">PRICE HIGH TO LOW</option>
-                    <option value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</option>
-                  </select>
-                </div>
-                <div className="smilingAllProductDataMainMobile">
-                  {/* RollOverImageName */}
-                  {/* {(newProData.length ? newProData : finalDataOfDisplaying())?.map((products, i) => ( */}
-                  {(newProData?.length ? newProData : ProductApiData2)?.map((products, i) => (
-                    <div className="main-ProdcutListConatiner">
-                      <div className="listing-card">
-                        <div className="listing-image">
-                          <div
-                            onClick={() => handelProductSubmit(products)}
-                            className="background-image-container"
-                            style={{
-                              backgroundImage: `url(${hoveredImageUrls[i] ? hoveredImageUrls[i] :
-                                (products?.MediumImagePath ?
-                                  (products?.imagepath + products?.MediumImagePath?.split(",")[0]) :
-                                  notFound
-                                )
-                                })`
-                            }}
-                            onMouseEnter={() => handleHoverImageShow(products?.MediumImagePath?.split(",")[0], i, products?.RollOverImageName, products?.imagepath)}
-                            //onMouseEnter={() => handleHoverImageShow(products?.MediumImagePath?.split(",")[0], i, isColorWiseImageShow === 1 ? products?.ColorWiseRollOverImageName : products?.RollOverImageName, products?.imagepath)}
-                            onMouseLeave={() => handleMouseLeave(i)}
-                          ></div>
-                          <div className="cart-icon">
-                            <Checkbox
-                              icon={
-                                <LocalMallOutlinedIcon
-                                  sx={{ fontSize: "22px", color: "#000" }}
-                                />
-                              }
-                              checkedIcon={
-                                <LocalMallIcon
-                                  sx={{ fontSize: "22px", color: "#f0d85e" }}
-                                />
-                              }
-                              disableRipple={true}
-                              sx={{ padding: "5px" }}
+                  <div className="smilingAllProductDataMainMobile">
+                    {/* RollOverImageName */}
+                    {/* {(newProData.length ? newProData : finalDataOfDisplaying())?.map((products, i) => ( */}
+                    {(newProData?.length ? newProData : ProductApiData2)?.map((products, i) => (
 
-                              checked={products?.checkFlag}
-                              onChange={(e) => handelCartList(e, products)}
-                            />
-                          </div>
-                          <div className="image-overlay">
-                            <Checkbox
-                              icon={
-                                <FavoriteBorderIcon
-                                  sx={{ fontSize: "22px", color: "#000" }}
-                                />
-                              }
-                              checkedIcon={
-                                <FavoriteIcon
-                                  sx={{ fontSize: "22px", color: "#e31b23" }}
-                                />
-                              }
-                              disableRipple={true}
-                              sx={{ padding: "5px" }}
+                      <div className="main-ProdcutListConatiner">
+                        <div className="listing-card">
+                          <div className="listing-image">
+                            <div
+                              onClick={() => handelProductSubmit(products)}
+                              className="background-image-container"
+                              style={{
+                                backgroundImage: `url(${hoveredImageUrls[i] ? hoveredImageUrls[i] : updatedColorImage[i] ? updatedColorImage[i] :
+                                  (products?.MediumImagePath ?
+                                    (products?.imagepath + products?.MediumImagePath?.split(",")[0]) :
+                                    notFound
+                                  )
+                                  })`
+                              }}
+                              onMouseEnter={() => handleHoverImageShow(products?.MediumImagePath?.split(",")[0], i, products?.RollOverImageName, products?.imagepath)}
+                              //onMouseEnter={() => handleHoverImageShow(products?.MediumImagePath?.split(",")[0], i, isColorWiseImageShow === 1 ? products?.ColorWiseRollOverImageName : products?.RollOverImageName, products?.imagepath)}
+                              onMouseLeave={() => handleMouseLeave(i)}
+                            ></div>
+                            <div className="cart-icon">
+                              <Checkbox
+                                icon={
+                                  <LocalMallOutlinedIcon
+                                    sx={{ fontSize: "22px", color: "#000" }}
+                                  />
+                                }
+                                checkedIcon={
+                                  <LocalMallIcon
+                                    sx={{ fontSize: "22px", color: "#f0d85e" }}
+                                  />
+                                }
+                                disableRipple={true}
+                                sx={{ padding: "5px" }}
 
-                              checked={products?.wishCheck}
-                              onChange={(e) => handelWishList(e, products)}
-                            />
-                          </div>
-                        </div>
-                        <div className="listing-details" onClick={() => handelProductSubmit(products)}>
-                          <p className="productDetails property-type">
-                            {products?.TitleLine}
-                          </p>
-                          <div>
-                            {isPriceShow === 1 &&
-                              <p className="productDetails price">{currencySym?.Currencysymbol}
-                                {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}</p>
-                            }
-                            <span className="productDesignDetails">
-                              <p className="productDetails address">{products?.designno}</p>
-                              <Divider
-                                className="dividerLine"
-                                orientation="vertical"
-                                variant="middle"
-                                flexItem
+                                checked={products?.checkFlag}
+                                onChange={(e) => handelCartList(e, products)}
                               />
-                              <p className="productDetails address"> {isMetalTCShow === 1 && products?.MetalTypeName}-{products?.MetalColorName}{products?.MetalPurity}</p>
-                            </span>
-                          </div>
-                        </div>
-                        <div className="listing-features">
-                          <div>
-                            {ismetalWShow === 1 &&
-                              <div className="feature">
-                                <p>
-                                  <span className="feature-count">NWT : </span> {products?.netwt}
-                                </p>
-                              </div>
-                            }
-                            {((isDaaimongWShow || isDaaimongWShow) === 1 && (products?.diamondweight !== 0 || products?.diamondpcs !== 0)) &&
-                              <div className="feature">
-                                <p>
-                                  <span className="feature-count">DWT : </span> {(isDaaimongWShow === 1 && products?.diamondweight !== 0) && products?.diamondweight + '/'}  {(isDaaimonPShow === 1 && products?.diamondpcs !== 0) && products?.diamondpcs}
-                                </p>
-                              </div>
-                            }
-                          </div>
-                          <div>
-                            {isGrossWShow === 1 &&
-                              <div className="feature">
-                                <p>
-                                  <span className="feature-count">GWT : </span> {products?.Grossweight}
-                                </p>
-                              </div>
-                            }
-                            {((isStoneWShow || isStonePShow) === 1 && (products?.totalcolorstoneweight !== 0 || products?.totalcolorstonepcs !== 0)) &&
-                              <div className="feature">
-                                <p>
-                                  <span className="feature-count">CWT : </span> {(isStoneWShow === 1 && products?.totalcolorstoneweight !== 0) && products?.totalcolorstoneweight + '/'}  {(isStonePShow === 1 && products?.totalcolorstonepcs !== 0) && products?.totalcolorstonepcs}
-                                </p>
-                              </div>
-                            }
-                          </div>
-                        </div>
-                        {/* {products?.IsColorWiseImageExists !== null && (
-                          <div
-                            style={{
-                              display: "flex",
-                              gap: "8px",
-                              justifyContent: "center",
-                              alignItems: "center",
-                              marginBottom: "12px",
-                            }}
-                          >
-                            <div
-                              style={{
-                                width: "9px",
-                                height: "9px",
-                                backgroundColor: "#c8c8c8",
-                                borderRadius: "50%",
-                              }}
-                              onClick={() => handleColorSelection(products, i, 'White Gold')}
-                            ></div>
-                            <div
-                              style={{
-                                width: "9px",
-                                height: "9px",
-                                backgroundColor: "#ffcfbc",
-                                borderRadius: "50%",
-                              }}
-                              onClick={(e) => handleColorSelection(products, i, 'Rose Gold')}
-                            ></div>
-                            <div
-                              style={{
-                                width: "9px",
-                                height: "9px",
-                                backgroundColor: "#e0be77",
-                                borderRadius: "50%",
-                              }}
-                              onClick={(e) => handleColorSelection(products, i, 'Yellow Gold')}
-                            >
+                            </div>
+                            <div className="image-overlay">
+                              <Checkbox
+                                icon={
+                                  <FavoriteBorderIcon
+                                    sx={{ fontSize: "22px", color: "#000" }}
+                                  />
+                                }
+                                checkedIcon={
+                                  <FavoriteIcon
+                                    sx={{ fontSize: "22px", color: "#e31b23" }}
+                                  />
+                                }
+                                disableRipple={true}
+                                sx={{ padding: "5px" }}
+
+                                checked={products?.wishCheck}
+                                onChange={(e) => handelWishList(e, products)}
+                              />
                             </div>
                           </div>
-                        )} */}
+                          <div className="listing-details" onClick={() => handelProductSubmit(products)}>
+                            <p className="productDetails property-type">
+                              {products?.TitleLine}
+                            </p>
+                            <div>
+                              {isPriceShow === 1 &&
+                                <p className="productDetails price">{currencySym?.Currencysymbol}
+                                  {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}</p>
+                              }
+                              <span className="productDesignDetails">
+                                <p className="productDetails address">{products?.designno}</p>
+                                <Divider
+                                  className="dividerLine"
+                                  orientation="vertical"
+                                  variant="middle"
+                                  flexItem
+                                />
+                                <p className="productDetails address"> {isMetalTCShow === 1 && products?.MetalTypeName}-{products?.MetalColorName}{products?.MetalPurity}</p>
+                              </span>
+                            </div>
+                          </div>
+                          <div className="listing-features">
+                            <div>
+                              {ismetalWShow === 1 &&
+                                <div className="feature">
+                                  <p>
+                                    <span className="feature-count">NWT : </span> {products?.netwt}
+                                  </p>
+                                </div>
+                              }
+                              {((isDaaimongWShow || isDaaimongWShow) === 1 && (products?.diamondweight !== 0 || products?.diamondpcs !== 0)) &&
+                                <div className="feature">
+                                  <p>
+                                    <span className="feature-count">DWT : </span> {(isDaaimongWShow === 1 && products?.diamondweight !== 0) && products?.diamondweight + '/'}  {(isDaaimonPShow === 1 && products?.diamondpcs !== 0) && products?.diamondpcs}
+                                  </p>
+                                </div>
+                              }
+                            </div>
+                            <div>
+                              {isGrossWShow === 1 &&
+                                <div className="feature">
+                                  <p>
+                                    <span className="feature-count">GWT : </span> {products?.Grossweight}
+                                  </p>
+                                </div>
+                              }
+                              {((isStoneWShow || isStonePShow) === 1 && (products?.totalcolorstoneweight !== 0 || products?.totalcolorstonepcs !== 0)) &&
+                                <div className="feature">
+                                  <p>
+                                    <span className="feature-count">CWT : </span> {(isStoneWShow === 1 && products?.totalcolorstoneweight !== 0) && products?.totalcolorstoneweight + '/'}  {(isStonePShow === 1 && products?.totalcolorstonepcs !== 0) && products?.totalcolorstonepcs}
+                                  </p>
+                                </div>
+                              }
+                            </div>
+                          </div>
+                          {products?.IsColorWiseImageExists !== null && (
+                            <div
+                              style={{
+                                display: "flex",
+                                gap: "8px",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                marginBottom: "12px",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  width: "9px",
+                                  height: "9px",
+                                  backgroundColor: "#c8c8c8",
+                                  borderRadius: "50%",
+                                  cursor:'pointer'
+                                }}
+                                onClick={() => handleColorSelection(products, i, 'White Gold')}
+                              ></div>
+                              <div
+                                style={{
+                                  width: "9px",
+                                  height: "9px",
+                                  backgroundColor: "#ffcfbc",
+                                  borderRadius: "50%",
+                                  cursor:'pointer'
+                                }}
+                                onClick={(e) => handleColorSelection(products, i, 'Rose Gold')}
+                              ></div>
+                              <div
+                                style={{
+                                  width: "9px",
+                                  height: "9px",
+                                  backgroundColor: "#e0be77",
+                                  borderRadius: "50%",
+                                  cursor:'pointer'
+                                }}
+                                onClick={(e) => handleColorSelection(products, i, 'Yellow Gold')}
+                              >
+                              </div>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
+              <SmilingRock />
+              <Footer />
             </div>
-            <SmilingRock />
-            <Footer />
           </div>
         </div>
         {/* <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
