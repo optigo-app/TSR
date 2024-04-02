@@ -542,7 +542,7 @@ const ManageAddress = () => {
             </Dialog>
             <Dialog
                 open={open}
-            //  onClose={handleClose}
+                onClose={handleClose}
             >
                 <div className='smilingAddressPopupMain'>
                     <DialogTitle style={{ textAlign: 'center', textDecoration: 'underline' }}>Add Shipping Info</DialogTitle>
