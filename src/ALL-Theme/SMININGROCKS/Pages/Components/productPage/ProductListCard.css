@@ -132,10 +132,10 @@
 }
 
 
-/* @media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) and (min-width: 500px) {
     .listing-card {
         width: 311px;
-        max-width: 311;
+        max-width: 311PX;
     }
     .property-type {
         width:290px;
@@ -143,4 +143,17 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
-} */
+}
+
+@media screen and (max-width: 500px) {
+    .listing-card {
+        width: 311px;
+        max-width: 311PX;
+    }
+    .property-type {
+        width:290px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

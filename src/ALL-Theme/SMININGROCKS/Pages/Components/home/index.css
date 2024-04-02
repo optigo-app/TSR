@@ -48,6 +48,7 @@
 @media screen and (max-width: 1440px) {
     .paddingTopMobileSet{
         padding-top: 1px!important;
+        margin: 120px !important;
     }
 
 }
