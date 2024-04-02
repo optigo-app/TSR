@@ -744,7 +744,7 @@ export default function CartPage() {
                                 <div
                                   style={{
                                     fontSize: "40px",
-                                    fontFamily: "FreightDisp Pro Medium",
+                                    fontFamily: "Harmonia",
                                     color: "#7d7f85",
                                     lineHeight: "40px",
                                     marginBottom: "14px",
@@ -769,7 +769,7 @@ export default function CartPage() {
                                     style={{
                                       borderTop: "1px solid #e1e1e1",
                                       marginInline: "-10px",
-                                      padding: "20px",
+                                      padding: "20px 20px 20px 0px",
                                     }}
                                   >
                                     <div
@@ -1044,7 +1044,7 @@ export default function CartPage() {
                                       textAlign: "center",
                                       outline: "none",
                                       width: "80px",
-                                      height: "35px",
+                                      height: "30px",
                                       border: "1px solid #7d7f85",
                                     }}
                                     maxLength={2}
@@ -1415,7 +1415,7 @@ export default function CartPage() {
                     <div
                       style={{
                         fontSize: "40px",
-                        fontFamily: "FreightDisp Pro Medium",
+                        fontFamily: "Harmonia",
                         color: "#7d7f85",
                         lineHeight: "40px",
                         marginBottom: "14px",

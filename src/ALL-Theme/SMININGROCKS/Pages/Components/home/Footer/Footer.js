@@ -34,7 +34,7 @@ export default function Footer() {
     };
 
     return (
-        <div>
+        <div style={{marginTop:'20px'}}>
             <div className='TSRFooterMain'>
                 <div className='TSRFooterPart1'>
                     <div className='TSRFooterPart1Sub'>

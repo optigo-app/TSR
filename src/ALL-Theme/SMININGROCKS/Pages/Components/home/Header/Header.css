@@ -4,29 +4,6 @@
     resize: none;
 }
 
-.SmilingUpdateQuantityBtn {
-    height: 35px;
-    width: 60px;
-    background-color: #e1e1e1;
-    border: none;
-    outline: none;
-    font-weight: 500;
-}
-
-.SmilingAddSingleRemkarBtn {
-    height: 35px;
-    width: 70px;
-    background-color: #e1e1e1;
-    border: none;
-    font-size: 14px;
-    outline: none;
-    font-weight: 500;
-}
-
-/* .SmilingAddSingleRemkarBtn:hover{
-    background-color: white;
-    border: 1px solid #f1d8c6;
-} */
 .SmilingAddRemkarBtn {
     height: 40px;
     width: 130px;
@@ -672,9 +649,6 @@
         width: 70% !important;
     }
 
-    .SmilingAddSingleRemkarBtn {
-        width: 50% !important;
-    }
 
     .smilingAddresingleMobileMain {
         margin-top: 10px !important;
@@ -687,9 +661,7 @@
         width: 70% !important;
     }
 
-    .SmilingUpdateQuantityBtn {
-        width: 50% !important;
-    }
+   
 
     .smilingQualityMain {
         width: 95% !important;
@@ -904,7 +876,8 @@
     list-style: none;
     margin: 0px;
     margin-left: 7px;
-    align-items: center;
+    align-items: baseline;
+    height: 100%;
 }
 
 .gorjana-Menu-item {
@@ -915,6 +888,9 @@
     font-weight: 500;
     color: inherit;
     cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .gorjana-Menu-item:hover {
