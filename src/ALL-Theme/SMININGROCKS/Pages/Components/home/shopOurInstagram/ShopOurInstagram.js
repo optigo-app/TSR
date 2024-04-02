@@ -261,7 +261,7 @@ export default function ShopOurInstagram() {
     return (
         <div style={{ filter: open && 'blur(10px)' }}>
             <div className='TsrInstaMain' style={{ marginBlock: '100px' }}>
-                <p className='gorInstaTitle'>@gorjana</p>
+                <p className='gorInstaTitle'>@sonason</p>
                 <div className='gorInstaMain'>
                     {
                         InstaImages.map((data, index) =>
@@ -294,20 +294,20 @@ export default function ShopOurInstagram() {
                 className="custom-modal"
             >
                 <Box component={'div'} className='gorInstagramPopup'>
-
+                    <div className='mobilePopupTopFixed'>
+                        <p className='mobilePopupTopFixedFont' onClick={handleClose}>Back</p>
+                    </div>
                     <div className='gorinstapopupMain'>
-
                         <div className='gorInstagramPopupImage'>
                             <img src={openImage} className='gorinstapopupImg' />
                         </div>
                         <div className='gorInstagramPopupDesc'>
-                            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                            <div style={{ display: 'flex', justifyContent: 'flex-end' }} className='closeIconeMain'>
                                 <IoMdClose onClick={handleClose} style={{ height: '40px', borderRadius: '40px', color: 'white', backgroundColor: '#4d5469', padding: '7px', width: '40px', marginTop: '-15px', marginRight: '-15px', cursor: 'pointer' }} />
                             </div>
 
-                            <div style={{ height: '15.5rem', borderBottom: '1px solid #e4e6ec', marginInline: '20px' }}>
-                                <img data-v-42173558="" src="https://content-cdn.stackla.com/3704/6579ede364a945a463e6a736/avatar?width=52&amp;height=52&amp;crop=center" width="52" height="52" />@gorjana
-
+                            <div className='TsrpopupImagesTop' style={{ height: '15.5rem', borderBottom: '1px solid #e4e6ec', marginInline: '20px' }}>
+                                <img data-v-42173558="" src="https://content-cdn.stackla.com/3704/6579ede364a945a463e6a736/avatar?width=52&amp;height=52&amp;crop=center" width="52" height="52" />@sonason
                                 <p style={{ marginTop: '10px' }}>13G</p>
                             </div>
                             <div style={{ display: 'flex', justifyContent: 'space-between', marginInline: '20px' }}>
@@ -358,6 +358,7 @@ export default function ShopOurInstagram() {
                         </div>
                     </div>
                 </Box>
+             
             </Modal>
         </div>
     )

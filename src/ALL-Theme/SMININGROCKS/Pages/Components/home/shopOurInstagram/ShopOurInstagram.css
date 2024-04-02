@@ -136,42 +136,47 @@
 
 
 
-.gorInstaMain{
+.gorInstaMain {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
 
-.TsrInstaMain{
+.TsrInstaMain {
     margin-inline: 10%;
 }
-.groInstaImagesMain{
+
+.groInstaImagesMain {
     width: 25%;
 }
-.groInstaImagesMainSub{
+
+.groInstaImagesMainSub {
     padding: 5px;
-    overflow: hidden; 
-    position: relative; 
+    overflow: hidden;
+    position: relative;
 }
-.groInstaImages{
+
+.groInstaImages {
     width: 100%;
     height: 100%;
     object-fit: cover;
     cursor: pointer;
 }
-.gorInstaTitle{
+
+.gorInstaTitle {
     font-size: 30px;
     margin: 0px;
-    font-family: 'Freight Big Pro,serif';
+    font-family: 'Harmonia';
 }
-.gorInstaIconeMain{
+
+.gorInstaIconeMain {
     position: absolute;
     right: 25px;
     bottom: 20px;
 }
 
-.gorInstagramPopup{
+.gorInstagramPopup {
     width: 1100px;
     position: absolute;
     top: 50%;
@@ -183,64 +188,151 @@
     prefix: 4;
     padding-bottom: 3;
 }
-.gorinstapopupImg{
+
+.gorinstapopupImg {
     width: 100%;
     height: 800px;
     object-fit: cover;
 }
-.gorinstapopupMain{
+
+.gorinstapopupMain {
     display: flex;
 }
-.gorInstagramPopupImage{
+
+.gorInstagramPopupImage {
     width: 60%;
 }
-.gorInstagramPopupDesc{
+
+.gorInstagramPopupDesc {
     width: 40%;
 }
-.gorInstaSliderImageMain{
-    display: flex!important;
+
+.gorInstaSliderImageMain {
+    display: flex !important;
 
 }
-.gorInstaSliderImageBox{
+
+.gorInstaSliderImageBox {
     width: 33.33%;
     border: 1px solid;
     margin-inline: 5px;
     border-radius: 5px;
+    overflow: hidden;
 }
-.gorInstaSliderImage{
+
+.gorInstaSliderImage {
     height: 100%;
     width: 100%;
-    padding: 7px;
+    object-fit: contain;
 }
 
-.custom-modal, .custom-modal .gorInstagramPopup {
-    border: none !important; 
-    outline: none!important;
+.custom-modal,
+.custom-modal .gorInstagramPopup {
+    border: none !important;
+    outline: none !important;
 }
 
+
+@media screen and (max-width: 1550px) {
+
+    .gorInstagramPopup {
+        width: 90% !important;
+
+    }
+
+    .gorInstagramPopup {
+        height: 100%;
+    }
+
+}
 
 @media screen and (max-width:1441px) {
-    .gorInstaMain{
+    .gorInstaMain {
         padding-inline: 7%;
     }
 }
 
-@media screen and (max-width:1200px) {
-    .gorInstaMain{
-        padding-inline: 3%;
-    }
-
-    .groInstaImagesMain{
-        width: 33.33%;
+@media screen and (min-width:1200px) {
+    .mobilePopupTopFixed {
+        display: none;
     }
 }
 
-@media screen and (max-width: 900px) {
-    .gorInstaMain{
+@media screen and (max-width:1200px) {
+
+    .mobilePopupTopFixed {
+        position: sticky;
+        top: 0px;
+        height: 50px;
+        background-color: white;
+        width: 100%;
+    }
+
+    .closeIconeMain {
+        display: none !important;
+    }
+
+    .mobilePopupTopFixedFont {
+        margin: 0px 20px 20px 20px;
+        font-size: 20px;
+        font-weight: 600;
+        font-family: 'Harmonia';
+
+    }
+
+    .gorInstaMain {
         padding-inline: 3%;
     }
 
-    .groInstaImagesMain{
+    .groInstaImagesMain {
+        width: 33.33%;
+    }
+
+
+    .gorInstagramPopup {
+        width: 100% !important;
+
+    }
+
+    .gorinstapopupMain {
+        width: 100% !important;
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        margin-top: 0px;
+    }
+
+    .gorInstagramPopupImage {
+        width: 100% !important;
+        height: 700px !important;
+        display: flex;
+        justify-content: center;
+    }
+
+    .gorinstapopupImg {
+        height: 100% !important;
+        width: 100% !important;
+
+    }
+
+    .gorInstagramPopupDesc {
+        width: 100% !important;
+    }
+
+    .custom-modal,
+    .custom-modal .gorInstagramPopup {
+        overflow: auto;
+    }
+
+
+}
+
+@media screen and (max-width: 900px) {
+    .gorInstaMain {
+        padding-inline: 3%;
+    }
+
+    .groInstaImagesMain {
         width: 50%;
     }
 }

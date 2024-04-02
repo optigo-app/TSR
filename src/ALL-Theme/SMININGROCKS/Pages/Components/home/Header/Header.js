@@ -604,28 +604,34 @@ export default function Header() {
                 }
               </ul>
 
-              {/* 
-              <IoSearch
-                style={{
-                  height: "25px",
-                  cursor: "pointer",
-                  width: "25px",
-                  marginInline: "10px",
-                }}
-
-                onClick={() => { setOpenSearchDrawer(true); setOpenYourBagDrawer(false); }}
-              /> */}
             </div>
 
 
             <div className="gorjanaHeaderMenuIconeMobile">
-              <IoSearch className="gorHeaderMobileIcoen" />
-              <HiOutlineShoppingBag className="gorHeaderMobileIcoen" />
+              <IoSearch onClick={toggleOverlay} className="gorHeaderMobileIcoen" />
+              <Badge
+                badgeContent={getCartListCount}
+                overlap={"rectangular"}
+                color="secondary"
+                className="gorHeaderMobileIcoen"
+              >
+                <Tooltip title="Cart">
+                  <li
+                    onClick={toggleCartDrawer(true)}
+                    style={{
+                      cursor: "pointer",
+                      listStyle: 'none',
+                    }}
+                  >
+                    <HiOutlineShoppingBag className="gorHeaderMobileIcoenCart" />
+                  </li>
+                </Tooltip>
+              </Badge>
               <IoMenuOutline className="gorHeaderMobileIcoen" />
             </div>
           </div>
         </div>
-      </div > 
+      </div >
 
       <div
         onMouseEnter={handleDropdownOpen}
@@ -643,11 +649,11 @@ export default function Header() {
         >
           <div style={{ display: 'flex', flexDirection: 'row', gap: '50px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', width: '200%' }}>
-              <span style={{ fontSize: '13px',height:'25px', fontFamily: 'Harmonia', letterSpacing: 1, color: '#4d4d4d', fontWeight: 600, borderBottom: '1px solid #e1e1e1' }}>FINE JEWELRY</span>
+              <span style={{ fontSize: '13px', height: '25px', fontFamily: 'Harmonia', letterSpacing: 1, color: '#4d4d4d', fontWeight: 600, borderBottom: '1px solid #e1e1e1' }}>FINE JEWELRY</span>
               <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px' }}>
                 {
                   menul0data?.map((md) => (
-                    <span style={{ fontSize: '12.5px', fontFamily: 'Harmonia', letterSpacing: 0.4, cursor: 'pointer', color:'#4d4d4d' }}
+                    <span style={{ fontSize: '12.5px', fontFamily: 'Harmonia', letterSpacing: 0.4, cursor: 'pointer', color: '#4d4d4d' }}
                       onClick={() => handelNewMenuData({ "label": "param0", "data": md })}
                     >
                       {capitalizeText(md?.menuname)}
@@ -657,11 +663,11 @@ export default function Header() {
               </span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', paddingLeft: '30px', width: '200%' }}>
-              <span style={{ fontSize: '13px',height:'25px', fontFamily: 'Harmonia', letterSpacing: 1, fontWeight: 600, color: '#4d4d4d', borderBottom: '1px solid #e1e1e1' }}>COLLECTIONS</span>
+              <span style={{ fontSize: '13px', height: '25px', fontFamily: 'Harmonia', letterSpacing: 1, fontWeight: 600, color: '#4d4d4d', borderBottom: '1px solid #e1e1e1' }}>COLLECTIONS</span>
               <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px' }}>
                 {
                   menul1data?.map((md) => (
-                    <span style={{ fontSize: '12.5px', fontFamily: 'Harmonia', letterSpacing: 0.4, cursor: 'pointer', color:'#4d4d4d' }}
+                    <span style={{ fontSize: '12.5px', fontFamily: 'Harmonia', letterSpacing: 0.4, cursor: 'pointer', color: '#4d4d4d' }}
                       onClick={() => handelNewMenuData({ "label": "param1", "data": md })}
                     >
                       {capitalizeText(md?.param1dataname)}
@@ -671,12 +677,13 @@ export default function Header() {
               </span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', paddingLeft: '30px', width: '200%' }}>
-              <span style={{ fontSize: '13px',height:'25px', fontFamily: 'Harmonia', letterSpacing: 1, fontWeight: 600, color: '#4d4d4d', borderBottom: '1px solid #e1e1e1' }}>BOUTIQUE</span>
+              <span style={{ fontSize: '13px', height: '25px', fontFamily: 'Harmonia', letterSpacing: 1, fontWeight: 600, color: '#4d4d4d', borderBottom: '1px solid #e1e1e1' }}>BOUTIQUE</span>
               <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px', height: '350px', flexWrap: 'wrap' }}>
                 {
                   menul2data?.map((md) => (
-                    <span style={{ fontSize: '12.5px', fontFamily: 'Harmonia', letterSpacing: 0.4, cursor: 'pointer', color:'#4d4d4d'
-                   }}
+                    <span style={{
+                      fontSize: '12.5px', fontFamily: 'Harmonia', letterSpacing: 0.4, cursor: 'pointer', color: '#4d4d4d'
+                    }}
                       onClick={() => handelNewMenuData({ "label": "param2", "data": md })}
                     >
                       {capitalizeText(md?.param2dataname)}

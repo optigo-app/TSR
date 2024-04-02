@@ -6,6 +6,7 @@ import { AiFillInstagram } from "react-icons/ai";
 import { FaYoutube } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { TfiYoutube } from "react-icons/tfi";
+import footerLogo from '../../../assets/sonasons_white.png'
 
 export default function Footer() {
 
@@ -38,7 +39,7 @@ export default function Footer() {
             <div className='TSRFooterMain'>
                 <div className='TSRFooterPart1'>
                     <div className='TSRFooterPart1Sub'>
-                        <img src='https://pipeline-theme-fashion.myshopify.com/cdn/shop/files/Mezzo_White.png?v=1652288798&width=230' className='trsFoooterImg' />
+                        <img src={footerLogo} className='trsFoooterImg' />
                         <div className='TSRFooterPart1Sub1'>
                             <div className='TSRFooterPart1Sub1-1'>
                                 <p className='TSRFooterPart1Sub1menuTitle'>COLLECTIONS</p>

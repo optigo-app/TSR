@@ -258,7 +258,7 @@
 
 
 .TSRFooterMain {
-    background-color: #424242;
+    background-color: #714f44;
     display: flex;
 }
 
@@ -269,6 +269,7 @@
 
 .trsFoooterImg {
     padding-bottom: 5%;
+    width: 250px;
 }
 
 .TSRFooterPart1Sub1menuTitle {
@@ -291,7 +292,7 @@
 
 .TSRFooterPart2 {
     width: 40%;
-    background-color: #4f4f4f;
+    background-color: #a4796636;
 }
 
 .TSRFooterPart2Img {
@@ -349,7 +350,7 @@
 
 
 .footerMoreTextNew {
-    background-color: #1d1d1d;
+    background-color: #3e1d14;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -873,7 +873,8 @@
     list-style: none;
     margin: 0px;
     margin-left: 7px;
-    align-items: baseline;
+    align-items: center;
+
     height: 100%;
 }
 
@@ -906,6 +907,14 @@
     cursor: pointer;
     width: 25px;
     margin-inline: 15px;
+
+}
+
+
+.gorHeaderMobileIcoenCart {
+    height: 25px;
+    cursor: pointer;
+    width: 25px;
 
 }
 
@@ -994,10 +1003,16 @@
     .gorjanaHeaderMenuIconeWeb {
         display: none;
     }
+    
+    .gorjanaHeaderMenuIconeMobile{
+        display: flex;
+    }
+ 
 
     .gorajanaBottomHeaderMain {
         padding: 0px;
         padding-Block: 20px;
+        padding-inline: 20px;
     }
 
     .gorjanaHeaderMenu {
@@ -1007,6 +1022,10 @@
     .gorjanaHeaderSubMenuMain {
         display: flex;
         justify-content: flex-end;
+    }
+
+    .smlingTopSerachOver-Fixed{
+        height: 134px!important;
     }
 
 }
@@ -1019,5 +1038,7 @@
         width: 25px;
         margin-inline: 8px;
     }
-
+    .gorajanaBottomHeaderMain {
+        padding-inline: 10px;
+    }
 }

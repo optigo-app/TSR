@@ -131,12 +131,15 @@
 .gor-image-scroll-content {
     display: inline-block;
     overflow-y: scroll;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* Internet Explorer and Edge */
 }
 
 .gor-image-scroll-content::-webkit-scrollbar {
-    display: none; /* Webkit (Chrome, Safari, etc.) */
+    display: none;
+    /* Webkit (Chrome, Safari, etc.) */
 }
 
 .gor-image-wrapper {
@@ -165,7 +168,21 @@
 
 @media screen and (max-width:1441px) {
 
-    .gorReccommMain{
-        margin-inline: 3%!important;
+    .gor-scrollable-container {
+        height: 400px !important;
+    }
+
+    .gor-image-wrapper img {
+        height: 100% !important;
+
+    }
+
+    .TsrpopupImagesTop{
+        height: auto!important;
+        margin: 10px;
+    }
+
+    .gorReccommMain {
+        margin-inline: 3% !important;
     }
 }
