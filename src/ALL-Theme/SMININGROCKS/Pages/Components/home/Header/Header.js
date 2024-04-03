@@ -20,6 +20,7 @@ import { HiOutlineShoppingBag } from "react-icons/hi2";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import menu1Img from '../../../assets/45.jpg'
 import menu2Img from '../../../assets/456.jpg'
+import { FaChevronRight } from "react-icons/fa";
 
 export default function Header() {
   const navigation = useNavigate();
@@ -82,6 +83,7 @@ export default function Header() {
     setIsDropdownOpen(false)
     setDrawerShowOverlay(false)
     navigation("/productpage")
+    setDrawerOpen(false);
   }
 
 
@@ -266,7 +268,7 @@ export default function Header() {
     if (savedProductList) {
       const productList = JSON.parse(savedProductList);
       const searchValue = searchText;
-      const filteredProducts = productList.filter(product => product.designno === searchValue || product.id === parseInt(searchValue));
+      const filteredProducts = productList.filter(product => product.designno === searchValue || product.id === parseInt(searchValue) || product.ProducttypeName === parseInt(searchValue) || product.MetalColorName === parseInt(searchValue) || product.MetalTypeName === parseInt(searchValue) || product.OcassionName === parseInt(searchValue) || product.GenderName === parseInt(searchValue) || product.BrandName === parseInt(searchValue) || product.CategoryName === parseInt(searchValue) || product.CollectionName === parseInt(searchValue) || product.autocode === parseInt(searchValue));
       setSearchedProducts(filteredProducts);
     }
     navigation('/productpage');
@@ -306,6 +308,16 @@ export default function Header() {
     window.location.reload();
   }
 
+
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleList = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const toggleDrawer = () => {
+    setDrawerOpen(!drawerOpen);
+  };
 
   return (
     <>
@@ -452,6 +464,141 @@ export default function Header() {
               <p>$150</p>
             </div>
             <button className="gorbagChecoutBtn">PROCEED TO CHECKOUT</button>
+          </div>
+        </div>
+      </Drawer>
+
+      <Drawer
+        open={drawerOpen}
+        onClose={toggleDrawer}
+        className="tsrMobileDrawerMain"
+      >
+        <div>
+          <div style={{ borderBottom: '1px solid lightgray' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '10px' }}>
+              <IoClose
+                style={{
+                  height: "30px",
+                  width: "30px",
+                  cursor: "pointer",
+                }}
+                onClick={toggleDrawer}
+              />
+
+              <div>
+                {islogin === "true" ? (
+                  <div style={{ display: 'flex' }}>
+
+
+                    <li
+                      className="gorjana-Menu-item"
+                      style={{ cursor: "pointer", fontWeight: 600 }}
+                      onClick={() => { navigation("/account"); toggleDrawer(); }}
+                    >
+                      {ACCOUNT}
+                    </li>
+
+
+                  </div>
+                ) : (
+                  <li
+                    className="gorjana-Menu-item"
+                    style={{ cursor: "pointer", marginInline: '10px', fontWeight: 600 }}
+                    onClick={() => { navigation('/LoginOption'); toggleDrawer(); }}
+                  >
+                    {LOGIN}
+                  </li>
+                )}
+              </div>
+            </div>
+          </div>
+          <div>
+
+            <div className="tsrmobileDraweMenuItem" style={{ display: 'flex', flexDirection: 'column', height: 'auto' }}>
+              <li
+                className="gorjana-Menu-item"
+                style={{ cursor: "pointer", height: 'auto', width: '100%' }}
+                onClick={toggleList}
+              >
+                <p style={{ width: '100%', display: 'flex', justifyContent: 'space-between', marginInline: '20px' }}>Fine Jewellery<span>{isOpen ? "-" : "+"}</span></p>
+              </li>
+              <ul className={`my-list-fineJewe ${isOpen ? "open" : ""}`} style={{ margin: isOpen && '-15px 0px 30px 40px', width: '100%' }}>
+                <li style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
+                  {
+                    menul0data?.map((md) => (
+                      <span style={{ fontSize: '12.5px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 0.4, cursor: 'pointer' }}
+                        onClick={() => handelNewMenuData({ "label": "param0", "data": md })}
+                      >
+                        {capitalizeText(md?.menuname)}
+                      </span>
+                    ))
+                  }
+                </li>
+              </ul>
+            </div>
+
+            <div className="tsrmobileDraweMenuItem">
+              <li
+                className="gorjana-Menu-item"
+                style={{ cursor: "pointer" }}
+                onClick={() => { navigation("/impact"); toggleDrawer(); }}
+              >
+                {IMPACT}
+              </li>
+              <FaChevronRight style={{ margin: '10px', opacity: '0.5' }} onClick={() => { navigation("/impact"); toggleDrawer(); }} />
+            </div>
+
+            <div className="tsrmobileDraweMenuItem">
+              <li
+                style={{ cursor: "pointer" }}
+                className="gorjana-Menu-item"
+                onClick={() => { navigation("/aboutUs"); toggleDrawer(); }}
+              >
+                {ABOUT_US}
+              </li>
+              <FaChevronRight style={{ margin: '10px', opacity: '0.5' }} onClick={() => { navigation("/aboutUs"); toggleDrawer(); }} />
+            </div>
+
+
+
+            {islogin === "true" &&
+              <>
+
+                <div className="tsrmobileDraweMenuItem">
+                  <li
+                    style={{ cursor: "pointer" }}
+                    className="gorjana-Menu-item"
+                    onClick={() => { navigation("/myWishList"); toggleDrawer(); }}
+                  >
+                    WishList
+                  </li>
+                  <FaChevronRight style={{ margin: '10px', opacity: '0.5' }} onClick={() => { navigation("/myWishList"); toggleDrawer(); }} />
+                </div>
+
+                <div className="tsrmobileDraweMenuItem">
+                  <li
+                    style={{ cursor: "pointer" }}
+                    className="gorjana-Menu-item"
+                    onClick={() => { toggleCartDrawer(true); toggleDrawer(); }}
+                  >
+                    Cart
+                  </li>
+                  <FaChevronRight style={{ margin: '10px', opacity: '0.5' }} onClick={() => { toggleCartDrawer(true); toggleDrawer(); }} />
+                </div>
+
+
+                <div className="tsrmobileDraweMenuItem" style={{ display: 'flex', justifyContent: 'center' }}>
+                  <li
+                    style={{ cursor: "pointer" }}
+                    className="gorjana-Menu-item"
+                    onClick={() => { handleLogout(); toggleDrawer(); }}
+                  >
+                    Log Out
+                  </li>
+                </div>
+
+              </>
+            }
           </div>
         </div>
       </Drawer>
@@ -606,26 +753,39 @@ export default function Header() {
 
 
             <div className="gorjanaHeaderMenuIconeMobile">
-              <IoSearch onClick={toggleOverlay} className="gorHeaderMobileIcoen" />
-              <Badge
-                badgeContent={getCartListCount}
-                overlap={"rectangular"}
-                color="secondary"
-                className="gorHeaderMobileIcoen"
-              >
-                <Tooltip title="Cart">
-                  <li
-                    onClick={toggleCartDrawer(true)}
-                    style={{
-                      cursor: "pointer",
-                      listStyle: 'none',
-                    }}
+              {islogin === "true" ? (
+                <div style={{ display: 'flex' }}>
+                  <IoSearch onClick={toggleOverlay} className="gorHeaderMobileIcoen" />
+                  <Badge
+                    badgeContent={getCartListCount}
+                    overlap={"rectangular"}
+                    color="secondary"
+                    className="gorHeaderMobileIcoen"
                   >
-                    <HiOutlineShoppingBag className="gorHeaderMobileIcoenCart" />
-                  </li>
-                </Tooltip>
-              </Badge>
-              <IoMenuOutline className="gorHeaderMobileIcoen" />
+                    <Tooltip title="Cart">
+                      <li
+                        onClick={toggleCartDrawer(true)}
+                        style={{
+                          cursor: "pointer",
+                          listStyle: 'none',
+                        }}
+                      >
+                        <HiOutlineShoppingBag className="gorHeaderMobileIcoenCart" />
+                      </li>
+                    </Tooltip>
+                  </Badge>
+                </div>
+              ) : (
+                <li
+                  className="gorjana-Menu-item"
+                  style={{ cursor: "pointer", marginInline: '10px', fontWeight: 600 }}
+                  onClick={() => navigation('/LoginOption')}
+                >
+                  {LOGIN}
+                </li>
+              )}
+
+              <IoMenuOutline className="gorHeaderMobileIcoen" onClick={toggleDrawer} />
             </div>
           </div>
         </div>

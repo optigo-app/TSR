@@ -691,11 +691,12 @@ export default function CartPage() {
                           margin: "0px",
                           fontSize: "20px",
                           fontWeight: 500,
+                          fontFamily: 'PT Sans, sans-serif'
                         }}
                       >
                         No Data Available
                       </p>
-                      <p>Please First Add To Cart Data</p>
+                      <p style={{fontFamily: 'PT Sans, sans-serif'}}>Please First Add To Cart Data</p>
                       <button
                         className="browseBtnMore"
                         onClick={() => navigation("/productpage")}
@@ -740,7 +741,7 @@ export default function CartPage() {
                                 <div
                                   style={{
                                     fontSize: "40px",
-                                    fontFamily: "Harmonia",
+                                    fontFamily: "PT Sans, sans-serif",
                                     color: "#7d7f85",
                                     lineHeight: "40px",
                                     marginBottom: "14px",
@@ -829,7 +830,7 @@ export default function CartPage() {
                                               outline: "none",
                                               color: "#7d7f85",
                                               fontSize: "12.5px",
-                                              fontFamily: "Harmonia",
+                                              fontFamily: "PT Sans, sans-serif",
 
                                             }}
                                             value={selectedColor}
@@ -868,7 +869,7 @@ export default function CartPage() {
                                               outline: "none",
                                               color: "#7d7f85",
                                               fontSize: "12.5px",
-                                              fontFamily: "Harmonia",
+                                              fontFamily: "PT Sans, sans-serif",
 
                                             }}
                                             value={diaQColOpt}
@@ -907,7 +908,7 @@ export default function CartPage() {
                                               outline: "none",
                                               color: "#7d7f85",
                                               fontSize: "12.5px",
-                                              fontFamily: "Harmonia",
+                                              fontFamily: "PT Sans, sans-serif",
 
                                             }}
                                             value={cSQopt}
@@ -951,7 +952,7 @@ export default function CartPage() {
                                                 outline: "none",
                                                 color: "#7d7f85",
                                                 fontSize: "12.5px",
-                                                fontFamily: "Harmonia",
+                                                fontFamily: "PT Sans, sans-serif",
 
                                               }}
                                               onChange={(e) =>
@@ -991,7 +992,7 @@ export default function CartPage() {
                                   marginTop: "20px",
                                   color: "#7d7f85",
                                   fontSize: "14px",
-                                  fontFamily: 'Harmonia'
+                                  fontFamily: 'PT Sans, sans-serif'
                                 }}
                               >
                                 Price :{" "}
@@ -1397,7 +1398,7 @@ export default function CartPage() {
                     <div
                       style={{
                         fontSize: "40px",
-                        fontFamily: "Harmonia",
+                        fontFamily: "PT Sans, sans-serif",
                         color: "#7d7f85",
                         lineHeight: "46px",
                         marginBottom: "14px",
@@ -1439,7 +1440,7 @@ export default function CartPage() {
                             <label
                               style={{
                                 fontSize: "12.5px", color: "#7d7f85",
-                                fontFamily: "Harmonia",
+                                fontFamily: "PT Sans, sans-serif",
                               }}
                             >
                               METAL COLOR:
@@ -1450,7 +1451,7 @@ export default function CartPage() {
                                 outline: "none",
                                 color: "#7d7f85",
                                 fontSize: "12.5px",
-                                fontFamily: "Harmonia",
+                                fontFamily: "PT Sans, sans-serif",
 
                               }}
                               value={selectedColor}
@@ -1485,7 +1486,7 @@ export default function CartPage() {
                               style={{
                                 border: "none",
                                 outline: "none",
-                                fontFamily: "Harmonia",
+                                fontFamily: "PT Sans, sans-serif",
                                 color: "#7d7f85",
                                 fontSize: "12.5px",
                               }}
@@ -1521,7 +1522,7 @@ export default function CartPage() {
                             <label
                               style={{
                                 fontSize: "12.5px", color: "#7d7f85",
-                                fontFamily: "Harmonia",
+                                fontFamily: "PT Sans, sans-serif",
                               }}
                             >
                               DAIMOND :
@@ -1531,7 +1532,7 @@ export default function CartPage() {
                                 border: "none",
                                 outline: "none",
                                 color: "#7d7f85",
-                                fontFamily: "Harmonia",
+                                fontFamily: "PT Sans, sans-serif",
 
                                 fontSize: "12.5px",
                               }}
@@ -1563,7 +1564,7 @@ export default function CartPage() {
                               style={{
                                 fontSize: "12.5px",
                                 color: "#7d7f85",
-                                fontFamily: "Harmonia",
+                                fontFamily: "PT Sans, sans-serif",
                                 marginTop: "10px",
                               }}
                             >
@@ -1574,7 +1575,7 @@ export default function CartPage() {
                                 border: "none",
                                 outline: "none",
                                 color: "#7d7f85",
-                                fontFamily: "Harmonia",
+                                fontFamily: "PT Sans, sans-serif",
 
                                 fontSize: "12.5px",
                               }}
@@ -1608,7 +1609,7 @@ export default function CartPage() {
                             <label
                               style={{
                                 fontSize: "12.5px", color: "#7d7f85",
-                                fontFamily: "Harmonia",
+                                fontFamily: "PT Sans, sans-serif",
                               }}
                             >
                               SIZE:
@@ -1618,7 +1619,7 @@ export default function CartPage() {
                                 border: "none",
                                 outline: "none",
                                 color: "#7d7f85",
-                                fontFamily: "Harmonia",
+                                fontFamily: "PT Sans, sans-serif",
                                 fontSize: "12.5px",
                               }}
                               onChange={(e) => handelSize(e.target.value)}
@@ -1652,14 +1653,14 @@ export default function CartPage() {
                       marginTop: "20px",
                       color: "#7d7f85",
                       fontSize: "14px",
-                      fontFamily: "Harmonia",
+                      fontFamily: "PT Sans, sans-serif",
 
                     }}
                   >
                     Price :{" "}
                     <span style={{
                       fontWeight: "500", fontSize: "16px",
-                      fontFamily: "Harmonia",
+                      fontFamily: "PT Sans, sans-serif",
                     }}>
                       {currencySymbol?.Currencysymbol}
                       {(

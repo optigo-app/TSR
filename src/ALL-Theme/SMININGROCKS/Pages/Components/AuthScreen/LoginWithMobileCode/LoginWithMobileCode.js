@@ -117,7 +117,7 @@ export default function LoginWithMobileCode() {
     };
 
     return (
-        <div className='paddingTopMobileSet' style={{ backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
+        <div className='paddingTopMobileSetAuth' style={{ backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
             {isLoading && (
                 <div className="loader-overlay">
                     <CircularProgress className='loadingBarManage' />
@@ -125,14 +125,13 @@ export default function LoginWithMobileCode() {
             )}
             <div>
                 <div className='smling-forgot-main-Color'>
-
                     <div className='smling-forgot-main'>
                         <p style={{
                             textAlign: 'center',
                             paddingBlock: '60px',
                             marginTop: '15px',
                             fontSize: '25px',
-                            fontFamily: 'Harmonia'
+                            fontFamily: 'PT Sans, sans-serif'
                         }}
                             className='AuthScreenMainTitle'
                         >Login With Code</p>
@@ -141,7 +140,7 @@ export default function LoginWithMobileCode() {
                             marginTop: '-80px',
                             fontSize: '15px',
                             color: '#7d7f85',
-                            fontFamily: 'Harmonia'
+                            fontFamily: 'PT Sans, sans-serif'
                         }}
                             className='AuthScreenSubTitle'
                         >Last step! To secure your account, enter the code we just sent to {mobileNo}.</p>
@@ -166,7 +165,7 @@ export default function LoginWithMobileCode() {
 
                             <button className='submitBtnForgot' onClick={handleSubmit}>Login</button>
                             <p style={{ marginTop: '10px' }}>Didn't get the code ? {resendTimer === 0 ? <span style={{ fontWeight: 500, color: 'blue', textDecoration: 'underline', cursor: 'pointer' }} onClick={handleResendCode}>Resend Code</span> : <span>Resend in {Math.floor(resendTimer / 60).toString().padStart(2, '0')}:{(resendTimer % 60).toString().padStart(2, '0')}</span>}</p>
-                            <Button style={{ marginTop: '10px', color: 'gray', fontFamily: 'Harmonia' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
+                            <Button style={{ marginTop: '10px', color: 'gray', fontFamily: 'PT Sans, sans-serif' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
                         </div>
                     </div>
                 </div>

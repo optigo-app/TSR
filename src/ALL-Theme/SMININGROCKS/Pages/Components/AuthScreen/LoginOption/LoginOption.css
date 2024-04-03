@@ -1,29 +1,31 @@
-
-
-.optionLoginMain{
+.optionLoginMain {
     background-color: white;
     width: 30%;
 }
-.loginDailog{
+
+.loginDailog {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10% 0px 8% 0px;
 }
-.smilingLoginOptionMain{
+
+.smilingLoginOptionMain {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.loginDiTile{
+
+.loginDiTile {
     font-size: 25px;
     font-weight: 500;
     margin-top: 25px;
     text-align: center;
-    font-family: 'Harmonia';
+    font-family: 'PT Sans, sans-serif';
 }
-.loginMail{
+
+.loginMail {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -34,13 +36,14 @@
     width: 75%;
     margin-top: 30px;
 }
-.loginMail:hover{
+
+.loginMail:hover {
     background-color: rgba(66, 66, 66, 0.05);
 }
 
 
 
-.loginMobile{
+.loginMobile {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,18 +54,40 @@
     margin-top: 25px;
     width: 75%;
 }
-.loginMobile:hover{
+
+.loginMobile:hover {
     background-color: rgba(66, 66, 66, 0.05);
+}
+
+
+
+@media screen and (max-width: 1450px) {
+
+    .paddingTopMobileSetAuth {}
+
+    .optionLoginMain {
+        width: 50%;
+    }
 }
 
 @media screen and (max-width: 1150px) {
 
-    .loginMail{
-        width: 50%!important;
+
+    .loginMail {
+        width: 50% !important;
     }
 
-    .loginMobile{
-        width: 50%!important;
+    .loginMobile {
+        width: 50% !important;
+    }
+
+    .optionLoginMain {
+        width: 80%;
+    }
+
+
+    .loginDailog {
+        padding-top: 20%;
     }
 }
 
@@ -70,35 +95,46 @@
 
 
 @media screen and (max-width: 900px) {
-    .loginDailog{
-        margin-inline: 2%!important;
+    .loginDailog {
+        margin-inline: 2% !important;
     }
 
 }
-    @media screen and (max-width: 700px) {
 
-    .loginMail{
-        width: 80%!important;
+@media screen and (max-width: 700px) {
+
+    .loginMail {
+        width: 80% !important;
     }
 
-    .loginMobile{
-        width: 80%!important;
+    .loginMobile {
+        width: 80% !important;
     }
 
-    .loginDiTile{
+    .loginDiTile {
         font-size: 25px;
     }
 
+    .loginDailog {
+        padding-top: 35%;
+    }
+
 }
 
 
+@media screen and (max-width: 500px) {
+    .loginDailog {
+        padding-top: 45%;
+    }
+}
+
 @media screen and (max-width: 400px) {
 
-    .loginMail{
-        width: 95%!important;
+    .loginMail {
+        width: 95% !important;
     }
 
-    .loginMobile{
-        width: 95%!important;
+    .loginMobile {
+        width: 95% !important;
     }
 }
