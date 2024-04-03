@@ -22,7 +22,7 @@
 
 .prodTitleLine {
     font-size: 40px;
-    font-family: "Harmonia";
+    font-family: "PT Sans, sans-serif";
     color: #7d7f85;
     line-height: 40px;
     margin-bottom: 14px;
@@ -133,6 +133,7 @@
     border: 1px solid black;
     background-color: white;
     cursor: pointer;
+    font-family: 'PT Sans, sans-serif';
 }
 
 .browseBtnMore:hover {
@@ -150,7 +151,7 @@
     border-left: none;
     height: 24px;
     border-bottom: 1px solid lightgray;
-    font-family: 'Harmonia';
+    font-family: "PT Sans, sans-serif";
 
 }
 
@@ -161,7 +162,7 @@
     border: none;
     outline: none;
     font-weight: 500;
-    font-family: 'Harmonia';
+    font-family: "PT Sans, sans-serif";
 }
 
 .SmilingCustomzeSaveBtn {
@@ -179,7 +180,7 @@
 .cartPageDropdownLabel {
     font-size: 12.5px;
     color: #7d7f85;
-    font-family: 'Harmonia' !important;
+    font-family: "PT Sans, sans-serif" !important;
 
 }
 
@@ -197,7 +198,7 @@
     font-size: 14px;
     outline: none;
     font-weight: 500;
-    font-family: 'Harmonia';
+    font-family: "PT Sans, sans-serif";
 }
 
 

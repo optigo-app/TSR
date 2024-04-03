@@ -225,25 +225,22 @@ export default function Register() {
   };
 
   return (
-    <div className='paddingTopMobileSet' style={{ backgroundColor: '#c0bbb1', paddingTop: '110px' }}>
+    <div className='paddingTopMobileSetAuth' style={{ paddingTop: '110px', backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
       {isLoading && (
         <div className="loader-overlay">
           <CircularProgress className='loadingBarManage' />
         </div>
       )}
-      <div style={{ backgroundColor: '#c0bbb1' }}>
-        <div className='smling-register-main'>
+      <div className='smling-forgot-main-Color' style={{padding: '5% 0px 5% 0px'}}>
+        <div className='smling-forgot-main'>
           <p style={{
             textAlign: 'center',
-            paddingBlock: '60px',
             marginTop: '15px',
-            fontSize: '40px',
-            color: '#7d7f85',
-            fontFamily: 'FreightDispProBook-Regular,Times New Roman,serif'
+            fontSize: '25px',
+            fontFamily: 'PT Sans, sans-serif'
           }}
             className='AuthScreenRegisterMainTitle'
           >Register</p>
-
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <TextField
               autoFocus
@@ -373,14 +370,11 @@ export default function Register() {
               <input type='checkbox' />
               <p style={{ margin: '5px' }}>Subscribe to our newsletter</p>
             </div> */}
-            <Button style={{ marginTop: '10px', color: 'gray' }} onClick={() => navigation('/LoginOption')}>BACK</Button>
+            <Button style={{ marginTop: '10px', color: 'gray' , fontFamily:'PT Sans, sans-serif' }} onClick={() => navigation('/LoginOption')}>BACK</Button>
           </div>
-          <Footer />
         </div>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
-        <p style={{ margin: '0px', fontWeight: 500, width: '100px', color: 'white', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
-      </div>
+      <Footer />
     </div>
   );
 }

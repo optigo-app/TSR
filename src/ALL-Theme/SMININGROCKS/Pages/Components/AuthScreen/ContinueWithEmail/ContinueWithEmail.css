@@ -30,7 +30,7 @@
     font-weight: 600!important;
     letter-spacing: 1px;
     transition: all 0.5s ease;
-    font-family: 'Harmonia';
+    font-family: 'PT Sans, sans-serif';
     cursor: pointer;
     background-color: white;
 }
@@ -74,7 +74,21 @@
     margin-top: 10px;
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1500px) {
+    .smling-forgot-main{
+        width: 50%;
+    }
+}
+@media screen and (max-width: 1200px) {
+
+    .smling-forgot-main-Color{
+        padding-top: 20%;
+    }
+    .smling-forgot-main{
+        width: 70%;
+    }
+}
+    @media screen and (max-width: 950px) {
     .AuthScreenMainTitle {
         font-size: 25px !important;
         padding-bottom: 50px !important;
@@ -98,9 +112,16 @@
     }
 
     .submitBtnForgot {
-        width: 50%;
+        width: 90%;
         height: 50px !important;
 
+    }
+
+    .smling-forgot-main-Color{
+        padding-top: 30%;
+    }
+    .smling-forgot-main{
+        width: 85%;
     }
 
 }
@@ -108,7 +129,7 @@
 @media screen and (max-width: 500px) {
 
     .submitBtnForgot {
-        width: 70%;
+        width: 90%;
         height: 40px !important;
     }
 

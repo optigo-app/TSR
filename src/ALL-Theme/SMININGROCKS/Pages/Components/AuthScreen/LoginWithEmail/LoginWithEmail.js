@@ -57,7 +57,7 @@ export default function LoginWithEmail() {
     }
 
     useEffect(() => {
-        const storedEmail = location.state?.email;;
+        const storedEmail = location.state?.email;
         if (storedEmail) setEmail(storedEmail);
     }, []);
 
@@ -134,8 +134,7 @@ export default function LoginWithEmail() {
 
     const handleNavigation = () => {
         localStorage.setItem('LoginCodeEmail', 'true');
-        localStorage.setItem('registerEmail', email);
-        navigation('/LoginWithEmailCode');
+        navigation('/LoginWithEmailCode', { state: { email: location.state?.email } });
     }
 
     const handleForgotPassword = async () => {
@@ -170,7 +169,7 @@ export default function LoginWithEmail() {
         }
     }
     return (
-        <div className='paddingTopMobileSet' style={{ backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
+        <div className='paddingTopMobileSetAuth' style={{ backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
             <ToastContainer />
             {isLoading && (
                 <div className="loader-overlay">
@@ -185,7 +184,7 @@ export default function LoginWithEmail() {
                             paddingBlock: '60px',
                             marginTop: '15px',
                             fontSize: '25px',
-                            fontFamily: 'Harmonia'
+                            fontFamily: 'PT Sans, sans-serif'
                         }}
                             className='AuthScreenMainTitle'
                         >Login With Password</p>
@@ -194,7 +193,7 @@ export default function LoginWithEmail() {
                             marginTop: '-80px',
                             fontSize: '15px',
                             color: '#7d7f85',
-                            fontFamily: 'Harmonia'
+                            fontFamily: 'PT Sans, sans-serif'
                         }}
                             className='AuthScreenSubTitle'
                         >using {email}</p>
@@ -234,12 +233,12 @@ export default function LoginWithEmail() {
                             />
 
                             <button className='submitBtnForgot' onClick={handleSubmit}>Login</button>
-                            <Button style={{ marginTop: '10px', color: '#424242' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
+                            <Button style={{ marginTop: '10px', color: '#424242', fontFamily: 'PT Sans, sans-serif' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
 
                             <button type='submit' className='submitBtnForgot' onClick={handleNavigation}>Login With a Code instead on email</button>
-                            <p style={{ textAlign: 'center', fontFamily: 'Harmonia', fontSize: '14px' }}>Go passwordless! we'll send you an email.</p>
+                            <p style={{ textAlign: 'center', fontFamily: 'PT Sans, sans-serif', fontSize: '14px' }}>Go passwordless! we'll send you an email.</p>
 
-                            <p style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline', paddingBottom: '50px' }} onClick={handleForgotPassword}>Forgot Password ?</p>
+                            <p style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline', paddingBottom: '50px', fontFamily: 'PT Sans, sans-serif' }} onClick={handleForgotPassword}>Forgot Password ?</p>
                         </div>
                     </div>
                 </div>

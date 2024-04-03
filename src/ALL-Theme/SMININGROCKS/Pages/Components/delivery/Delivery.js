@@ -559,8 +559,8 @@ export default function Delivery() {
             <div className='smilingDelivery'>
                 <div className='smilingOrderMain'>
                     <div className='smilingdeliverBox1'>
-                        <p style={{ fontSize: '30px', fontWeight: 500, color: 'gray', fontFamily: 'Harmonia' }}>Delivery</p>
-                        <p style={{fontFamily: 'Harmonia'}}>Order Will be delivered to selected address</p>
+                        <p style={{ fontSize: '30px', fontWeight: 500, color: 'gray', fontFamily: 'PT Sans, sans-serif' }}>Delivery</p>
+                        <p style={{fontFamily: 'PT Sans, sans-serif'}}>Order Will be delivered to selected address</p>
                         <div className='smilingDeliveyAddressMain' style={{ display: 'flex', flexWrap: 'wrap' }}>
                             {
                                 addressData?.map((item, index) => (
@@ -584,7 +584,7 @@ export default function Delivery() {
                                                     border: '1px solid #999',
                                                 }}
                                             /> */}
-                                            {item.isdefault === 1 && <p style={{ margin: '0px 0px 0px 5px' , backgroundColor: 'blue', fontWeight: 500,borderRadius:'5px', padding: '0px 10px 0px 10px', color: 'white' }}>Selected</p>}
+                                            {item.isdefault === 1 && <p style={{ margin: '0px 0px 0px 5px' , backgroundColor: 'blue', fontWeight: 500,borderRadius:'5px', padding: '0px 10px 0px 10px', color: 'white', fontFamily: 'PT Sans, sans-serif' }}>Selected</p>}
                                             {/* {item.isdefault !== 1 && <p style={{ margin: '0px 0px 0px 5px' , backgroundColor: 'blue', fontWeight: 500,borderRadius:'5px', padding: '0px 10px 0px 10px', color: 'white' }}>Click Select</p>} */}
                                         </div>
                                         <p className='addressData' style={{ margin: '0px 0px 5px 0px' }}>{item.shippingfirstname} {item.shippinglastname}</p>
