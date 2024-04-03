@@ -1907,7 +1907,7 @@ const ProductList = () => {
                 {/* for mobile */}
                 <div className="smilingMobileProductListSideBar">
 
-                  <hr style={{ marginTop: "0px" }} />
+                  {/* <hr style={{ marginTop: "0px" }} /> */}
                   <div className="filterListMobileData" style={{ display: "flex", marginInline: "15px" }}>
                     <div style={{ width: "49%" }} onClick={toggleDrawerOverlay}>
 

@@ -264,7 +264,7 @@
 }
 
 .main-ProdcutListConatiner {
-    font-family: "PT Sans, sans-serif";
+  font-family: "PT Sans, sans-serif";
 }
 .main-ProdcutListConatiner2ImageShow{
   width: 40%;
@@ -423,6 +423,7 @@
 .smilingFilterweb {
   display: none !important;
 }
+
 /* for select option sort dropdown */
 .custom-select {
   width: 300px;
@@ -485,7 +486,7 @@
 }
 
 .select-dropdown li:hover,
-.select-dropdown input:checked ~ label {
+.select-dropdown input:checked~label {
   background-color: #f2f2f2;
 }
 
@@ -584,21 +585,83 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (min-width: 426px) and (max-width: 775px) {
+  .smilingAllProductDataMainMobile {
+    gap: 2px;
+  }
+
+  .main-ProdcutListConatiner {
+    width: 49%;
+  }
+  .background-image-container{
+    height: 290px;
+  }
+  .listing-details {
+    padding: 12px;
+  }
+
   .smilingAllProductDataMainMobile {
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: row !important;
+    flex-wrap: wrap;
     margin: 10px;
   }
 
+  .smilingProductMain {
+    margin-inline: 0%;
+  }
+
+  .paddingTopMobileSet {
+    padding-top: 1px !important;
+    margin: 136px 0px 0px 0px !important;
+  }
+
+  .listing-card {
+    width: 100%;
+  }
+
+  .property-type {
+    width: 350px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .price {
+    font-size: 1.4rem;
+  }
+  .address {
+    font-size: 0.95rem;
+  }
+  .listing-features {
+    padding: 7px;
+    font-size: 13.5px;
+  }
   .filterMobileDivcontainer {
     display: flex;
     border: 1px solid #d9d9d9;
     border-radius: 5px;
     overflow: hidden;
     width: 310px;
-    /* justify-content: center; */
-    margin: 20px 10px 0px 10px;
+    margin: 0px 10px 0px 10px;
+  }
+  .bg-image {
+    margin: 10px 38px 10px 25px;
+  }
+  .select-button {
+    font-size: 12.5px;
+  }
+
+  .select-button {
+    font-size: 12.5px;
+  }
+
+  .custom-select {
+    width: 85px;
+  }
+  .select-dropdown{
+    margin-top: 6px;
   }
 
   .part {
@@ -633,13 +696,19 @@
   background-color: "#7f7d85";
 }
 
-@media screen and (min-width: 321px) and (max-width: 425px) {
+@media screen and (min-width: 376px) and (max-width: 425px) {
   .smilingAllProductDataMainMobile {
     gap: 2px;
   }
 
   .main-ProdcutListConatiner {
-    width: 50%;
+    width: 49%;
+  }
+  .background-image-container{
+    height: 210px;
+  }
+  .listing-details {
+    padding: 8px;
   }
 
   .smilingAllProductDataMainMobile {
@@ -655,32 +724,57 @@
 
   .paddingTopMobileSet {
     padding-top: 1px !important;
-    margin: 120px 0px 0px 0px !important;
+    margin: 136px 0px 0px 0px !important;
   }
 
   .listing-card {
     width: 100%;
-    max-width: 100%;
   }
 
   .property-type {
-    width: 290px;
+    width: 192px;
+    font-size: 0.675rem;
+    font-weight: 700;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
+  .price {
+    font-size: 1.2rem;
+  }
+  .address {
+    font-size: 0.75rem;
+  }
+  .listing-features {
+    padding: 5px;
+    font-size: 10.5px;
+  }
   .filterMobileDivcontainer {
     display: flex;
     border: 1px solid #d9d9d9;
     border-radius: 5px;
     overflow: hidden;
-    width: 310px;
-    margin: 20px 10px 0px 10px;
+    width: 355px;
+    margin: 0px 10px 10px 10px;
+  }
+  .bg-image {
+    margin: 10px 38px 10px 25px;
   }
   .select-button {
     font-size: 12.5px;
   }
+
+  .select-button {
+    font-size: 12.5px;
+  }
+
+  .custom-select {
+    width: 85px;
+  }
+  .select-dropdown{
+    margin-top: 6px;
+  }
+
   .part {
     padding: 5px;
     display: flex;
@@ -709,21 +803,34 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 375px) {
   .smilingProductMain {
     margin-inline: 0%;
   }
+
   .paddingTopMobileSet {
     padding-top: 1px !important;
     margin: 140px 0px 0px 0px !important;
   }
+
   .filterDivider {
     margin-top: -9px !important;
     height: 30px !important;
   }
+  .bg-image {
+    margin: 10px 25px 10px 25px;
+  }
   .select-button {
     font-size: 12.5px;
   }
+
+  .custom-select {
+    width: 85px;
+  }
+  .select-dropdown{
+    margin-top: 6px;
+  }
+
   .listing-card {
     width: 311px;
     max-width: 311px;
@@ -736,13 +843,17 @@
     text-overflow: ellipsis;
   }
 
+  .filterListMobileData{
+    margin-inline: 0;
+  }
+
   .filterMobileDivcontainer {
     display: flex;
     border: 1px solid #d9d9d9;
     border-radius: 5px;
     overflow: hidden;
     width: 310px;
-    margin: 20px 10px 0px 10px;
+    margin: 0px 10px 10px 10px;
   }
 
   .part {
