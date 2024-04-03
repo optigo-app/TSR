@@ -83,6 +83,7 @@ const ProductList = () => {
 
   const [hoverProductImageShow, setHoverProductImageShow] = useState(false);
   const [isColorWiseImageShow, setIsColorWiseImage] = useState('');
+  const [isShowfilter, setIsShowFilter] = useState(true);
 
   const navigate = useNavigate();
 
@@ -108,7 +109,7 @@ const ProductList = () => {
   const [isMetalTCShow, setIsMetalTCShow] = useState('');
   const [isPriceShow, setIsPriceShow] = useState('');
   const [updatedColorImage, setUpdateColorImage] = useState({});
-  const [isShowColorImg, setIsColorImg] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     setNewProData(getSearchData)
@@ -1343,7 +1344,7 @@ const ProductList = () => {
 
   };
 
-  // console.log("hovwer---", hoveredImageUrls);
+  console.log("hovwer---", hoveredImageUrls);
 
   const handleMouseLeave = (index) => {
     setHoveredImageUrls(prevState => {
@@ -1358,35 +1359,51 @@ const ProductList = () => {
     return path.replace(/\\/g, '/');
   }
 
-  const handleColorSelection = (product, index, color) => {
-    console.log('index--', index);
-    console.log('product--', product);
-    console.log('color--', color);
-    let uploadPath = localStorage.getItem('UploadLogicalPath');
+  function checkImageAvailability(imageUrl) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = imageUrl;
+    });
+  }
+
+  const handleColorSelection = async (product, index, color) => {
+    const uploadPath = localStorage.getItem('UploadLogicalPath');
     const storedDataAll = localStorage.getItem('storeInit');
     const data = JSON.parse(storedDataAll);
     const colorWiseImageData = JSON.parse(localStorage.getItem('colorDataImages'));
     const productAutoCode = product?.autocode;
     const productColorName = color;
-    console.log("coor--", productColorName);
+    console.log("color--", productColorName);
 
     if (!colorWiseImageData) {
       return [];
     }
 
     if (data.IsColorWiseImages === 1) {
-      const matchingData = [];
-      colorWiseImageData.forEach(imageDataItem => {
-        if (productAutoCode == imageDataItem.autocode && productColorName == imageDataItem.colorname) {
-          matchingData.push({
-            imagePath: uploadPath + '/' + data.ukey + convertPath(imageDataItem.imagepath)
-          });
-        }
+      const matchingData = colorWiseImageData.filter(imageDataItem => (
+        productAutoCode === imageDataItem.autocode && productColorName === imageDataItem.colorname
+      ));
+
+      const checkAvailabilityPromises = matchingData.map(async (imageDataItem) => {
+        const imagePath = uploadPath + '/' + data.ukey + convertPath(imageDataItem.imagepath);
+        const isAvailable = await checkImageAvailability(imagePath);
+        console.log('isAvailable---', isAvailable);
+        return { imagePath: imagePath.replace(/ /g, "%20"), isAvailable };
       });
-      let imageData = matchingData[0]
-      console.log("image Data-", imageData);
-      setUpdateColorImage({ [index]: imageData?.imagePath.replace(/ /g, "%20") });
-      return imageData;
+
+      const imageData = await Promise.all(checkAvailabilityPromises);
+      const availableImage = imageData.find(image => image.isAvailable);
+
+      if (availableImage) {
+        const formedImgData = { [index]: availableImage.imagePath };
+        setUpdateColorImage(formedImgData);
+        return availableImage;
+      } else {
+        console.log('No available image found');
+        return [];
+      }
     } else {
       setUpdateColorImage({});
       return [];
@@ -1394,6 +1411,10 @@ const ProductList = () => {
   };
   // console.log('updated image---', updatedColorImage);
 
+
+  const handleFilterShow = () => {
+    setIsShowFilter(!isShowfilter)
+  }
 
 
   const [state, setState] = React.useState({
@@ -1577,15 +1598,26 @@ const ProductList = () => {
   );
 
   const [selectedSortOption, setSelectedSortOption] = useState('None');
+  const [selectedOptionData, setSelectedOptionData] = useState(null);
+  const options = [
+    { label: 'Recommended' },
+    { label: 'New' },
+    { label: 'In stock' },
+    { label: 'PRICE LOW TO HIGH' },
+    { label: 'PRICE HIGH TO LOW' },
+  ];
 
-  // useEffect(() => {
-  //   const data = JSON.parse(localStorage.getItem("allproductlist"));
-  //   setProductApiData2(data);
-  // }, []);
+  const toggleDropdown = () => {
+    setIsActive(!isActive);
+  };
 
-  const handleSortChange = (event) => {
-    const selectedOption = event.target.value;
-    setSelectedSortOption(selectedOption);
+  const handleSortChange = (option) => {
+    debugger
+    console.log('event---', option?.label);
+    const selectedOption = option?.label;
+    setSelectedOptionData(option?.label);
+    setIsActive(false);
+    setSelectedSortOption(option?.label);
     let sortedData = [...ProductApiData2];
 
     if (selectedOption === 'PRICE HIGH TO LOW') {
@@ -1597,10 +1629,6 @@ const ProductList = () => {
     }
     setProductApiData2(sortedData);
   };
-
-
-
-  console.log('ddddddddddddd', ProductApiData2);
 
   return (
     <div id="top">
@@ -1630,16 +1658,33 @@ const ProductList = () => {
             </div>
             <div className="filterDivcontainer">
               <div className="part" style={{ flex: '20%' }}>
-                <div className="part-content">
-                  Hide Filter
+                <div className="part-content" onClick={handleFilterShow}>
+                  {isShowfilter ? "Hide Filter" : "Show Filter"}
                   <FilterListIcon />
                 </div>
               </div>
               <div className="divider"></div>
               <div className="part" style={{ flex: '20%' }}>
                 <div className="part-content">
-                  Featured
-                  <SortIcon />
+                  <div className={`custom-select ${isActive ? 'active' : ''}`}>
+                    <button
+                      className="select-button"
+                      onClick={toggleDropdown}
+                      aria-haspopup="listbox"
+                      aria-expanded={isActive}
+                    >
+                      <span className="selected-value">{selectedOptionData ? selectedOptionData : 'Featured'}
+                        <SortIcon />
+                      </span>
+                    </button>
+                    <ul className="select-dropdown">
+                      {options.map((option, index) => (
+                        <li key={index} role="option" onClick={() => handleSortChange(option)}>
+                          <label htmlFor={`option-${index}`}>{option.label}</label>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
               <div className="divider"></div>
@@ -1655,193 +1700,195 @@ const ProductList = () => {
                 className="smilingProductSubMain"
                 style={{ width: "100%", display: "flex" }}
               >
-                <div className="smilingWebProductListSideBar">
-                  <ul style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '0px 0px 0px 28px' }}>
-                    <li className="finejwelery me-4" id="finejwelery">Filters</li>
-                    <li className="finejwelery" id="finejwelery" onClick={() => handlePageReload()}>All Jwelery</li>
-                  </ul>
-                  <div>
-                    {NewFilterData().map((ele, index) => (
-                      <>
-                        <Accordion
-                          elevation={0}
-                          sx={{
-                            borderBottom: "1px solid #ededed",
-                            borderRadius: 0,
-                            marginLeft: "28px",
-                            "&.Mui-expanded": {
-                              marginLeft: "28px",
-                            },
-                            "&.MuiPaper-root.MuiAccordion-root:last-of-type": {
-                              borderBottomLeftRadius: "0px",
-                              borderBottomRightRadius: "0px",
-                            },
-                            "&.MuiPaper-root.MuiAccordion-root:before": {
-                              background: "none",
-                            },
-                          }}
-                        >
-                          <AccordionSummary
-                            expandIcon={<ExpandMoreIcon sx={{ width: "20px" }} />}
-                            aria-controls="panel1-content"
-                            id="panel1-header"
+                {isShowfilter && (
+                  <div className="smilingWebProductListSideBar">
+                    <ul style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '0px 0px 0px 28px' }}>
+                      <li className="finejwelery me-4" id="finejwelery">Filters</li>
+                      <li className="finejwelery" id="finejwelery" onClick={() => handlePageReload()}>All Jwelery</li>
+                    </ul>
+                    <div>
+                      {NewFilterData().map((ele, index) => (
+                        <>
+                          <Accordion
+                            elevation={0}
                             sx={{
-                              color: "#7f7d85",
+                              borderBottom: "1px solid #ededed",
                               borderRadius: 0,
-
-                              "&.MuiAccordionSummary-root": {
-                                padding: 0,
+                              marginLeft: "28px",
+                              "&.Mui-expanded": {
+                                marginLeft: "28px",
+                              },
+                              "&.MuiPaper-root.MuiAccordion-root:last-of-type": {
+                                borderBottomLeftRadius: "0px",
+                                borderBottomRightRadius: "0px",
+                              },
+                              "&.MuiPaper-root.MuiAccordion-root:before": {
+                                background: "none",
                               },
                             }}
                           >
-                            <span
-                              className="filtercategoryLable"
-                            // style={{
-                            //   fontFamily: "Harmonia, sans-serif",
-                            //   fontSize: "13px",
-                            //   fontWeight:'500px',
-                            //   color:'#424242'
-                            // }}
+                            <AccordionSummary
+                              expandIcon={<ExpandMoreIcon sx={{ width: "20px" }} />}
+                              aria-controls="panel1-content"
+                              id="panel1-header"
+                              sx={{
+                                color: "#7f7d85",
+                                borderRadius: 0,
+
+                                "&.MuiAccordionSummary-root": {
+                                  padding: 0,
+                                },
+                              }}
                             >
-                              {ele.label}
-                            </span>
-                          </AccordionSummary>
-                          <AccordionDetails
-                            sx={{
-                              display: "flex",
-                              flexDirection: "column",
-                              gap: "4px",
-                            }}
-                            className="filterListData"
-                          >
-                            {ele.label === "PRICE" &&
-                              <div>
-                                <Slider
-                                  className='netWtSecSlider'
-                                  getAriaLabel={() => 'Minimum distance'}
-                                  value={value1}
-                                  min={minPrice}
-                                  max={maxPrice}
-                                  size="small"
-                                  onChange={handlePriceChange}
-                                  valueLabelDisplay="auto"
-                                  getAriaValueText={valuetext}
-                                  disableSwap
-                                />
-                                <div className="d-flex w-100 justify-content-between align-items-center mt-1">
-                                  <input value={value1[0]} className="minmaxvalpl" disabled />
-                                  <input value={value1[1]} className="minmaxvalpl" disabled />
-                                </div>
-                              </div>}
-
-                            {ele.label === "NETWT" &&
-                              <div>
-                                <Slider
-                                  className='netWtSecSlider'
-                                  getAriaLabel={() => 'Minimum distance'}
-                                  value={value2}
-                                  min={minNetwt}
-                                  max={maxNetwt}
-                                  size="small"
-                                  onChange={handleNetWtChange}
-                                  valueLabelDisplay="auto"
-                                  getAriaValueText={valuetext}
-                                  disableSwap
-                                />
-                                <div className="d-flex w-100 justify-content-between align-items-center mt-1">
-                                  <input value={value2[0]} className="minmaxvalpl" disabled />
-                                  <input value={value2[1]} className="minmaxvalpl" disabled />
-                                </div>
-                              </div>
-                            }
-
-                            {ele.label === "GROSSWT" &&
-                              <div>
-                                <Slider
-                                  className='netWtSecSlider'
-                                  getAriaLabel={() => 'Minimum distance'}
-                                  value={value3}
-                                  min={minGrosswt}
-                                  max={maxGrosswt}
-                                  size="small"
-                                  onChange={handlegrossWtChange}
-                                  valueLabelDisplay="auto"
-                                  getAriaValueText={valuetext}
-                                  disableSwap
-                                />
-                                <div className="d-flex w-100 justify-content-between align-items-center mt-1">
-                                  <input value={value3[0]} className="minmaxvalpl" disabled />
-                                  <input value={value3[1]} className="minmaxvalpl" disabled />
-                                </div>
-                              </div>
-                            }
-
-                            {ele.label === "DIAMONDWT" &&
-                              <div>
-                                <Slider
-                                  className='netWtSecSlider'
-                                  getAriaLabel={() => 'Minimum distance'}
-                                  value={value4}
-                                  min={minDiamondWt}
-                                  max={maxDiamondWt}
-                                  size="small"
-                                  onChange={handleDiamondChange}
-                                  valueLabelDisplay="auto"
-                                  getAriaValueText={valuetext}
-                                  disableSwap
-                                />
-                                <div className="d-flex w-100 justify-content-between align-items-center mt-1">
-                                  <input value={value4[0]} className="minmaxvalpl" disabled />
-                                  <input value={value4[1]} className="minmaxvalpl" disabled />
-                                </div>
-                              </div>
-                            }
-
-                            {ele.filterList.map((flist, i) => (
-                              <div
-                                style={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "space-between",
-                                  gap: "12px",
-                                }}
-                                key={i}
+                              <span
+                                className="filtercategoryLable"
+                              // style={{
+                              //   fontFamily: "Harmonia, sans-serif",
+                              //   fontSize: "13px",
+                              //   fontWeight:'500px',
+                              //   color:'#424242'
+                              // }}
                               >
-                                <small
-                                  className="sidebarfilterText"
-                                // style={{
-                                //   fontFamily: "TT Commons, sans-serif",
-                                //   color: "#7f7d85",
-                                //   textTransform: "lowercase",
-                                // }}
+                                {ele.label}
+                              </span>
+                            </AccordionSummary>
+                            <AccordionDetails
+                              sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "4px",
+                              }}
+                              className="filterListData"
+                            >
+                              {ele.label === "PRICE" &&
+                                <div>
+                                  <Slider
+                                    className='netWtSecSlider'
+                                    getAriaLabel={() => 'Minimum distance'}
+                                    value={value1}
+                                    min={minPrice}
+                                    max={maxPrice}
+                                    size="small"
+                                    onChange={handlePriceChange}
+                                    valueLabelDisplay="auto"
+                                    getAriaValueText={valuetext}
+                                    disableSwap
+                                  />
+                                  <div className="d-flex w-100 justify-content-between align-items-center mt-1">
+                                    <input value={value1[0]} className="minmaxvalpl" disabled />
+                                    <input value={value1[1]} className="minmaxvalpl" disabled />
+                                  </div>
+                                </div>}
+
+                              {ele.label === "NETWT" &&
+                                <div>
+                                  <Slider
+                                    className='netWtSecSlider'
+                                    getAriaLabel={() => 'Minimum distance'}
+                                    value={value2}
+                                    min={minNetwt}
+                                    max={maxNetwt}
+                                    size="small"
+                                    onChange={handleNetWtChange}
+                                    valueLabelDisplay="auto"
+                                    getAriaValueText={valuetext}
+                                    disableSwap
+                                  />
+                                  <div className="d-flex w-100 justify-content-between align-items-center mt-1">
+                                    <input value={value2[0]} className="minmaxvalpl" disabled />
+                                    <input value={value2[1]} className="minmaxvalpl" disabled />
+                                  </div>
+                                </div>
+                              }
+
+                              {ele.label === "GROSSWT" &&
+                                <div>
+                                  <Slider
+                                    className='netWtSecSlider'
+                                    getAriaLabel={() => 'Minimum distance'}
+                                    value={value3}
+                                    min={minGrosswt}
+                                    max={maxGrosswt}
+                                    size="small"
+                                    onChange={handlegrossWtChange}
+                                    valueLabelDisplay="auto"
+                                    getAriaValueText={valuetext}
+                                    disableSwap
+                                  />
+                                  <div className="d-flex w-100 justify-content-between align-items-center mt-1">
+                                    <input value={value3[0]} className="minmaxvalpl" disabled />
+                                    <input value={value3[1]} className="minmaxvalpl" disabled />
+                                  </div>
+                                </div>
+                              }
+
+                              {ele.label === "DIAMONDWT" &&
+                                <div>
+                                  <Slider
+                                    className='netWtSecSlider'
+                                    getAriaLabel={() => 'Minimum distance'}
+                                    value={value4}
+                                    min={minDiamondWt}
+                                    max={maxDiamondWt}
+                                    size="small"
+                                    onChange={handleDiamondChange}
+                                    valueLabelDisplay="auto"
+                                    getAriaValueText={valuetext}
+                                    disableSwap
+                                  />
+                                  <div className="d-flex w-100 justify-content-between align-items-center mt-1">
+                                    <input value={value4[0]} className="minmaxvalpl" disabled />
+                                    <input value={value4[1]} className="minmaxvalpl" disabled />
+                                  </div>
+                                </div>
+                              }
+
+                              {ele.filterList.map((flist, i) => (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                    gap: "12px",
+                                  }}
+                                  key={i}
                                 >
-                                  {flist}
-                                </small>
-                                <Checkbox
-                                  name={`checkbox${index + 1}${i + 1}`}
-                                  checked={
-                                    filterChecked[`checkbox${index + 1}${i + 1}`]
-                                      ?.checked
-                                  }
+                                  <small
+                                    className="sidebarfilterText"
                                   // style={{
+                                  //   fontFamily: "TT Commons, sans-serif",
                                   //   color: "#7f7d85",
-                                  //   padding: 0,
-                                  //   width: "10px",
+                                  //   textTransform: "lowercase",
                                   // }}
-                                  className="filterCheckBox"
-                                  onClick={(e) =>
-                                    handleCheckboxChange(e, ele, flist)
-                                  }
-                                  size="small"
-                                />
-                              </div>
-                            ))}
-                          </AccordionDetails>
-                        </Accordion>
-                      </>
-                    ))}
+                                  >
+                                    {flist}
+                                  </small>
+                                  <Checkbox
+                                    name={`checkbox${index + 1}${i + 1}`}
+                                    checked={
+                                      filterChecked[`checkbox${index + 1}${i + 1}`]
+                                        ?.checked
+                                    }
+                                    // style={{
+                                    //   color: "#7f7d85",
+                                    //   padding: 0,
+                                    //   width: "10px",
+                                    // }}
+                                    className="filterCheckBox"
+                                    onClick={(e) =>
+                                      handleCheckboxChange(e, ele, flist)
+                                    }
+                                    size="small"
+                                  />
+                                </div>
+                              ))}
+                            </AccordionDetails>
+                          </Accordion>
+                        </>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                )}
                 {/* for mobile */}
                 <div className="smilingMobileProductListSideBar">
 
@@ -1850,13 +1897,52 @@ const ProductList = () => {
                     <div style={{ width: "49%" }} onClick={toggleDrawerOverlay}>
 
                       <Drawer
-                        anchor="bottom"
+                        anchor="left"
                         open={isOpenDetail}
                         onClose={toggleDetailDrawer}
                       >
-                        {list("bottom")}
+                        {list("left")}
                       </Drawer>
-                      <p
+                      <div className="filterMobileDivcontainer">
+                        <div className="part firstfilteDiv" style={{ flex: '20%' }}>
+                          <div className="part-content"  onClick={toggleDetailDrawer}>
+                            Filter
+                            <FilterListIcon />
+                          </div>
+                        </div>
+                        <div className="divider"></div>
+                        <div className="part secondfilteDiv" style={{ flex: '20%' }}>
+                          <div className="part-content">
+                            <div className={`custom-select ${isActive ? 'active' : ''}`}>
+                              <button
+                                className="select-button"
+                                onClick={toggleDropdown}
+                                aria-haspopup="listbox"
+                                aria-expanded={isActive}
+                              >
+                                <span className="selected-value">{selectedOptionData ? selectedOptionData : 'Featured'}
+                                  <SortIcon />
+                                </span>
+                              </button>
+                              <ul className="select-dropdown">
+                                {options.map((option, index) => (
+                                  <li key={index} role="option" onClick={() => handleSortChange(option)}>
+                                    <label htmlFor={`option-${index}`}>{option.label}</label>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="divider"></div>
+                        <div className="part thirdfilteDiv" style={{ flex: '80%', justifyContent: 'end' }}>
+                          <div className="part-content">
+                            <GridViewIcon />
+                            <AppsIcon />
+                          </div>
+                        </div>
+                      </div>
+                      {/* <p
                         className="filterTextData"
                         style={{
                           display: "flex",
@@ -1907,18 +1993,18 @@ const ProductList = () => {
                         <option value="None">In stock</option>
                         <option value="PRICE HIGH TO LOW">PRICE HIGH TO LOW</option>
                         <option value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</option>
-                      </select>
+                      </select> */}
                     </div>
                   </div>
                 </div>
                 <div
                   style={{
-                    width: "80%",
+                    width: isShowfilter ? "80%" : "100%",
                     display: "flex",
                     flexDirection: 'column',
                     justifyContent: "center",
                     alignItems: "center",
-                    margin: "40px 50px 0px 0px",
+                    margin: "40px 0px 0px 0px",
                   }}
                   className="smilingProductImageMain"
                   id="smilingProductImageMain"
