@@ -520,26 +520,28 @@
 
 @media screen and (max-width:1650px) {
 
-    .showShopByDataImg1{
-        height: 200px!important;
-        width: 250px!important;
+    .showShopByDataImg1 {
+        height: 200px !important;
+        width: 250px !important;
     }
-    .showShopByDataImg2{
-        height: 200px!important;
-        width: 250px!important;
+
+    .showShopByDataImg2 {
+        height: 200px !important;
+        width: 250px !important;
     }
 }
 
 @media screen and (max-width:1440px) {
 
-    
-    .showShopByDataImg1{
-        height: 130px!important;
-        width: 180px!important;
+
+    .showShopByDataImg1 {
+        height: 130px !important;
+        width: 180px !important;
     }
-    .showShopByDataImg2{
-        height: 130px!important;
-        width: 180px!important;
+
+    .showShopByDataImg2 {
+        height: 130px !important;
+        width: 180px !important;
     }
 
     .Smining-Top-Header-fixed {
@@ -873,15 +875,16 @@
     list-style: none;
     margin: 0px;
     margin-left: 7px;
-    align-items: baseline;
+    align-items: center;
+
     height: 100%;
 }
 
 .gorjana-Menu-item {
     margin: 0px;
     margin-inline: 20px;
-    font-family: 'Harmonia';
-    font-size: 13px;
+    font-family: "PT Sans, sans-serif" !important;
+    font-size: 17px;
     font-weight: 500;
     color: inherit;
     cursor: pointer;
@@ -906,6 +909,14 @@
     cursor: pointer;
     width: 25px;
     margin-inline: 15px;
+
+}
+
+
+.gorHeaderMobileIcoenCart {
+    height: 25px;
+    cursor: pointer;
+    width: 25px;
 
 }
 
@@ -995,9 +1006,15 @@
         display: none;
     }
 
+    .gorjanaHeaderMenuIconeMobile {
+        display: flex;
+    }
+
+
     .gorajanaBottomHeaderMain {
         padding: 0px;
         padding-Block: 20px;
+        padding-inline: 20px;
     }
 
     .gorjanaHeaderMenu {
@@ -1007,6 +1024,10 @@
     .gorjanaHeaderSubMenuMain {
         display: flex;
         justify-content: flex-end;
+    }
+
+    .smlingTopSerachOver-Fixed {
+        height: 134px !important;
     }
 
 }
@@ -1020,4 +1041,7 @@
         margin-inline: 8px;
     }
 
+    .gorajanaBottomHeaderMain {
+        padding-inline: 10px;
+    }
 }

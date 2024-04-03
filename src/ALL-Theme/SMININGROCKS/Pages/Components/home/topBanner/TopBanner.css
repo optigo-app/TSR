@@ -24,7 +24,7 @@
     display: flex;
     justify-content: flex-end;
     margin-top: -15px;
-    font-family: 'Freight Big Pro,serif';
+    font-family: "PT Sans, sans-serif";
     text-decoration: underline;
 }
 
@@ -42,7 +42,7 @@
 .gorjanaFavBoxLink2{
     font-size: 19px;
     color: white;
-    font-family: 'Freight Big Pro,serif';
+    font-family: "PT Sans, sans-serif";
     text-decoration: underline;
 }
 
@@ -57,7 +57,7 @@
     font-size: 19px;
     color: white;
     margin-top: -15px;
-    font-family: 'Freight Big Pro,serif';
+    font-family: "PT Sans, sans-serif";
     text-decoration: underline;
 }
 
@@ -70,7 +70,7 @@
     font-size: 19px;
     color: white;
     margin-top: -15px;
-    font-family: 'Freight Big Pro,serif';
+    font-family: "PT Sans, sans-serif";
     text-decoration: underline;
     text-align: center;
 } 
