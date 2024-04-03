@@ -3,9 +3,10 @@ import Header from '../../home/Header/Header';
 import { Button, CircularProgress, IconButton, InputAdornment, TextField } from '@mui/material';
 import Footer from '../../home/Footer/Footer';
 import { CommonAPI } from '../../../../Utils/API/CommonAPI';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './LoginWithEmailCode.css';
 import CryptoJS from 'crypto-js';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function LoginWithEmailCode() {
     const [email, setEmail] = useState('');
@@ -14,14 +15,17 @@ export default function LoginWithEmailCode() {
     const navigation = useNavigate();
     const [mobileNo, setMobileNo] = useState('');
     const [resendTimer, setResendTimer] = useState(120);
+    const location = useLocation();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const storedEmail = localStorage.getItem('registerEmail');
+                const storedEmail = location.state?.email;;
                 const storeInit = JSON.parse(localStorage.getItem('storeInit'));
                 const { FrontEnd_RegNo } = storeInit;
 
+
+                console.log('storedEmailstoredEmailstoredEmail',storedEmail);
                 if (storedEmail) {
                     setEmail(storedEmail);
                     const value = localStorage.getItem('LoginCodeEmail');
@@ -29,6 +33,9 @@ export default function LoginWithEmailCode() {
                         const combinedValue = JSON.stringify({
                             userid: storedEmail, FrontEnd_RegNo: FrontEnd_RegNo
                         });
+
+                        console.log('combinedValuecombinedValue', combinedValue);
+
                         const encodedCombinedValue = btoa(combinedValue);
                         const body = {
                             con: "{\"id\":\"\",\"mode\":\"WEBSCEMAIL\"}",
@@ -36,11 +43,13 @@ export default function LoginWithEmailCode() {
                             p: encodedCombinedValue
                         };
                         const response = await CommonAPI(body);
+                        console.log('ressssssssssssssssss', response);
+
                         if (response.Data.Table1[0].stat === '1') {
+                            toast.success('OTP send Sucssessfully');
                             localStorage.setItem('LoginCodeEmail', 'false');
-                            alert('OTP send Sucssessfully');
                         } else {
-                            // Handle error condition
+                            toast.error('OTP send Error');
                         }
                     }
                 }
@@ -114,7 +123,6 @@ export default function LoginWithEmailCode() {
             const response = await CommonAPI(body);
             if (response.Data.rd[0].stat === 1) {
                 localStorage.setItem('LoginUser', 'true')
-                alert('Register Sucssessfully');
                 navigation('/');
             } else {
                 errors.mobileNo = 'Code is Invalid'
@@ -144,9 +152,9 @@ export default function LoginWithEmailCode() {
             const response = await CommonAPI(body);
             if (response.Data.Table1[0].stat === '1') {
                 localStorage.setItem('LoginCodeEmail', 'false');
-                alert('OTP send Sucssessfully');
+                toast.success('OTP send Sucssessfully');
             } else {
-                alert('OTP send Error');
+                toast.error('OTP send Error');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -154,7 +162,8 @@ export default function LoginWithEmailCode() {
     };
 
     return (
-        <div className='paddingTopMobileSet' style={{ backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
+        <div className='paddingTopMobileSetAuth' style={{ backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
+            <ToastContainer />
             {isLoading && (
                 <div className="loader-overlay">
                     <CircularProgress className='loadingBarManage' />
@@ -168,7 +177,7 @@ export default function LoginWithEmailCode() {
                             paddingBlock: '60px',
                             marginTop: '15px',
                             fontSize: '25px',
-                            fontFamily: 'Harmonia'
+                            fontFamily: 'PT Sans, sans-serif'
                         }}
                             className='AuthScreenMainTitle'
                         >Login With Code</p>
@@ -177,7 +186,7 @@ export default function LoginWithEmailCode() {
                             marginTop: '-80px',
                             fontSize: '15px',
                             color: '#7d7f85',
-                            fontFamily: 'Harmonia'
+                            fontFamily: 'PT Sans, sans-serif'
                         }}
                             className='AuthScreenSubTitle'
                         >Last step! To secure your account, enter the code we just sent to {email}.</p>
@@ -203,7 +212,7 @@ export default function LoginWithEmailCode() {
 
                             <button className='submitBtnForgot' onClick={handleSubmit}>Login</button>
                             <p style={{ marginTop: '10px' }}>Didn't get the code ? {resendTimer === 0 ? <span style={{ fontWeight: 500, color: 'blue', textDecoration: 'underline', cursor: 'pointer' }} onClick={handleResendCode}>Resend Code</span> : <span>Resend in {Math.floor(resendTimer / 60).toString().padStart(2, '0')}:{(resendTimer % 60).toString().padStart(2, '0')}</span>}</p>
-                            <Button style={{ marginTop: '10px', color: 'gray', fontFamily: 'Harmonia', fontFamily: 'Harmonia' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
+                            <Button style={{ marginTop: '10px', color: 'gray', fontFamily: 'PT Sans, sans-serif' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
                         </div>
                     </div>
                 </div>

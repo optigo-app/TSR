@@ -35,7 +35,7 @@ export default function Footer() {
     };
 
     return (
-        <div style={{marginTop:'20px'}}>
+        <div style={{ marginTop: '20px' }}>
             <div className='TSRFooterMain'>
                 <div className='TSRFooterPart1'>
                     <div className='TSRFooterPart1Sub'>
@@ -91,7 +91,7 @@ export default function Footer() {
                     </div>
 
                     <div className='TSRFooterPart1Sub2'>
-                        <p className='StayIntouce' style={{ fontSize: '35px', color: 'white', marginBlock: '60px', fontFamily: "PT Sans, sans-serif"}}>STAY IN TOUCH.</p>
+                        <p className='StayIntouce' style={{ fontSize: '35px', color: 'white', marginBlock: '60px', fontFamily: "PT Sans, sans-serif" }}>STAY IN TOUCH.</p>
                         <div className='footerIconeMain' style={{ display: 'flex' }}>
                             <FaTwitter style={{ margin: '5px', cursor: 'pointer', color: 'white' }} />
                             <FaFacebookF style={{ margin: '5px', cursor: 'pointer', color: 'white' }} />
@@ -112,20 +112,11 @@ export default function Footer() {
                 </div>
             </div>
             <div className='footerMoreTextNew'>
-                <div style={{width: '100%'}}>
-                    <select className='forrterSelectionMain'>
-                        <option>UNITED STATES (US $)</option>
-                        <option>UNITED KINGDOM (GB £)</option>
-                        <option>CANADA (CA $)</option>
-                    </select>
-                </div>
-                <div style={{width: '100%'}}>
-                    <p style={{ color: 'rgba(223, 223, 223, 0.9)', fontSize: '14px', fontFamily: "PT Sans, sans-serif" }}>© PIPELINE CLEAN 2024
-                        FRINGE
-                        SHORESIDE
-                        WAYFARER
-                        POWERED BY SHOPIFY</p>
-                </div>
+                <p style={{ color: 'rgba(223, 223, 223, 0.9)', fontSize: '14px', fontFamily: "PT Sans, sans-serif" }}>© PIPELINE CLEAN 2024
+                    FRINGE
+                    SHORESIDE
+                    WAYFARER
+                    POWERED BY OPTIGOAPPS</p>
             </div>
         </div>
     )

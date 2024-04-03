@@ -5,6 +5,7 @@ import { Button, CircularProgress, TextField } from '@mui/material';
 import Footer from '../../home/Footer/Footer';
 import { CommonAPI } from '../../../../Utils/API/CommonAPI';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function ContinueWithEmail() {
     const [email, setEmail] = useState('');
@@ -62,8 +63,13 @@ export default function ContinueWithEmail() {
             };
             const response = await CommonAPI(body);
             console.log('ressssssss', response);
-            if (response.Data.rd[0].stat === 1) {
+            if (response.Data.rd[0].stat == 1 && response.Data.rd[0].islead == 1) {
+                toast.error('You are not a customer, contact to admin')
+            } else if (response.Data.rd[0].stat == 1 && response.Data.rd[0].islead == 0) {
                 navigation('/LoginWithEmail', { state: { email: trimmedEmail } });
+                if(trimmedEmail){
+                    localStorage.setItem("userEmailForPdList",trimmedEmail);
+                }
             } else {
                 navigation('/register', { state: { email: trimmedEmail } });
             }
@@ -75,7 +81,8 @@ export default function ContinueWithEmail() {
     };
 
     return (
-        <div className='paddingTopMobileSet' style={{ backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
+        <div className='paddingTopMobileSetAuth' style={{ backgroundColor: 'rgba(66, 66, 66, 0.05)' }}>
+            <ToastContainer />
             {isLoading && (
                 <div className="loader-overlay">
                     <CircularProgress className='loadingBarManage' />
@@ -90,7 +97,7 @@ export default function ContinueWithEmail() {
                             marginTop: '15px',
                             fontSize: '25px',
                             // color: '#7d7f85',
-                            fontFamily: 'Harmonia'
+                            fontFamily: 'PT Sans, sans-serif'
                         }}
                             className='AuthScreenMainTitle'
                         >Continue With Email</p>
@@ -99,7 +106,7 @@ export default function ContinueWithEmail() {
                             marginTop: '-70px',
                             fontSize: '15px',
                             // color: '#7d7f85',
-                            fontFamily: 'Harmonia'
+                            fontFamily: 'PT Sans, sans-serif'
                         }}
 
                             className='AuthScreenSubTitle'
@@ -128,7 +135,7 @@ export default function ContinueWithEmail() {
                             />
 
                             <button type='submit' className='submitBtnForgot' onClick={handleSubmit}>SUBMIT</button>
-                            <Button style={{ marginTop: '10px', color: '#424242', fontFamily: 'Harmonia', paddingBottom: '50px' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
+                            <Button style={{ marginTop: '10px', color: '#424242', fontFamily: 'PT Sans, sans-serif', paddingBottom: '50px' }} onClick={() => navigation('/LoginOption')}>CANCEL</Button>
                         </div>
                     </div>
                 </div>

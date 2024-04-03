@@ -352,7 +352,7 @@
 .footerMoreTextNew {
     background-color: #3e1d14;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 30px;
 }

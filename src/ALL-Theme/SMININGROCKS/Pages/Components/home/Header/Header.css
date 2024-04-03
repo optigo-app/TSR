@@ -994,6 +994,18 @@
     margin-top: -20px;
 }
 
+
+.tsrMobileDrawerMain .MuiDrawer-paperAnchorLeft {
+    width: 100% !important;
+}
+.tsrmobileDraweMenuItem{
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+
 @media screen and (min-width:1151px) {
     .gorjanaHeaderMenuIconeMobile {
         display: none;
@@ -1002,6 +1014,9 @@
 
 @media screen and (max-width:1150px) {
 
+    .gorjanaTopHeader{
+        padding: 5px 5px 5px 2%!important;
+    }
     .gorjanaHeaderMenuIconeWeb {
         display: none;
     }
