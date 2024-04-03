@@ -1622,6 +1622,12 @@ const ProductList = () => {
           className='paddingTopMobileSet'
         >
           <div>
+            <div class="bg-image">
+              <div class="overlay"></div>
+              <div class="text-container">
+                <h1>All</h1>
+              </div>
+            </div>
             <div className="filterDivcontainer">
               <div className="part" style={{ flex: '20%' }}>
                 <div className="part-content">
@@ -1851,7 +1857,7 @@ const ProductList = () => {
                         {list("bottom")}
                       </Drawer>
                       <p
-                      className="filterTextData"
+                        className="filterTextData"
                         style={{
                           display: "flex",
                           justifyContent: "space-between",
@@ -1866,9 +1872,9 @@ const ProductList = () => {
                         FILTER<span>{isOpenDetail ? "-" : "+"}</span>
                       </p>
 
-                      </div>
+                    </div>
                     <hr
-                    className="filterDivider"
+                      className="filterDivider"
                       style={{
                         border: "none",
                         marginBottom: "0px",
