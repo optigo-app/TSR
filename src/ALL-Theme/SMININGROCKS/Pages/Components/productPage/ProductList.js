@@ -1617,7 +1617,7 @@ const ProductList = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            paddingTop: '110px'
+            paddingTop: '130px'
           }}
           className='paddingTopMobileSet'
         >

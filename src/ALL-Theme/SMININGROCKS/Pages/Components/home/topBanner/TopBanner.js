@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './TopBanner.css';
-import demovide from '../../../assets/Video/demo2.mp4';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { loginState } from '../../../../../../Recoil/atom';
