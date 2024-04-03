@@ -1630,6 +1630,21 @@ const ProductList = () => {
     setProductApiData2(sortedData);
   };
 
+
+
+  const [show2ImagesView, setShow2ImageView] = useState(false);
+  const [show4ImagesView, setShow4ImageView] = useState(false);
+  const handle2ImageShow = () => {
+    setShow4ImageView(false)
+    setShow2ImageView(true)
+
+  }
+
+  const handle4ImageShow = () => {
+    setShow2ImageView(false)
+    setShow4ImageView(true)
+  }
+
   return (
     <div id="top">
       <div
@@ -1690,8 +1705,8 @@ const ProductList = () => {
               <div className="divider"></div>
               <div className="part" style={{ flex: '80%', justifyContent: 'end' }}>
                 <div className="part-content">
-                  <GridViewIcon />
-                  <AppsIcon />
+                  <GridViewIcon onClick={() => handle2ImageShow()} />
+                  <AppsIcon onClick={() => handle4ImageShow()} />
                 </div>
               </div>
             </div>
@@ -1905,7 +1920,7 @@ const ProductList = () => {
                       </Drawer>
                       <div className="filterMobileDivcontainer">
                         <div className="part firstfilteDiv" style={{ flex: '20%' }}>
-                          <div className="part-content"  onClick={toggleDetailDrawer}>
+                          <div className="part-content" onClick={toggleDetailDrawer}>
                             Filter
                             <FilterListIcon />
                           </div>
@@ -1937,7 +1952,7 @@ const ProductList = () => {
                         <div className="divider"></div>
                         <div className="part thirdfilteDiv" style={{ flex: '80%', justifyContent: 'end' }}>
                           <div className="part-content">
-                            <GridViewIcon />
+                            <GridViewIcon onClick={() => handle2ImageShow()} />
                             <AppsIcon />
                           </div>
                         </div>
@@ -2031,19 +2046,25 @@ const ProductList = () => {
                       <option value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</option>
                     </select>
                   </div>
-                  <div className="smilingAllProductDataMainMobile">
+                  <div className={show4ImagesView ? "smilingAllProductDataMainMobileShow4Image" : "smilingAllProductDataMainMobile"}>
                     {/* RollOverImageName */}
                     {/* {(newProData.length ? newProData : finalDataOfDisplaying())?.map((products, i) => ( */}
                     {(newProData?.length ? newProData : ProductApiData2)?.map((products, i) => (
 
-                      <div className="main-ProdcutListConatiner">
-                        <div className="listing-card">
+                      <div className={`main-ProdcutListConatiner
+                                  ${show2ImagesView ? "main-ProdcutListConatiner2ImageShow" : ""}
+                                  ${show4ImagesView ? "main-ProdcutListConatiner4ImageShow" : ""}`}
+                      >
+                        <div className={`listing-card
+                                      ${show2ImagesView ? "listing-cardShow2Image" : ""}
+                                      ${show4ImagesView ? "listing-cardShow4Image" : ""}`} >
                           <div className="listing-image">
                             <div
                               onClick={() => handelProductSubmit(products)}
-                              className="background-image-container"
+                              className={show2ImagesView ?  'background-2image-container'  : "background-image-container"}
                               style={{
                                 backgroundImage: `url(${hoveredImageUrls[i] ? hoveredImageUrls[i] : updatedColorImage[i] ? updatedColorImage[i] :
+
                                   (products?.MediumImagePath ?
                                     (products?.imagepath + products?.MediumImagePath?.split(",")[0]) :
                                     notFound

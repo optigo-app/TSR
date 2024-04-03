@@ -72,7 +72,15 @@
   justify-content: center;
   gap: 20px;
 }
-
+.smilingAllProductDataMainMobileShow4Image{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 .minmaxvalpl {
   outline: none !important;
   font-size: 13px !important;
@@ -258,10 +266,22 @@
 .main-ProdcutListConatiner {
     font-family: "PT Sans, sans-serif";
 }
-
+.main-ProdcutListConatiner2ImageShow{
+  width: 40%;
+}
+.main-ProdcutListConatiner4ImageShow{
+  width: 23%;
+}
 .background-image-container {
   width: 100%;
   height: 320px;
+  background-size: cover;
+  object-fit: cover;
+  background-position: center;
+}
+.background-2image-container{
+  width: 100%;
+  height: 480px;
   background-size: cover;
   object-fit: cover;
   background-position: center;
@@ -282,6 +302,27 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.listing-cardShow2Image{
+  width: auto;
+  height: auto;
+  max-width: 90%;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.listing-cardShow2Image:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.listing-cardShow4Image{
+  width: auto;
+  height: auto;
+  max-width: auto;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 8px;
+  overflow: hidden;
+}
 .listing-image {
   position: relative;
 }
