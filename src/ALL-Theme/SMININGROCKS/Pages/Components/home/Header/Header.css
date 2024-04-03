@@ -520,26 +520,28 @@
 
 @media screen and (max-width:1650px) {
 
-    .showShopByDataImg1{
-        height: 200px!important;
-        width: 250px!important;
+    .showShopByDataImg1 {
+        height: 200px !important;
+        width: 250px !important;
     }
-    .showShopByDataImg2{
-        height: 200px!important;
-        width: 250px!important;
+
+    .showShopByDataImg2 {
+        height: 200px !important;
+        width: 250px !important;
     }
 }
 
 @media screen and (max-width:1440px) {
 
-    
-    .showShopByDataImg1{
-        height: 130px!important;
-        width: 180px!important;
+
+    .showShopByDataImg1 {
+        height: 130px !important;
+        width: 180px !important;
     }
-    .showShopByDataImg2{
-        height: 130px!important;
-        width: 180px!important;
+
+    .showShopByDataImg2 {
+        height: 130px !important;
+        width: 180px !important;
     }
 
     .Smining-Top-Header-fixed {
@@ -881,8 +883,8 @@
 .gorjana-Menu-item {
     margin: 0px;
     margin-inline: 20px;
-    font-family: 'Harmonia';
-    font-size: 13px;
+    font-family: "PT Sans, sans-serif" !important;
+    font-size: 17px;
     font-weight: 500;
     color: inherit;
     cursor: pointer;
@@ -1003,11 +1005,11 @@
     .gorjanaHeaderMenuIconeWeb {
         display: none;
     }
-    
-    .gorjanaHeaderMenuIconeMobile{
+
+    .gorjanaHeaderMenuIconeMobile {
         display: flex;
     }
- 
+
 
     .gorajanaBottomHeaderMain {
         padding: 0px;
@@ -1024,8 +1026,8 @@
         justify-content: flex-end;
     }
 
-    .smlingTopSerachOver-Fixed{
-        height: 134px!important;
+    .smlingTopSerachOver-Fixed {
+        height: 134px !important;
     }
 
 }
@@ -1038,6 +1040,7 @@
         width: 25px;
         margin-inline: 8px;
     }
+
     .gorajanaBottomHeaderMain {
         padding-inline: 10px;
     }

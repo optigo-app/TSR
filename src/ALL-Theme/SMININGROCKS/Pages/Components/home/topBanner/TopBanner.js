@@ -11,7 +11,7 @@ export default function TopBanner() {
 
   const islogin = useRecoilValue(loginState);
 
-  console.log('isloginisloginisloginislogin',islogin);
+  console.log('isloginisloginisloginislogin', islogin);
   const handleImageLoad = () => {
     setLoading(false);
   };
@@ -24,9 +24,9 @@ export default function TopBanner() {
     <div>
       <div className='gorjanaFave1web'>
         <img src='https://www.gorjana.com/cdn/shop/files/Hero_D-2_12.jpg?v=1701379010&width=2800' className='gorjanaFaveImage' />
-        {islogin  === "true" && <div className='gorjanaFaveBox'>
+        {islogin === "true" && <div className='gorjanaFaveBox'>
           <p style={{
-            fontFamily: 'Freight Big Pro,serif',
+            fontFamily: "PT Sans, sans-serif",
             fontSize: '60px',
             color: 'white',
             fontWeight: 400,
@@ -35,7 +35,7 @@ export default function TopBanner() {
             Forever Favorites
           </p>
           <p style={{
-            fontFamily: 'Freight Big Pro,serif',
+            fontFamily: "PT Sans, sans-serif",
             fontSize: '21px',
             color: 'white',
             display: 'flex',
@@ -48,9 +48,9 @@ export default function TopBanner() {
       </div>
       <div className='gorjanaFave1Mobile'>
         <img src='https://www.gorjana.com/cdn/shop/files/Hero_M-2_16.jpg?v=1701379034&width=750' className='gorjanaFaveImageMobile' />
-        {islogin  === "true"  && <div className='gorjanaFaveBoxMobile'>
+        {islogin === "true" && <div className='gorjanaFaveBoxMobile'>
           <p style={{
-            fontFamily: 'Freight Big Pro,serif',
+            fontFamily: "PT Sans, sans-serif",
             fontSize: '40px',
             color: 'white',
             fontWeight: 400,
@@ -60,7 +60,7 @@ export default function TopBanner() {
             Forever Favorites
           </p>
           <p style={{
-            fontFamily: 'Freight Big Pro,serif',
+            fontFamily: "PT Sans, sans-serif",
             fontSize: '18px',
             color: 'white',
             marginTop: '-20px',
@@ -73,15 +73,15 @@ export default function TopBanner() {
 
       <div className='gorjanaFave2web'>
         <img src='https://www.gorjana.com/cdn/shop/files/SubStory-D_7_303500df-182d-4edd-8eff-a93a1eb284ac.jpg?v=1699567448&width' className='gorjanaFaveImage' />
-        {islogin  === "true"  && <div className='gorjanaFaveBox2'>
+        {islogin === "true" && <div className='gorjanaFaveBox2'>
           <p style={{
-            fontFamily: 'Freight Big Pro,serif',
+            fontFamily: "PT Sans, sans-serif",
             fontSize: '60px',
             color: 'white',
             fontWeight: 400
           }}>Holiday Gift Guide</p>
           <p style={{
-            fontFamily: 'Freight Big Pro,serif',
+            fontFamily: "PT Sans, sans-serif",
             fontSize: '21px',
             color: 'white',
             marginTop: '-30px'
@@ -91,9 +91,9 @@ export default function TopBanner() {
       </div>
       <div className='gorjanaFave2Mobile'>
         <img src='https://www.gorjana.com/cdn/shop/files/SubStory_M_3.jpg?v=1699487597&width=750' className='gorjanaFaveImageMobile' />
-        {islogin  === "true"  && <div className='gorjanaFaveBox2Mobile'>
+        {islogin === "true" && <div className='gorjanaFaveBox2Mobile'>
           <p style={{
-            fontFamily: 'Freight Big Pro,serif',
+            fontFamily: "PT Sans, sans-serif",
             fontSize: '40px',
             color: 'white',
             fontWeight: 400,
@@ -101,7 +101,7 @@ export default function TopBanner() {
 
           }}>Holiday Gift Guide</p>
           <p style={{
-            fontFamily: 'Freight Big Pro,serif',
+            fontFamily: "PT Sans, sans-serif",
             fontSize: '18px',
             color: 'white',
             marginTop: '-20px',

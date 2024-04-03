@@ -91,7 +91,7 @@ export default function Footer() {
                     </div>
 
                     <div className='TSRFooterPart1Sub2'>
-                        <p className='StayIntouce' style={{ fontSize: '35px', color: 'white', marginBlock: '60px', fontFamily: 'Tenor Sans, sans-serif' }}>STAY IN TOUCH.</p>
+                        <p className='StayIntouce' style={{ fontSize: '35px', color: 'white', marginBlock: '60px', fontFamily: "PT Sans, sans-serif"}}>STAY IN TOUCH.</p>
                         <div className='footerIconeMain' style={{ display: 'flex' }}>
                             <FaTwitter style={{ margin: '5px', cursor: 'pointer', color: 'white' }} />
                             <FaFacebookF style={{ margin: '5px', cursor: 'pointer', color: 'white' }} />
@@ -103,9 +103,9 @@ export default function Footer() {
                 <div className='TSRFooterPart2'>
                     <img src='https://pipeline-theme-fashion.myshopify.com/cdn/shop/files/210128_BW_PF21_S219059.jpg?v=1671215731&width=768' className='TSRFooterPart2Img' />
                     <div className='TSRFooterPart2SubMain' style={{ padding: '60px 0px 0px 60px' }}>
-                        <p className='TSRFooterPart2Desc1' style={{ color: 'white', fontFamily: 'Harmonia', fontSize: '13px', letterSpacing: '1px', margin: '40px 0px 0px 0px' }}>OUR WEEKLY NEWSLETTER</p>
+                        <p className='TSRFooterPart2Desc1' style={{ color: 'white', fontFamily: "PT Sans, sans-serif", fontSize: '13px', letterSpacing: '1px', margin: '40px 0px 0px 0px' }}>OUR WEEKLY NEWSLETTER</p>
                         <p className='TSRFooterPart2Desc2'>SKIP TO THE DETAILS</p>
-                        <p className='TSRFooterPart2Desc3' style={{ fontFamily: 'Harmonia', margin: '0px', color: 'white' }}>Join to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
+                        <p className='TSRFooterPart2Desc3' style={{ fontFamily: "PT Sans, sans-serif", margin: '0px', color: 'white' }}>Join to get special offers, free giveaways, and once-in-a-lifetime deals.</p>
 
                         <input type='text' placeholder="your-email@gxample.com" className='TSRFooterPart2Input' />
                     </div>
@@ -120,7 +120,7 @@ export default function Footer() {
                     </select>
                 </div>
                 <div style={{width: '100%'}}>
-                    <p style={{ color: 'rgba(223, 223, 223, 0.9)', fontSize: '14px' }}>© PIPELINE CLEAN 2024
+                    <p style={{ color: 'rgba(223, 223, 223, 0.9)', fontSize: '14px', fontFamily: "PT Sans, sans-serif" }}>© PIPELINE CLEAN 2024
                         FRINGE
                         SHORESIDE
                         WAYFARER

@@ -61,7 +61,7 @@ export default function SmilingBrides() {
             <p style={{
                 textAlign: 'center',
                 fontSize: '35px',
-                fontFamily: 'Freight Big Pro,serif',
+                fontFamily: 'PT Sans, sans-serif',
                 margin: '0px'
             }}>Recommended For You</p>
             <div className='gorReccommMain' style={{
@@ -76,9 +76,9 @@ export default function SmilingBrides() {
                                 <div style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
                                     <img src={data.prodImg} alt={`Image ${index + 1}`} />
                                     <div>
-                                        <p style={{ margin: '0px' }}>{data.prodtitle}</p>
-                                        <p style={{ margin: '0px' }}>{data.price}</p>
-                                        <p>{data.more}</p>
+                                        <p style={{ margin: '0px', fontFamily: 'PT Sans, sans-serif' }}>{data.prodtitle}</p>
+                                        <p style={{ margin: '0px' ,fontFamily: 'PT Sans, sans-serif' }}>{data.price}</p>
+                                        <p style={{fontFamily: 'PT Sans, sans-serif'}}>{data.more}</p>
                                         <div className='gorRecommDiv' >
                                             <button className='gorRecommBtn'>Add To Card</button>
                                         </div>
