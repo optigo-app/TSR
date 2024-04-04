@@ -63,24 +63,6 @@
   transition: all 0.9s ease-in-out;
 }
 
-.smilingAllProductDataMainMobile {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-.smilingAllProductDataMainMobileShow4Image{
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-}
 .minmaxvalpl {
   outline: none !important;
   font-size: 13px !important;
@@ -91,8 +73,8 @@
 }
 
 .smilingWebProductListSideBar {
-  width: 15%;
-  padding: 52px 0px 40px 100px;
+  width: 20%;
+  /* padding: 52px 0px 40px 100px; */
 }
 
 .finejwelery {
@@ -111,7 +93,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 40px 0px 0px 0px;
+  /* margin: 40px 0px 0px 0px; */
 }
 
 .smilingProductDeatilTitleMobile {
@@ -193,7 +175,7 @@
   background-image: url("https://t4.ftcdn.net/jpg/02/92/56/91/360_F_292569116_Phht4uRj1YIuLFgBhrLu8171npBOcJcr.jpg");
   background-size: cover;
   background-position: center;
-  margin: 25px 100px 22px 100px;
+  /* margin: 25px 100px 22px 100px; */
 }
 
 .overlay {
@@ -227,7 +209,8 @@
   border-radius: 5px;
   overflow: hidden;
   justify-content: center;
-  margin: 0px 100px 0px 100px;
+  margin-block: 20px;
+  /* margin: 0px 100px 0px 100px; */
 }
 
 .part {
@@ -257,20 +240,44 @@
   background-color: #d9d9d9;
 }
 
-/* productcard css */
 .container {
   margin: 150px 50px 0px 50px;
   color: #4a5568;
 }
 
+.smilingAllProductDataMainMobile {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.smilingAllProductDataMainMobileShow2Image{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.smilingAllProductDataMainMobileShow4Image{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
 .main-ProdcutListConatiner {
   font-family: "PT Sans, sans-serif";
+  width: 33%;
 }
 .main-ProdcutListConatiner2ImageShow{
-  width: 40%;
+  width: 49.5%;
 }
 .main-ProdcutListConatiner4ImageShow{
-  width: 23%;
+  width: 24.6%;
 }
 .background-image-container {
   width: 100%;
@@ -288,12 +295,9 @@
 }
 
 .listing-card {
-  width: 380px;
   height: auto;
-  /* max-height: 58vh; */
-  max-width: 380px;
   background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -305,9 +309,9 @@
 .listing-cardShow2Image{
   width: auto;
   height: auto;
-  max-width: 90%;
+  max-width: 100%;
   background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -319,7 +323,8 @@
   height: auto;
   max-width: auto;
   background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  /* border: 1px solid black; */
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -349,6 +354,9 @@
 .listing-details {
   padding: 12px;
 }
+.listing4-details {
+  padding: 0px;
+}
 
 .productDetails {
   margin: 5px;
@@ -366,9 +374,21 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.property4-type{
+  text-transform: uppercase;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  opacity: 0.9;
+  color: #1f1919;
+}
 
 .price {
   font-size: 1.445rem;
+  color: #1f1919;
+}
+.price4{
+  font-size: 20px;
   color: #1f1919;
 }
 
@@ -380,6 +400,12 @@
   display: flex;
   height: 18px;
   align-items: center;
+}
+.productDesignDetails4{
+  display: flex;
+  height: 18px;
+  align-items: center;
+  font-size: 15px;
 }
 
 .designlistDetails {
@@ -398,6 +424,14 @@
   border-top: 1px solid rgba(0, 0, 0, 0.04);
   color: #4a5568;
 }
+.listing-features4 {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 5px 16px 2px;
+  font-size: 14.5px;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  color: #4a5568;
+}
 
 .feature {
   display: flex;
@@ -406,6 +440,9 @@
 
 .feature p {
   margin: 0 0 5px 8px;
+}
+.feature4 p {
+  margin: 2px 5px 5px 2px
 }
 
 .feature-count {
