@@ -72,13 +72,13 @@ const ProdDetail = () => {
   const [csqcData, setCsqcData] = useState([])
   const [getPriceData, setGetPriceData] = useState([]);
 
-  const [addToCartFlag,setAddToCartFlag] =useState(false)
-  const [addToWishListFlag,setAddToWishListFlag] =useState()
+  const [addToCartFlag, setAddToCartFlag] = useState(false)
+  const [addToWishListFlag, setAddToWishListFlag] = useState()
+  const [globImagePath,setGlobImagepath] = useState()
 
   const [designUniqueNO, setDesignUnicNo] = useState('');
   const [uploadLogicPath, setUploadLogicPath] = useState('');
   const [uKey, setUkey] = useState('');
-  const [globImagePath,setGlobImagepath] = useState()
 
 
   const setCartCount = useSetRecoilState(CartListCounts)
@@ -104,6 +104,10 @@ const ProdDetail = () => {
     setGlobImagepath(storeInit?.DesignImageFol)
   },[])
 
+  useEffect(()=>{
+    const storeInit = JSON.parse(localStorage.getItem('storeInit'))
+    setGlobImagepath(storeInit?.DesignImageFol)
+  },[])
 
   useEffect(() => {
 
@@ -598,11 +602,11 @@ const ProdDetail = () => {
     getCartAndWishListData()
   }, [])
 
-  useEffect(()=>{
-  if(productData?.checkFlag){
-    setAddToCartFlag(true)
-  }
-  },[productData])
+  useEffect(() => {
+    if (productData?.checkFlag) {
+      setAddToCartFlag(true)
+    }
+  }, [productData])
 
   const handelCart = async () => {
 
@@ -880,9 +884,9 @@ const ProdDetail = () => {
 
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     handelCart()
-  },[addToCartFlag])
+  }, [addToCartFlag])
 
   const handelWishList = async (event) => {
 
@@ -1238,20 +1242,26 @@ const ProdDetail = () => {
                 <img
                   src={
 
-                    (productData?.OriginalImagePath) ? (selectedImagePath == '' ?
-                      globImagePath +
-                      (!handelmainImg()?.length
-                        ? productData?.OriginalImagePath?.split(",")[0]
-                        : handelmainImg())
-                      :
-                      selectedImagePath)
+                    (productData?.OriginalImagePath) ?
+                      updatedColorImage?.length !== 0 ?
+                        updatedColorImage[0]?.imagepath
+                        :
+                        (
+                          selectedImagePath == '' ?
+                            globImagePath + (!handelmainImg()?.length ? productData?.OriginalImagePath?.split(",")[0]
+                              :
+                              handelmainImg()
+                            )
+                            :
+                            selectedImagePath)
+
                       :
                       notFound
                   }
                   alt={""}
                   style={{
                     width: "100%",
-                    height:'80%',
+                    height: '80%',
                     zindex: -1,
                     position: "relative",
                     objectFit: "contain",
@@ -1319,7 +1329,7 @@ const ProdDetail = () => {
                   {productData?.TitleLine}
                 </p>
 
-                <p  className='tsrProdDescription'>
+                <p className='tsrProdDescription'>
                   {/* Slip this open Drizzle Ring from Smiling Rock's iconic
                   collection- Drizzle. It’s an exquisite ring with diamonds all
                   around the ring. The ring creates a wide space to decorate
@@ -1342,18 +1352,18 @@ const ProdDetail = () => {
                 >
                   <div
                     className="part1"
-                    style={{ display: "flex",flexDirection: "column",gap:'4px'}}
+                    style={{ display: "flex", flexDirection: "column", gap: '4px' }}
                   >
                     <span
                       style={{
                         // textTransform: "uppercase",
                         fontSize: "16px",
                         color: "#424242",
-                        fontFamily: "PT Sans, sans-serif",
-                        fontWeight:'600',
-                        letterSpacing:'2px'
+                        fontFamily: 'Harmonia',
+                        fontWeight: '600',
+                        letterSpacing: '2px'
                       }}
-                      
+
                     >
                       {productData?.designno}
                     </span>
@@ -1365,7 +1375,7 @@ const ProdDetail = () => {
                         // fontWeight:'600'
                       }}
                     >
-                      Metal Purity : <span style={{fontWeight:'bold',letterSpacing:'2px'}}>{mtTypeOption ? mtTypeOption.split(" ")[1] : productData?.MetalPurity}</span>
+                      Metal Purity : <span style={{ fontWeight: 'bold', letterSpacing: '2px' }}>{mtTypeOption ? mtTypeOption.split(" ")[1] : productData?.MetalPurity}</span>
                     </span>
                     <sapn
                       style={{
@@ -1375,7 +1385,7 @@ const ProdDetail = () => {
                         // fontWeight:'600'
                       }}
                     >
-                      Metal Color : <span style={{fontWeight:'bold',letterSpacing:'2.2px'}}>{selectedColor ? selectedColor : productData?.MetalColorName}</span>
+                      Metal Color : <span style={{ fontWeight: 'bold', letterSpacing: '2.2px' }}>{selectedColor ? selectedColor : productData?.MetalColorName}</span>
                     </sapn>
                     <sapn
                       style={{
@@ -1385,7 +1395,7 @@ const ProdDetail = () => {
                         // fontWeight:'600'
                       }}
                     >
-                      Diamond Quality Color: <span style={{fontWeight:'bold',letterSpacing:'2.2px'}}>{diaQColOpt ? diaQColOpt : `${productData?.diamondquality}-${productData?.diamondcolorname}`}</span>
+                      Diamond Quality Color: <span style={{ fontWeight: 'bold', letterSpacing: '2.2px' }}>{diaQColOpt ? diaQColOpt : `${productData?.diamondquality}-${productData?.diamondcolorname}`}</span>
                     </sapn>
                   </div>
                   {/* {productData?.IsColorWiseImageExists !== null && (
@@ -1446,7 +1456,7 @@ const ProdDetail = () => {
 
                 </div>
                 <div
-                  style={{ display: "flex", flexDirection:'column', width: "100%", marginTop: "12px" }}
+                  style={{ display: "flex", flexDirection: 'column', width: "100%", marginTop: "12px" }}
                   className="CustomiZationDeatilPageWeb"
                 >
 
@@ -1456,26 +1466,26 @@ const ProdDetail = () => {
                       flexDirection: "column",
                       width: '95%',
                       marginBottom: '10px',
-                      gap:'5px',
-                      
+                      gap: '5px',
+
                     }}
                   >
-                    <label style={{ 
-                       fontSize: "15px",
-                        color: "#424242",
-                        fontFamily: "PT Sans, sans-serif",
-                        }}>
+                    <label style={{
+                      fontSize: "15px",
+                      color: "#424242",
+                      fontFamily: 'Harmonia',
+                    }}>
                       METAL TYPE:
                     </label>
                     {mtrdData.U === 1 ?
-                      <span style={{ 
+                      <span style={{
                         fontSize: "16px",
                         color: "#424242",
                         fontFamily: "PT Sans, sans-serif",
                         fontWeight:'bold',
                         letterSpacing:'2.2px'
 
-                        }}>
+                      }}>
                         {`${productData.MetalPurity} ${productData.MetalTypeName}`}
                       </span>
                       :
@@ -1520,10 +1530,10 @@ const ProdDetail = () => {
                         flexDirection: "column",
                         width: '95%',
                         paddingTop: '10px',
-                        borderTop:'1px solid #42424233'
+                        borderTop: '1px solid #42424233'
                       }}
                     >
-                      <label style={{ 
+                      <label style={{
                         fontSize: "15px",
                         color: "#424242",
                         fontFamily: "PT Sans, sans-serif"
@@ -1567,12 +1577,12 @@ const ProdDetail = () => {
 
                   {((isDaimondCstoFlag == 1) && (productData?.diamondweight !== 0 || productData?.diamondpcs !== 0)) && <div
                     style={{
-                      display:"flex",
-                      flexDirection:"column",
-                      width:'95%',
-                      marginTop:'10px',
+                      display: "flex",
+                      flexDirection: "column",
+                      width: '95%',
+                      marginTop: '10px',
                       paddingTop: '10px',
-                      borderTop:'1px solid #42424233'
+                      borderTop: '1px solid #42424233'
                     }}
                   >
                     <label style={{ fontSize: "15px",
@@ -1581,7 +1591,7 @@ const ProdDetail = () => {
                       DAIMOND :
                     </label>
                     {mtrdData?.U === 1 ?
-                      <span style={{ 
+                      <span style={{
                         fontSize: "16px",
                         color: "#424242",
                         fontFamily: "PT Sans, sans-serif",
@@ -1631,7 +1641,7 @@ const ProdDetail = () => {
                       width: '95%',
                       marginTop: '20px',
                       paddingTop: '10px',
-                      borderTop:'1px solid #42424233'
+                      borderTop: '1px solid #42424233'
 
                     }}
                   >
@@ -1644,7 +1654,7 @@ const ProdDetail = () => {
                     </label>
                     {
                       mtrdData.U === 1 ?
-                        <span style={{ 
+                        <span style={{
                           fontSize: "16px",
                           color: "#424242",
                           fontFamily: "PT Sans, sans-serif",
@@ -1686,7 +1696,7 @@ const ProdDetail = () => {
                         width: '95%',
                         marginTop: '10px',
                         paddingTop: '10px',
-                        borderTop:'1px solid #42424233'
+                        borderTop: '1px solid #42424233'
                       }}
                     >
                       <label style={{
@@ -1989,25 +1999,25 @@ const ProdDetail = () => {
                     </span>
                   </div> */}
                   <span className='containercartwish'>
-                  <div className='addtocartcont' onClick={() => setAddToCartFlag(!addToCartFlag)}>
-                    <span className='addtocarttxt'>{addToCartFlag? "REMOVE FROM CART" :"ADD TO CART"}</span>
-                  </div>
-                  <div className='wishlistcont'>
-                    <Tooltip title={"WishList"}>
-                      <Checkbox
-                        icon={
-                          <StarBorderIcon
-                            sx={{ fontSize: "25px", color: "#d2815f" }}
-                          />
-                        }
-                        checkedIcon={
-                          <StarIcon sx={{ fontSize: "25px", color: "#d2815f" }} />
-                        }
-                        disableRipple={true}
-                        checked={WishListFlag}
-                        onChange={(e) => handelWishList(e)}
-                      />
-                    </Tooltip>
+                    <div className='addtocartcont' onClick={() => setAddToCartFlag(!addToCartFlag)}>
+                      <span className='addtocarttxt'>{addToCartFlag ? "REMOVE FROM CART" : "ADD TO CART"}</span>
+                    </div>
+                    <div className='wishlistcont'>
+                      <Tooltip title={"WishList"}>
+                        <Checkbox
+                          icon={
+                            <StarBorderIcon
+                              sx={{ fontSize: "25px", color: "#d2815f" }}
+                            />
+                          }
+                          checkedIcon={
+                            <StarIcon sx={{ fontSize: "25px", color: "#d2815f" }} />
+                          }
+                          disableRipple={true}
+                          checked={WishListFlag}
+                          onChange={(e) => handelWishList(e)}
+                        />
+                      </Tooltip>
                     </div>
                   </span>
 
@@ -2279,26 +2289,26 @@ const ProdDetail = () => {
                             ) : ''} */}
                           </span>
                           <span>
-                             DiamondWeight:{" "}
+                            DiamondWeight:{" "}
                             <b>{daimondFilterData?.length
                               ? (
-                                  productData?.diamondweight +
-                                  daimondFilterData[0]?.Weight
-                                ).toFixed(2)
+                                productData?.diamondweight +
+                                daimondFilterData[0]?.Weight
+                              ).toFixed(2)
                               : productData?.diamondweight}</b>
                           </span>
                           <span>
                             Diamondpcs:{" "}
                             <b>{daimondFilterData?.length
                               ? productData?.diamondpcs +
-                                daimondFilterData[0]?.pieces
+                              daimondFilterData[0]?.pieces
                               : productData?.diamondpcs}</b>
                           </span>
                           <span>
                             NumberOfDiamonds:{" "}
                             <b>{daimondFilterData?.length
                               ? productData?.diamondpcs +
-                                daimondFilterData[0]?.pieces
+                              daimondFilterData[0]?.pieces
                               : productData?.diamondpcs}</b>
                           </span>
                         </div>
@@ -2307,9 +2317,9 @@ const ProdDetail = () => {
                             Netwt:{" "}
                             <b>{metalFilterData?.length
                               ? (
-                                  productData?.netwt +
-                                  metalFilterData[0]?.Weight
-                                ).toFixed(2)
+                                productData?.netwt +
+                                metalFilterData[0]?.Weight
+                              ).toFixed(2)
                               : productData?.netwt}</b>
                           </span>
                           <span>
@@ -2323,9 +2333,9 @@ const ProdDetail = () => {
                             TotalDiamondWeight:
                             <b>{daimondFilterData?.length
                               ? (
-                                  productData?.diamondweight +
-                                  daimondFilterData[0]?.Weight
-                                ).toFixed(2)
+                                productData?.diamondweight +
+                                daimondFilterData[0]?.Weight
+                              ).toFixed(2)
                               : productData?.diamondweight}</b>
                           </span>
                           <span>
@@ -2567,7 +2577,7 @@ const ProdDetail = () => {
           {/* <SmilingRock /> */}
         </div>
       </div>
-          <Footer />
+      <Footer />
     </div >
   );
 }
