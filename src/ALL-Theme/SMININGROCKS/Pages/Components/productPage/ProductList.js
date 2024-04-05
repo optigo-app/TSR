@@ -1676,7 +1676,7 @@ const ProductList = () => {
                 </div>
               </div>
               <div className="divider"></div>
-              <div className="part" style={{ flex: '80%', justifyContent: 'end' }}>
+              <div className="part" style={{ flex: '60%', justifyContent: 'end' }}>
                 <div className="part-content">
                   <GridViewIcon style={{ height: '30px', width: '30px' }} onClick={() => handle2ImageShow()} />
                   <AppsIcon style={{ height: '30px', width: '30px' }} onClick={() => handle3ImageShow()} />
@@ -1880,7 +1880,7 @@ const ProductList = () => {
 
                   {/* <hr style={{ marginTop: "0px" }} /> */}
                   <div className="filterListMobileData" style={{ display: "flex", marginInline: "15px" }}>
-                    <div style={{ width: "49%" }} onClick={toggleDrawerOverlay}>
+                    <div style={{ width: "100%" }} onClick={toggleDrawerOverlay}>
 
                       <Drawer
                         anchor="left"
@@ -2051,7 +2051,7 @@ const ProductList = () => {
                               <Checkbox
                                 icon={
                                   <LocalMallOutlinedIcon
-                                    sx={{ fontSize: "22px", color: "#000" }}
+                                    sx={{ fontSize: "22px", color: "#1f1919", opacity:'.7' }}
                                   />
                                 }
                                 checkedIcon={
@@ -2066,11 +2066,11 @@ const ProductList = () => {
                                 onChange={(e) => handelCartList(e, products)}
                               />
                             </div>
-                            <div className="image-overlay">
+                            <div className="wishlist-icon">
                               <Checkbox
                                 icon={
                                   <FavoriteBorderIcon
-                                    sx={{ fontSize: "22px", color: "#000" }}
+                                    sx={{ fontSize: "22px", color: "#1f1919", opacity:'.7' }}
                                   />
                                 }
                                 checkedIcon={
@@ -2091,7 +2091,7 @@ const ProductList = () => {
                               {products?.TitleLine}
                             </p>
                             <div>
-                              {isPriceShow === 1 &&
+                              {/* {isPriceShow === 1 &&
                                 <p className={show4ImagesView ? "productDetails price4" : "productDetails price"}>{currencySym?.Currencysymbol}
                                   {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}</p>
                               }
@@ -2104,7 +2104,7 @@ const ProductList = () => {
                                   flexItem
                                 />
                                 <p className="productDetails address"> {isMetalTCShow === 1 && products?.MetalTypeName}-{products?.MetalColorName}{products?.MetalPurity}</p>
-                              </span>
+                              </span> */}
                             </div>
                           </div>
                           <div className={show4ImagesView ? "listing-features4" : "listing-features"} >
@@ -2116,15 +2116,6 @@ const ProductList = () => {
                                   </p>
                                 </div>
                               }
-                              {((isDaaimongWShow || isDaaimongWShow) === 1 && (products?.diamondweight !== 0 || products?.diamondpcs !== 0)) &&
-                                <div className={show4ImagesView ? "feature4" : 'feature'}>
-                                  <p>
-                                    <span className="feature-count">DWT : </span> {(isDaaimongWShow === 1 && products?.diamondweight !== 0) && products?.diamondweight + '/'}  {(isDaaimonPShow === 1 && products?.diamondpcs !== 0) && products?.diamondpcs}
-                                  </p>
-                                </div>
-                              }
-                            </div>
-                            <div>
                               {isGrossWShow === 1 &&
                                 <div className={show4ImagesView ? "feature4" : 'feature'}>
                                   <p>
@@ -2132,16 +2123,45 @@ const ProductList = () => {
                                   </p>
                                 </div>
                               }
-                              {((isStoneWShow || isStonePShow) === 1 && (products?.totalcolorstoneweight !== 0 || products?.totalcolorstonepcs !== 0)) &&
+                              {/* {((isDaaimongWShow || isDaaimongWShow) === 1 && (products?.diamondweight !== 0 || products?.diamondpcs !== 0)) &&
                                 <div className={show4ImagesView ? "feature4" : 'feature'}>
                                   <p>
-                                    <span className="feature-count">CWT : </span> {(isStoneWShow === 1 && products?.totalcolorstoneweight !== 0) && products?.totalcolorstoneweight + '/'}  {(isStonePShow === 1 && products?.totalcolorstonepcs !== 0) && products?.totalcolorstonepcs}
+                                    <span className="feature-count">DWT : </span> {(isDaaimongWShow === 1 && products?.diamondweight !== 0) && products?.diamondweight + '/'}  {(isDaaimonPShow === 1 && products?.diamondpcs !== 0) && products?.diamondpcs}
+                                  </p>
+                                </div>
+                              } */}
+                            </div>
+                            <div>
+                              
+                              {/* <div className={show4ImagesView ? "feature4" : 'feature'}>
+                                <p>
+                                  <span className="feature-count">{products?.designno}</span>
+                                </p>
+                              </div>
+                              {isPriceShow === 1 &&
+                                <div className={show4ImagesView ? "feature4" : 'feature'}>
+                                  <p>
+                                  <span className="feature-count">{currencySym?.Currencysymbol}
+                                    {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}</span>
+                                    </p>
+                                </div>
+                              } */}
+                                <div className={show4ImagesView ? "feature4" : 'feature'}>
+                                  <p>
+                                    <span className="feature-count">{products?.designno}</span>
+                                  </p>
+                                </div>
+                                {isPriceShow === 1 &&
+                                <div className={show4ImagesView ? "feature4" : 'feature'}>
+                                  <p>
+                                    <span className="feature-count">{currencySym?.Currencysymbol}
+                                    {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}</span>
                                   </p>
                                 </div>
                               }
                             </div>
                           </div>
-                          {products?.IsColorWiseImageExists !== null && (
+                          {isColorWiseImageShow == 1  && (
                             <div
                               style={{
                                 display: "flex",
