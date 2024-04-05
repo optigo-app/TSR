@@ -101,7 +101,7 @@
   font-size-adjust: 1;
   color: #1f1919;
   font-style: normal;
-  font-family: "PT Sans, sans-serif";
+  font-family: "PT Sans", sans-serif;
   text-transform: capitalize;
   font-weight: 600;
   cursor: pointer;
@@ -119,19 +119,19 @@
 .customizeDetails {
   color: #1f1919;
   font-size: 13px;
-  font-family: "PT Sans, sans-serif";
+  font-family: "PT Sans", sans-serif;
 }
 
 .priceQuality {
   color: #1f1919;
   text-align: start;
   font-size: 13px;
-  font-family: "PT Sans, sans-serif";
+  font-family: "PT Sans", sans-serif;
   margin-top: 5px;
 }
 
 .filtercategoryLable {
-  font-family: "PT Sans, sans-serif";
+  font-family: "PT Sans", sans-serif;
   font-size: 13px;
   font-weight: 500px !important;
   text-transform: uppercase;
@@ -147,7 +147,7 @@
   letter-spacing: 1.5px;
   line-height: 1.5;
   font-weight: 300 !important;
-  font-family: "PT Sans, sans-serif";
+  font-family: "PT Sans", sans-serif;
   text-transform: uppercase;
 }
 
@@ -223,7 +223,7 @@
   display: flex;
   color: #7b7b7b;
   font-size: 13.5px;
-  font-family: "PT Sans, sans-serif";
+  font-family: "PT Sans", sans-serif;
   align-items: center;
   cursor: pointer;
   justify-content: end !important;
@@ -723,7 +723,7 @@
     display: flex;
     color: #7b7b7b;
     font-size: 12.5px;
-    font-family: "PT Sans, sans-serif";
+    font-family: "PT Sans", sans-serif;
     align-items: center;
     justify-content: end !important;
   }
@@ -834,7 +834,7 @@
     display: flex;
     color: #7b7b7b;
     font-size: 12.5px;
-    font-family: "PT Sans, sans-serif";
+    font-family: "PT Sans", sans-serif;
     align-items: center;
     justify-content: end !important;
   }
@@ -915,7 +915,7 @@
     display: flex;
     color: #7b7b7b;
     font-size: 12.5px;
-    font-family: "PT Sans, sans-serif";
+    font-family: "PT Sans", sans-serif;
     align-items: center;
     justify-content: end !important;
   }

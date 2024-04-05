@@ -443,9 +443,11 @@ const ManageAddress = () => {
                 padding: "15px 15px",
                 marginTop: '30px',
                 fontSize: '20px',
-                background: '#7d7f85',
-                color: "#fff",
-                fontWeight: "500",
+                background: '#f6efe6',
+                color: "rgba(31, 25, 25, 0.7)",
+                fontFamily:"PT Sans, sans-serif",
+                fontWeight: "700",
+                opacity:'.8'
             }} className='savedAddress'>Saved Addresses</p>
             <Box sx={{ paddingLeft: "15px" }}>
                 <Button className='muiSmilingRocksBtnManage savedAddressManageBtn' variant="contained" sx={{ background: "#7d7f85", padding: "6px 15px", textAlign: "end", fontSize: "0.9rem", marginBottom: "10px", borderRadius: "0" }} onClick={handleOpen}>ADD NEW ADDRESS</Button></Box>
@@ -463,32 +465,32 @@ const ManageAddress = () => {
                                 return <Box className="AddressSec" key={index}>
                                     <Box className={`manageAddressBlock ${item.isdefault === 1 && `manageAddressDefault`}`}>
                                         <Box sx={{ display: "flex", flexWrap: "wrap", }}>
-                                            <Box sx={{ paddingRight: "15px", fontweight: "600", paddingBottom: "10px" }}><h6>{item?.shippingfirstname && item?.shippingfirstname}</h6></Box>
-                                            <Box sx={{ fontweight: "600" }}><h6>{item?.shippinglastname !== undefined && item?.shippinglastname}</h6></Box>
+                                            <Box className="addresDetailsTg addresDetailsName" sx={{ paddingRight: "5px", fontweight: "600", paddingBottom: "10px" }}><h6 className="addresDetailsTg">{item?.shippingfirstname && item?.shippingfirstname}</h6></Box>
+                                            <Box className="addresDetailsTg addresDetailsName" sx={{ fontweight: "600" }}><h6 className="addresDetailsTg">{item?.shippinglastname !== undefined && item?.shippinglastname}</h6></Box>
                                         </Box>
-                                        <Box>
-                                            <Typography sx={{ paddingBottom: "15px" }}>{item?.street !== undefined && item?.street},{item?.city !== undefined && item?.city}-{item?.zip !== undefined && item?.zip},{item?.state !== undefined && item?.state},{item?.country !== undefined && item?.country}</Typography>
+                                        <Box className="addresDetailsTg addresDetailsAddrs">
+                                            <Typography className="addresDetailsTg" sx={{ paddingBottom: "15px" }}>{item?.street !== undefined && item?.street},{item?.city !== undefined && item?.city}-{item?.zip !== undefined && item?.zip},{item?.state !== undefined && item?.state},{item?.country !== undefined && item?.country}</Typography>
                                         </Box>
                                         <NavLink to="" style={{ textDecoration: "unset" }}>
-                                            <Box sx={{ display: "flex", paddingBottom: "15px", textDecoration: "unset", marginLeft: "-4px", }}>
+                                            <Box className="addresDetailsTg addresDetailMoNo" sx={{ display: "flex", paddingBottom: "15px", textDecoration: "unset", marginLeft: "-4px", }}>
                                                 <StayPrimaryPortraitIcon />
-                                                <Typography sx={{ paddingLeft: "3px", textDecoration: "unset" }}>{item?.shippingmobile !== undefined && item?.shippingmobile}</Typography>
+                                                <Typography className="addresDetailsTg" sx={{ paddingLeft: "3px", textDecoration: "unset" }}>{item?.shippingmobile !== undefined && item?.shippingmobile}</Typography>
                                             </Box>
                                         </NavLink>
 
 
-                                        <Box sx={{ display: "flex", paddingBottom: "7px", alignItems: 'center' }}>
+                                        <Box className="addresDetailsTg addresDetailsDefault" sx={{ display: "flex", paddingBottom: "7px", alignItems: 'center' }}>
                                             {/* <FormControlLabel value="Default1" control={<Radio />} /> */}
                                             <input
                                                 type="radio"
                                                 checked={item.isdefault === 1}
                                                 onChange={() => handleDefaultSelection(item.id)}
-                                                className='manageAddressInputRadio'
+                                                className='manageAddressInputRadio '
                                             />
-                                            <Typography>Default</Typography>
+                                            <Typography className="addresDetailsTg">Default</Typography>
                                         </Box>
 
-                                        <Box sx={{ borderTop: "1px solid #dee2e6 !important", display: "flex", flexWrap: "wrap", paddingTop: "20px", position: 'absolute', bottom: 0, left: "15px", width: "calc( 100% - 30px)", }}>
+                                        <Box className="addresDetailsTg addresDetailsBtn" sx={{ borderTop: "1px solid rgba(0, 0, 0, 0.04) !important", display: "flex", flexWrap: "wrap", paddingTop: "20px", position: 'absolute', bottom: 0, left: "15px", width: "calc( 100% - 30px)", }}>
                                             <Button className='muiSmilingRocksBtnManageEdit' variant="contained"
                                                 sx={{
                                                     background: "#7d7f85", maxHeight: "30px", minWidth: "max-content",
@@ -516,13 +518,14 @@ const ManageAddress = () => {
                 open={openDelete}
             >
                 <div className='smilingDeliverDelerePopu'>
-                    <p style={{ fontSize: '20px', fontWeight: 500 }}>ARE YOU SURE TO DELETE ?</p>
+                    <p className='addresDetailsTg'  style={{ fontSize: '20px', fontWeight: 400 }}>ARE YOU SURE TO DELETE ?</p>
 
                     <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '40px' }}>
                         <button onClick={handleDeleteAddress} style={{
                             height: '35px',
                             width: '100px',
-                            backgroundColor: 'lightgray',
+                            backgroundColor: '#f6efe6',
+                            color:'rgba(31, 25, 25, 0.7)',
                             fontWeight: 500,
                             border: 'none',
                             outline: 'none',
@@ -531,7 +534,8 @@ const ManageAddress = () => {
                         <button onClick={() => setOpenDelete(false)} style={{
                             height: '35px',
                             width: '100px',
-                            backgroundColor: 'lightgray',
+                            backgroundColor: '#f6efe6',
+                            color:'rgba(31, 25, 25, 0.7)',
                             fontWeight: 500,
                             border: 'none',
                             outline: 'none',
@@ -545,13 +549,13 @@ const ManageAddress = () => {
                 onClose={handleClose}
             >
                 <div className='smilingAddressPopupMain'>
-                    <DialogTitle style={{ textAlign: 'center', textDecoration: 'underline' }}>Add Shipping Info</DialogTitle>
+                    <DialogTitle className='addresDetailsTg' style={{ textAlign: 'center', textDecoration: 'underline' }}><Typography variant='h6'>Add Shipping Info</Typography></DialogTitle>
                     <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <TextField
                             id="firstName"
                             label="First Name"
                             variant="outlined"
-                            className="labgrowRegister"
+                            className="labgrowRegister addresDetailsTg"
                             style={{ margin: '15px' }}
                             value={formData.firstName}
                             onChange={(e) => handleInputChange(e, 'firstName')}
@@ -562,7 +566,7 @@ const ManageAddress = () => {
                             id="lastName"
                             label="Last Name"
                             variant="outlined"
-                            className="labgrowRegister"
+                            className="labgrowRegister addresDetailsTg"
                             style={{ margin: '15px' }}
                             value={formData.lastName}
                             onChange={(e) => handleInputChange(e, 'lastName')}
@@ -573,7 +577,7 @@ const ManageAddress = () => {
                             id="address"
                             label="Address"
                             variant="outlined"
-                            className="labgrowRegister"
+                            className="labgrowRegister addresDetailsTg"
                             style={{ margin: '15px' }}
                             value={formData.address}
                             onChange={(e) => handleInputChange(e, 'address')}
@@ -584,7 +588,7 @@ const ManageAddress = () => {
                             id="country"
                             label="Country"
                             variant="outlined"
-                            className="labgrowRegister"
+                            className="labgrowRegister addresDetailsTg"
                             style={{ margin: '15px' }}
                             value={formData.country}
                             onChange={(e) => handleInputChange(e, 'country')}
@@ -595,7 +599,7 @@ const ManageAddress = () => {
                             id="state"
                             label="State"
                             variant="outlined"
-                            className="labgrowRegister"
+                            className="labgrowRegister addresDetailsTg"
                             style={{ margin: '15px' }}
                             value={formData.state}
                             onChange={(e) => handleInputChange(e, 'state')}
@@ -606,7 +610,7 @@ const ManageAddress = () => {
                             id="city"
                             label="City"
                             variant="outlined"
-                            className="labgrowRegister"
+                            className="labgrowRegister addresDetailsTg"
                             style={{ margin: '15px' }}
                             value={formData.city}
                             onChange={(e) => handleInputChange(e, 'city')}
@@ -617,7 +621,7 @@ const ManageAddress = () => {
                             id="zipCode"
                             label="ZIP Code"
                             variant="outlined"
-                            className="labgrowRegister"
+                            className="labgrowRegister addresDetailsTg"
                             style={{ margin: '15px' }}
                             value={formData.zipCode}
                             onChange={(e) => handleInputChange(e, 'zipCode')}
@@ -628,7 +632,7 @@ const ManageAddress = () => {
                             id="mobileNo"
                             label="Mobile No."
                             variant="outlined"
-                            className="labgrowRegister"
+                            className="labgrowRegister addresDetailsTg"
                             style={{ margin: '15px' }}
                             value={formData.mobileNo}
                             onChange={(e) => handleInputChange(e, 'mobileNo')}
@@ -637,7 +641,7 @@ const ManageAddress = () => {
                         />
                         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px' }}>
                             <div style={{ display: 'flex', justifyContent: 'center', marginTop: '15px', marginBottom: '30px' }}>
-                                <button type="submit" className='smilingDeleveryformSaveBtn'>
+                                <button  type="submit" className='smilingDeleveryformSaveBtn'>
                                     {isEditMode ? 'Edit' : 'Add'}
                                 </button>
                                 <button onClick={handleClose} className='smilingDeleveryformCansleBtn'>
