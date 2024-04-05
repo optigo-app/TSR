@@ -79,7 +79,6 @@ const ProdDetail = () => {
   const [designUniqueNO, setDesignUnicNo] = useState('');
   const [uploadLogicPath, setUploadLogicPath] = useState('');
   const [uKey, setUkey] = useState('');
-  const [globImagePath,setGlobImagepath] = useState()
 
 
   const setCartCount = useSetRecoilState(CartListCounts)
