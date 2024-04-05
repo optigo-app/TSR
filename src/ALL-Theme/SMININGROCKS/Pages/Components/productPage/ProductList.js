@@ -31,6 +31,8 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import SortIcon from '@mui/icons-material/Sort';
 import GridViewIcon from '@mui/icons-material/GridView';
 import AppsIcon from '@mui/icons-material/Apps';
+import { TfiLayoutGrid4Alt } from "react-icons/tfi";
+
 
 function valuetext(value) {
   return `${value}°C`;
@@ -1449,32 +1451,6 @@ const ProductList = () => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      {/* <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List> */}
-
       {isOpenDetail &&
         <div>
           {NewFilterData().map((ele, index) => (
@@ -1567,14 +1543,7 @@ const ProductList = () => {
                       }}
                       key={i}
                     >
-                      <small
-                        // style={{
-                        //   fontFamily: "TT Commons, sans-serif",
-                        //   color: "#7f7d85",
-                        //   textTransform: "lowercase",
-                        // }}
-                        className="sidebarfilterText"
-                      >
+                      <small className="sidebarfilterText" >
                         {flist}
                       </small>
                       <Checkbox
@@ -1583,11 +1552,6 @@ const ProductList = () => {
                           filterChecked[`checkbox${index + 1}${i + 1}`]
                             ?.checked
                         }
-                        // style={{
-                        //   color: "#e3e3e3",
-                        //   padding: 0,
-                        //   width: "10px",
-                        // }}
                         onClick={(e) =>
                           handleCheckboxChange(e, ele, flist)
                         }
@@ -1639,26 +1603,34 @@ const ProductList = () => {
 
 
   const [show2ImagesView, setShow2ImageView] = useState(false);
+  const [show3ImagesView, setShow3ImageView] = useState(false);
   const [show4ImagesView, setShow4ImageView] = useState(false);
   const handle2ImageShow = () => {
     setShow4ImageView(false)
+    setShow3ImageView(false)
     setShow2ImageView(true)
 
   }
 
+  const handle3ImageShow = () => {
+    setShow4ImageView(false)
+    setShow2ImageView(false)
+    setShow3ImageView(true)
+  }
+
   const handle4ImageShow = () => {
     setShow2ImageView(false)
+    setShow3ImageView(false)
     setShow4ImageView(true)
   }
+
 
   return (
     <div id="top">
       <div
         style={{
-          // backgroundColor: "#c0bbb1",
           height: "100%",
           width: "100%",
-          // paddingBottom: "100px",
         }}
       >
         <div
@@ -1666,7 +1638,8 @@ const ProductList = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            paddingTop: '130px'
+            paddingTop: '160px',
+            marginInline: '13%'
           }}
           className='paddingTopMobileSet'
         >
@@ -1711,8 +1684,9 @@ const ProductList = () => {
               <div className="divider"></div>
               <div className="part" style={{ flex: '80%', justifyContent: 'end' }}>
                 <div className="part-content">
-                  <GridViewIcon onClick={() => handle2ImageShow()} />
-                  <AppsIcon onClick={() => handle4ImageShow()} />
+                  <GridViewIcon style={{ height: '30px', width: '30px' }} onClick={() => handle2ImageShow()} />
+                  <AppsIcon style={{ height: '30px', width: '30px' }} onClick={() => handle3ImageShow()} />
+                  <TfiLayoutGrid4Alt style={{ height: '22px', width: '22px' }} onClick={() => handle4ImageShow()} />
                 </div>
               </div>
             </div>
@@ -1723,7 +1697,7 @@ const ProductList = () => {
               >
                 {isShowfilter && (
                   <div className="smilingWebProductListSideBar">
-                    <ul style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '0px 0px 0px 28px' }}>
+                    <ul style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '0px 20px 0px 0px' }}>
                       <li className="finejwelery me-4" id="finejwelery">Filters</li>
                       <li className="finejwelery" id="finejwelery" onClick={() => handlePageReload()}>All Jwelery</li>
                     </ul>
@@ -1735,10 +1709,7 @@ const ProductList = () => {
                             sx={{
                               borderBottom: "1px solid #ededed",
                               borderRadius: 0,
-                              marginLeft: "28px",
-                              "&.Mui-expanded": {
-                                marginLeft: "28px",
-                              },
+                              marginRight: '20px',
                               "&.MuiPaper-root.MuiAccordion-root:last-of-type": {
                                 borderBottomLeftRadius: "0px",
                                 borderBottomRightRadius: "0px",
@@ -2020,12 +1991,11 @@ const ProductList = () => {
                 </div>
                 <div
                   style={{
+                    // width: isShowfilter ? "80%" : "100%",
                     width: isShowfilter ? "80%" : "100%",
                     display: "flex",
                     flexDirection: 'column',
-                    justifyContent: "center",
-                    alignItems: "center",
-                    margin: "40px 0px 0px 0px",
+                    // margin: "40px 0px 0px 0px",
                   }}
                   className="smilingProductImageMain"
                   id="smilingProductImageMain"
@@ -2052,7 +2022,9 @@ const ProductList = () => {
                       <option value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</option>
                     </select>
                   </div>
-                  <div className={show4ImagesView ? "smilingAllProductDataMainMobileShow4Image" : "smilingAllProductDataMainMobile"}>
+                  <div className={`smilingAllProductDataMainMobile
+                                    ${show2ImagesView ? "smilingAllProductDataMainMobileShow2Image" : ""}
+                                    ${show4ImagesView ? "smilingAllProductDataMainMobileShow4Image" : ""}`}>
                     {/* RollOverImageName */}
                     {/* {(newProData.length ? newProData : finalDataOfDisplaying())?.map((products, i) => ( */}
                     {(newProData?.length ? newProData : ProductApiData2)?.map((products, i) => (
@@ -2067,7 +2039,7 @@ const ProductList = () => {
                           <div className="listing-image">
                             <div
                               onClick={() => handelProductSubmit(products)}
-                              className={show2ImagesView ?  'background-2image-container'  : "background-image-container"}
+                              className={show2ImagesView ? 'background-2image-container' : "background-image-container"}
                               style={{
                                 backgroundImage: `url(${hoveredImageUrls[i] ? hoveredImageUrls[i] : updatedColorImage[i] ? updatedColorImage[i] :
 
@@ -2120,16 +2092,16 @@ const ProductList = () => {
                               />
                             </div>
                           </div>
-                          <div className="listing-details" onClick={() => handelProductSubmit(products)}>
-                            <p className="productDetails property-type">
+                          <div className={show4ImagesView ? 'listing4-details' : "listing-details"} onClick={() => handelProductSubmit(products)}>
+                            <p className={show4ImagesView ? "productDetails property4-type" : "productDetails property-type"}>
                               {products?.TitleLine}
                             </p>
                             <div>
                               {isPriceShow === 1 &&
-                                <p className="productDetails price">{currencySym?.Currencysymbol}
+                                <p className={show4ImagesView ? "productDetails price4" : "productDetails price"}>{currencySym?.Currencysymbol}
                                   {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}</p>
                               }
-                              <span className="productDesignDetails">
+                              <span className={show4ImagesView ? "productDesignDetails4" : "productDesignDetails"}>
                                 <p className="productDetails address">{products?.designno}</p>
                                 <Divider
                                   className="dividerLine"
@@ -2141,17 +2113,17 @@ const ProductList = () => {
                               </span>
                             </div>
                           </div>
-                          <div className="listing-features">
+                          <div className={show4ImagesView ? "listing-features4" : "listing-features"} >
                             <div>
                               {ismetalWShow === 1 &&
-                                <div className="feature">
+                                <div className={show4ImagesView ? "feature4" : 'feature'}>
                                   <p>
                                     <span className="feature-count">NWT : </span> {products?.netwt}
                                   </p>
                                 </div>
                               }
                               {((isDaaimongWShow || isDaaimongWShow) === 1 && (products?.diamondweight !== 0 || products?.diamondpcs !== 0)) &&
-                                <div className="feature">
+                                <div className={show4ImagesView ? "feature4" : 'feature'}>
                                   <p>
                                     <span className="feature-count">DWT : </span> {(isDaaimongWShow === 1 && products?.diamondweight !== 0) && products?.diamondweight + '/'}  {(isDaaimonPShow === 1 && products?.diamondpcs !== 0) && products?.diamondpcs}
                                   </p>
@@ -2160,14 +2132,14 @@ const ProductList = () => {
                             </div>
                             <div>
                               {isGrossWShow === 1 &&
-                                <div className="feature">
+                                <div className={show4ImagesView ? "feature4" : 'feature'}>
                                   <p>
                                     <span className="feature-count">GWT : </span> {products?.Grossweight}
                                   </p>
                                 </div>
                               }
                               {((isStoneWShow || isStonePShow) === 1 && (products?.totalcolorstoneweight !== 0 || products?.totalcolorstonepcs !== 0)) &&
-                                <div className="feature">
+                                <div className={show4ImagesView ? "feature4" : 'feature'}>
                                   <p>
                                     <span className="feature-count">CWT : </span> {(isStoneWShow === 1 && products?.totalcolorstoneweight !== 0) && products?.totalcolorstoneweight + '/'}  {(isStonePShow === 1 && products?.totalcolorstonepcs !== 0) && products?.totalcolorstonepcs}
                                   </p>
@@ -2229,11 +2201,7 @@ const ProductList = () => {
             </div>
           </div>
         </div>
-        {/* <div style={{ display: 'flex', justifyContent: 'center', paddingBlock: '30px' }}>
-          <p style={{ margin: '0px', fontWeight: 500, width: '100px', color: 'white', cursor: 'pointer' }} onClick={() => window.scrollTo(0, 0)}>BACK TO TOP</p>
-        </div> */}
       </div>
-
     </div >
   );
 };

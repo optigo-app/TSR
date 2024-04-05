@@ -23,10 +23,15 @@
 .orderedItems{
     /* max-height: 600px;
     min-height: 600px; */
+    font-family: "PT Sans", sans-serif;
     height: 100%;
     overflow-y: auto;
-    border: 1px solid #e8e8e8;
+    /* border: 1px solid #e8e8e8; */
     padding: 15px;
+}
+.orderHistoryItemText{
+    color: #1f1919;
+    opacity: .7;
 }
 .paginate_OH{
     width: 100%;

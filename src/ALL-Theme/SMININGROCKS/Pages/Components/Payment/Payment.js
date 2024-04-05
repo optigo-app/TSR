@@ -136,7 +136,7 @@ export default function Payment() {
                             {/* <p style={{ fontSize: '25px', fontWeight: 500, color: '#5e5e5e' }}>Payment Card Method</p> */}
 
                             <div className='smilingPaySub1Box1Sub1'>
-                                <p style={{ fontSize: '25px', fontWeight: 500, color: '#5e5e5e', margin: '0px 0px 5px 0px', fontFamily: 'PT Sans, sans-serif'  }}>Billing Address</p>
+                                <p style={{ fontSize: '25px', fontWeight: 500, color: '#5e5e5e', margin: '0px 0px 5px 0px', fontFamily: 'Harmonia'  }}>Billing Address</p>
                                 <div style={{}}>
                                     <p className='AddressTitle'>Name : <span className='AdressData'>{selectedAdd.shippingfirstname} {selectedAdd.shippinglastname}</span></p>
                                     <p className='AddressTitle'>Address : <span className='AdressData'>{selectedAdd.street}</span></p>
@@ -147,8 +147,8 @@ export default function Payment() {
                             </div>
 
                             <div className="smilingPaySub1Box1Sub2">
-                                <p style={{ fontSize: '25px', fontWeight: 500, color: '#5e5e5e', margin: '0px 0px 5px 0px', fontFamily: 'PT Sans, sans-serif'  }}>Shipping Address</p>
-                                <p style={{ fontSize: '20px', margin: '0px', fontWeight: 500, color: '#5e5e5e' , fontFamily: 'PT Sans, sans-serif' }}>{selectedAdd.shippingfirstname} {selectedAdd.shippinglastname}</p>
+                                <p style={{ fontSize: '25px', fontWeight: 500, color: '#5e5e5e', margin: '0px 0px 5px 0px', fontFamily: 'Harmonia'  }}>Shipping Address</p>
+                                <p style={{ fontSize: '20px', margin: '0px', fontWeight: 500, color: '#5e5e5e' , fontFamily: 'Harmonia' }}>{selectedAdd.shippingfirstname} {selectedAdd.shippinglastname}</p>
                                 <p className='AddressTitle'><span className='AdressData'>{selectedAdd.street}</span></p>
                                 <p className='AddressTitle'><span className='AdressData'>{selectedAdd.city}-{selectedAdd.zip}</span></p>
                                 <p className='AddressTitle'><span className='AdressData'>{selectedAdd.state},{selectedAdd.country}</span></p>
@@ -156,7 +156,7 @@ export default function Payment() {
                             </div>
                         </div>
                         <div className='smilingPaySub1Box2'>
-                            <p style={{ fontSize: '25px', fontWeight: 500, color: '#5e5e5e', fontFamily: 'PT Sans, sans-serif'  }}>Order Summary</p>
+                            <p style={{ fontSize: '25px', fontWeight: 500, color: '#5e5e5e', fontFamily: 'Harmonia'  }}>Order Summary</p>
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <p className='smilingPaySub1Box2P'>Subtotal</p>
                                 <p>0.00</p>
