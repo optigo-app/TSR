@@ -335,6 +335,12 @@ export default function CartPage() {
       if (response.Data.rd[0].stat === 1) {
         await getCartData();
         await getCountFunc();
+        let prevIndexofCartList = cartListData?.findIndex((cld)=>cld?.autocode === data?.autocode)
+        if(prevIndexofCartList === 0){
+          setCartSelectData()
+        }else{  
+          setCartSelectData(cartListData[prevIndexofCartList -1]);
+        }
       } else {
         alert("Error");
       }
@@ -674,7 +680,10 @@ export default function CartPage() {
                 display: "flex",
               }}
             >
-              <div className="smilingCartDeatilSub2" style={{ marginBottom: cartListData?.length === 0 && '15%' }}>
+              <div
+                className="smilingCartDeatilSub2"
+                style={{ marginBottom: cartListData?.length === 0 && "15%" }}
+              >
                 {cartListData?.length === 0 ? (
                   !isLoading && (
                     <div
@@ -691,12 +700,14 @@ export default function CartPage() {
                           margin: "0px",
                           fontSize: "20px",
                           fontWeight: 500,
-                          fontFamily: 'PT Sans, sans-serif'
+                          fontFamily: "PT Sans, sans-serif",
                         }}
                       >
                         No Data Available
                       </p>
-                      <p style={{fontFamily: 'PT Sans, sans-serif'}}>Please First Add To Cart Data</p>
+                      <p style={{ fontFamily: "PT Sans, sans-serif" }}>
+                        Please First Add To Cart Data
+                      </p>
                       <button
                         className="browseBtnMore"
                         onClick={() => navigation("/productpage")}
@@ -762,185 +773,187 @@ export default function CartPage() {
                                     padding: "20px",
                                   }}
                                 >
-                                  {isProductCuFlag === 1 && <div
-                                    style={{
-                                      borderTop: "1px solid #e1e1e1",
-                                      marginInline: "-10px",
-                                      padding: "20px 20px 20px 0px",
-                                    }}
-                                  >
+                                  {isProductCuFlag === 1 && (
                                     <div
                                       style={{
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                        flexWrap: 'wrap',
-                                        marginTop: "12px",
+                                        borderTop: "1px solid #e1e1e1",
+                                        marginInline: "-10px",
+                                        padding: "20px 20px 20px 0px",
                                       }}
                                     >
-                                      {isMetalCutoMizeFlag == 1 && (
-                                        <div
-                                          style={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            width: "45%",
-                                          }}
-                                        >
-                                          <label className="cartPageDropdownLabel">
-                                            METAL TYPE:
-                                          </label>
-                                          <select
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          justifyContent: "space-between",
+                                          flexWrap: "wrap",
+                                          marginTop: "12px",
+                                        }}
+                                      >
+                                        {isMetalCutoMizeFlag == 1 && (
+                                          <div
                                             style={{
-                                              border: "none",
-                                              outline: "none",
-                                              color: "#7d7f85",
-                                              fontSize: "12.5px",
+                                              display: "flex",
+                                              flexDirection: "column",
+                                              width: "45%",
                                             }}
-                                            // value={mtTypeOption ?? cartSelectData?.metal}
-                                            value={mtTypeOption}
-                                            onChange={(e) =>
-                                              setmtTypeOption(e.target.value)
-                                            }
                                           >
-                                            {metalType.map((data, index) => (
-                                              <option
-                                                key={index}
-                                                value={data.metalType}
-                                              >
-                                                {data.metaltype}
-                                              </option>
-                                            ))}
-                                          </select>
-                                        </div>
-                                      )}
-
-                                      {isMetalCutoMizeFlag == 1 && (
-                                        <div
-                                          style={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            width: "45%",
-                                          }}
-                                        >
-                                          <label className="cartPageDropdownLabel" >
-                                            METAL COLOR:
-                                          </label>
-                                          <select
-                                            style={{
-                                              border: "none",
-                                              outline: "none",
-                                              color: "#7d7f85",
-                                              fontSize: "12.5px",
-                                              fontFamily: "PT Sans, sans-serif",
-
-                                            }}
-                                            value={selectedColor}
-                                            onChange={(e) =>
-                                              setSelectedColor(e.target.value)
-                                            }
-                                          >
-                                            {metalColorData.map((colorItem) => (
-                                              <option
-                                                key={colorItem.ColorId}
-                                                value={colorItem.metalcolorname}
-                                              >
-                                                {colorItem.metalcolorname}
-                                              </option>
-                                            ))}
-                                          </select>
-                                        </div>
-                                      )}
-
-
-                                      {isDaimondCstoFlag == 1 && (
-                                        <div
-                                          style={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            width: "45%",
-                                            marginTop: "30px",
-                                          }}
-                                        >
-                                          <label className="cartPageDropdownLabel">
-                                            DAIMOND :
-                                          </label>
-                                          <select
-                                            style={{
-                                              border: "none",
-                                              outline: "none",
-                                              color: "#7d7f85",
-                                              fontSize: "12.5px",
-                                              fontFamily: "PT Sans, sans-serif",
-
-                                            }}
-                                            value={diaQColOpt}
-                                            onChange={(e) =>
-                                              setDiaQColOpt(e.target.value)
-                                            }
-                                          >
-                                            {colorData?.map((colorItem) => (
-                                              <option
-                                                key={colorItem.ColorId}
-                                                value={`${colorItem.Quality}_${colorItem.color}`}
-                                              >
-                                                {`${colorItem.Quality}_${colorItem.color}`}
-                                              </option>
-                                            ))}
-                                          </select>
-                                        </div>
-                                      )}
-
-                                      {isCColrStoneCustFlag == 1 && (
-                                        <div
-                                          style={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            width: "4%",
-                                            marginTop: "20px",
-
-                                          }}
-                                        >
-                                          <label className="cartPageDropdownLabel">
-                                            COLOR STONE:
-                                          </label>
-                                          <select
-                                            style={{
-                                              border: "none",
-                                              outline: "none",
-                                              color: "#7d7f85",
-                                              fontSize: "12.5px",
-                                              fontFamily: "PT Sans, sans-serif",
-
-                                            }}
-                                            value={cSQopt}
-                                            onChange={(e) =>
-                                              setCSQOpt(e.target.value)
-                                            }
-                                          >
-                                            {DaimondQualityColor.map(
-                                              (data, index) => (
+                                            <label className="cartPageDropdownLabel">
+                                              METAL TYPE:
+                                            </label>
+                                            <select
+                                              style={{
+                                                border: "none",
+                                                outline: "none",
+                                                color: "#7d7f85",
+                                                fontSize: "12.5px",
+                                              }}
+                                              // value={mtTypeOption ?? cartSelectData?.metal}
+                                              value={mtTypeOption}
+                                              onChange={(e) =>
+                                                setmtTypeOption(e.target.value)
+                                              }
+                                            >
+                                              {metalType.map((data, index) => (
                                                 <option
                                                   key={index}
-                                                  value={`${data.Quality}_${data.color}`}
+                                                  value={data.metalType}
                                                 >
-                                                  {`${data.Quality}_${data.color}`}
+                                                  {data.metaltype}
                                                 </option>
-                                              )
-                                            )}
-                                          </select>
-                                        </div>
-                                      )}
+                                              ))}
+                                            </select>
+                                          </div>
+                                        )}
 
-                                      {(sizeData?.length !== 0 ||
-                                        (productData?.DefaultSize &&
-                                          productData.DefaultSize.length !==
-                                          0)) && (
+                                        {isMetalCutoMizeFlag == 1 && (
+                                          <div
+                                            style={{
+                                              display: "flex",
+                                              flexDirection: "column",
+                                              width: "45%",
+                                            }}
+                                          >
+                                            <label className="cartPageDropdownLabel">
+                                              METAL COLOR:
+                                            </label>
+                                            <select
+                                              style={{
+                                                border: "none",
+                                                outline: "none",
+                                                color: "#7d7f85",
+                                                fontSize: "12.5px",
+                                                fontFamily:
+                                                  "PT Sans, sans-serif",
+                                              }}
+                                              value={selectedColor}
+                                              onChange={(e) =>
+                                                setSelectedColor(e.target.value)
+                                              }
+                                            >
+                                              {metalColorData.map(
+                                                (colorItem) => (
+                                                  <option
+                                                    key={colorItem.ColorId}
+                                                    value={
+                                                      colorItem.metalcolorname
+                                                    }
+                                                  >
+                                                    {colorItem.metalcolorname}
+                                                  </option>
+                                                )
+                                              )}
+                                            </select>
+                                          </div>
+                                        )}
+
+                                        {isDaimondCstoFlag == 1 && (
                                           <div
                                             style={{
                                               display: "flex",
                                               flexDirection: "column",
                                               width: "45%",
                                               marginTop: "30px",
+                                            }}
+                                          >
+                                            <label className="cartPageDropdownLabel">
+                                              DAIMOND :
+                                            </label>
+                                            <select
+                                              style={{
+                                                border: "none",
+                                                outline: "none",
+                                                color: "#7d7f85",
+                                                fontSize: "12.5px",
+                                                fontFamily:
+                                                  "PT Sans, sans-serif",
+                                              }}
+                                              value={diaQColOpt}
+                                              onChange={(e) =>
+                                                setDiaQColOpt(e.target.value)
+                                              }
+                                            >
+                                              {colorData?.map((colorItem) => (
+                                                <option
+                                                  key={colorItem.ColorId}
+                                                  value={`${colorItem.Quality}_${colorItem.color}`}
+                                                >
+                                                  {`${colorItem.Quality}_${colorItem.color}`}
+                                                </option>
+                                              ))}
+                                            </select>
+                                          </div>
+                                        )}
 
+                                        {isCColrStoneCustFlag == 1 && (
+                                          <div
+                                            style={{
+                                              display: "flex",
+                                              flexDirection: "column",
+                                              width: "4%",
+                                              marginTop: "20px",
+                                            }}
+                                          >
+                                            <label className="cartPageDropdownLabel">
+                                              COLOR STONE:
+                                            </label>
+                                            <select
+                                              style={{
+                                                border: "none",
+                                                outline: "none",
+                                                color: "#7d7f85",
+                                                fontSize: "12.5px",
+                                                fontFamily:
+                                                  "PT Sans, sans-serif",
+                                              }}
+                                              value={cSQopt}
+                                              onChange={(e) =>
+                                                setCSQOpt(e.target.value)
+                                              }
+                                            >
+                                              {DaimondQualityColor.map(
+                                                (data, index) => (
+                                                  <option
+                                                    key={index}
+                                                    value={`${data.Quality}_${data.color}`}
+                                                  >
+                                                    {`${data.Quality}_${data.color}`}
+                                                  </option>
+                                                )
+                                              )}
+                                            </select>
+                                          </div>
+                                        )}
+
+                                        {(sizeData?.length !== 0 ||
+                                          (productData?.DefaultSize &&
+                                            productData.DefaultSize.length !==
+                                              0)) && (
+                                          <div
+                                            style={{
+                                              display: "flex",
+                                              flexDirection: "column",
+                                              width: "45%",
+                                              marginTop: "30px",
                                             }}
                                           >
                                             <label className="cartPageDropdownLabel">
@@ -952,19 +965,20 @@ export default function CartPage() {
                                                 outline: "none",
                                                 color: "#7d7f85",
                                                 fontSize: "12.5px",
-                                                fontFamily: "PT Sans, sans-serif",
-
+                                                fontFamily:
+                                                  "PT Sans, sans-serif",
                                               }}
                                               onChange={(e) =>
                                                 handelSize(e.target.value)
                                               }
                                               defaultValue={
-                                                productData && productData.DefaultSize
+                                                productData &&
+                                                productData.DefaultSize
                                                   ? productData.DefaultSize
                                                   : sizeData.find(
-                                                    (size) =>
-                                                      size.IsDefaultSize === 1
-                                                  )?.id
+                                                      (size) =>
+                                                        size.IsDefaultSize === 1
+                                                    )?.id
                                               }
                                             >
                                               {sizeData?.map((size) => (
@@ -974,7 +988,7 @@ export default function CartPage() {
                                                   selected={
                                                     productData &&
                                                     productData.DefaultSize ===
-                                                    size.sizename
+                                                      size.sizename
                                                   }
                                                 >
                                                   {size.sizename}
@@ -983,8 +997,9 @@ export default function CartPage() {
                                             </select>
                                           </div>
                                         )}
+                                      </div>
                                     </div>
-                                  </div>}
+                                  )}
                                 </div>
                               </div>
                               <div
@@ -992,25 +1007,46 @@ export default function CartPage() {
                                   marginTop: "20px",
                                   color: "#7d7f85",
                                   fontSize: "14px",
-                                  fontFamily: 'PT Sans, sans-serif'
+                                  display: "flex",
+                                  justifyContent: "space-between",
                                 }}
                               >
-                                Price :{" "}
-                                <span
+                                <span>
+                                  Price :
+                                  <span
+                                    style={{
+                                      fontWeight: "500",
+                                      fontSize: "18px",
+                                      color: "black",
+                                    }}
+                                  >
+                                    {currencySymbol?.Currencysymbol}
+                                    {(
+                                      cartSelectData?.UnitCost +
+                                      (mtrdData?.Z ?? 0) +
+                                      (dqcData?.S ?? 0) +
+                                      (csqcData?.S ?? 0)
+                                    ).toFixed(2)}
+                                  </span>
+                                </span>
+                                <button
                                   style={{
-                                    fontWeight: "500",
-                                    fontSize: "16px",
-
+                                    border: "none",
+                                    outline: "none",
+                                    backgroundColor: "#e1e1e1",
+                                    padding: "6px 17px",
+                                    borderRadius: "4px",
                                   }}
                                 >
-                                  {currencySymbol?.Currencysymbol}
-                                  {(
-                                    cartSelectData?.UnitCost +
-                                    (mtrdData?.Z ?? 0) +
-                                    (dqcData?.S ?? 0) +
-                                    (csqcData?.S ?? 0)
-                                  ).toFixed(2)}
-                                </span>
+                                  <span
+                                    style={{
+                                      fontSize: "16px",
+                                      fontWeight: "500",
+                                    }}
+                                  >
+                                    Save
+                                  </span>
+                                </button>
                               </div>
                               <div className="similingCartPageBotttomMain">
                                 <div
@@ -1103,142 +1139,81 @@ export default function CartPage() {
                                   setDialogOpen(true);
                               }}
                             >
-                              <div className="cartPageCards">
-                                <div className="CartPage-image">
-                                  <div
-                                    className="cartImageContainer"
-                                    style={{
-                                      backgroundImage: `url(${imageURL}/${yKey}/${item.DefaultImageName})`,
-                                    }}
-                                  ></div>
-                                  <div
-                                    className="remove_icon"
-                                    onClick={() => handleRemove(item)}
+                              <div
+                                style={{
+                                  cursor: "pointer",
+                                  position: "absolute",
+                                  right: "0px",
+                                  top: "0px",
+                                  backgroundColor: "black",
+                                  borderRadius: "2px",
+                                  opacity: "0.8",
+                                }}
+                                onClick={() => handleRemove(item)}
+                              >
+                                <CloseIcon
+                                  sx={{ color: "white", fontSize: "22px" }}
+                                />
+                              </div>
+                              <img
+                                src={`${imageURL}/${yKey}/${item.DefaultImageName}`}
+                                alt="#"
+                                className="cartImageShow"
+                              />
+                              <div
+                                className="smilingCartBox1"
+                                style={{ padding: "5px" }}
+                              >
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                  }}
+                                >
+                                  <p
+                                    style={{ margin: "0px", fontSize: "12px" }}
                                   >
-                                    <CloseIcon
-                                    // sx={{ color: "white", fontSize: "22px" }}
-                                    />
-                                  </div>
+                                    NWT :{" "}
+                                    <span style={{ fontWeight: 600 }}>
+                                      {item?.MetalWeight}
+                                    </span>
+                                  </p>
+                                  <p
+                                    style={{ margin: "0px", fontSize: "12px" }}
+                                  >
+                                    DWT :{" "}
+                                    <span style={{ fontWeight: 600 }}>
+                                      {item?.Rec_DiamondWeight} /{" "}
+                                      {item?.totaldiamondpcs}
+                                    </span>
+                                  </p>
                                 </div>
-                                <div className="cart-features">
-                                  <div>
-                                    <div className="cartDeatails-features">
-                                      <p>
-                                        <span className="feature-count">
-                                          NWT :{" "}
-                                        </span>{" "}
-                                        {item?.MetalWeight}
-                                      </p>
-                                    </div>
-                                    <div className="feature">
-                                      <p>
-                                        <span className="feature-titleHead">
-                                          DWT :{" "}
-                                        </span>{" "}
-                                        {item?.Rec_DiamondWeight} /{" "}
-                                        {item?.totaldiamondpcs}
-                                      </p>
-                                    </div>
-                                  </div>
-                                  <div>
-                                    <div className="feature">
-                                      <p>
-                                        <span className="feature-count">
-                                          GWT :{" "}
-                                        </span>{" "}
-                                        {item?.grossweight}
-                                      </p>
-                                    </div>
-                                    <div className="feature">
-                                      <p>
-                                        <span className="feature-count">
-                                          CWT :{" "}
-                                        </span>{" "}
-                                        {item?.Rec_CSWeight} /{" "}
-                                        {item?.totalcolorstonepcs}
-                                      </p>
-                                    </div>
-                                  </div>
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                  }}
+                                >
+                                  <p
+                                    style={{ margin: "0px", fontSize: "12px" }}
+                                  >
+                                    CWT :{" "}
+                                    <span style={{ fontWeight: 600 }}>
+                                      {item?.Rec_CSWeight} /{" "}
+                                      {item?.totalcolorstonepcs}
+                                    </span>
+                                  </p>
+                                  <p
+                                    style={{ margin: "0px", fontSize: "12px" }}
+                                  >
+                                    GWT :{" "}
+                                    <span style={{ fontWeight: 600 }}>
+                                      {item?.grossweight}
+                                    </span>
+                                  </p>
                                 </div>
                               </div>
                             </div>
-
-                            // <div
-                            //   key={item.id}
-                            //   className="smiling-cartPageBoxMain"
-                            //   onClick={() => {
-                            //     setCartSelectData(item);
-                            //     getSizeData(item.autocode)
-                            //     window.innerWidth <= 1080 && setDialogOpen(true)
-                            //   }}
-                            // >
-                            //   <div
-                            //     style={{
-                            //       cursor: "pointer",
-                            //       position: "absolute",
-                            //       right: "0px",
-                            //       top: "0px",
-                            //       backgroundColor: "black",
-                            //       borderRadius: "2px",
-                            //       opacity: "0.8",
-                            //     }}
-                            //     onClick={() => handleRemove(item)}
-                            //   >
-                            //     <CloseIcon
-                            //       sx={{ color: "white", fontSize: "22px" }}
-                            //     />
-                            //   </div>
-                            //   <img
-                            //     src={`${imageURL}/${yKey}/${item.DefaultImageName}`}
-                            //     alt="#"
-                            //     className="cartImageShow"
-                            //   />
-                            //   <div
-                            //     className="smilingCartBox1"
-                            //     style={{ padding: "5px" }}
-                            //   >
-                            //     <div
-                            //       style={{
-                            //         display: "flex",
-                            //         justifyContent: "space-between",
-                            //       }}
-                            //     >
-                            //       <p style={{ margin: "0px", fontSize: "12px" }}>
-                            //         NWT :{" "}
-                            //         <span style={{ fontWeight: 600 }}>
-                            //           {item?.MetalWeight}
-                            //         </span>
-                            //       </p>
-                            //       <p style={{ margin: "0px", fontSize: "12px" }}>
-                            //         DWT :{" "}
-                            //         <span style={{ fontWeight: 600 }}>
-                            //           {item?.Rec_DiamondWeight} /{" "}
-                            //           {item?.totaldiamondpcs}
-                            //         </span>
-                            //       </p>
-                            //     </div>
-                            //     <div
-                            //       style={{
-                            //         display: "flex",
-                            //         justifyContent: "space-between",
-                            //       }}
-                            //     >
-                            //       <p style={{ margin: "0px", fontSize: "12px" }}>
-                            //         CWT :{" "}
-                            //         <span style={{ fontWeight: 600 }}>
-                            //           {item?.Rec_CSWeight} /{" "}
-                            //           {item?.totalcolorstonepcs}
-                            //         </span>
-                            //       </p>
-                            //       <p style={{ margin: "0px", fontSize: "12px" }}>
-                            //         GWT :{" "}
-                            //         <span style={{ fontWeight: 600 }}>
-                            //           {item?.grossweight}
-                            //         </span>
-                            //       </p>
-                            //     </div>
-                            //   </div>
-                            // </div>
                           ))}
                         </div>
 
@@ -1261,7 +1236,8 @@ export default function CartPage() {
                             Add Order Remark
                           </button>
                         </div>
-                      </div>)}
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -1439,7 +1415,8 @@ export default function CartPage() {
                           >
                             <label
                               style={{
-                                fontSize: "12.5px", color: "#7d7f85",
+                                fontSize: "12.5px",
+                                color: "#7d7f85",
                                 fontFamily: "PT Sans, sans-serif",
                               }}
                             >
@@ -1452,7 +1429,6 @@ export default function CartPage() {
                                 color: "#7d7f85",
                                 fontSize: "12.5px",
                                 fontFamily: "PT Sans, sans-serif",
-
                               }}
                               value={selectedColor}
                               onChange={(e) => setSelectedColor(e.target.value)}
@@ -1521,7 +1497,8 @@ export default function CartPage() {
                           >
                             <label
                               style={{
-                                fontSize: "12.5px", color: "#7d7f85",
+                                fontSize: "12.5px",
+                                color: "#7d7f85",
                                 fontFamily: "PT Sans, sans-serif",
                               }}
                             >
@@ -1598,54 +1575,55 @@ export default function CartPage() {
                       {(sizeData?.length !== 0 ||
                         (productData?.DefaultSize &&
                           productData.DefaultSize.length !== 0)) && (
-                          <div
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: "49%",
+                            marginTop: "30px",
+                          }}
+                        >
+                          <label
                             style={{
-                              display: "flex",
-                              flexDirection: "column",
-                              width: "49%",
-                              marginTop: "30px",
+                              fontSize: "12.5px",
+                              color: "#7d7f85",
+                              fontFamily: "PT Sans, sans-serif",
                             }}
                           >
-                            <label
-                              style={{
-                                fontSize: "12.5px", color: "#7d7f85",
-                                fontFamily: "PT Sans, sans-serif",
-                              }}
-                            >
-                              SIZE:
-                            </label>
-                            <select
-                              style={{
-                                border: "none",
-                                outline: "none",
-                                color: "#7d7f85",
-                                fontFamily: "PT Sans, sans-serif",
-                                fontSize: "12.5px",
-                              }}
-                              onChange={(e) => handelSize(e.target.value)}
-                              defaultValue={
-                                productData && productData.DefaultSize
-                                  ? productData.DefaultSize
-                                  : sizeData.find(
+                            SIZE:
+                          </label>
+                          <select
+                            style={{
+                              border: "none",
+                              outline: "none",
+                              color: "#7d7f85",
+                              fontFamily: "PT Sans, sans-serif",
+                              fontSize: "12.5px",
+                            }}
+                            onChange={(e) => handelSize(e.target.value)}
+                            defaultValue={
+                              productData && productData.DefaultSize
+                                ? productData.DefaultSize
+                                : sizeData.find(
                                     (size) => size.IsDefaultSize === 1
                                   )?.id
-                              }
-                            >
-                              {sizeData?.map((size) => (
-                                <option
-                                  key={size.id}
-                                  value={size.sizename} // Pass sizename as value
-                                  selected={
-                                    productData &&
-                                    productData.DefaultSize === size.sizename
-                                  }
-                                >
-                                  {size.sizename}
-                                </option>
-                              ))}
-                            </select>
-                          </div>
-                        )}
+                            }
+                          >
+                            {sizeData?.map((size) => (
+                              <option
+                                key={size.id}
+                                value={size.sizename} // Pass sizename as value
+                                selected={
+                                  productData &&
+                                  productData.DefaultSize === size.sizename
+                                }
+                              >
+                                {size.sizename}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
                     </div>
                   </div>
                   <div
@@ -1653,23 +1631,41 @@ export default function CartPage() {
                       marginTop: "20px",
                       color: "#7d7f85",
                       fontSize: "14px",
-                      fontFamily: "PT Sans, sans-serif",
-
+                      display: "flex",
+                      justifyContent: "space-between",
                     }}
                   >
-                    Price :{" "}
-                    <span style={{
-                      fontWeight: "500", fontSize: "16px",
-                      fontFamily: "PT Sans, sans-serif",
-                    }}>
-                      {currencySymbol?.Currencysymbol}
-                      {(
-                        cartSelectData?.UnitCost +
-                        (mtrdData?.Z ?? 0) +
-                        (dqcData?.S ?? 0) +
-                        (csqcData?.S ?? 0)
-                      ).toFixed(2)}
+                    <span>
+                      Price :
+                      <span
+                        style={{
+                          fontWeight: "500",
+                          fontSize: "18px",
+                          color: "black",
+                        }}
+                      >
+                        {currencySymbol?.Currencysymbol}
+                        {(
+                          cartSelectData?.UnitCost +
+                          (mtrdData?.Z ?? 0) +
+                          (dqcData?.S ?? 0) +
+                          (csqcData?.S ?? 0)
+                        ).toFixed(2)}
+                      </span>
                     </span>
+                    <button
+                      style={{
+                        border: "none",
+                        outline: "none",
+                        backgroundColor: "#e1e1e1",
+                        padding: "6px 17px",
+                        borderRadius: "4px",
+                      }}
+                    >
+                      <span style={{ fontSize: "16px", fontWeight: "500" }}>
+                        Save
+                      </span>
+                    </button>
                   </div>
                   <div className="similingCartPageBotttomMain">
                     <div

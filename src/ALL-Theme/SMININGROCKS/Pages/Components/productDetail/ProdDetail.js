@@ -78,6 +78,8 @@ const ProdDetail = () => {
   const [designUniqueNO, setDesignUnicNo] = useState('');
   const [uploadLogicPath, setUploadLogicPath] = useState('');
   const [uKey, setUkey] = useState('');
+  const [globImagePath,setGlobImagepath] = useState()
+
 
   const setCartCount = useSetRecoilState(CartListCounts)
   const setWishCount = useSetRecoilState(WishListCounts)
@@ -97,6 +99,10 @@ const ProdDetail = () => {
     setGetPriceData(data)
   }, [])
 
+  useEffect(()=>{
+    const storeInit = JSON.parse(localStorage.getItem('storeInit'))
+    setGlobImagepath(storeInit?.DesignImageFol)
+  },[])
 
 
   useEffect(() => {
@@ -781,7 +787,7 @@ const ProdDetail = () => {
           "encrypted_designno": `${product?.encrypted_designno ?? ""}`,
           "hashtagid": `${product?.Hashtagid ?? ""}`,
           "hashtagname": `${product?.Hashtagname ?? ""}`,
-          "imagepath": `${product?.imagepath}`,
+          "imagepath": `${globImagePath}`,
           "mediumimage": `${product?.MediumImagePath ?? ""}`,
           "originalimage": `${product?.OriginalImagePath}`,
           "storyline_html": `${product?.storyline_html ?? ""}`,
@@ -1049,7 +1055,7 @@ const ProdDetail = () => {
           "encrypted_designno": `${product?.encrypted_designno ?? ""}`,
           "hashtagid": `${product?.Hashtagid ?? ""}`,
           "hashtagname": `${product?.Hashtagname ?? ""}`,
-          "imagepath": `${product?.imagepath}`,
+          "imagepath": `${globImagePath}`,
           "imgrandomno": `${product?.imgrandomno}`,
           "mediumimage": `${product?.MediumImagePath ?? ""}`,
           "originalimage": `${product?.OriginalImagePath}`,
@@ -1233,7 +1239,7 @@ const ProdDetail = () => {
                   src={
 
                     (productData?.OriginalImagePath) ? (selectedImagePath == '' ?
-                      productData?.imagepath +
+                      globImagePath +
                       (!handelmainImg()?.length
                         ? productData?.OriginalImagePath?.split(",")[0]
                         : handelmainImg())
@@ -1261,7 +1267,7 @@ const ProdDetail = () => {
                   {productData?.ThumbImagePath && <div className="srthumb_images">
                     {productData?.ThumbImagePath?.split(",").map((data, i) => (
                       <img
-                        src={productData?.imagepath + data}
+                        src={globImagePath + data}
                         alt={""}
                         className="srthumb_images_el"
                         onClick={() => setThumbImg(i)}
@@ -1343,7 +1349,7 @@ const ProdDetail = () => {
                         // textTransform: "uppercase",
                         fontSize: "16px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',
+                        fontFamily: "PT Sans, sans-serif",
                         fontWeight:'600',
                         letterSpacing:'2px'
                       }}
@@ -1355,7 +1361,7 @@ const ProdDetail = () => {
                       style={{
                         fontSize: "16px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',
+                        fontFamily: "PT Sans, sans-serif",
                         // fontWeight:'600'
                       }}
                     >
@@ -1365,7 +1371,7 @@ const ProdDetail = () => {
                       style={{
                         fontSize: "16px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',
+                        fontFamily: "PT Sans, sans-serif",
                         // fontWeight:'600'
                       }}
                     >
@@ -1375,7 +1381,7 @@ const ProdDetail = () => {
                       style={{
                         fontSize: "16px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',
+                        fontFamily: "PT Sans, sans-serif",
                         // fontWeight:'600'
                       }}
                     >
@@ -1457,7 +1463,7 @@ const ProdDetail = () => {
                     <label style={{ 
                        fontSize: "15px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',
+                        fontFamily: "PT Sans, sans-serif",
                         }}>
                       METAL TYPE:
                     </label>
@@ -1465,7 +1471,7 @@ const ProdDetail = () => {
                       <span style={{ 
                         fontSize: "16px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',
+                        fontFamily: "PT Sans, sans-serif",
                         fontWeight:'bold',
                         letterSpacing:'2.2px'
 
@@ -1479,7 +1485,7 @@ const ProdDetail = () => {
                           outline: "none",
                           fontSize: "13px",
                           color: "#424242",
-                          fontFamily: 'Harmonia',
+                          fontFamily: "PT Sans, sans-serif",
                           fontWeight:'bold',
                         letterSpacing:'2.2px'
 
@@ -1520,14 +1526,14 @@ const ProdDetail = () => {
                       <label style={{ 
                         fontSize: "15px",
                         color: "#424242",
-                        fontFamily: 'Harmonia'
+                        fontFamily: "PT Sans, sans-serif"
                         }}>
                         METAL COLOR:
                       </label>
                       {mtrdData.U === 1 ?
                         <span style={{ fontSize: "16px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',
+                        fontFamily: "PT Sans, sans-serif",
                         fontWeight:'bold',
                         letterSpacing:'2.2px'
                         }}>
@@ -1540,7 +1546,7 @@ const ProdDetail = () => {
                             outline: "none",
                             fontSize: "13px",
                             color: "#424242",
-                            fontFamily: 'Harmonia',
+                            fontFamily: "PT Sans, sans-serif",
                             fontWeight:'bold',
                             letterSpacing:'2.2px'
                           }}
@@ -1571,14 +1577,14 @@ const ProdDetail = () => {
                   >
                     <label style={{ fontSize: "15px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',}}>
+                        fontFamily: "PT Sans, sans-serif",}}>
                       DAIMOND :
                     </label>
                     {mtrdData?.U === 1 ?
                       <span style={{ 
                         fontSize: "16px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',
+                        fontFamily: "PT Sans, sans-serif",
                         fontWeight:'bold',
                         letterSpacing:'2.2px'
                       }}>
@@ -1591,7 +1597,7 @@ const ProdDetail = () => {
                           outline: "none",
                           fontSize: "13px",
                           color: "#424242",
-                          fontFamily: 'Harmonia',
+                          fontFamily: "PT Sans, sans-serif",
                           fontWeight:'bold',
                           letterSpacing:'2.2px'
                         }}
@@ -1632,7 +1638,7 @@ const ProdDetail = () => {
                     <label style={{ 
                         fontSize: "15px",
                         color: "#424242",
-                        fontFamily: 'Harmonia'
+                        fontFamily: "PT Sans, sans-serif"
                         }}>
                       COLOR STONE:
                     </label>
@@ -1641,7 +1647,7 @@ const ProdDetail = () => {
                         <span style={{ 
                           fontSize: "16px",
                           color: "#424242",
-                          fontFamily: 'Harmonia',
+                          fontFamily: "PT Sans, sans-serif",
                           fontWeight:'bold',
                           letterSpacing:'2.2px'
 
@@ -1655,7 +1661,7 @@ const ProdDetail = () => {
                             outline: "none",
                             fontSize: "13px",
                             color: "#424242",
-                            fontFamily: 'Harmonia',
+                            fontFamily: "PT Sans, sans-serif",
                             fontWeight:'bold',
                             letterSpacing:'2.2px'
 
@@ -1686,7 +1692,7 @@ const ProdDetail = () => {
                       <label style={{
                         fontSize: "15px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',
+                        fontFamily: "PT Sans, sans-serif",
                         }}>
                         SIZE:
                       </label>
@@ -1696,7 +1702,7 @@ const ProdDetail = () => {
                           outline: "none",
                           fontSize: "16px",
                           color: "#424242",
-                          fontFamily: 'Harmonia',
+                          fontFamily: "PT Sans, sans-serif",
                           fontWeight:'bold'
                         }}
                         onChange={(e) => handelSize(e.target.value)}
@@ -1912,12 +1918,11 @@ const ProdDetail = () => {
 
                 {isPriseShow == 1 && <div style={{ marginTop: "23px" }}>
                   <p style={{ fontSize: "20px",
-                        color: "#424242",
-                        fontFamily: 'Harmonia', }}>
+                        color: "#424242",}}>
                     {/* Price: <span style={{ fontWeight: '500', fontSize: '16px' }}>{currencySymbol?.Currencysymbol}{`${(productData?.price - grandTotal) === 0 ? "Not Availabel" : (productData?.price - grandTotal)?.toFixed(2)}`}</span> */}
                     {/* Price: <span style={{ fontWeight: '500', fontSize: '16px' }}>{currencySymbol?.Currencysymbol}{`${productData?.UnitCost + (productData?.price - grandTotal)?.toFixed(2)}`}</span> */}
-                    {currencySymbol?.Currencysymbol}
-                    <span style={{ fontWeight: 'bold', fontSize: '22px',letterSpacing:'2.2px'}}>{`${((productData?.UnitCost) + (mtrdData?.Z ?? 0) + (dqcData?.S ?? 0) + (csqcData?.S ?? 0) + (sizeMarkup ?? 0) + metalUpdatedPrice() + diaUpdatedPrice() + colUpdatedPrice()).toFixed(2)}`}</span>
+                    <span>{currencySymbol?.Currencysymbol}</span>
+                    <span style={{ fontWeight: 'bold', fontSize: '22px',letterSpacing:'2.2px',fontFamily: "PT Sans, sans-serif"}}>{`${((productData?.UnitCost) + (mtrdData?.Z ?? 0) + (dqcData?.S ?? 0) + (csqcData?.S ?? 0) + (sizeMarkup ?? 0) + metalUpdatedPrice() + diaUpdatedPrice() + colUpdatedPrice()).toFixed(2)}`}</span>
                   </p>
                 </div>}
 
