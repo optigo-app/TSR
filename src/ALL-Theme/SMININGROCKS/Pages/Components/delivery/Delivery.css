@@ -5,7 +5,7 @@
 
 .smilingOrderMain{
     display: flex;
-    margin-inline: 10%;
+    margin-inline: 7%;
 }
 
 .smilingdeliverBox1{
@@ -33,6 +33,7 @@
     border-radius: 5px;
     margin-bottom: 5px;
     position: relative;
+    margin-bottom: 5px;
 }
 .addressData{
     margin: 0px;
