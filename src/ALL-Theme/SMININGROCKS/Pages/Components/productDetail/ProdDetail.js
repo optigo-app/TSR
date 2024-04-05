@@ -79,6 +79,8 @@ const ProdDetail = () => {
   const [designUniqueNO, setDesignUnicNo] = useState('');
   const [uploadLogicPath, setUploadLogicPath] = useState('');
   const [uKey, setUkey] = useState('');
+  const [globImagePath,setGlobImagepath] = useState()
+
 
   const setCartCount = useSetRecoilState(CartListCounts)
   const setWishCount = useSetRecoilState(WishListCounts)
@@ -98,6 +100,10 @@ const ProdDetail = () => {
     setGetPriceData(data)
   }, [])
 
+  useEffect(()=>{
+    const storeInit = JSON.parse(localStorage.getItem('storeInit'))
+    setGlobImagepath(storeInit?.DesignImageFol)
+  },[])
 
   useEffect(()=>{
     const storeInit = JSON.parse(localStorage.getItem('storeInit'))
@@ -786,7 +792,7 @@ const ProdDetail = () => {
           "encrypted_designno": `${product?.encrypted_designno ?? ""}`,
           "hashtagid": `${product?.Hashtagid ?? ""}`,
           "hashtagname": `${product?.Hashtagname ?? ""}`,
-          "imagepath": `${product?.imagepath}`,
+          "imagepath": `${globImagePath}`,
           "mediumimage": `${product?.MediumImagePath ?? ""}`,
           "originalimage": `${product?.OriginalImagePath}`,
           "storyline_html": `${product?.storyline_html ?? ""}`,
@@ -1054,7 +1060,7 @@ const ProdDetail = () => {
           "encrypted_designno": `${product?.encrypted_designno ?? ""}`,
           "hashtagid": `${product?.Hashtagid ?? ""}`,
           "hashtagname": `${product?.Hashtagname ?? ""}`,
-          "imagepath": `${product?.imagepath}`,
+          "imagepath": `${globImagePath}`,
           "imgrandomno": `${product?.imgrandomno}`,
           "mediumimage": `${product?.MediumImagePath ?? ""}`,
           "originalimage": `${product?.OriginalImagePath}`,
@@ -1272,7 +1278,7 @@ const ProdDetail = () => {
                   {productData?.ThumbImagePath && <div className="srthumb_images">
                     {productData?.ThumbImagePath?.split(",").map((data, i) => (
                       <img
-                        src={productData?.imagepath + data}
+                        src={globImagePath + data}
                         alt={""}
                         className="srthumb_images_el"
                         onClick={() => setThumbImg(i)}
@@ -1366,7 +1372,7 @@ const ProdDetail = () => {
                       style={{
                         fontSize: "16px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',
+                        fontFamily: "PT Sans, sans-serif",
                         // fontWeight:'600'
                       }}
                     >
@@ -1376,7 +1382,7 @@ const ProdDetail = () => {
                       style={{
                         fontSize: "16px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',
+                        fontFamily: "PT Sans, sans-serif",
                         // fontWeight:'600'
                       }}
                     >
@@ -1386,7 +1392,7 @@ const ProdDetail = () => {
                       style={{
                         fontSize: "16px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',
+                        fontFamily: "PT Sans, sans-serif",
                         // fontWeight:'600'
                       }}
                     >
@@ -1476,9 +1482,9 @@ const ProdDetail = () => {
                       <span style={{
                         fontSize: "16px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',
-                        fontWeight: 'bold',
-                        letterSpacing: '2.2px'
+                        fontFamily: "PT Sans, sans-serif",
+                        fontWeight:'bold',
+                        letterSpacing:'2.2px'
 
                       }}>
                         {`${productData.MetalPurity} ${productData.MetalTypeName}`}
@@ -1490,9 +1496,9 @@ const ProdDetail = () => {
                           outline: "none",
                           fontSize: "13px",
                           color: "#424242",
-                          fontFamily: 'Harmonia',
-                          fontWeight: 'bold',
-                          letterSpacing: '2.2px'
+                          fontFamily: "PT Sans, sans-serif",
+                          fontWeight:'bold',
+                        letterSpacing:'2.2px'
 
                         }}
                         defaultValue={mtTypeOption}
@@ -1531,17 +1537,16 @@ const ProdDetail = () => {
                       <label style={{
                         fontSize: "15px",
                         color: "#424242",
-                        fontFamily: 'Harmonia'
-                      }}>
+                        fontFamily: "PT Sans, sans-serif"
+                        }}>
                         METAL COLOR:
                       </label>
                       {mtrdData.U === 1 ?
-                        <span style={{
-                          fontSize: "16px",
-                          color: "#424242",
-                          fontFamily: 'Harmonia',
-                          fontWeight: 'bold',
-                          letterSpacing: '2.2px'
+                        <span style={{ fontSize: "16px",
+                        color: "#424242",
+                        fontFamily: "PT Sans, sans-serif",
+                        fontWeight:'bold',
+                        letterSpacing:'2.2px'
                         }}>
                           {productData.MetalColorName}
                         </span>
@@ -1552,9 +1557,9 @@ const ProdDetail = () => {
                             outline: "none",
                             fontSize: "13px",
                             color: "#424242",
-                            fontFamily: 'Harmonia',
-                            fontWeight: 'bold',
-                            letterSpacing: '2.2px'
+                            fontFamily: "PT Sans, sans-serif",
+                            fontWeight:'bold',
+                            letterSpacing:'2.2px'
                           }}
                           onChange={(e) => handleColorSelection(e.target.value)}
                         >
@@ -1581,20 +1586,18 @@ const ProdDetail = () => {
                       borderTop: '1px solid #42424233'
                     }}
                   >
-                    <label style={{
-                      fontSize: "15px",
-                      color: "#424242",
-                      fontFamily: 'Harmonia',
-                    }}>
+                    <label style={{ fontSize: "15px",
+                        color: "#424242",
+                        fontFamily: "PT Sans, sans-serif",}}>
                       DAIMOND :
                     </label>
                     {mtrdData?.U === 1 ?
                       <span style={{
                         fontSize: "16px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',
-                        fontWeight: 'bold',
-                        letterSpacing: '2.2px'
+                        fontFamily: "PT Sans, sans-serif",
+                        fontWeight:'bold',
+                        letterSpacing:'2.2px'
                       }}>
                         {`${productData.diamondquality}_${productData.diamondcolorname}`}
                       </span>
@@ -1605,9 +1608,9 @@ const ProdDetail = () => {
                           outline: "none",
                           fontSize: "13px",
                           color: "#424242",
-                          fontFamily: 'Harmonia',
-                          fontWeight: 'bold',
-                          letterSpacing: '2.2px'
+                          fontFamily: "PT Sans, sans-serif",
+                          fontWeight:'bold',
+                          letterSpacing:'2.2px'
                         }}
                         defaultValue={diaQColOpt}
                         onChange={(e) => setDiaQColOpt(e.target.value)}
@@ -1643,11 +1646,11 @@ const ProdDetail = () => {
 
                     }}
                   >
-                    <label style={{
-                      fontSize: "15px",
-                      color: "#424242",
-                      fontFamily: 'Harmonia'
-                    }}>
+                    <label style={{ 
+                        fontSize: "15px",
+                        color: "#424242",
+                        fontFamily: "PT Sans, sans-serif"
+                        }}>
                       COLOR STONE:
                     </label>
                     {
@@ -1655,9 +1658,9 @@ const ProdDetail = () => {
                         <span style={{
                           fontSize: "16px",
                           color: "#424242",
-                          fontFamily: 'Harmonia',
-                          fontWeight: 'bold',
-                          letterSpacing: '2.2px'
+                          fontFamily: "PT Sans, sans-serif",
+                          fontWeight:'bold',
+                          letterSpacing:'2.2px'
 
                         }}>
                           {`${productData.colorstonequality}-${productData?.colorstonecolorname}`}
@@ -1669,9 +1672,9 @@ const ProdDetail = () => {
                             outline: "none",
                             fontSize: "13px",
                             color: "#424242",
-                            fontFamily: 'Harmonia',
-                            fontWeight: 'bold',
-                            letterSpacing: '2.2px'
+                            fontFamily: "PT Sans, sans-serif",
+                            fontWeight:'bold',
+                            letterSpacing:'2.2px'
 
                           }}
                           onChange={(e) => setCSQOpt(e.target.value)}
@@ -1700,8 +1703,8 @@ const ProdDetail = () => {
                       <label style={{
                         fontSize: "15px",
                         color: "#424242",
-                        fontFamily: 'Harmonia',
-                      }}>
+                        fontFamily: "PT Sans, sans-serif",
+                        }}>
                         SIZE:
                       </label>
                       <select
@@ -1710,8 +1713,8 @@ const ProdDetail = () => {
                           outline: "none",
                           fontSize: "16px",
                           color: "#424242",
-                          fontFamily: 'Harmonia',
-                          fontWeight: 'bold'
+                          fontFamily: "PT Sans, sans-serif",
+                          fontWeight:'bold'
                         }}
                         onChange={(e) => handelSize(e.target.value)}
                         defaultValue={
@@ -1925,15 +1928,12 @@ const ProdDetail = () => {
                 </div>
 
                 {isPriseShow == 1 && <div style={{ marginTop: "23px" }}>
-                  <p style={{
-                    fontSize: "20px",
-                    color: "#424242",
-                    fontFamily: 'Harmonia',
-                  }}>
+                  <p style={{ fontSize: "20px",
+                        color: "#424242",}}>
                     {/* Price: <span style={{ fontWeight: '500', fontSize: '16px' }}>{currencySymbol?.Currencysymbol}{`${(productData?.price - grandTotal) === 0 ? "Not Availabel" : (productData?.price - grandTotal)?.toFixed(2)}`}</span> */}
                     {/* Price: <span style={{ fontWeight: '500', fontSize: '16px' }}>{currencySymbol?.Currencysymbol}{`${productData?.UnitCost + (productData?.price - grandTotal)?.toFixed(2)}`}</span> */}
-                    {currencySymbol?.Currencysymbol}
-                    <span style={{ fontWeight: 'bold', fontSize: '22px', letterSpacing: '2.2px' }}>{`${((productData?.UnitCost) + (mtrdData?.Z ?? 0) + (dqcData?.S ?? 0) + (csqcData?.S ?? 0) + (sizeMarkup ?? 0) + metalUpdatedPrice() + diaUpdatedPrice() + colUpdatedPrice()).toFixed(2)}`}</span>
+                    <span>{currencySymbol?.Currencysymbol}</span>
+                    <span style={{ fontWeight: 'bold', fontSize: '22px',letterSpacing:'2.2px',fontFamily: "PT Sans, sans-serif"}}>{`${((productData?.UnitCost) + (mtrdData?.Z ?? 0) + (dqcData?.S ?? 0) + (csqcData?.S ?? 0) + (sizeMarkup ?? 0) + metalUpdatedPrice() + diaUpdatedPrice() + colUpdatedPrice()).toFixed(2)}`}</span>
                   </p>
                 </div>}
 

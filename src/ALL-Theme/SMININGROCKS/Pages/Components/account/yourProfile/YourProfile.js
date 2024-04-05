@@ -159,12 +159,13 @@ export default function YourProfile() {
             >
                 <div className='smilingEditProfilePopup' style={{ position: 'absolute', backgroundColor: 'white', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: 450, boxShadow: 24, p: 4 }}>
                     <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-                        <h2 style={{ marginTop: '30px', textAlign: 'center' }}>Edit Profile</h2>
+                        <h2 className='profileDetailsTg' style={{ marginTop: '30px', textAlign: 'center' }}>Edit Profile</h2>
                         {editedUserData && (
                             <>
                                 <TextField
                                     id="defaddress_shippingfirstname"
                                     label="First Name"
+                                    className='profileDetailsTg'
                                     variant="outlined"
                                     style={{ margin: '15px' }}
                                     value={editedUserData.defaddress_shippingfirstname !== "undefined" ? editedUserData.defaddress_shippingfirstname : ""}
@@ -173,6 +174,7 @@ export default function YourProfile() {
                                 <TextField
                                     id="defaddress_shippinglastname"
                                     label="Last Name"
+                                    className='profileDetailsTg'
                                     variant="outlined"
                                     style={{ margin: '15px' }}
                                     value={editedUserData.defaddress_shippinglastname !== "undefined" ? editedUserData.defaddress_shippinglastname : ""}
@@ -181,6 +183,7 @@ export default function YourProfile() {
                                 <TextField
                                     id="userid"
                                     label="Email"
+                                    className='profileDetailsTg profileEmailtag'
                                     variant="outlined"
                                     style={{ margin: '15px' }}
                                     value={editedUserData.userid !== "undefined" ? editedUserData.userid : ""}
@@ -189,6 +192,7 @@ export default function YourProfile() {
                                 <TextField
                                     id="defaddress_shippingmobile"
                                     label="Mobile No."
+                                    className='profileDetailsTg'
                                     variant="outlined"
                                     style={{ margin: '15px' }}
                                     value={editedUserData.defaddress_shippingmobile !== "undefined" ? editedUserData.defaddress_shippingmobile : ""}
@@ -198,6 +202,7 @@ export default function YourProfile() {
                                     id="defaddress_street"
                                     label="Address"
                                     variant="outlined"
+                                    className='profileDetailsTg'
                                     style={{ margin: '15px' }}
                                     value={editedUserData.defaddress_street !== "undefined" ? editedUserData.defaddress_street : ""}
                                     onChange={handleInputChange}

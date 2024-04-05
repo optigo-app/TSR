@@ -176,9 +176,9 @@ const OrderHistory = () => {
 
   return (
     <div>
-      <div className="text-center text-secondary w-100 fs-4 fw-bold mt-2 pt-2 pb-2 yourOrderHistory bg_oh">
+      {/* <div className="text-center text-secondary w-100 fs-4 fw-bold mt-2 pt-2 pb-2 yourOrderHistory bg_oh">
         Your Order History
-      </div>
+      </div> */}
       {loaderOH ? (
         <Box sx={{ display: "flex", justifyContent: "center", paddingTop: "10px" }}><CircularProgress className='loadingBarManage' /></Box>
       ) : (
@@ -190,7 +190,7 @@ const OrderHistory = () => {
                   <div className=" d-flex w-100 justify-content-between align-items-center p-1 d_block">
                     <div className="w-25 _w50_oh">
                       <div className="d-flex justify-content-start w-100 align-items-center py-2 d_block">
-                        <div className="text-secondary fw-bold fs-5 ps-3 pe-5 fs_Small_2">
+                        <div className="orderHistoryItemText fw-bold fs-5 ps-3 pe-5 fs_Small_2">
                           {e?.OrderPrefix}
                           {e?.orderno}
                         </div>
@@ -205,11 +205,11 @@ const OrderHistory = () => {
                           {e?.b2c_MasterManagement_ProgressStatusName}
                         </div>
                       </div>
-                      <div className="py-2 text-secondary ps-3">
+                      <div className="py-2 orderHistoryItemText ps-3">
                         Date &nbsp;&nbsp;:&nbsp;&nbsp;{" "}
                         <span className="text-danger">{e?.orderEntryDate}</span>
                       </div>
-                      <div className="py-2 text-secondary ps-3">
+                      <div className="py-2 orderHistoryItemText ps-3">
                         items&nbsp;&nbsp; : &nbsp;&nbsp;(
                         <span className="text-danger">{e?.TotalQuantity}</span>)
                       </div>
@@ -249,12 +249,11 @@ const OrderHistory = () => {
                         <div className="d-flex flex-wrap align-items-center center_price_2 d_block">
                           {orderDetails?.length > 0 &&
                             orderDetails?.map((el) => {
-                              console.log(el);
                               return (
                                 <div className="container_order_details ">
                                   <div className="_center_img">
                                     <img
-                                      src={`${image_path}/${ukey}/Design_Image/D999EBEDCCMDAwMzQ2Mg==/Red_Thumb/0003462_23102023133214918.jpg`}
+                                      src={`${image_path}/${ukey}/Design_Image/${el?.imgrandomno}${btoa(el?.autocode)}/Red_Thumb/${el?.DefaultImageName}`}
                                       alt="#designimage"
                                       className="des_img_aoh"
                                     />
@@ -286,7 +285,7 @@ const OrderHistory = () => {
                   </div>
                 </div>
               );
-            }) : <span className="w-100 d-flex justify-content-center align-items-center fs-5">Data Not Present</span>}
+            }) : <span className="w-100 d-flex justify-content-center align-items-center fs-5" style={{marginTop:'15%'}}>Data Not Present</span>}
         </div>
       )}
       {/* {
