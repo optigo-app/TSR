@@ -33,7 +33,7 @@ import GridViewIcon from '@mui/icons-material/GridView';
 import AppsIcon from '@mui/icons-material/Apps';
 import { TfiLayoutGrid4Alt } from "react-icons/tfi";
 import CloseIcon from '@mui/icons-material/Close';
-
+import { IoGrid } from "react-icons/io5";
 
 function valuetext(value) {
   return `${value}°C`;
