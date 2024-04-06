@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import "./accountledger.css"
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { useState } from 'react';
@@ -15,6 +15,7 @@ import moment from 'moment';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
+import Swal from 'sweetalert2';
 const AccountLedger = () => {
     const [resultArray, setResultArray] = useState([]);
     const [currencySymbol, setCurrencySymbol] = useState('');
@@ -26,7 +27,7 @@ const AccountLedger = () => {
     const [selectedStatus, setSelectedStatus] = useState('all');
     const [dueDateWise, setDueDateWise] = useState(false);
     const [userName, setUserName] = useState('');
-    const [selectedDays, setSelectedDays] = useState(30); 
+    const [selectedDays, setSelectedDays] = useState(null); 
     const [resultTotal, setResultTotal] = useState(null);
     const [openingBalanceTotal, setOpeningBalanceTotal] = useState(null);
     const [debit_dia_diff, setDebit_dia_diff] = useState(0);
@@ -37,13 +38,27 @@ const AccountLedger = () => {
     const [credit_mg_diff, setCredit_mg_diff] = useState(0);
     const [credit_amt_diff, setCredit_amt_diff] = useState(0);
     const [credit_curr_diff, setCredit_curr_diff] = useState(0);
-    const firstDayOfMonth = dayjs().startOf('month');
-    const lastDayOfMonth = dayjs().endOf('month');
-    const [fromDate, setFromDate] = useState((firstDayOfMonth));
-    const [toDate, setToDate] = useState(lastDayOfMonth);
+    // const firstDayOfMonth = dayjs().startOf('month');
+    // const lastDayOfMonth = dayjs().endOf('month');
+    // const [fromDate, setFromDate] = useState((firstDayOfMonth));
+    const [fromDate, setFromDate] = useState();
+    // const [toDate, setToDate] = useState(lastDayOfMonth);
+    const [toDate, setToDate] = useState();
     const [showStartDate, setShowStartDate] = useState();
     const [showEndDate, setShowEndDate] = useState();
+    const fromDateRef = useRef(null);
+    const toDateRef = useRef(null);
     const navigate = useNavigate("");
+    // const [displayDates, setDisplayDates] = useState({ from: null, to: null });
+
+    // useEffect(() => {
+    //     if (fromDate && toDate) {
+    //         setDisplayDates({
+    //             from: moment(fromDate).format('DD-MM-YYYY'),
+    //             to: moment(toDate).format('DD-MM-YYYY')
+    //         });
+    //     }
+    // }, [fromDate, toDate]);
 
     useEffect(() => {
 
@@ -53,21 +68,10 @@ const AccountLedger = () => {
         setUserName(userName?.customercode)
 
         getLedgerData();
-
-
+        
       // eslint-disable-next-line react-hooks/exhaustive-deps
       }, []);
 
-      useEffect(() => {
-        filterData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [fromDate, toDate, selectedDays]);
-    // }, [startDate, endDate, selectedDays, dueDateWise, selectedStatus]);
-
-        useEffect(() => {
-            filterData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        },[resultArray])
 
       const getLedgerData = async() => {
         setLoaderAC(true)
@@ -181,13 +185,14 @@ const AccountLedger = () => {
         // getCurrentMonthDates();
 
         // setDays
-        setSelectedDays(30)
+        // setSelectedDays(30)
+        setSelectedDays(null)
 
         const buttons = document.querySelectorAll('.daybtn');
         buttons.forEach(button => {
             const buttonDays = parseInt(button?.textContent);
-            if (buttonDays === 30) {
-                button.classList.add('selected');
+            if (buttonDays === null) {
+                button.classList.remove('selected');
             } else {
                 button.classList.remove('selected');
             }
@@ -196,7 +201,7 @@ const AccountLedger = () => {
         getLedgerData();
 
 
-        setOpeningBalanceTotal(null);
+        // setOpeningBalanceTotal(null);
 
         setDebit_amt_diff(0);
         setDebit_dia_diff(0);
@@ -204,27 +209,109 @@ const AccountLedger = () => {
         setCredit_amt_diff(0);
         setCredit_dia_diff(0);
         setCredit_mg_diff(0);
+        
         const initialFromDate = dayjs(resultArray[0]?.EntryDate);
         const initialToDate = dayjs(resultArray[resultArray?.length - 1]?.EntryDate);
-        setFromDate(initialFromDate);
-        setToDate(initialToDate);
+        // setFromDate(initialFromDate);
+        // setToDate(initialToDate);
+        setFromDate(null);
+        setToDate(null);
+        
 
       }
-      
+      const backToInitial2 = () => {
+          const firstDayOfMonth = dayjs().startOf('month');
+          const lastDayOfMonth = dayjs().endOf('month');
+          console.log("back ini", firstDayOfMonth, lastDayOfMonth);
+          setFromDate(null);
+          setToDate(null);
+          setSelectedDays(null)
+        //   setFromDate(firstDayOfMonth);
+        //   setToDate(lastDayOfMonth);
+        //   setSelectedDays(30)
+
+        const buttons = document.querySelectorAll('.daybtn');
+        buttons.forEach(button => {
+            const buttonDays = parseInt(button?.textContent);
+            if (buttonDays === null) {
+                button.classList.remove('selected');
+            } else {
+                button.classList.remove('selected');
+            }
+        });
+      }
+      const backToInitial3 = () => {
+        setSelectedDays(null);
+        setFilterArray(resultArray);
+        setDebit_amt_diff(0);
+        setDebit_dia_diff(0);
+        setDebit_mg_diff(0);
+        setCredit_amt_diff(0);
+        setCredit_dia_diff(0);
+        setCredit_mg_diff(0);
+        setCredit_curr_diff(0);
+        setDebit_curr_diff(0);
+        getLedgerData();
+        setFromDate(null);
+        setToDate(null);
+        // setResultTotal(null);
+        // CalculateOpeningBalance(resultArray)
+      }
       const handleDays = (days) => {
         setSelectedDays(days)
-        const currentDate = dayjs();
+        let newStartDate = null;
+        let newEndDate = null;
+        
+        const currentMonthStart = dayjs().startOf('month');
+        const currentMonthEnd = dayjs().endOf('month');
+    
+        if (days === 30) {
+            newStartDate = currentMonthStart;
+            newEndDate = currentMonthEnd;
+        } else if (days === 60) {
+            const prevMonthStart = currentMonthStart.subtract(1, 'month');
+            newStartDate = prevMonthStart;
+            newEndDate = currentMonthEnd;
+        } else if (days === 90) {
+            const twoMonthsAgoStart = currentMonthStart.subtract(2, 'month');
+            newStartDate = twoMonthsAgoStart;
+            newEndDate = currentMonthEnd;
+        }
+        // let newStartDate = null;
+        // let newEndDate = null;
+        // if (days === 30) {
+        //     newStartDate = dayjs().subtract(1, 'month').startOf('month');
+        //     newEndDate = dayjs().subtract(1, 'day').endOf('month');
+        // } else if (days === 60) {
+        //     newStartDate = dayjs().subtract(2, 'month').startOf('month');
+        //     newEndDate = dayjs().subtract(1, 'day').endOf('month');
+        // } else if (days === 90) {
+        //     newStartDate = dayjs().subtract(3, 'month').startOf('month');
+        //     newEndDate = dayjs().subtract(1, 'day').endOf('month');
+        // }
+    
+    
 
-        // Set the end date to the current date
-        const endDate = currentDate.endOf('day').format('YYYY-MM-DD');
+    // Update the start and end dates in the state
+        setFromDate(newStartDate);
+        // setShowStartDate(newStartDate)
+        setToDate(newEndDate);
+        // setShowEndDate(newEndDate)
+        handleSearchBtn('', newStartDate, newEndDate, days)
+        // Filter the data based on the new date range
+        // filterData();
+        // const currentDate = dayjs();
+
+        // // Set the end date to the current date
+        // const endDate = currentDate.endOf('day').format('YYYY-MM-DD');
     
-        // Calculate the start date based on the selected number of days
-        const startDate = currentDate.subtract(days, 'day').startOf('day').format('YYYY-MM-DD');
+        // // Calculate the start date based on the selected number of days
+        // const startDate = currentDate.subtract(days, 'day').startOf('day').format('YYYY-MM-DD');
     
-        // Update the start and end dates in the state
-        setStartDate(startDate);
-        setEndDate(endDate);
-        filterData();
+        // // Update the start and end dates in the state
+        // setStartDate(startDate);
+        // setEndDate(endDate);
+        // filterData();
         // const currentDate = new Date();
         // const currentYear = currentDate.getFullYear();
         // const currentMonth = ('0' + (currentDate.getMonth() + 1)).slice(-2); // Add leading zero if needed
@@ -245,8 +332,8 @@ const AccountLedger = () => {
         // filterData(formattedStartDate, formattedCurrentDate);
 
         const buttons = document.querySelectorAll('.daybtn');
-        buttons.forEach(button => {
-            const buttonDays = parseInt(button.textContent);
+            buttons.forEach(button => {
+        const buttonDays = parseInt(button.textContent);
             if (buttonDays === days) {
                 button.classList.add('selected');
             } else {
@@ -255,9 +342,186 @@ const AccountLedger = () => {
         });
 
       }
+      const handlePreviousDays = () => {
+        // Get the selected number of days
+        // const days = selectedDays;
+        const days = selectedDays;
+        let newStartDate = null;
+        let newEndDate = null;
+        let fromDateCopy = fromDate; // Create a copy of fromDate to avoid modifying the state directly
+    
+        if (days === 30) {
+            // Subtract 1 month from the current start date to get the new start date
+            newStartDate = fromDate.subtract(1, 'month').startOf('month');
+            // Set the end date as the last day of the previous month
+            newEndDate = fromDate.subtract(1, 'month').endOf('month');
+            fromDateCopy = fromDateCopy.subtract(1, 'month');
+        } else if (days === 60) {
+            // Subtract 2 months from the current start date to get the new start date
+            newStartDate = fromDate.subtract(2, 'month').startOf('month');
+            // Set the end date as the last day of the previous month
+            newEndDate = fromDate.subtract(1, 'month').endOf('month');
+            fromDateCopy = fromDateCopy.subtract(2, 'month');
+        } else if (days === 90) {
+            // Subtract 3 months from the current start date to get the new start date
+            newStartDate = fromDate.subtract(3, 'month').startOf('month');
+            // Set the end date as the last day of the previous month
+            newEndDate = fromDate.subtract(1, 'month').endOf('month');
+            fromDateCopy = fromDateCopy.subtract(3, 'month');
+        }
+    
+        // Update the state with the new start and end dates
+        setFromDate(newStartDate);
+        // setShowStartDate(newStartDate);
+        setToDate(newEndDate);
+        // setShowEndDate(newEndDate)
+    
+        // Update the fromDate state
+        setFromDate(fromDateCopy);
+        handleSearchBtn('', newStartDate, newEndDate, days)
+        // let newStartDate = null;
+        // let newEndDate = null;
+    
+        // if (days === 30) {
+        //     // Subtract 1 month from the current start date to get the new start date
+        //     newStartDate = fromDate.subtract(1, 'month');
+        //     // Set the end date as the last day of the previous month
+        //     newEndDate = newStartDate.endOf('month');
+        // } else if (days === 60) {
+        //     // Subtract 2 months from the current start date to get the new start date
+        //     newStartDate = fromDate.subtract(2, 'month');
+        //     // Set the end date as the last day of the previous month
+        //     newEndDate = newStartDate.endOf('month');
+        // } else if (days === 90) {
+        //     // Subtract 3 months from the current start date to get the new start date
+        //     newStartDate = fromDate.subtract(3, 'month');
+        //     // Set the end date as the last day of the previous month
+        //     newEndDate = newStartDate.endOf('month');
+        // }
+        // console.log(days);
+        // // Calculate the new end date (which is the current end date)
+        // const newEndDate = toDate.subtract(days, 'day');
+        
+        // // Calculate the new start date based on the new end date and selected number of days
+        // const newStartDate = newEndDate.subtract(days - 1, 'day'); // Subtract one less day to maintain the selected number of days
+        
+        // Update the state with the new start and end dates
+        // setFromDate(newStartDate);
+        // setToDate(newEndDate);
+    
+        // Filter the data based on the new date range
+        // filterData();
+      }
+      const handleNextDays = () => {
+        // Get the selected number of days
+        const days = selectedDays;
+        let newStartDate = null;
+        let newEndDate = null;
+        let toDateCopy = toDate; // Create a copy of toDate to avoid modifying the state directly
+        
+        if (days === 30) {
+            newStartDate = fromDate.add(1, 'month').startOf('month');
+            newEndDate = fromDate.add(1, 'month').endOf('month');
+            toDateCopy = toDateCopy.add(1, 'month').endOf('month'); // Adjust to end of month
+        } else if (days === 60) {
+            newStartDate = fromDate.add(2, 'month').startOf('month');
+            newEndDate = fromDate.add(2, 'month').endOf('month');
+            toDateCopy = toDateCopy.add(2, 'month').endOf('month'); // Adjust to end of month
+        } else if (days === 90) {
+            newStartDate = fromDate.add(3, 'month').startOf('month');
+            newEndDate = fromDate.add(3, 'month').endOf('month');
+            toDateCopy = toDateCopy.add(3, 'month').endOf('month'); // Adjust to end of month
+        }
+    
+        setFromDate(newStartDate);
+        // setShowStartDate(newStartDate)
+        setToDate(newEndDate);
+        // setShowEndDate(newEndDate)
+        
+        // Update the toDate state
+        setToDate(toDateCopy);
+        handleSearchBtn('', newStartDate, newEndDate, days)
+        //working code
+        // const days = selectedDays;
+        // let newStartDate = null;
+        // let newEndDate = null;
+        // let toDateCopy = toDate; // Create a copy of toDate to avoid modifying the state directly
+        
+        // if (days === 30) {
+        //     newStartDate = fromDate.add(1, 'month').startOf('month');
+        //     newEndDate = fromDate.add(1, 'month').endOf('month');
+        //     toDateCopy = toDateCopy.add(1, 'month');
+        // } else if (days === 60) {
+        //     newStartDate = fromDate.add(2, 'month').startOf('month');
+        //     newEndDate = fromDate.add(2, 'month').endOf('month');
+        //     toDateCopy = toDateCopy.add(2, 'month');
+        // } else if (days === 90) {
+        //     newStartDate = fromDate.add(3, 'month').startOf('month');
+        //     newEndDate = fromDate.add(3, 'month').endOf('month');
+        //     toDateCopy = toDateCopy.add(3, 'month');
+        // }
+    
+        // setFromDate(newStartDate);
+        // setToDate(newEndDate);
+    
+        // // Update the toDate state
+        // setToDate(toDateCopy);
+        //above working code ^
+        // const days = selectedDays;
+        // console.log(days);
+        // let newStartDate = null;
+        // let newEndDate = null;
+        
+        // if (days === 30) {
+        //     // Add 1 month to the current start date to get the new start date
+        //     newStartDate = fromDate.add(1, 'month').startOf('month');
+        //     // Set the end date as the last day of the new month
+        //     newEndDate = newStartDate.endOf('month');
+        // } else if (days === 60) {
+        //     // Add 2 months to the current start date to get the new start date
+        //     newStartDate = fromDate.add(2, 'month').startOf('month');
+        //     // Set the end date as the last day of the new month
+        //     newEndDate = newStartDate.endOf('month');
+        // } else if (days === 90) {
+        //     // Add 3 months to the current start date to get the new start date
+        //     newStartDate = fromDate.add(3, 'month').startOf('month');
+        //     // Set the end date as the last day of the new month
+        //     newEndDate = newStartDate.endOf('month');
+        // }
+    
+        // // Update the state with the new start and end dates
+        // setFromDate(newStartDate);
+        // setToDate(newEndDate);
+        // const days = selectedDays;
+        // let newStartDate = null;
+        // let newEndDate = null;
+    
+        // if (days === 30) {
+        //     // Add 1 month to the current start date to get the new start date
+        //     newStartDate = fromDate.add(1, 'month');
+        //     // Set the end date as the last day of the new month
+        //     newEndDate = newStartDate.endOf('month');
+        // } else if (days === 60) {
+        //     // Add 2 months to the current start date to get the new start date
+        //     newStartDate = fromDate.add(2, 'month');
+        //     // Set the end date as the last day of the new month
+        //     newEndDate = newStartDate.endOf('month');
+        // } else if (days === 90) {
+        //     // Add 3 months to the current start date to get the new start date
+        //     newStartDate = fromDate.add(3, 'month');
+        //     // Set the end date as the last day of the new month
+        //     newEndDate = newStartDate.endOf('month');
+        // }
+    
+        // // Update the state with the new start and end dates
+        // setFromDate(newStartDate);
+        // setToDate(newEndDate);
+
+        // filterData();
+      }
       
       const handleSearch = () => {
-        filterData();
+        // filterData();
       };
 
     //   const filterData = () => {
@@ -450,45 +714,78 @@ const AccountLedger = () => {
     //     // getFormatedArrayData(filteredData);
     //     // CalculateOpeningBalance(recordsBeforeStartDate);
     // };
-    const filterData = () => {
-        const nowdays = selectedDays;
-        const startdate = fromDate.format('DD MMM YY');;
-        const enddate = toDate.format('DD MMM YY');;
+    //   const filterData = () => {
+    //         const nowdays = selectedDays;
+    //         if(fromDate !== null && toDate !== null){
 
-        const findedData = resultArray?.filter((e) => {
-            const entryDate = dayjs(e?.EntryDate);
-                return entryDate.isBetween(startdate, enddate, null, '[]'); // '[]' includes start and end dates
-        })
-        setFilterArray(findedData);
-        // const startDate = fromDate?.subtract(selectedDays, 'day');
-        // console.log(startDate);
-        // // Filter data based on date range
-        // const filteredData = resultArray?.filter(item => {
-        //     const entryDate = dayjs(item?.EntryDate);
-        //     return entryDate.isBetween(startDate, toDate, null, '[]'); // '[]' includes start and end dates
-        // });
-    
-        // Update filtered data in state
-        // setFilterArray(filteredData);
-        const oneDayBeforeStartDate = new Date(startdate);
-            oneDayBeforeStartDate.setDate(oneDayBeforeStartDate.getDate() - 1);
-            const recordsBeforeStartDate = resultArray?.filter(entry => {
-                const entryDate = new Date(entry.EntryDate);
-                return entryDate <= oneDayBeforeStartDate;
-            });
-            setFilterArray(findedData);
-            getFormatedArrayData(findedData);
-            CalculateOpeningBalance(recordsBeforeStartDate);
-
-            const formattedFromDate = startdate === null ? '' : moment(startdate)?.format('DD MMM YYYY');
-            const formattedToDate = enddate === null ? '' : moment(enddate)?.format('DD MMM YYYY');
-
-            setShowStartDate(formattedFromDate)
-            setShowEndDate(formattedToDate)
-    }
-    
-      const CalculateOpeningBalance = (data) => {
+    //             const startdate = fromDate.format('DD MMM YY');
+    //             const enddate = toDate.format('DD MMM YY');
+    //         // if (moment(startdate).isSameOrBefore(enddate)) {
+    //         const findedData = resultArray?.filter((e) => {
+    //             const entryDate = dayjs(e?.EntryDate);
+    //             if(moment(startdate).isSameOrBefore(enddate)){
+    //                 return entryDate.isBetween(startdate, enddate, null, '[]'); // '[]' includes start and end dates
+    //             }else{
+    //                 Swal.fire({
+    //                     title: "Error !",
+    //                     text: "Enter Valid Dates",
+    //                     icon: "error",
+    //                     confirmButtonText: "ok"
+    //                   });
+    //                 //   backToInitial2();
+    //             }
+    //         })
+    //         setFilterArray(findedData);
+    //         // const startDate = fromDate?.subtract(selectedDays, 'day');
+    //         // console.log(startDate);
+    //         // // Filter data based on date range
+    //         // const filteredData = resultArray?.filter(item => {
+    //         //     const entryDate = dayjs(item?.EntryDate);
+    //         //     return entryDate.isBetween(startDate, toDate, null, '[]'); // '[]' includes start and end dates
+    //         // });
         
+    //         // Update filtered data in state
+    //         // setFilterArray(filteredData);
+    //         const oneDayBeforeStartDate = new Date(startdate);
+    //         oneDayBeforeStartDate.setDate(oneDayBeforeStartDate.getDate() - 1);
+    //             const recordsBeforeStartDate = resultArray?.filter(entry => {
+    //                 const entryDate = new Date(entry.EntryDate);
+    //                 return entryDate <= oneDayBeforeStartDate;
+    //             });
+    //             setFilterArray(findedData);
+    //             getFormatedArrayData(findedData);
+    //             CalculateOpeningBalance(recordsBeforeStartDate);
+
+    //             const formattedFromDate = startdate === null ? '' : moment(startdate)?.format('DD MMM YYYY');
+    //             const formattedToDate = enddate === null ? '' : moment(enddate)?.format('DD MMM YYYY');
+                
+    //             setShowStartDate(formattedFromDate)
+    //             setShowEndDate(formattedToDate)
+    //         //  }
+    //         //  else{
+    //         //     backToInitial2();
+    //         // }
+    //     }
+    //         else if(fromDate !== null && toDate === null){
+    //             Swal.fire({
+    //                 title: "Error !",
+    //                 text: "Enter Valid Date To",
+    //                 icon: "error",
+    //                 confirmButtonText: "ok"
+    //               });
+    //               backToInitial2();
+    //         }else if(fromDate === null && toDate !== null){
+    //             Swal.fire({
+    //                 title: "Error !",
+    //                 text: "Enter Valid Date From",
+    //                 icon: "error",
+    //                 confirmButtonText: "ok"
+    //               });
+    //               backToInitial2();
+    //         }
+    //   }
+            
+    const CalculateOpeningBalance = (data) => {
         let credit_debit = {
             credit_metalgold : 0,
             credit_diamondwt : 0,
@@ -634,40 +931,7 @@ const AccountLedger = () => {
         // filterData();
 
         // }
-        const handlePreviousDays = () => {
-            // Get the selected number of days
-            const days = selectedDays;
-            
-            // Calculate the new end date (which is the current end date)
-            const newEndDate = toDate.subtract(days, 'day');
-            
-            // Calculate the new start date based on the new end date and selected number of days
-            const newStartDate = newEndDate.subtract(days - 1, 'day'); // Subtract one less day to maintain the selected number of days
-            
-            // Update the state with the new start and end dates
-            setFromDate(newStartDate);
-            setToDate(newEndDate);
-        
-            // Filter the data based on the new date range
-            filterData();
-        }
-        const handleNextDays = () => {
-            // Get the selected number of days
-            const days = selectedDays;
-            
-            // Calculate the new end date (which is the current end date)
-            const newEndDate = toDate.add(days, 'day');
-            
-            // Calculate the new start date based on the new end date and selected number of days
-            const newStartDate = newEndDate.add(days - 1, 'day'); // Subtract one less day to maintain the selected number of days
-            
-            // Update the state with the new start and end dates
-            setFromDate(newEndDate);
-            setToDate(newStartDate);
-        
-            // Filter the data based on the new date range
-            filterData();
-        }
+     
         // const handleNextDays = () => {
 
         //     // const newStartDate = moment(startDate).add(30, 'days').format('YYYY-MM-DD');
@@ -707,6 +971,214 @@ const AccountLedger = () => {
         window.open("http://localhost:3000/accountledgerexcel");
       }
 
+    // useEffect(() => {
+    //     if(fromDate === 'invalid date'){
+    //         setFilterArray([])
+    //     }
+    //     else if(toDate === 'invalid date'){
+    //         setFilterArray([])
+    //     }
+    //     else if(fromDate === 'invalid date' && toDate === 'invalid date'){
+    //         setFilterArray([])
+    //     }
+    // }, [fromDate, toDate])
+    // const handleFromDateChange = (newValue) => {
+    //     setFromDate(newValue);
+    //     if (newValue && toDate && newValue.isAfter(toDate)) {
+    //         setErrorDialogOpen(true);
+    //     }
+    // };
+
+    // const handleToDateChange = (newValue) => {
+    //     setToDate(newValue);
+    //     if (newValue && fromDate && newValue.isBefore(fromDate)) {
+    //         setErrorDialogOpen(true);
+    //     }
+    // };
+
+    const handleSearchBtn = (eve, fromDatess, todatess, days) => {
+        let fromdates = `${fromDatess?.["$y"]}-${checkMonth(fromDatess?.["$M"])}-${fromDatess?.["$D"]}`;
+        let todates = `${todatess?.["$y"]}-${checkMonth(todatess?.["$M"])}-${todatess?.["$D"]}`;
+
+        let filteredData = [];
+        let count = 0;
+        resultArray?.forEach((e, i) => {
+            let cutDate = "";
+            cutDate = e?.["EntryDate"]?.split("-");
+            let compareDate = `${cutDate[0]}-${cutDate[1]}-${cutDate[2]}`
+            cutDate = `${cutDate[2]}-${cutDate[1]}-${cutDate[0]}`;
+            let flags = {
+                dateFrom: false,
+                dateTo: false,
+                // search: false,
+            }
+            
+            if (cutDate !== undefined) {
+                // if(fromDatess && todatess && moment(fromdates).isSameOrBefore(moment(todates))){
+                if (!fromdates?.includes(undefined) && !todates?.includes(undefined)) {
+                    let fromdat = moment(fromdates);
+                    let todat = moment(todates);
+                    let cutDat = moment(cutDate);
+                    if(moment(fromdates).isSameOrBefore(todates)){
+                        const isBetween = cutDat.isBetween(fromdat, todat, null, '[]');
+                        if (isBetween || cutDat.isSame(fromdat) || cutDat.isSame(todat)) {
+                            flags.dateTo = true;
+                            flags.dateFrom = true;
+                        }
+                    }
+                    else{
+                        setTimeout(() => {
+                        setSelectedDays(null);
+                        setFilterArray(resultArray);
+                        setDebit_amt_diff(0);
+                        setDebit_dia_diff(0);
+                        setDebit_mg_diff(0);
+                        setCredit_amt_diff(0);
+                        setCredit_dia_diff(0);
+                        setCredit_mg_diff(0);
+                        setCredit_curr_diff(0);
+                        setDebit_curr_diff(0);
+                        setFromDate(null);
+                        setToDate(null);
+                        getLedgerData();
+                        const buttons = document.querySelectorAll('.daybtn');
+                        buttons.forEach(button => {
+                        const buttonDays = parseInt(button.textContent);
+                            if (buttonDays === days) {
+                                button.classList.remove('selected');
+                            } else {
+                                button.classList.remove('selected');
+                            }
+                        });
+                        }, 0);
+                        
+                  
+
+                        // backToInitial3();
+                        // reseltFil();
+                        // getLedgerData();
+                    }
+                    // }
+                    // else{
+                    //     // count = count+1
+                    //     // flags.dateFrom = true;
+                    //     // flags.dateTo = true;
+                    //     Swal.fire({
+                    //         title: "Error !",
+                    //         text: "Enter Valid Dates",
+                    //         icon: "error",
+                    //         confirmButtonText: "ok"
+                    //     });
+                    //     reseltFil();
+                    // }
+                } else if (fromdates?.includes(undefined) && !todates?.includes(undefined)) {
+                    // let todat = new Date(todates);
+                    // let cutDat = new Date(cutDate);
+                    // if (cutDat <= todat) {
+                    //     flags.dateTo = true;
+                    //     flags.dateFrom = true;
+                    // }
+                    // flags.dateTo = true;
+                    count = count+1
+                    flags.dateFrom = true;
+                    Swal.fire({
+                        title: "Error !",
+                        text: "Enter Valid Date From",
+                        icon: "error",
+                        confirmButtonText: "ok"
+                      });
+                      reseltFil();
+                } else if (!fromdates?.includes(undefined) && todates?.includes(undefined)) {
+                    // let fromdat = new Date(fromdates);
+                    // let cutDat = new Date(cutDate);
+                    // if (cutDat >= fromdat) {
+                    //     flags.dateTo = true;
+                    //     flags.dateFrom = true;
+                    // }
+                    count = count+1
+                    flags.dateTo = true;
+                    Swal.fire({
+                        title: "Error !",
+                        text: "Enter Valid Date To",
+                        icon: "error",
+                        confirmButtonText: "ok"
+                      });
+                      reseltFil();
+                    // flags.dateFrom = true;
+
+                } else if (fromdates?.includes(undefined) && todates?.includes(undefined) ) {
+                    flags.dateTo = true;
+                    flags.dateFrom = true;
+                }
+            //   }
+            }
+
+            if (flags.dateFrom === true && flags.dateTo === true) {
+                filteredData.push(e);
+            }
+
+        });
+        // CalculateOpeningBalance(recordsBeforeStartDate);
+        if(count === 0){
+            // setFilterData(filteredData);
+            setFilterArray(filteredData)
+            
+                const oneDayBeforeStartDate = new Date(fromdates);
+                oneDayBeforeStartDate.setDate(oneDayBeforeStartDate.getDate() - 1);
+                const recordsBeforeStartDate = resultArray.filter(entry => {
+                    const entryDate = new Date(entry.EntryDate);
+                    return entryDate <= oneDayBeforeStartDate;
+                });
+                setFilterArray(filteredData);
+                getFormatedArrayData(filteredData);
+                CalculateOpeningBalance(recordsBeforeStartDate);
+                // handleSearchBtn('', fromdates, todates, '');
+        }
+        else{
+            setFilterArray(resultArray)
+            // handleSearchBtn('', fromdates, todates, '');
+        
+            const oneDayBeforeStartDate = new Date(fromdates);
+            oneDayBeforeStartDate.setDate(oneDayBeforeStartDate.getDate() - 1);
+            const recordsBeforeStartDate = resultArray.filter(entry => {
+                const entryDate = new Date(entry.EntryDate);
+                return entryDate <= oneDayBeforeStartDate;
+            });
+            // setFilterArray(filteredData);
+            getFormatedArrayData(filteredData);
+            CalculateOpeningBalance(recordsBeforeStartDate);
+            // backToInitial();
+        }
+    }
+    const reseltFil = () => {
+        // setSearchVal("");
+        setFromDate(null);
+        setToDate(null);
+        // setPage(0);
+        // resetAllFilters(data);
+        // setFilterData(data);
+    }
+
+    useEffect(() => {
+        
+        let fromdate =  moment(fromDate)
+        let enddate =  moment(toDate)
+        let daytextf = fromdate?._i?.$d;
+        let daytextt = enddate?._i?.$d;
+
+        const startDate = new Date(daytextf);
+        const endDate = new Date(daytextt);
+
+        const formattedStartDate = moment(startDate).format('DD MMM YYYY');
+        const formattedEndDate = moment(endDate).format('DD MMM YYYY');
+
+        setShowStartDate(formattedStartDate)
+        setShowEndDate(formattedEndDate);
+
+    }, [fromDate, toDate])
+
+// console.log(moment(fromDate));
+// console.log(moment(toDate));
     
 
   return (
@@ -714,7 +1186,11 @@ const AccountLedger = () => {
         {/* <div className='fs-4 fw-bold text-center text-secondary ledger_title'>Ledger</div> */}
         <div>
             <div className='border'>
-            <div className='p-2 ps-4 border-bottom fs_Al_mq' style={{letterSpacing:'1px'}}>Account Detail for &nbsp; <b>{userName}</b>&nbsp; Period of &nbsp;<b>{showStartDate}</b>&nbsp; to &nbsp;<b>{showEndDate}</b>&nbsp;</div>
+            <div className='p-2 ps-4 border-bottom fs_Al_mq' style={{letterSpacing:'1px'}}>Account Detail for &nbsp; <b>{userName}</b>
+                &nbsp; Period of &nbsp;<b>{moment(showStartDate).format('DD MMM YYYY') === 'Invalid date' ? '' : moment(showStartDate).format('DD MMM YYYY')}</b>&nbsp; to 
+                &nbsp;<b>{moment(showEndDate).format('DD MMM YYYY') === 'Invalid date' ? '' : moment(showEndDate).format('DD MMM YYYY')}</b>&nbsp;</div>
+            {/* <div className='p-2 ps-4 border-bottom fs_Al_mq' style={{letterSpacing:'1px'}}>Account Detail for &nbsp; <b>{userName}</b>&nbsp; Period of &nbsp;<b>{showStartDate}</b>&nbsp; to &nbsp;<b>{showEndDate}</b>&nbsp;</div> */}
+            
 
                 {/* <div className='p-2 ps-4 border-bottom' style={{letterSpacing:'1px'}}>Account Detail for &nbsp; <b>{userName}</b>&nbsp; Period of &nbsp;<b>{formatDate(startDate)}</b>&nbsp; to &nbsp;<b>{formatDate(endDate)}</b>&nbsp;</div> */}
                 
@@ -727,7 +1203,55 @@ const AccountLedger = () => {
                     <Box sx={{ display: "flex", alignItems: "center", paddingRight: "15px", paddingBottom: "35px" }} className="QuotePadSec">
                         <p className='fs-6 mb-0' style={{ paddingRight: "8px" }}>Date: </p>
                         <Box>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    label="Date From"
+                                    value={fromDate} 
+                                    ref={fromDateRef}
+                                    // defaultValue={dayjs('2022-04-17')}
+                                    // onChange={(e) => setStartDate(e.target.value)}
+                                    // onChange={(newValue) => setFromDate(newValue)}
+                                    // onChange={handleFromDateChange}
+                                    onChange={(newValue) => {
+                                        console.log(moment(newValue));
+                                        if (newValue === null) {
+                                          setFromDate(null)
+                                        } else {
+                                            // if(newValue["$d"] == "Invalid Date"){
+                                            //     Swal.fire({
+                                            //         title: "Error !",
+                                            //         text: "Enter Valid Date From",
+                                            //         icon: "error",
+                                            //         confirmButtonText: "ok"
+                                            //       });
+                                            //       backToInitial2();
+                                            // }
+                                            // else {
+                                                if (((newValue["$y"] <= 2099 && newValue["$y"] >= 1900) || newValue["$y"] < 1000) || isNaN(newValue["$y"])) {
+                                                    setFromDate(newValue)
+                                                  } else {
+                                                    Swal.fire({
+                                                      title: "Error !",
+                                                      text: "Enter Valid Date From",
+                                                      icon: "error",
+                                                      confirmButtonText: "ok"
+                                                    });
+                                                    // resetAllFilters();
+                                                    backToInitial2();
+                                                    // backToInitial2();
+                                                  }
+                                            // }
+                                         
+                                        }
+                                      }}
+                                    format="DD MMM YYYY"
+                                    placeholder="DD MMM YYYY"
+                                    className='quotationFilterDates'
+                                    name="date" 
+                                    id="startdate" 
+                                />
+                            </LocalizationProvider>
+                            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                     label="Any"
                                     value={fromDate} 
@@ -740,13 +1264,50 @@ const AccountLedger = () => {
                                     name="date" 
                                     id="startdate" 
                                 />
-                            </LocalizationProvider>
+                            </LocalizationProvider> */}
                         </Box>
                     </Box>
                     <Box sx={{ display: "flex", alignItems: "center", paddingBottom: "35px", paddingRight: "15px" }} className="QuotePadSec">
                         <p className='fs-6 mb-0' style={{ paddingRight: "8px" }}>To: </p>
                         <Box>
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    label="Date To"
+                                    value={toDate} 
+                                    ref={toDateRef}
+                                    // defaultValue={dayjs('2022-04-17')}
+                                    // onChange={(newValue) => setToDate(newValue)}
+                                    // onChange={(e) => setEndDate(e.target.value)}
+                                    // onChange={handleToDateChange}
+                                    onChange={(newValue) => {
+                                        if (newValue === null) {
+                                          setToDate(null)
+                                        } else {
+                                          if (((newValue["$y"] <= 2099 && newValue["$y"] >= 1900) || newValue["$y"] < 1000) || isNaN(newValue["$y"])) {
+                                            setToDate(newValue)
+                                            setShowEndDate(newValue)
+                                          } 
+                                          else {
+                                            Swal.fire({
+                                              title: "Error !",
+                                              text: "Enter Valid Date To",
+                                              icon: "error",
+                                              confirmButtonText: "ok"
+                                            });
+                                            // resetAllFilters();
+                                            // backToInitial();
+                                            backToInitial2();
+                                        }
+                                        }
+                                      }}
+                                    format="DD MMM YYYY"
+                                    placeholder="DD MMM YYYY"
+                                    className='quotationFilterDates'
+                                    name="date" 
+                                    id="enddate"
+                                />
+                            </LocalizationProvider>
+                            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
                                     label="Any"
                                     value={toDate} 
@@ -759,7 +1320,7 @@ const AccountLedger = () => {
                                     name="date" 
                                     id="enddate"
                                 />
-                            </LocalizationProvider>
+                            </LocalizationProvider> */}
                         </Box>
                     </Box>
                 </Box>
