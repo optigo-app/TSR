@@ -297,7 +297,8 @@
 
 .TSRFooterPart2Img {
     width: 100%;
-    height: 50%;
+    /* height: 50%; */
+    object-fit: cover;
 }
 
 .TSRFooterPart2Desc2 {

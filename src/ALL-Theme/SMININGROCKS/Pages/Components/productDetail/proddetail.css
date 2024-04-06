@@ -139,7 +139,8 @@
 
 .product-detail-container {
     display: flex;
-    width: 100%
+    width: 100%;
+    min-height: 1009px;
 }
 
 .srprodetail1 {
@@ -259,6 +260,15 @@
 
 .wishlistcont:hover{
     background-color: #d2815f0d;
+}
+
+.smilingCompleteLookMainWeb{
+    position: relative;
+    margin-inline:10%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 7%;
+    min-height: 500px;
 }
 
 @media screen and (max-width:1731px) {
