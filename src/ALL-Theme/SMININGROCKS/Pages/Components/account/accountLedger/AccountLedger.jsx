@@ -1185,7 +1185,7 @@ const AccountLedger = () => {
     <div>
         {/* <div className='fs-4 fw-bold text-center text-secondary ledger_title'>Ledger</div> */}
         <div>
-            <div className='border'>
+            <div className='border mb-5 pb-5'>
             <div className='p-2 ps-4 border-bottom fs_Al_mq' style={{letterSpacing:'1px'}}>Account Detail for &nbsp; <b>{userName}</b>
                 &nbsp; Period of &nbsp;<b>{moment(showStartDate).format('DD MMM YYYY') === 'Invalid date' ? '' : moment(showStartDate).format('DD MMM YYYY')}</b>&nbsp; to 
                 &nbsp;<b>{moment(showEndDate).format('DD MMM YYYY') === 'Invalid date' ? '' : moment(showEndDate).format('DD MMM YYYY')}</b>&nbsp;</div>
@@ -1329,8 +1329,17 @@ const AccountLedger = () => {
                         {/* <input type="date" name="date" id="startdate" className='mx-2 p-1 mb-2' value={startDate} onChange={(e) => setStartDate(e.target.value)} title='find data'  />
                             To 
                         <input type="date" name="date" id="enddate" className='mx-2 p-1 mb-2'   value={endDate} onChange={(e) => setEndDate(e.target.value)}  title='enddate' /> */}
-                        <Box sx={{paddingBottom: "35px", paddingRight: "15px"}}>
+                        {/* <Box sx={{paddingBottom: "35px", paddingRight: "15px"}}>
                             <SearchIcon titleAccess='search here' sx={{cursor:'pointer'}}   onClick={handleSearch}/>
+                        </Box> */}
+                             <Box sx={{ paddingBottom: "35px", paddingRight: "15px"}}>
+
+                            <Button variant='contained' className='muiSmilingRocksBtn' title='search here'
+                                sx={{ padding: "7px 10px", minWidth: "max-content", background: "#7d7f85",  }}
+                               onClick={(e) => handleSearchBtn(e, fromDate, toDate, selectedDays)}
+                                // onClick={(eve) => handleSearch(eve, fromDate, toDate, netWtSlider[0], netWtSlider[1], grossWtSlider[0], grossWtSlider[1], purchaseCount, designNo, metal, productType, metalColor, category, subCategory, orderProm)}
+                            >
+                            <SearchIcon sx={{ color: "#fff !important", cursor:'pointer' }} /></Button>
                         </Box>
                     </div>
                     <Box sx={{paddingBottom: "35px", paddingRight: "15px"}}>
@@ -1381,16 +1390,29 @@ const AccountLedger = () => {
                 
                 <div className='text-secondary fs_al d-flex justify-content-between align-items-start p-2 my-3'>
                     <div className='d-flex justify-content-start align-items-start flex-wrap'>
-                        <div className='px-4 px_2_al d-flex align-items-center mb-2 '><span>Balance Gold :&nbsp;</span> <span className='bal_Amt_ac'>
-                            { (((resultTotal?.debit_metalgold  + Math.abs(debit_mg_diff) ) - ( resultTotal?.credit_metalgold + Math.abs(credit_mg_diff)))?.toFixed(3)) }
-                            { ((resultTotal?.debit_metalgold + Math.abs(debit_mg_diff)) - (resultTotal?.credit_metalgold + Math.abs(credit_mg_diff))) > 0 ? 'Dr' : ' Cr' }</span></div>
-                        <div className='px-4 px_2_al d-flex align-items-center mb-2'><span>Balance Diam. :&nbsp;</span> <span className='bal_Amt_ac'>
-                            { (((Math.abs(debit_dia_diff) + resultTotal?.debit_diamondwt) - (Math.abs(credit_dia_diff) + resultTotal?.credit_diamondwt))?.toFixed(3)) }
-                            { ((Math.abs(debit_dia_diff) + resultTotal?.debit_diamondwt) - (Math.abs(credit_dia_diff) + resultTotal?.credit_diamondwt)) > 0 ? 'Dr' : ' Cr' }</span></div>
-                        <div className='px-4 px_2_al d-flex align-items-center mb-2'><span>Balance Amount :&nbsp;</span> <span className='bal_Amt_ac'>
+                        <div className='px-4 px_2_al d-flex align-items-center mb-2 '><span>Balance Gold :&nbsp;</span> 
+                            <span className='bal_Amt_ac'>
+                                { (((resultTotal?.debit_metalgold  + Math.abs(debit_mg_diff) ) - ( resultTotal?.credit_metalgold + Math.abs(credit_mg_diff)))?.toFixed(3)) }
+                                { ((resultTotal?.debit_metalgold + Math.abs(debit_mg_diff)) - (resultTotal?.credit_metalgold + Math.abs(credit_mg_diff))) > 0 ? 'Dr' : ' Cr' }
+                            </span>
+                        </div>
+                        <div className='px-4 px_2_al d-flex align-items-center mb-2'><span>Balance Diam. :&nbsp;</span> 
+                            <span className='bal_Amt_ac'>
+                                { (((Math.abs(debit_dia_diff) + resultTotal?.debit_diamondwt) - (Math.abs(credit_dia_diff) + resultTotal?.credit_diamondwt))?.toFixed(3)) }
+                                { ((Math.abs(debit_dia_diff) + resultTotal?.debit_diamondwt) - (Math.abs(credit_dia_diff) + resultTotal?.credit_diamondwt)) > 0 ? 'Dr' : ' Cr' }
+                            </span>
+                        </div>
+                        <div className='px-4 px_2_al d-flex align-items-center mb-2'><span>Balance Amount :&nbsp;</span> 
+                        <span className='bal_Amt_ac'>
                             {/* { (formatAmount(resultTotal?.debit_totalcurrency - resultTotal?.credit_totalcurrency))}&nbsp;{(((Math.abs(debit_amt_diff) + resultTotal?.debit_totalamount) - (Math.abs(credit_amt_diff) + resultTotal?.credit_totalamount)) ? 'Dr' : 'Cr' ) }</span></div> */}
-                            {currencySymbol}&nbsp;{ (formatAmount((Math.abs(debit_curr_diff) + resultTotal?.debit_totalcurrency) - (Math.abs(credit_curr_diff) + resultTotal?.credit_totalcurrency)))}&nbsp;
-                            {(((Math.abs(debit_curr_diff) + resultTotal?.debit_totalcurrency) - (Math.abs(credit_curr_diff) + resultTotal?.credit_totalcurrency)) ? 'Dr' : ' Cr' ) }</span></div>
+                                {currencySymbol}&nbsp;{ (
+                                    formatAmount(
+                                             (Math.abs(debit_curr_diff) + resultTotal?.debit_totalcurrency) - (Math.abs(credit_curr_diff) + resultTotal?.credit_totalcurrency)
+                                            )
+                                    )}&nbsp;
+                                {(((Math.abs(debit_curr_diff) + resultTotal?.debit_totalcurrency) - (Math.abs(credit_curr_diff) + resultTotal?.credit_totalcurrency)) ? 'Dr' : ' Cr' ) }
+                            </span>
+                        </div>
                     </div>
                 </div>
                 {
@@ -1435,20 +1457,20 @@ const AccountLedger = () => {
                                             <td className='border-end p-1 text-center'></td>
                                             <td className='border-end p-1  ps-1' align='center'>Opening</td>
                                             <td className='border-end p-1 text-start ps-1'></td>
-                                            <td className='border-end p-1 text-end ps-1'>{ Math.abs(debit_mg_diff)}</td>
-                                            <td className='border-end p-1 text-end ps-1'>{Math.abs(debit_dia_diff)}</td>
+                                            <td className='border-end p-1 text-end ps-1'>{ Math.abs(debit_mg_diff) === 0 ? '' : (Math.abs(debit_mg_diff))?.toFixed(3)}</td>
+                                            <td className='border-end p-1 text-end ps-1'>{ Math.abs(debit_dia_diff) === 0 ? '' : Math.abs(debit_dia_diff)?.toFixed(3)}</td>
                                             {/* <td className='border-end p-1 text-end pe-1'>{Math.abs(debit_amt_diff)}</td>
                                             <td className='border-end p-1 text-end pe-1'></td> */}
-                                            <td className='border-end p-1 text-end pe-1' style={{minWidth:'100px'}}>{Math.abs(debit_curr_diff)}</td>
+                                            <td className='border-end p-1 text-end pe-1' style={{minWidth:'100px'}}>{Math.abs(debit_curr_diff) === 0 ? '' : formatAmount(Math.abs(debit_curr_diff))}</td>
                                             <td className='border-end p-1 text-center'></td>
                                             <td className='border-end p-1 text-center'></td>
                                             <td className='border-end p-1 text-start ps-1' align='center'>Opening</td>
                                             <td className='border-end p-1 text-end pe-1'></td>
-                                            <td className='border-end p-1 text-end ps-1'>{Math.abs(credit_mg_diff)}</td>
-                                            <td className='border-end p-1 text-end ps-1'>{Math.abs(credit_dia_diff)}</td>
+                                            <td className='border-end p-1 text-end ps-1'>{Math.abs(credit_mg_diff) === 0 ? '' : (Math.abs(credit_mg_diff))?.toFixed(3)}</td>
+                                            <td className='border-end p-1 text-end ps-1'>{Math.abs(credit_dia_diff) === 0 ? '' : (Math.abs(credit_dia_diff))?.toFixed(3)}</td>
                                             {/* <td className='border-end p-1 text-end ps-1'>{Math.abs(credit_amt_diff)}</td>
                                             <td className='border-end p-1 text-end pe-1'></td> */}
-                                            <td className='border-end p-1 text-end pe-1' style={{minWidth:'100px'}}>{Math.abs(credit_curr_diff)}</td>
+                                            <td className='border-end p-1 text-end pe-1' style={{minWidth:'100px'}}>{Math.abs(credit_curr_diff) === 0 ? '' : formatAmount(Math.abs(credit_curr_diff))}</td>
                                             <td className=' p-1 text-center'></td>
                                         </tr> 
                                         }
@@ -1492,21 +1514,21 @@ const AccountLedger = () => {
                                             <td className='border-end p-1 text-center'></td>
                                             <td className='border-end p-1 text-start ps-1'></td>
                                             <td className='border-end p-1 text-start ps-1'></td>
-                                            <td className='border-end p-1 text-end pe-1'>{( (Math.abs(debit_mg_diff) + resultTotal?.debit_metalgold))?.toFixed(3)}</td>
-                                            <td className='border-end p-1 text-end pe-1'>{((Math.abs(debit_dia_diff) + resultTotal?.debit_diamondwt))?.toFixed(3)}</td>
+                                            <td className='border-end p-1 text-end pe-1'>{ (Math.abs(debit_mg_diff) + resultTotal?.debit_metalgold) === 0 ? '' : ((Math.abs(debit_mg_diff) + resultTotal?.debit_metalgold))?.toFixed(3)}</td>
+                                            <td className='border-end p-1 text-end pe-1'>{ (Math.abs(debit_dia_diff) + resultTotal?.debit_diamondwt) === 0 ? '' :  ((Math.abs(debit_dia_diff) + resultTotal?.debit_diamondwt))?.toFixed(3)}</td>
                                             {/* <td className='border-end p-1 text-end pe-1' style={{minWidth:'100px'}}>{formatAmount(((Math.abs(debit_amt_diff) + resultTotal?.debit_totalamount)))}</td>
                                             <td className='border-end p-1 text-end pe-1'></td> */}
-                                            <td className='border-end p-1 text-end pe-1' style={{minWidth:'100px'}}>{currencySymbol}&nbsp;{formatAmount((Math.abs(debit_curr_diff) + resultTotal?.debit_totalcurrency))}</td>
+                                            <td className='border-end p-1 text-end pe-1' style={{minWidth:'100px'}}>{(Math.abs(debit_curr_diff) + resultTotal?.debit_totalcurrency) === 0 ? '' : currencySymbol}&nbsp;{(Math.abs(debit_curr_diff) + resultTotal?.debit_totalcurrency) === 0 ? '' : formatAmount((Math.abs(debit_curr_diff) + resultTotal?.debit_totalcurrency))}</td>
                                             <td className='border-end p-1 text-center'></td>
                                             <td className='border-end p-1 text-center'></td>
                                             <td className='border-end p-1 text-start ps-1'></td>
                                             <td className='border-end p-1 text-start ps-1'></td>
                                             {/* {console.log("dia wt total with result",((Math.abs(credit_dia_diff) + resultTotal?.credit_diamondwt))?.toFixed(3))} */}
-                                            <td className='border-end p-1 text-end pe-1'>{((Math.abs(credit_mg_diff) + resultTotal?.credit_metalgold))?.toFixed(3)}</td>
-                                            <td className='border-end p-1 text-end pe-1'>{((Math.abs(credit_dia_diff) + resultTotal?.credit_diamondwt))?.toFixed(3)}</td>
+                                            <td className='border-end p-1 text-end pe-1'>{ (Math.abs(credit_mg_diff) + resultTotal?.credit_metalgold) === 0 ? '' : ((Math.abs(credit_mg_diff) + resultTotal?.credit_metalgold))?.toFixed(3)}</td>
+                                            <td className='border-end p-1 text-end pe-1'>{ (Math.abs(credit_dia_diff) + resultTotal?.credit_diamondwt) === 0 ? '' : ((Math.abs(credit_dia_diff) + resultTotal?.credit_diamondwt))?.toFixed(3)}</td>
                                             {/* <td className='border-end p-1 text-end pe-1' style={{minWidth:'100px'}}>{formatAmount((Math.abs(credit_amt_diff) + resultTotal?.credit_totalamount))}</td>
                                             <td className='border-end p-1 text-end pe-1'></td> */}
-                                            <td className='border-end p-1 text-end pe-1' style={{minWidth:'100px'}}>{currencySymbol}&nbsp;{formatAmount((Math.abs(credit_curr_diff) + resultTotal?.credit_totalcurrency))}</td>
+                                            <td className='border-end p-1 text-end pe-1' style={{minWidth:'100px'}}>{(Math.abs(credit_curr_diff) + resultTotal?.credit_totalcurrency) === 0 ? '' : currencySymbol}&nbsp;{(Math.abs(credit_curr_diff) + resultTotal?.credit_totalcurrency) === 0 ? '' : formatAmount((Math.abs(credit_curr_diff) + resultTotal?.credit_totalcurrency))}</td>
                                             <td className=' p-1 text-center'></td>
                                         </tr>
                         </tbody>
