@@ -364,7 +364,9 @@ export default function Header() {
       >
         <div style={{ paddingTop: '150px' }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <h1 style={{ color: 'black', marginLeft: '40%', fontFamily: "PT Sans, sans-serif", fontWeight: 400 }}>Search</h1>
+            <h1 
+            className="FontFamilySet"
+            style={{ color: 'black', marginLeft: '40%', fontWeight: 400 }}>Search</h1>
             <CloseRoundedIcon
               style={{ fontSize: "32px", marginLeft: '30%', cursor: 'pointer' }}
               onClick={() => {
@@ -405,7 +407,9 @@ export default function Header() {
       >
         <div style={{ paddingTop: '150px' }}>
           <div className="gorYourBagTopHeader">
-            <h1 style={{ color: 'black', marginLeft: '30%', fontFamily: "PT Sans, sans-serif", fontWeight: 400 }}>Your Bag (1)</h1>
+            <h1 
+            className="FontFamilySet"
+            style={{ color: 'black', marginLeft: '30%',  fontWeight: 400 }}>Your Bag (1)</h1>
             <CloseRoundedIcon
               style={{ fontSize: "32px", marginLeft: '30%', cursor: 'pointer' }}
               onClick={() => {
@@ -418,8 +422,8 @@ export default function Header() {
               <img alt="" src="https://cdn.shopify.com/s/files/1/0015/3849/0427/files/RE-1811-202-G_1_641d250d-bdec-4856-9232-5c453e35e89c.jpg?v=1700605683&width=832&height=1109&crop=center" className="gorBagimge" />
               <div style={{ width: '100%' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <p style={{ margin: '0px', fontSize: '17px', fontFamily: "PT Sans, sans-serif" }}>Bespoke Plate Adjustable Bracelet (gold)</p>
-                  <p style={{ margin: '0px', fontSize: '15px' }}>$150</p>
+                  <p className="FontFamilySet" style={{ margin: '0px', fontSize: '17px', }}>Bespoke Plate Adjustable Bracelet (gold)</p>
+                  <p className="FontFamilySet" style={{ margin: '0px', fontSize: '15px' }}>$150</p>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <p style={{ margin: '0px', fontSize: '13px', fontStyle: 'italic' }}>Gold Plated</p>
@@ -432,7 +436,7 @@ export default function Header() {
             </div>
 
             <div>
-              <p style={{ fontSize: '32px', marginTop: '50px', fontFamily: "PT Sans, sans-serif", textAlign: 'center' }}>Don't Forget These</p>
+              <p className="FontFamilySet" style={{ fontSize: '32px', marginTop: '50px', textAlign: 'center' }}>Don't Forget These</p>
               <div style={{ display: 'flex' }}>
                 <div style={{ marginInline: '20px' }}>
                   <div style={{ position: 'relative', zIndex: '-1', width: 'fit-content' }}>
@@ -526,7 +530,7 @@ export default function Header() {
                 <li style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
                   {
                     menul0data?.map((md) => (
-                      <span style={{ fontSize: '12.5px', fontFamily: 'TT Commons, sans-serif', letterSpacing: 0.4, cursor: 'pointer' }}
+                      <span className="FontFamilySet" style={{ fontSize: '12.5px', letterSpacing: 0.4, cursor: 'pointer' }}
                         onClick={() => handelNewMenuData({ "label": "param0", "data": md })}
                       >
                         {capitalizeText(md?.menuname)}
@@ -606,7 +610,7 @@ export default function Header() {
       <div className="gorjanaHeader">
         <div className="gorjanaTopHeader">
           <PiMapPinLight style={{ height: "20px", width: "40px" }} />
-          <a href="/pages/store-locator" style={{ fontSize: "12px", color: 'black', fontFamily: "PT Sans, sans-serif" }}>
+          <a href="/pages/store-locator" className="FontFamilySet" style={{ fontSize: "12px", color: 'black' }}>
             Find a Store Near You
           </a>
         </div>
@@ -622,17 +626,15 @@ export default function Header() {
             <ul className="gorjanaHeaderMenu">
               {islogin === "true" &&
                 <li
-                  className="gorjana-Menu-item "
+                  className="gorjana-Menu-item  FontFamilySet"
                   onMouseEnter={handleDropdownOpen}
                   onMouseLeave={handleDropdownClose}
                   style={{
                     display: "flex",
                     alignItems: "center",
                     fontWeight: 500,
-                    fontFamily: "PT Sans, sans-serif",
                     height: '70px'
                   }}
-
                 >
                   Shop
                   <RiArrowDropDownLine
@@ -807,11 +809,15 @@ export default function Header() {
         >
           <div style={{ display: 'flex', flexDirection: 'row', gap: '50px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', width: '200%' }}>
-              <span style={{ fontSize: '13px', height: '25px', fontFamily: "PT Sans, sans-serif", letterSpacing: 1, color: '#4d4d4d', fontWeight: 600, borderBottom: '1px solid #e1e1e1' }}>FINE JEWELRY</span>
+              <span
+                className="FontFamilySet"
+                style={{ fontSize: '13px', height: '25px', letterSpacing: 1, color: '#4d4d4d', fontWeight: 600, borderBottom: '1px solid #e1e1e1' }}>FINE JEWELRY</span>
               <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px' }}>
                 {
                   menul0data?.map((md) => (
-                    <span style={{ fontSize: '12.5px', fontFamily: "PT Sans, sans-serif", letterSpacing: 0.4, cursor: 'pointer', color: '#4d4d4d' }}
+                    <span
+                      className="FontFamilySet"
+                      style={{ fontSize: '12.5px', letterSpacing: 0.4, cursor: 'pointer', color: '#4d4d4d' }}
                       onClick={() => handelNewMenuData({ "label": "param0", "data": md })}
                     >
                       {capitalizeText(md?.menuname)}
@@ -821,11 +827,15 @@ export default function Header() {
               </span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', paddingLeft: '30px', width: '200%' }}>
-              <span style={{ fontSize: '13px', height: '25px', fontFamily: "PT Sans, sans-serif", letterSpacing: 1, fontWeight: 600, color: '#4d4d4d', borderBottom: '1px solid #e1e1e1' }}>COLLECTIONS</span>
+              <span
+                className="FontFamilySet"
+                style={{ fontSize: '13px', height: '25px', letterSpacing: 1, fontWeight: 600, color: '#4d4d4d', borderBottom: '1px solid #e1e1e1' }}>COLLECTIONS</span>
               <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px' }}>
                 {
                   menul1data?.map((md) => (
-                    <span style={{ fontSize: '12.5px', fontFamily: "PT Sans, sans-serif", letterSpacing: 0.4, cursor: 'pointer', color: '#4d4d4d' }}
+                    <span
+                      className="FontFamilySet"
+                      style={{ fontSize: '12.5px', letterSpacing: 0.4, cursor: 'pointer', color: '#4d4d4d' }}
                       onClick={() => handelNewMenuData({ "label": "param1", "data": md })}
                     >
                       {capitalizeText(md?.param1dataname)}
@@ -835,13 +845,17 @@ export default function Header() {
               </span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', paddingLeft: '30px', width: '200%' }}>
-              <span style={{ fontSize: '13px', height: '25px', fontFamily: "PT Sans, sans-serif", letterSpacing: 1, fontWeight: 600, color: '#4d4d4d', borderBottom: '1px solid #e1e1e1' }}>BOUTIQUE</span>
+              <span
+                className="FontFamilySet"
+                style={{ fontSize: '13px', height: '25px', letterSpacing: 1, fontWeight: 600, color: '#4d4d4d', borderBottom: '1px solid #e1e1e1' }}>BOUTIQUE</span>
               <span style={{ display: 'flex', flexDirection: 'column', marginTop: '12px', gap: '5px', height: '350px', flexWrap: 'wrap' }}>
                 {
                   menul2data?.map((md) => (
-                    <span style={{
-                      fontSize: '12.5px', fontFamily: "PT Sans, sans-serif", letterSpacing: 0.4, cursor: 'pointer', color: '#4d4d4d'
-                    }}
+                    <span
+                      className="FontFamilySet"
+                      style={{
+                        fontSize: '12.5px', letterSpacing: 0.4, cursor: 'pointer', color: '#4d4d4d'
+                      }}
                       onClick={() => handelNewMenuData({ "label": "param2", "data": md })}
                     >
                       {capitalizeText(md?.param2dataname)}

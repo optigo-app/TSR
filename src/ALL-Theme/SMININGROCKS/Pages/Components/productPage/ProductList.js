@@ -32,7 +32,7 @@ import SortIcon from '@mui/icons-material/Sort';
 import GridViewIcon from '@mui/icons-material/GridView';
 import AppsIcon from '@mui/icons-material/Apps';
 import { TfiLayoutGrid4Alt } from "react-icons/tfi";
-
+import { IoGrid } from "react-icons/io5";
 
 function valuetext(value) {
   return `${value}°C`;
@@ -1678,19 +1678,19 @@ const ProductList = () => {
               <div className="divider"></div>
               <div className="part" style={{ flex: '60%', justifyContent: 'end' }}>
                 <div className="part-content">
-                  <GridViewIcon style={{ height: '30px', width: '30px' }} onClick={() => handle2ImageShow()} />
-                  <AppsIcon style={{ height: '30px', width: '30px' }} onClick={() => handle3ImageShow()} />
-                  <TfiLayoutGrid4Alt style={{ height: '22px', width: '22px' }} onClick={() => handle4ImageShow()} />
+                   <IoGrid style={{ height: '18px', width: '18px' , opacity: 0.7 , color: '#7b7b7b'}} onClick={() => handle2ImageShow()} />
+                  <AppsIcon style={{ height: '22px', width: '22px', opacity: 0.8 , color: '#1f1919' }} onClick={() => handle3ImageShow()} />
+                  <TfiLayoutGrid4Alt style={{ height: '17px', width: '17px' , opacity: 0.6}} onClick={() => handle4ImageShow()} /> 
                 </div>
               </div>
             </div>
             <div className="smilingProductMain" id="smilingProductMain">
               <div
                 className="smilingProductSubMain"
-                style={{ width: "100%", display: "flex" }}
+                style={{ width: "100%", display: "flex", position: "relative" }}
               >
-                {isShowfilter && (
-                  <div className="smilingWebProductListSideBar">
+                {/* {isShowfilter && ( */}
+                  <div className="smilingWebProductListSideBar" style={{transition: "1s ease",width: `20%`, left: `${isShowfilter ? "0" : "-500%"}` }}>
                     <ul style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '0px 20px 0px 0px' }}>
                       <li className="finejwelery me-4" id="finejwelery">Filters</li>
                       <li className="finejwelery" id="finejwelery" onClick={() => handlePageReload()}>All Jwelery</li>
@@ -1874,7 +1874,7 @@ const ProductList = () => {
                       ))}
                     </div>
                   </div>
-                )}
+                {/* )} */}
                 {/* for mobile */}
                 <div className="smilingMobileProductListSideBar">
 
@@ -1989,6 +1989,7 @@ const ProductList = () => {
                     width: isShowfilter ? "80%" : "100%",
                     display: "flex",
                     flexDirection: 'column',
+                    transition: "1s ease"
                     // margin: "40px 0px 0px 0px",
                   }}
                   className="smilingProductImageMain"
@@ -2051,7 +2052,7 @@ const ProductList = () => {
                               <Checkbox
                                 icon={
                                   <LocalMallOutlinedIcon
-                                    sx={{ fontSize: "22px", color: "#1f1919", opacity:'.7' }}
+                                    sx={{ fontSize: "22px", color: "#1f1919", opacity: '.7' }}
                                   />
                                 }
                                 checkedIcon={
@@ -2070,7 +2071,7 @@ const ProductList = () => {
                               <Checkbox
                                 icon={
                                   <FavoriteBorderIcon
-                                    sx={{ fontSize: "22px", color: "#1f1919", opacity:'.7' }}
+                                    sx={{ fontSize: "22px", color: "#1f1919", opacity: '.7' }}
                                   />
                                 }
                                 checkedIcon={
@@ -2132,7 +2133,7 @@ const ProductList = () => {
                               } */}
                             </div>
                             <div>
-                              
+
                               {/* <div className={show4ImagesView ? "feature4" : 'feature'}>
                                 <p>
                                   <span className="feature-count">{products?.designno}</span>
@@ -2146,22 +2147,22 @@ const ProductList = () => {
                                     </p>
                                 </div>
                               } */}
-                                <div className={show4ImagesView ? "feature4" : 'feature'}>
-                                  <p>
-                                    <span className="feature-count">{products?.designno}</span>
-                                  </p>
-                                </div>
-                                {isPriceShow === 1 &&
+                              <div className={show4ImagesView ? "feature4" : 'feature'}>
+                                <p>
+                                  <span className="feature-count">{products?.designno}</span>
+                                </p>
+                              </div>
+                              {isPriceShow === 1 &&
                                 <div className={show4ImagesView ? "feature4" : 'feature'}>
                                   <p>
                                     <span className="feature-count">{currencySym?.Currencysymbol}
-                                    {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}</span>
+                                      {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}</span>
                                   </p>
                                 </div>
                               }
                             </div>
                           </div>
-                          {isColorWiseImageShow == 1  && (
+                          {isColorWiseImageShow == 1 && (
                             <div
                               style={{
                                 display: "flex",

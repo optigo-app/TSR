@@ -11,6 +11,10 @@
   /* text-decoration:underline; */
 }
 
+#top{
+  overflow: hidden;
+}
+
 .smilingProductMain {
   width: 100%;
   background-color: white;
@@ -74,6 +78,7 @@
 
 .smilingWebProductListSideBar {
   width: 20%;
+  position: absolute;
   /* padding: 52px 0px 40px 100px; */
 }
 
@@ -207,7 +212,6 @@
 .filterDivcontainer {
   display: flex;
   border: 1px solid #d9d9d9;
-  border-radius: 5px;
   overflow: hidden;
   justify-content: center;
   margin-block: 20px;
@@ -305,13 +309,12 @@
   height: auto;
   background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
   overflow: hidden;
 }
 
-.listing-card:hover {
+/* .listing-card:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .listing-cardShow2Image {
   width: auto;
@@ -362,7 +365,9 @@
 }
 
 .listing-details {
-  padding: 12px;
+  padding: 0px 12px 0px 12px;
+  min-height: 50px;
+  overflow: hidden;
 }
 
 .listing4-details {
@@ -417,6 +422,10 @@
   height: 18px;
   align-items: center;
   font-size: 15px;
+}
+
+.smilingProductSubMain{
+  justify-content: end;
 }
 
 .designlistDetails {
@@ -498,6 +507,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 15px;
 }
 
 .select-dropdown {

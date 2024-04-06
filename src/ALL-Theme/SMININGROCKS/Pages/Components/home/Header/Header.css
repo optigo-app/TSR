@@ -221,12 +221,6 @@
     margin-block: 10px;
 }
 
-.smiling-cartBoxMainImageView {
-    border: 1px solid lightgray;
-    /* border-radius: 10px; */
-    margin: 10px;
-    width: fit-content;
-}
 
 .smiling-cartBoxImg {
     width: 70%;
@@ -883,8 +877,8 @@
 .gorjana-Menu-item {
     margin: 0px;
     margin-inline: 20px;
-    font-family: "PT Sans, sans-serif" !important;
-    font-size: 17px;
+    font-family: "PT Sans", sans-serif !important;
+    font-size: 16px;
     font-weight: 500;
     color: inherit;
     cursor: pointer;
@@ -998,7 +992,8 @@
 .tsrMobileDrawerMain .MuiDrawer-paperAnchorLeft {
     width: 100% !important;
 }
-.tsrmobileDraweMenuItem{
+
+.tsrmobileDraweMenuItem {
     border-bottom: 1px solid lightgray;
     display: flex;
     justify-content: space-between;
@@ -1014,9 +1009,10 @@
 
 @media screen and (max-width:1150px) {
 
-    .gorjanaTopHeader{
-        padding: 5px 5px 5px 2%!important;
+    .gorjanaTopHeader {
+        padding: 5px 5px 5px 2% !important;
     }
+
     .gorjanaHeaderMenuIconeWeb {
         display: none;
     }

@@ -37,7 +37,7 @@
 }
 .addressData{
     margin: 0px;
-    font-family: 'PT Sans, sans-serif';
+    font-family: 'PT Sans', sans-serif;
     color: rgb(125, 127, 133);
     text-transform: capitalize;
     /* font-family: "FreightDisp Pro Medium"; */
@@ -81,7 +81,7 @@
     border-radius: 5px;
     font-weight: 500;
     margin-top: 10px;
-    font-family: 'PT Sans, sans-serif';
+    font-family: 'PT Sans', sans-serif;
 }
 .smilingAddToAddressBtn:hover{
     background-color: lightgray;
@@ -134,7 +134,12 @@
 }
 
 
-
+.smilingMobileDeliveryBtnMain{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 140px;
+    margin-top: 20px;
+}
 @media screen and (max-width: 900px) {
 
     .smilingdeliverBox1{
