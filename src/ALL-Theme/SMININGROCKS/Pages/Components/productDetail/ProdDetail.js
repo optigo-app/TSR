@@ -77,7 +77,7 @@ const ProdDetail = () => {
   const [globImagePath,setGlobImagepath] = useState()
 
   const [designUniqueNO, setDesignUnicNo] = useState('');
-  const [uploadLogicPath, setUploadLogicPath] = useState('');
+  const [uploadLogicPath, setUploadLogicPath] = useState(''); 
   const [uKey, setUkey] = useState('');
 
 
