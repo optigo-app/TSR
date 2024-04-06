@@ -546,6 +546,11 @@
   visibility: visible;
   transform: scaleY(1);
 }
+.drawerFilterTitle{
+  font-family: "PT Sans", sans-serif !important;
+  font-weight: 800 !important;
+  color: #1f1919;
+}
 
 @media screen and (min-width: 1440px) {
   .smilingMobileProductListSideBar {
@@ -637,6 +642,7 @@
   .filterDivcontainer {
     display: none !important;
   }
+
   .smilingProductSubMain {
     display: flex;
     flex-direction: column;
@@ -742,11 +748,12 @@
     align-items: center;
   }
 
-  .firstfilteDiv{
-    border-right: 0.01rem solid #d9d9d9!important;
+  .firstfilteDiv {
+    border-right: 0.01rem solid #d9d9d9 !important;
   }
-  .secondfilteDiv{
-    border-right: 0.01rem solid #d9d9d9!important;
+
+  .secondfilteDiv {
+    border-right: 0.01rem solid #d9d9d9 !important;
   }
 
   .part-content {
@@ -764,6 +771,7 @@
   .filterDivcontainer {
     display: none !important;
   }
+
   .smilingProductSubMain {
     display: flex;
     flex-direction: column;
@@ -869,11 +877,12 @@
     align-items: center;
   }
 
-  .firstfilteDiv{
-    border-right: 0.01rem solid #d9d9d9!important;
+  .firstfilteDiv {
+    border-right: 0.01rem solid #d9d9d9 !important;
   }
-  .secondfilteDiv{
-    border-right: 0.01rem solid #d9d9d9!important;
+
+  .secondfilteDiv {
+    border-right: 0.01rem solid #d9d9d9 !important;
   }
 
   .part-content {
@@ -894,6 +903,7 @@
   .filterDivcontainer {
     display: none !important;
   }
+
   .smilingProductSubMain {
     display: flex;
     flex-direction: column;
@@ -949,6 +959,7 @@
     font-weight: 700;
     height: 6vh;
   }
+
   .price {
     font-size: .75rem;
   }
@@ -999,11 +1010,13 @@
     display: flex;
     align-items: center;
   }
-  .firstfilteDiv{
-    border-right: 0.01rem solid #d9d9d9!important;
+
+  .firstfilteDiv {
+    border-right: 0.01rem solid #d9d9d9 !important;
   }
-  .secondfilteDiv{
-    border-right: 0.01rem solid #d9d9d9!important;
+
+  .secondfilteDiv {
+    border-right: 0.01rem solid #d9d9d9 !important;
   }
 
   .part-content {
@@ -1091,6 +1104,12 @@
     font-size: 10.5px;
   }
 
+  .feature-count {
+    font-weight: 700;
+    color: #1f1919;
+    opacity: .8;
+  }
+
   .feature p {
     margin: 0 0 2px 5px;
   }
@@ -1130,11 +1149,13 @@
     display: flex;
     align-items: center;
   }
-  .firstfilteDiv{
-    border-right: 0.01rem solid #d9d9d9!important;
+
+  .firstfilteDiv {
+    border-right: 0.01rem solid #d9d9d9 !important;
   }
-  .secondfilteDiv{
-    border-right: 0.01rem solid #d9d9d9!important;
+
+  .secondfilteDiv {
+    border-right: 0.01rem solid #d9d9d9 !important;
   }
 
   .cart-icon {
