@@ -32,6 +32,7 @@ import SortIcon from '@mui/icons-material/Sort';
 import GridViewIcon from '@mui/icons-material/GridView';
 import AppsIcon from '@mui/icons-material/Apps';
 import { TfiLayoutGrid4Alt } from "react-icons/tfi";
+import CloseIcon from '@mui/icons-material/Close';
 import { IoGrid } from "react-icons/io5";
 
 function valuetext(value) {
@@ -1440,13 +1441,20 @@ const ProductList = () => {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{
+        width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250, transition: 'width .2s ease-in-out',
+        overflowX: 'hidden',
+      }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       {isOpenDetail &&
         <div>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '5px', borderBottom: '1px solid #c7c8c9'}}>
+            <Typography className="drawerFilterTitle" sx={{ margin: '8px 15px 5px 15px' }}>Filter</Typography>
+            <CloseIcon sx={{ margin: '8px 15px 5px 15px' }} onClick={toggleDetailDrawer} />
+          </Box>
           {NewFilterData().map((ele, index) => (
             <>
               <Accordion
@@ -1454,9 +1462,9 @@ const ProductList = () => {
                 sx={{
                   borderBottom: "1px solid #c7c8c9",
                   borderRadius: 0,
-                  marginLeft: "28px",
+                  margin: "0px 15px 0px 15px",
                   "&.Mui-expanded": {
-                    marginLeft: "28px",
+                    margin: "0px 15px 0px 15px",
                   },
                   "&.MuiPaper-root.MuiAccordion-root:last-of-type": {
                     borderBottomLeftRadius: "0px",
