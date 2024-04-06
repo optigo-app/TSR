@@ -502,11 +502,11 @@ export default function CartPage() {
       if (response.Data.rd[0].stat === 1) {
         await getCartData();
         await getCountFunc();
-        let prevIndexofCartList = cartListData?.findIndex((cld)=>cld?.autocode === data?.autocode)
-        if(prevIndexofCartList === 0){
+        let prevIndexofCartList = cartListData?.findIndex((cld) => cld?.autocode === data?.autocode)
+        if (prevIndexofCartList === 0) {
           setCartSelectData()
-        }else{  
-          setCartSelectData(cartListData[prevIndexofCartList -1]);
+        } else {
+          setCartSelectData(cartListData[prevIndexofCartList - 1]);
         }
       } else {
         alert("Error");
@@ -1081,17 +1081,16 @@ export default function CartPage() {
                         marginTop: "150px",
                       }}
                     >
-                      <p
+                      <p className="FontFamilySet"
                         style={{
                           margin: "0px",
                           fontSize: "20px",
                           fontWeight: 500,
-                          fontFamily: "PT Sans, sans-serif",
                         }}
                       >
                         No Data Available
                       </p>
-                      <p style={{ fontFamily: "PT Sans, sans-serif" }}>
+                      <p className="FontFamilySet">
                         Please First Add To Cart Data
                       </p>
                       <button
@@ -1114,17 +1113,21 @@ export default function CartPage() {
                           }}
                         >
                           <div className="popUpcontainer">
-                            <img
-                              src={
-                                prodSelectData?.imagepath +
-                                prodSelectData?.MediumImagePath?.split(",")[0]
-                              }
-                              style={{
-                                border: "1px solid #e1e1e1",
-                                borderRadius: "12px",
-                                width: "35%",
-                              }}
-                            />
+                            <div style={{ height: '400px', width: '400px' }}>
+                              <img
+                                src={
+                                  prodSelectData?.imagepath +
+                                  prodSelectData?.MediumImagePath?.split(",")[0]
+                                }
+                                style={{
+                                  border: "1px solid #e1e1e1",
+                                  borderRadius: "12px",
+                                  width: "100%",
+                                  height: '100%',
+                                  objectFit: 'cover'
+                                }}
+                              />
+                            </div>
 
                             <div style={{ width: "550px" }}>
                               <div
@@ -1138,7 +1141,6 @@ export default function CartPage() {
                                 <div
                                   style={{
                                     fontSize: "40px",
-                                    fontFamily: "PT Sans, sans-serif",
                                     color: "#7d7f85",
                                     lineHeight: "40px",
                                     marginBottom: "14px",
@@ -1223,13 +1225,12 @@ export default function CartPage() {
                                               METAL COLOR:
                                             </label>
                                             <select
+                                            className="FontFamilySet"
                                               style={{
                                                 border: "none",
                                                 outline: "none",
                                                 color: "#7d7f85",
                                                 fontSize: "12.5px",
-                                                fontFamily:
-                                                  "PT Sans, sans-serif",
                                               }}
                                               value={selectedColor}
                                               onChange={(e) =>
@@ -1270,9 +1271,8 @@ export default function CartPage() {
                                                 outline: "none",
                                                 color: "#7d7f85",
                                                 fontSize: "12.5px",
-                                                fontFamily:
-                                                  "PT Sans, sans-serif",
                                               }}
+                                              className="FontFamilySet"
                                               value={diaQColOpt}
                                               onChange={(e) =>
                                                 setDiaQColOpt(e.target.value)
@@ -1308,9 +1308,8 @@ export default function CartPage() {
                                                 outline: "none",
                                                 color: "#7d7f85",
                                                 fontSize: "12.5px",
-                                                fontFamily:
-                                                  "PT Sans, sans-serif",
                                               }}
+                                              className="FontFamilySet"
                                               value={cSQopt}
                                               onChange={(e) =>
                                                 setCSQOpt(e.target.value)
@@ -1333,57 +1332,56 @@ export default function CartPage() {
                                         {(sizeData?.length !== 0 ||
                                           (productData?.DefaultSize &&
                                             productData.DefaultSize.length !==
-                                              0)) && (
-                                          <div
-                                            style={{
-                                              display: "flex",
-                                              flexDirection: "column",
-                                              width: "45%",
-                                              marginTop: "30px",
-                                            }}
-                                          >
-                                            <label className="cartPageDropdownLabel">
-                                              SIZE:
-                                            </label>
-                                            <select
+                                            0)) && (
+                                            <div
                                               style={{
-                                                border: "none",
-                                                outline: "none",
-                                                color: "#7d7f85",
-                                                fontSize: "12.5px",
-                                                fontFamily:
-                                                  "PT Sans, sans-serif",
+                                                display: "flex",
+                                                flexDirection: "column",
+                                                width: "45%",
+                                                marginTop: "30px",
                                               }}
-                                              onChange={(e) =>
-                                                handelSize(e.target.value)
-                                              }
-                                              value={
-                                                sizeOption
+                                            >
+                                              <label className="cartPageDropdownLabel">
+                                                SIZE:
+                                              </label>
+                                              <select
+                                                style={{
+                                                  border: "none",
+                                                  outline: "none",
+                                                  color: "#7d7f85",
+                                                  fontSize: "12.5px",
+                                                }}
+                                                className="FontFamilySet"
+                                                onChange={(e) =>
+                                                  handelSize(e.target.value)
+                                                }
+                                                value={
+                                                  sizeOption
                                                 // ??
-                                                // (productData && productData.DefaultSize
-                                                //   ? productData.DefaultSize
-                                                //   : sizeData.find(
+                                                    // (productData && productData.DefaultSize
+                                                  //   ? productData.DefaultSize
+                                                  //   : sizeData.find(
                                                 //     (size) =>
                                                 //       size.IsDefaultSize === 1
                                                 //   )?.id)
-                                              }
-                                            >
-                                              {sizeData?.map((size) => (
-                                                <option
-                                                  key={size.id}
-                                                  value={size.sizename} // Pass sizename as value
-                                                  // selected={
-                                                  //   productData &&
-                                                  //   productData.DefaultSize ===
+                                                }
+                                              >
+                                                {sizeData?.map((size) => (
+                                                  <option
+                                                    key={size.id}
+                                                    value={size.sizename} // Pass sizename as value
+                                                    // selected={
+                                                    //   productData &&
+                                                    //   productData.DefaultSize ===
                                                   //     size.sizename
-                                                  // }
-                                                >
-                                                  {size.sizename}
-                                                </option>
-                                              ))}
-                                            </select>
-                                          </div>
-                                        )}
+                                                    // }
+                                                  >
+                                                    {size.sizename}
+                                                  </option>
+                                                ))}
+                                              </select>
+                                            </div>
+                                          )}
                                       </div>
                                     </div>
                                   )}
@@ -1500,7 +1498,7 @@ export default function CartPage() {
                                     onClick={() => handleSubmit(cartSelectData)}
                                     className="SmilingAddSingleRemkarBtn"
                                   >
-                                    Add
+                                    ADD
                                   </button>
                                 </div>
                               </div>
@@ -1676,15 +1674,10 @@ export default function CartPage() {
                 >
                   {cartListData?.map((item, index) => (
                     <div key={item.id} className="smiling-cartBoxMainImageView">
-                      <div
-                        className="smilingCartMobileMain"
-                        style={{ display: "flex" }}
-                      >
-                        <img
-                          src={`${imageURL}/${yKey}/${item.DefaultImageName}`}
-                          className="smiling-cartPageBoxImgView"
-                        />
-                      </div>
+                      <img
+                        src={`${imageURL}/${yKey}/${item.DefaultImageName}`}
+                        className="smiling-cartPageBoxImgView"
+                      />
                     </div>
                   ))}
                 </div>
@@ -1766,7 +1759,6 @@ export default function CartPage() {
                     <div
                       style={{
                         fontSize: "40px",
-                        fontFamily: "PT Sans, sans-serif",
                         color: "#7d7f85",
                         lineHeight: "46px",
                         marginBottom: "14px",
@@ -1809,8 +1801,8 @@ export default function CartPage() {
                               style={{
                                 fontSize: "12.5px",
                                 color: "#7d7f85",
-                                fontFamily: "PT Sans, sans-serif",
                               }}
+                              className="FontFamilySet"
                             >
                               METAL COLOR:
                             </label>
@@ -1820,8 +1812,8 @@ export default function CartPage() {
                                 outline: "none",
                                 color: "#7d7f85",
                                 fontSize: "12.5px",
-                                fontFamily: "PT Sans, sans-serif",
                               }}
+                              className="FontFamilySet"
                               value={selectedColor}
                               onChange={(e) => setSelectedColor(e.target.value)}
                             >
@@ -1854,11 +1846,12 @@ export default function CartPage() {
                               style={{
                                 border: "none",
                                 outline: "none",
-                                fontFamily: "PT Sans, sans-serif",
                                 color: "#7d7f85",
                                 fontSize: "12.5px",
                               }}
                               // value={mtTypeOption ?? cartSelectData?.metal}
+                              className="FontFamilySet"
+
                               value={mtTypeOption}
                               onChange={(e) => setmtTypeOption(e.target.value)}
                             >
@@ -1891,8 +1884,9 @@ export default function CartPage() {
                               style={{
                                 fontSize: "12.5px",
                                 color: "#7d7f85",
-                                fontFamily: "PT Sans, sans-serif",
                               }}
+                              className="FontFamilySet"
+
                             >
                               DAIMOND :
                             </label>
@@ -1901,10 +1895,10 @@ export default function CartPage() {
                                 border: "none",
                                 outline: "none",
                                 color: "#7d7f85",
-                                fontFamily: "PT Sans, sans-serif",
-
                                 fontSize: "12.5px",
                               }}
+                              className="FontFamilySet"
+
                               value={diaQColOpt}
                               onChange={(e) => setDiaQColOpt(e.target.value)}
                             >
@@ -1933,7 +1927,6 @@ export default function CartPage() {
                               style={{
                                 fontSize: "12.5px",
                                 color: "#7d7f85",
-                                fontFamily: "PT Sans, sans-serif",
                                 marginTop: "10px",
                               }}
                             >
@@ -1944,10 +1937,10 @@ export default function CartPage() {
                                 border: "none",
                                 outline: "none",
                                 color: "#7d7f85",
-                                fontFamily: "PT Sans, sans-serif",
-
                                 fontSize: "12.5px",
                               }}
+                              className="FontFamilySet"
+
                               value={cSQopt}
                               onChange={(e) => setCSQOpt(e.target.value)}
                             >
@@ -1967,55 +1960,56 @@ export default function CartPage() {
                       {(sizeData?.length !== 0 ||
                         (productData?.DefaultSize &&
                           productData.DefaultSize.length !== 0)) && (
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            width: "49%",
-                            marginTop: "30px",
-                          }}
-                        >
-                          <label
+                          <div
                             style={{
-                              fontSize: "12.5px",
-                              color: "#7d7f85",
-                              fontFamily: "PT Sans, sans-serif",
+                              display: "flex",
+                              flexDirection: "column",
+                              width: "49%",
+                              marginTop: "30px",
                             }}
                           >
-                            SIZE:
-                          </label>
-                          <select
-                            style={{
-                              border: "none",
-                              outline: "none",
-                              color: "#7d7f85",
-                              fontFamily: "PT Sans, sans-serif",
-                              fontSize: "12.5px",
-                            }}
-                            onChange={(e) => handelSize(e.target.value)}
-                            defaultValue={
-                              productData && productData.DefaultSize
-                                ? productData.DefaultSize
-                                : sizeData.find(
+                            <label
+                              style={{
+                                fontSize: "12.5px",
+                                color: "#7d7f85",
+                              }}
+                              className="FontFamilySet"
+
+                            >
+                              SIZE:
+                            </label>
+                            <select
+                              style={{
+                                border: "none",
+                                outline: "none",
+                                color: "#7d7f85",
+                                fontSize: "12.5px",
+                              }}
+                              className="FontFamilySet"
+                              onChange={(e) => handelSize(e.target.value)}
+                              defaultValue={
+                                productData && productData.DefaultSize
+                                  ? productData.DefaultSize
+                                  : sizeData.find(
                                     (size) => size.IsDefaultSize === 1
                                   )?.id
-                            }
-                          >
-                            {sizeData?.map((size) => (
-                              <option
-                                key={size.id}
-                                value={size.sizename} // Pass sizename as value
-                                selected={
-                                  productData &&
-                                  productData.DefaultSize === size.sizename
-                                }
-                              >
-                                {size.sizename}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                      )}
+                              }
+                            >
+                              {sizeData?.map((size) => (
+                                <option
+                                  key={size.id}
+                                  value={size.sizename} // Pass sizename as value
+                                  selected={
+                                    productData &&
+                                    productData.DefaultSize === size.sizename
+                                  }
+                                >
+                                  {size.sizename}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
                     </div>
                   </div>
                   <div

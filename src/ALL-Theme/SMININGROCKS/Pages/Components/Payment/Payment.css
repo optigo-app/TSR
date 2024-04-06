@@ -42,7 +42,7 @@
     border: 1px solid lightgray;
     font-weight: 500;
     border-radius: 5px;
-    font-family: 'PT Sans, sans-serif' ;
+    font-family: 'PT Sans', sans-serif ;
 }
 
 .paymentBtn:hover {
@@ -55,12 +55,12 @@
 .AddressTitle {
     font-size: 15px;
     margin: 5px 0px;
-    font-family: 'PT Sans, sans-serif';
+    font-family: 'PT Sans', sans-serif;
 
 }
 
 .smilingPaySub1Box2P{
-    font-family: 'PT Sans, sans-serif';
+    font-family: 'PT Sans', sans-serif;
 }
 .AdressData {
     font-size: 16px;

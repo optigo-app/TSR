@@ -32,7 +32,8 @@ import SortIcon from '@mui/icons-material/Sort';
 import GridViewIcon from '@mui/icons-material/GridView';
 import AppsIcon from '@mui/icons-material/Apps';
 import { TfiLayoutGrid4Alt } from "react-icons/tfi";
-
+import CloseIcon from '@mui/icons-material/Close';
+import { IoGrid } from "react-icons/io5";
 
 function valuetext(value) {
   return `${value}°C`;
@@ -114,11 +115,6 @@ const ProductList = () => {
   const [isActive, setIsActive] = useState(false);
   const [globImagePath,setGlobImagepath] = useState();
   const [IsProdLoading,setIsProdLoading] = useState(false);
-
-  useEffect(()=>{
-    const storeInit = JSON.parse(localStorage.getItem('storeInit'))
-    setGlobImagepath(storeInit?.DesignImageFol)
-  },[])
 
   useEffect(() => {
     setNewProData(getSearchData)
@@ -873,7 +869,7 @@ const ProductList = () => {
           "encrypted_designno": `${product?.encrypted_designno ?? ""}`,
           "hashtagid": `${product?.Hashtagid ?? ""}`,
           "hashtagname": `${product?.Hashtagname ?? ""}`,
-          "imagepath": `${globImagePath}`,
+          "imagepath": `${product?.imagepath}`,
           "imgrandomno": `${product?.imgrandomno}`,
           "mediumimage": `${product?.MediumImagePath ?? ""}`,
           "originalimage": `${product?.OriginalImagePath}`,
@@ -1036,7 +1032,7 @@ const ProductList = () => {
           "encrypted_designno": `${product?.encrypted_designno ?? ""}`,
           "hashtagid": `${product?.Hashtagid ?? ""}`,
           "hashtagname": `${product?.Hashtagname ?? ""}`,
-          "imagepath": `${globImagePath}`,
+          "imagepath": `${product?.imagepath}`,
           "mediumimage": `${product?.MediumImagePath ?? ""}`,
           "originalimage": `${product?.OriginalImagePath}`,
           "storyline_html": `${product?.storyline_html ?? ""}`,
@@ -1447,13 +1443,20 @@ const ProductList = () => {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      sx={{
+        width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250, transition: 'width .2s ease-in-out',
+        overflowX: 'hidden',
+      }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       {isOpenDetail &&
         <div>
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '5px', borderBottom: '1px solid #c7c8c9'}}>
+            <Typography className="drawerFilterTitle" sx={{ margin: '8px 15px 5px 15px' }}>Filter</Typography>
+            <CloseIcon sx={{ margin: '8px 15px 5px 15px' }} onClick={toggleDetailDrawer} />
+          </Box>
           {NewFilterData().map((ele, index) => (
             <>
               <Accordion
@@ -1461,9 +1464,9 @@ const ProductList = () => {
                 sx={{
                   borderBottom: "1px solid #c7c8c9",
                   borderRadius: 0,
-                  marginLeft: "28px",
+                  margin: "0px 15px 0px 15px",
                   "&.Mui-expanded": {
-                    marginLeft: "28px",
+                    margin: "0px 15px 0px 15px",
                   },
                   "&.MuiPaper-root.MuiAccordion-root:last-of-type": {
                     borderBottomLeftRadius: "0px",
@@ -1694,21 +1697,21 @@ const ProductList = () => {
                 </div>
               </div>
               <div className="divider"></div>
-              <div className="part" style={{ flex: '80%', justifyContent: 'end' }}>
+              <div className="part" style={{ flex: '60%', justifyContent: 'end' }}>
                 <div className="part-content">
-                  <GridViewIcon style={{ height: '30px', width: '30px' }} onClick={() => handle2ImageShow()} />
-                  <AppsIcon style={{ height: '30px', width: '30px' }} onClick={() => handle3ImageShow()} />
-                  <TfiLayoutGrid4Alt style={{ height: '22px', width: '22px' }} onClick={() => handle4ImageShow()} />
+                   <IoGrid style={{ height: '18px', width: '18px' , opacity: 0.7 , color: '#7b7b7b'}} onClick={() => handle2ImageShow()} />
+                  <AppsIcon style={{ height: '22px', width: '22px', opacity: 0.8 , color: '#1f1919' }} onClick={() => handle3ImageShow()} />
+                  <TfiLayoutGrid4Alt style={{ height: '17px', width: '17px' , opacity: 0.6}} onClick={() => handle4ImageShow()} /> 
                 </div>
               </div>
             </div>
             <div className="smilingProductMain" id="smilingProductMain">
               <div
                 className="smilingProductSubMain"
-                style={{ width: "100%", display: "flex" }}
+                style={{ width: "100%", display: "flex", position: "relative" }}
               >
-                {isShowfilter && (
-                  <div className="smilingWebProductListSideBar">
+                {/* {isShowfilter && ( */}
+                  <div className="smilingWebProductListSideBar" style={{transition: "1s ease",width: `20%`, left: `${isShowfilter ? "0" : "-500%"}` }}>
                     <ul style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '0px 20px 0px 0px' }}>
                       <li className="finejwelery me-4" id="finejwelery">Filters</li>
                       <li className="finejwelery" id="finejwelery" onClick={() => handlePageReload()}>All Jwelery</li>
@@ -1892,13 +1895,13 @@ const ProductList = () => {
                       ))}
                     </div>
                   </div>
-                )}
+                {/* )} */}
                 {/* for mobile */}
                 <div className="smilingMobileProductListSideBar">
 
                   {/* <hr style={{ marginTop: "0px" }} /> */}
                   <div className="filterListMobileData" style={{ display: "flex", marginInline: "15px" }}>
-                    <div style={{ width: "49%" }} onClick={toggleDrawerOverlay}>
+                    <div style={{ width: "100%" }} onClick={toggleDrawerOverlay}>
 
                       <Drawer
                         anchor="left"
@@ -1914,7 +1917,7 @@ const ProductList = () => {
                             <FilterListIcon />
                           </div>
                         </div>
-                        <div className="divider"></div>
+                        {/* <div className="divider"></div>/ */}
                         <div className="part secondfilteDiv" style={{ flex: '20%' }}>
                           <div className="part-content">
                             <div className={`custom-select ${isActive ? 'active' : ''}`}>
@@ -1938,8 +1941,8 @@ const ProductList = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="divider"></div>
-                        <div className="part thirdfilteDiv" style={{ flex: '80%', justifyContent: 'end' }}>
+                        {/* <div className="divider"></div> */}
+                        <div className="part thirdfilteDiv" style={{ flex: '60%', justifyContent: 'end' }}>
                           <div className="part-content">
                             <GridViewIcon onClick={() => handle2ImageShow()} />
                             <AppsIcon />
@@ -2007,6 +2010,7 @@ const ProductList = () => {
                     width: isShowfilter ? "80%" : "100%",
                     display: "flex",
                     flexDirection: 'column',
+                    transition: "1s ease"
                     // margin: "40px 0px 0px 0px",
                   }}
                   className="smilingProductImageMain"
@@ -2056,12 +2060,12 @@ const ProductList = () => {
                                 backgroundImage: `url(${hoveredImageUrls[i] ? hoveredImageUrls[i] : updatedColorImage[i] ? updatedColorImage[i] :
 
                                   (products?.MediumImagePath ?
-                                    (globImagePath + products?.MediumImagePath?.split(",")[0]) :
+                                    (products?.imagepath + products?.MediumImagePath?.split(",")[0]) :
                                     notFound
                                   )
                                   })`
                               }}
-                              onMouseEnter={() => handleHoverImageShow(products?.MediumImagePath?.split(",")[0], i, products?.RollOverImageName, globImagePath)}
+                              onMouseEnter={() => handleHoverImageShow(products?.MediumImagePath?.split(",")[0], i, products?.RollOverImageName, products?.imagepath)}
                               //onMouseEnter={() => handleHoverImageShow(products?.MediumImagePath?.split(",")[0], i, isColorWiseImageShow === 1 ? products?.ColorWiseRollOverImageName : products?.RollOverImageName, products?.imagepath)}
                               onMouseLeave={() => handleMouseLeave(i)}
                             ></div>
@@ -2069,7 +2073,7 @@ const ProductList = () => {
                               <Checkbox
                                 icon={
                                   <LocalMallOutlinedIcon
-                                    sx={{ fontSize: "22px", color: "#000" }}
+                                    sx={{ fontSize: "22px", color: "#1f1919", opacity: '.7' }}
                                   />
                                 }
                                 checkedIcon={
@@ -2084,11 +2088,11 @@ const ProductList = () => {
                                 onChange={(e) => handelCartList(e, products)}
                               />
                             </div>
-                            <div className="image-overlay">
+                            <div className="wishlist-icon">
                               <Checkbox
                                 icon={
                                   <FavoriteBorderIcon
-                                    sx={{ fontSize: "22px", color: "#000" }}
+                                    sx={{ fontSize: "22px", color: "#1f1919", opacity: '.7' }}
                                   />
                                 }
                                 checkedIcon={
@@ -2109,7 +2113,7 @@ const ProductList = () => {
                               {products?.TitleLine}
                             </p>
                             <div>
-                              {isPriceShow === 1 &&
+                              {/* {isPriceShow === 1 &&
                                 <p className={show4ImagesView ? "productDetails price4" : "productDetails price"}>{currencySym?.Currencysymbol}
                                   {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}</p>
                               }
@@ -2122,7 +2126,7 @@ const ProductList = () => {
                                   flexItem
                                 />
                                 <p className="productDetails address"> {isMetalTCShow === 1 && products?.MetalTypeName}-{products?.MetalColorName}{products?.MetalPurity}</p>
-                              </span>
+                              </span> */}
                             </div>
                           </div>
                           <div className={show4ImagesView ? "listing-features4" : "listing-features"} >
@@ -2134,15 +2138,6 @@ const ProductList = () => {
                                   </p>
                                 </div>
                               }
-                              {((isDaaimongWShow || isDaaimongWShow) === 1 && (products?.diamondweight !== 0 || products?.diamondpcs !== 0)) &&
-                                <div className={show4ImagesView ? "feature4" : 'feature'}>
-                                  <p>
-                                    <span className="feature-count">DWT : </span> {(isDaaimongWShow === 1 && products?.diamondweight !== 0) && products?.diamondweight + '/'}  {(isDaaimonPShow === 1 && products?.diamondpcs !== 0) && products?.diamondpcs}
-                                  </p>
-                                </div>
-                              }
-                            </div>
-                            <div>
                               {isGrossWShow === 1 &&
                                 <div className={show4ImagesView ? "feature4" : 'feature'}>
                                   <p>
@@ -2150,16 +2145,45 @@ const ProductList = () => {
                                   </p>
                                 </div>
                               }
-                              {((isStoneWShow || isStonePShow) === 1 && (products?.totalcolorstoneweight !== 0 || products?.totalcolorstonepcs !== 0)) &&
+                              {/* {((isDaaimongWShow || isDaaimongWShow) === 1 && (products?.diamondweight !== 0 || products?.diamondpcs !== 0)) &&
                                 <div className={show4ImagesView ? "feature4" : 'feature'}>
                                   <p>
-                                    <span className="feature-count">CWT : </span> {(isStoneWShow === 1 && products?.totalcolorstoneweight !== 0) && products?.totalcolorstoneweight + '/'}  {(isStonePShow === 1 && products?.totalcolorstonepcs !== 0) && products?.totalcolorstonepcs}
+                                    <span className="feature-count">DWT : </span> {(isDaaimongWShow === 1 && products?.diamondweight !== 0) && products?.diamondweight + '/'}  {(isDaaimonPShow === 1 && products?.diamondpcs !== 0) && products?.diamondpcs}
+                                  </p>
+                                </div>
+                              } */}
+                            </div>
+                            <div>
+
+                              {/* <div className={show4ImagesView ? "feature4" : 'feature'}>
+                                <p>
+                                  <span className="feature-count">{products?.designno}</span>
+                                </p>
+                              </div>
+                              {isPriceShow === 1 &&
+                                <div className={show4ImagesView ? "feature4" : 'feature'}>
+                                  <p>
+                                  <span className="feature-count">{currencySym?.Currencysymbol}
+                                    {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}</span>
+                                    </p>
+                                </div>
+                              } */}
+                              <div className={show4ImagesView ? "feature4" : 'feature'}>
+                                <p>
+                                  <span className="feature-count">{products?.designno}</span>
+                                </p>
+                              </div>
+                              {isPriceShow === 1 &&
+                                <div className={show4ImagesView ? "feature4" : 'feature'}>
+                                  <p>
+                                    <span className="feature-count">{currencySym?.Currencysymbol}
+                                      {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}</span>
                                   </p>
                                 </div>
                               }
                             </div>
                           </div>
-                          {products?.IsColorWiseImageExists !== null && (
+                          {isColorWiseImageShow == 1 && (
                             <div
                               style={{
                                 display: "flex",

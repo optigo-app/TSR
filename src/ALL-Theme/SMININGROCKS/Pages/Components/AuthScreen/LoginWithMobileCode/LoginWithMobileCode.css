@@ -20,12 +20,13 @@
     width: 430px;
     border: 1px solid black;
     margin-top: 10px;
-    font-size: 14px;
-    color: #424242;
+    font-size: 14.5px;
+    color: #1f1919;
+    opacity: .8;
     font-weight: 600!important;
     letter-spacing: 1px;
     transition: all 0.5s ease;
-    font-family: 'Harmonia';
+    font-family: "PT Sans", sans-serif;
     cursor: pointer;
     background-color: white;
 }

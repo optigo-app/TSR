@@ -286,7 +286,7 @@
     font-size: 14px;
     margin-right: 40px;
     letter-spacing: 1px;
-    font-family: "PT Sans, sans-serif";;
+    font-family: "PT Sans", sans-serif;;
 }
 
 
@@ -302,7 +302,7 @@
 }
 
 .TSRFooterPart2Desc2 {
-    font-family: "PT Sans, sans-serif";
+    font-family: "PT Sans", sans-serif;
     color: white;
     font-size: 32px;
     letter-spacing: 3px;

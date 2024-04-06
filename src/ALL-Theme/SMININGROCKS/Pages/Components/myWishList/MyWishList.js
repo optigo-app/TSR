@@ -223,9 +223,9 @@ export default function MyWishList() {
                         <button className='smiTopClearBtn' onClick={() => navigation('/productpage')}>SHOW PRODUCTLIST</button>
                     </div>}
 
-                    <div className='smiWishLsitBoxMain'  style={{marginBottom: wishlistData?.length === 0 && '15%'}}>
+                    <div className='smiWishLsitBoxMain' style={{ marginBottom: wishlistData?.length === 0 && '15%' }}>
                         {wishlistData?.length === 0 ? !isLoading &&
-                            <div style={{ width: '100%',marginTop:'80px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                            <div style={{ width: '100%', marginTop: '80px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                                 <p style={{ margin: '0px', fontSize: '20px', fontWeight: 500 }}>No Data Available</p>
                                 <p>Please First Add To Wishlist Data</p>
                                 <button className='browseBtnMore' onClick={() => navigation('/productpage')}>BROWSE OUR COLLECTION</button>
@@ -237,7 +237,7 @@ export default function MyWishList() {
                                         <IoClose style={{ height: '30px', width: '30px', cursor: 'pointer', color: 'rgb(0 0 0 / 66%)' }} onClick={() => handleRemoveWichList(item)} />
                                     </div>
                                     <img src={`${imageURL}/${yKey}/${item.DefaultImageName}`} className='smiWishLsitBoxImge' style={{ cursor: 'pointer' }} alt='Wishlist item' onClick={() => handelProductSubmit(item)} />
-                                    
+
                                     <p className='smiWishLsitBoxTitltLine'>{item.TitleLine}</p>
 
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginInline: '2%' }}>
@@ -245,13 +245,13 @@ export default function MyWishList() {
                                         {isPriseShow == 1 && <p className='smiWishLsitBoxDescPrice'>{cuurencySymbol} {item.TotalUnitCost}</p>}
                                     </div>
 
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginInline: '2%' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginInline: '2%', paddingBottom: '18%' }}>
                                         <p className='smiWishLsitBoxDesc2'>GWT: {item.ActualGrossweight}</p>
                                         <p className='smiWishLsitBoxDesc2'>DWT: {item.totaldiamondweight}</p>
                                     </div>
                                     {/* <p className='smiWishLsitBoxDesc2'>{item.totaldiamondweight} / {item.ActualGrossweight}</p> */}
                                     {/* <p className='smiWishLsitBoxDesc2'>{item.mastermanagement_goldtypename} / {item.mastermanagement_goldcolorname} / {item.ActualGrossweight}</p> */}
-                                    <div style={{ display: 'flex', justifyContent: 'center', marginBlock: '15px' }}>
+                                    <div style={{ display: 'flex', position: 'absolute', bottom: '0px', width: '100%', justifyContent: 'center', marginBlock: '15px' }}>
                                         <button className='smiWishLsitBoxDesc3' onClick={() => handleAddToCart(item.autocode)}>ADD TO CART +</button>
                                     </div>
                                 </div>
