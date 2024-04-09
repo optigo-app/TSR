@@ -138,12 +138,10 @@
     top: 72px;
     left: 0;
     box-shadow: 0 0 25px 0 rgba(200, 200, 200, .5);
-    /* border: 1px solid black; */
 }
 
-.css-1abqjyq-MuiBadge-badge{
+.badge12 .MuiBadge-badge.MuiBadge-standard{
     background-color: #714f44!important;
-    color: black;
 }
 .nav-li-shop-main:hover {
     height: 90px;

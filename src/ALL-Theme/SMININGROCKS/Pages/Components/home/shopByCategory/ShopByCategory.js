@@ -2,13 +2,10 @@ import React from 'react'
 import './ShopByCategory.css'
 import { BsBag } from "react-icons/bs";
 
-import shop1 from '../../../assets/TSR/fue1.jpg'
-import shop2 from '../../../assets/TSR/fue2.jpg'
-import shop3 from '../../../assets/TSR/fue3.jpg'
-import shop4 from '../../../assets/TSR/fue4.jpg'
-import layer1 from '../../../assets/TSR/layer1.jpg'
-import layer2 from '../../../assets/TSR/layer2.jpg'
-import layer3 from '../../../assets/TSR/layer3.jpg'
+import shop1 from '../../../assets/Ring.jpg'
+import shop2 from '../../../assets/shopByCategory/shopByCategory2.jpg'
+import shop3 from '../../../assets/shopByCategory/shopByCategory3.webp'
+import shop4 from '../../../assets/shopByCategory/shopByCategory4.jpg'
 import { Colors } from '../../../../lib/consts/Colors'
 
 export default function ShopByCategory() {
@@ -61,21 +58,21 @@ export default function ShopByCategory() {
           <div className='gorFetureBox1'>
             <div>
               <p className='gorFutureMainTitleWeb'>Featured</p>
-              <img src={shop1} className='gorFutureBox1Images' />
+              <img src='https://www.gorjana.com/cdn/shop/files/OffMonth-MasonryGrid-Birthstones.jpg?v=1701379789&%3Bwidth=1200&em-format=avif' className='gorFutureBox1Images' />
               <p className='gorFutureBoxDesc'>Birthstones</p>
             </div>
             <div className='gorFetureBox1Sub'>
-              <img src={shop2} className='gorFutureBox1Images' />
+              <img src='https://www.gorjana.com/cdn/shop/files/Feature-Zoey_1.jpg?v=1700154326&%3Bwidth=700&em-format=avif' className='gorFutureBox1Images' />
               <p className='gorFutureBoxDesc'>Chain Links</p>
             </div>
           </div>
           <div className='gorFetureBox2'>
             <div>
-              <img src={shop3} className='gorFetureBox2Images' />
+              <img src='https://www.gorjana.com/cdn/shop/files/MasonryGrid-GiftsThatGlitter_1.jpg?v=1701383338&%3Bwidth=1200&em-format=avif' className='gorFetureBox2Images' />
               <p className='gorFutureBoxDesc'>Holiday Party Layers</p>
             </div>
             <div className='gorFetureBox2Sub'>
-              <img src={shop4} className='gorFetureBox2Images' />
+              <img src='https://www.gorjana.com/cdn/shop/files/OffMonth-MasonryGrid-Layered-Sets.jpg?v=1701379896&%3Bwidth=1200&em-format=avif' className='gorFetureBox2Images' />
               <p className='gorFutureBoxDesc'>Layered Sets</p>
             </div>
           </div>
@@ -88,14 +85,14 @@ export default function ShopByCategory() {
         <div className='GorMansoryMain'>
           <div className='GorMansoryBox1'>
             <div className='GorMansoryBox1ImageMain'>
-              <img src={layer1} className='GorMansoryBox1Img' />
+              <img src='https://www.gorjana.com/cdn/shop/files/NOV13-Site_Looks-1.jpg?v=1699488381&%3Bwidth=1180&em-format=avif' className='GorMansoryBox1Img' />
               <div className='gorShopLookBtnMain'>
                 <button className='gorShopLookBtn'>Shop The Look</button>
                 <BsBag style={{ backgroundColor: '#ffffffbf' }} />
               </div>
             </div>
             <div className='GorMansoryBox1ImageMain' style={{ marginTop: '40px' }}>
-              <img src={layer2} className='GorMansoryBox1Img' />
+              <img src='https://www.gorjana.com/cdn/shop/files/NOV13-Site_Looks-2_1.jpg?v=1699639359&%3Bwidth=1180&em-format=avif' className='GorMansoryBox1Img' />
               <div className='gorShopLookBtnMain'>
                 <button className='gorShopLookBtn'>Shop The Look</button>
                 <BsBag style={{ backgroundColor: '#ffffffbf' }} />
@@ -104,7 +101,7 @@ export default function ShopByCategory() {
           </div>
           <div className='GorMansoryBox2'>
             <div className='GorMansoryBox2ImageMain'>
-              <img src={layer3} className='GorMansoryBox2Img' />
+              <img src='https://www.gorjana.com/cdn/shop/files/NOV13-Site_Looks-3.jpg?v=1699488426&%3Bwidth=1180&em-format=avif' className='GorMansoryBox2Img' />
               <div className='gorShopLookBtnMain'>
                 <button className='gorShopLookBtn'>Shop The Look</button>
                 <BsBag style={{ backgroundColor: '#ffffffbf' }} />
