@@ -7,9 +7,9 @@
     align-items: baseline !important;
     margin-top: 0 !important;
 }
-.tableHeadRow{
+/* .tableHeadRow{
     background: #f6efe6 !important;
-}
+} */
 
 @media(max-width: 768px) {
     .salesApiSection {

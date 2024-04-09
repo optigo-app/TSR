@@ -917,12 +917,12 @@ const DesignWiseSalesReport = () => {
                         <div
                             style={{
                                 minWidth: "100%",
-                                border: "1px solid #e1e1e1",
+                                border: "1px solid rgba(0, 0, 0, 0.04)",
                                 textAlign: "center",
                                 color: "#7d7f85",
                                 position: "relative",
                                 zIndex: 0,
-                                background: "#f6efe6",
+                                // background: "#c0bbb133",
                             }}
                             className="smilingProductImageBox designWiseSalesReportProduct"
                         >
@@ -938,9 +938,9 @@ const DesignWiseSalesReport = () => {
 
                                 <Box sx={{ minheight: "271px" }}>
                                     {products?.imgsrc ? (
-                                        <img className="prod_img" src={products?.imgsrc} alt='' style={{ objectFit: "contain", height: "100%", minheight: "271px", maxHeight: "271px" }} />
+                                        <img className="prod_img1" src={products?.imgsrc} alt='' style={{ objectFit: "contain", height: "100%", minheight: "271px", maxHeight: "271px" }} />
                                     ) : (
-                                        <Skeleton variant="rectangular" width={"100%"} height={335} style={{marginBottom:'76px'}} />
+                                        <Skeleton variant="rectangular" width={"100%"} height='232px' style={{marginBottom:'39px'}} />
                                     )}
                                 </Box>
 
