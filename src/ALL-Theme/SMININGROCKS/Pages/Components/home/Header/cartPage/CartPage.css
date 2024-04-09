@@ -85,6 +85,7 @@
 .YourCartPageMainRemkarBox {
     width: 400px;
     padding-left: 5px;
+    border: 1px solid #ccc;
 }
 
 .smilingCartPageTab1Main:hover {
