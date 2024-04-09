@@ -1432,6 +1432,7 @@ export default function CartPage() {
                                       (diaUpdatedPrice() ?? 0) +
                                       (colUpdatedPrice() ?? 0)
                                     ).toFixed(2)}
+                                    
                                   </span>
                                 </span>
                                 <button
