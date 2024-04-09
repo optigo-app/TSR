@@ -922,7 +922,7 @@ const DesignWiseSalesReport = () => {
                                 color: "#7d7f85",
                                 position: "relative",
                                 zIndex: 0,
-                                background: "#c0bbb133",
+                                background: "#f6efe6",
                             }}
                             className="smilingProductImageBox designWiseSalesReportProduct"
                         >

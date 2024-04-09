@@ -677,12 +677,12 @@ const QuotationJob = () => {
             <TableContainer sx={{ maxHeight: 810 }} className='quotationJobSec'>
               <Table stickyHeader aria-label="sticky table" className='quotaionFiltertable'>
                 <TableHead>
-                  <TableRow>
+                  <TableRow className='tableHeadRow'>
                     {columns.map((column) => (
                       <TableCell
                         key={column.id}
                         align={column.align}
-                        style={{ minWidth: column.minWidth, backgroundColor: "#ebebeb", color: "#6f6f6f", }}
+                        style={{ minWidth: column.minWidth, backgroundColor: "#f6efe6", color: "#6f6f6f", }}
                         onClick={() => handleRequestSort(column.id)}
                       >
                         {column.label}

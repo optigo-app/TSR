@@ -69,6 +69,10 @@
     margin-bottom: 20px !important;
 }
 
+.tableHeadRow{
+    background: #f6efe6 !important;
+}
+
 @media(max-width: 768px){
     .salesReport .MuiTablePagination-root{
         padding-bottom: 0 !important;
