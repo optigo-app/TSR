@@ -1131,8 +1131,6 @@ const ProdDetail = () => {
 
       }
 
-
-
     }
     catch (error) {
       console.log("error", error);
