@@ -205,7 +205,9 @@ export default function Home() {
         }
 
         await CommonAPI(body).then((res) => {
-          localStorage.setItem("CURRENCYCOMBO", JSON.stringify(res.Data.rd[0]))
+          if(res.Data.rd){
+            localStorage.setItem("CURRENCYCOMBO", JSON.stringify(res.Data.rd))
+          }
           // console.log("res",res)
         })
 

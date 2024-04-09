@@ -1642,6 +1642,11 @@ const ProductList = () => {
     }
    },[newProData,ProductApiData2])
 
+  const decodeEntities = (html) => {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
 
   return (
     <div id="top">
@@ -2182,7 +2187,8 @@ const ProductList = () => {
                               {isPriceShow === 1 &&
                                 <div className={show4ImagesView ? "feature4" : 'feature'}>
                                   <p>
-                                    <span className="feature-count">{currencySym?.Currencysymbol}
+                                    <span className="feature-count" style={{display:'flex'}}>
+                                      <div className="currencyFont" dangerouslySetInnerHTML={{ __html: decodeEntities(currData[0]?.Currencysymbol) }} />
                                       {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}</span>
                                   </p>
                                 </div>
