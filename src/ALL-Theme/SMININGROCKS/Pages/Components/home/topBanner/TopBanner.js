@@ -3,8 +3,6 @@ import './TopBanner.css';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { loginState } from '../../../../../../Recoil/atom';
-import banner1 from '../../../assets/TSR/banner1.jpg'
-import banner2 from '../../../assets/TSR/banner2.jpg'
 
 export default function TopBanner() {
   const [loading, setLoading] = useState(true);
@@ -24,7 +22,7 @@ export default function TopBanner() {
   return (
     <div>
       <div className='gorjanaFave1web'>
-        <img src={banner1} className='gorjanaFaveImage' />
+        <img src='https://www.gorjana.com/cdn/shop/files/Hero_D-2_12.jpg?v=1701379010&width=2800' className='gorjanaFaveImage' />
         {islogin === "true" && <div className='gorjanaFaveBox'>
           <p style={{
             fontFamily: "PT Sans, sans-serif",
@@ -73,7 +71,7 @@ export default function TopBanner() {
 
 
       <div className='gorjanaFave2web'>
-        <img src={banner2} className='gorjanaFaveImage' />
+        <img src='https://www.gorjana.com/cdn/shop/files/SubStory-D_7_303500df-182d-4edd-8eff-a93a1eb284ac.jpg?v=1699567448&width' className='gorjanaFaveImage' />
         {islogin === "true" && <div className='gorjanaFaveBox2'>
           <p style={{
             fontFamily: "PT Sans, sans-serif",
