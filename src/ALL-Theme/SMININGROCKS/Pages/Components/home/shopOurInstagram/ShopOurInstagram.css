@@ -149,6 +149,8 @@
 
 .groInstaImagesMain {
     width: 25%;
+    height: 400px;
+    overflow: hidden;
 }
 
 .groInstaImagesMainSub {

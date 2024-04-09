@@ -4,6 +4,12 @@ import { useNavigate } from 'react-router-dom'
 import banner1 from '../../../assets/banner1.jpg'
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { loginState } from '../../../../../../Recoil/atom';
+import img1 from '../../../assets/TSR/gift1.jpg'
+import img2 from '../../../assets/TSR/gift2.jpg'
+import img3 from '../../../assets/TSR/gift3.jpg'
+import img4 from '../../../assets/TSR/gift4.jpg'
+import img5 from '../../../assets/TSR/lookbook1.jpg'
+import img6 from '../../../assets/TSR/banner3.jpg'
 
 export default function FestiveFinds() {
 
@@ -38,21 +44,21 @@ export default function FestiveFinds() {
                 <div className='gorGiftBox1'>
                     <div>
                         <p className='gorGiftBoxMainTitleWeb'>Gifting Made Easy</p>
-                        <img src='https://www.gorjana.com/cdn/shop/files/Feature-TopGifts_8331665f-9cc0-4d68-b09c-9193aff89e15.jpg?v=1702053479&%3Bwidth=1200&em-format=avif' className='gorGiftBox1Images' />
+                        <img src={img1} className='gorGiftBox1Images' />
                         <p className='gorGiftBoxDesc'>Top Gifts</p>
                     </div>
                     <div className='gorGiftBox1Sub1'>
-                        <img src='https://www.gorjana.com/cdn/shop/files/Feature-TopFineGifts_5dc280ce-376e-4488-8c79-e37c9339264d.jpg?v=1702053479&%3Bwidth=1200&em-format=avif' className='gorGiftBox1Images' />
+                        <img src={img2} className='gorGiftBox1Images' />
                         <p className='gorGiftBoxDesc'>Personalized Gifts</p>
                     </div>
                 </div>
                 <div className='gorGiftBox2'>
                     <div>
-                        <img src='https://www.gorjana.com/cdn/shop/files/Feature-GiftsUnder_150_4b3637bc-a43b-451c-b183-3721016224d5.jpg?v=1702053479&%3Bwidth=1200&em-format=avif' className='gorGiftBox2Images' />
+                        <img src={img3} className='gorGiftBox2Images' />
                         <p className='gorGiftBoxDesc'>Gifts Under $150</p>
                     </div>
                     <div className='gorGiftBox2Sub1' >
-                        <img src='https://www.gorjana.com/cdn/shop/files/MasonryGrid-GiftsThatGlitter.jpg?v=1701380400&%3Bwidth=1200&em-format=avif' className='gorGiftBox2Images' />
+                        <img src={img4} className='gorGiftBox2Images' />
                         <p className='gorGiftBoxDesc'>Splurge Worthy Gifts</p>
                     </div>
                 </div>
@@ -63,7 +69,7 @@ export default function FestiveFinds() {
                 marginTop: '70px'
             }}>
                 <div className='gorViewLookBookimg'>
-                    <img src='https://www.gorjana.com/cdn/shop/files/Feature-Lookbook_089f3d54-299c-4177-b403-7c3ebeb8e146.jpg?v=1702053479&%3Bwidth=1200&em-format=avif' className='gorViewLookBookImage' />
+                    <img src={img5} className='gorViewLookBookImage' />
                 </div>
                 <div className='gorViewLookBookDesc'>
                     <p style={{ fontSize: '30px', margin: '0px', fontFamily: 'Freight Big Pro,serif' }}>The Holiday Lookbook is Here</p>
@@ -74,7 +80,7 @@ export default function FestiveFinds() {
 
             <div style={{marginTop: '100px'}}>
                 <div className='gorjanaTrade1Web'>
-                    <img src='https://www.gorjana.com/cdn/shop/files/Hero_D-2_13.jpg?v=1701993381&width=2800' className='gorjanaFaveImage' />
+                    <img src={img6} className='gorjanaFaveImage' />
                     <div className='gorjanaTrideBox'>
                         <p style={{
                             fontFamily: 'Freight Big Pro,serif',

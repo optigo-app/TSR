@@ -94,6 +94,13 @@ export default function CartPage() {
 
   const setCartCount = useSetRecoilState(CartListCounts);
   const setWishCount = useSetRecoilState(WishListCounts);
+
+  const [currData,setCurrData] = useState([])
+
+  useEffect(()=>{
+    let currencyData = JSON.parse(localStorage.getItem("currencyData"))
+    setCurrData(currencyData)
+  },[])
   //   const getPriceData = useRecoilValue(priceData);
   // const getTestProdData = useRecoilValue(newTestProdData);
 
@@ -245,12 +252,12 @@ export default function CartPage() {
     let mtrd = getPriceData?.rd?.filter((ele) =>
     storeInit?.IsMetalCustomization === 1
     ?
-    ele?.A === srProductsData?.autocode &&
-    ele?.B === srProductsData?.designno &&
+    ele?.A === cartSelectData?.autocode &&
+    ele?.B === cartSelectData?.designno &&
     ele?.D === mtTypeOption
     :
-    ele?.A === srProductsData?.autocode &&
-    ele?.B === srProductsData?.designno
+    ele?.A === cartSelectData?.autocode &&
+    ele?.B === cartSelectData?.designno
 
     );
     
@@ -258,21 +265,23 @@ export default function CartPage() {
     
     let showPrice = 0;
     if (mtrd && mtrd.length > 0) {
-      showPrice = srProductsData?.price - ((srProductsData?.price - srProductsData?.metalrd) + (mtrd[0]?.Z ?? 0));
-      setMtrdData(mtrd[0] ?? [])
+      // showPrice = srProductsData?.price - ((srProductsData?.price - srProductsData?.metalrd) + (mtrd[0]?.Z ?? 0));
+      setMtrdData(mtrd[0])
       // setMetalPrice(mtrd[0]?.Z ?? 0)
+    }else{
+      setMtrdData([]);
     }
 
     let diaqcprice = getPriceData?.rd1?.filter((ele) =>
     storeInit?.IsDiamondCustomization === 1 
       ?
-      ele.A === srProductsData?.autocode &&
-      ele.B === srProductsData?.designno &&
+      ele.A === cartSelectData?.autocode &&
+      ele.B === cartSelectData?.designno &&
       ele.H === diaQColOpt?.split("_")[0] &&
       ele.J === diaQColOpt?.split("_")[1]
       :
-      ele.A === srProductsData?.autocode &&
-      ele.B === srProductsData?.designno
+      ele.A === cartSelectData?.autocode &&
+      ele.B === cartSelectData?.designno
 
     )
 
@@ -280,27 +289,31 @@ export default function CartPage() {
 
     let showPrice1 = 0;
     if (diaqcprice && diaqcprice.length > 0) {
-      showPrice1 = srProductsData?.price - ((srProductsData?.price - srProductsData?.diard1) + (diaqcprice[0]?.S ?? 0));
+      // showPrice1 = srProductsData?.price - ((srProductsData?.price - srProductsData?.diard1) + (diaqcprice[0]?.S ?? 0));
       let totalPrice = diaqcprice?.reduce((acc, obj) => acc + obj.S, 0)
       let diaRate = diaqcprice?.reduce((acc, obj) => acc + obj.O, 0)
       let diaSettRate = diaqcprice?.reduce((acc, obj) => acc + obj.Q, 0)
 
-      setDqcRate(diaRate ?? 0)
-      setDqcSettRate(diaSettRate ?? 0)
-      setDqcData(totalPrice ?? 0)
+      setDqcRate(diaRate)
+      setDqcSettRate(diaSettRate)
+      setDqcData(totalPrice)
       // setDQCPrice(diaqcprice[0]?.S ?? 0)
+    }else{
+      setDqcRate(0)
+      setDqcSettRate(0)
+      setDqcData(0)
     }
 
     let csqcpirce = getPriceData?.rd2?.filter((ele) =>
     storeInit?.IsCsCustomization === 1
       ?
-      ele.A === srProductsData?.autocode &&
-      ele.B === srProductsData?.designno &&
+      ele.A === cartSelectData?.autocode &&
+      ele.B === cartSelectData?.designno &&
       ele.H === cSQopt?.split("_")[0] &&
       ele.J === cSQopt?.split("_")[1]
       :
-      ele.A === srProductsData?.autocode &&
-      ele.B === srProductsData?.designno
+      ele.A === cartSelectData?.autocode &&
+      ele.B === cartSelectData?.designno
 
     );
 
@@ -308,23 +321,26 @@ export default function CartPage() {
 
     let showPrice2 = 0;
     if (csqcpirce && csqcpirce.length > 0) {
-      showPrice2 = srProductsData?.price - ((srProductsData?.price - srProductsData?.csrd2) + (csqcpirce[0]?.S ?? 0));
+      // showPrice2 = srProductsData?.price - ((srProductsData?.price - srProductsData?.csrd2) + (csqcpirce[0]?.S ?? 0));
       let totalPrice = csqcpirce?.reduce((acc, obj) => acc + obj.S, 0)
       let diaRate = csqcpirce?.reduce((acc, obj) => acc + obj.O, 0)
       let diaSettRate = csqcpirce?.reduce((acc, obj) => acc + obj.Q, 0)
-      setCsqcData(totalPrice ?? 0)
-      setCsqcRate(diaRate ?? 0)
-      setCsqcSettRate(diaSettRate ?? 0)
+      setCsqcData(totalPrice)
+      setCsqcRate(diaRate)
+      setCsqcSettRate(diaSettRate)
       // setCSQCPrice(csqcpirce[0]?.S ?? 0)
+    }else{
+      setCsqcData(0)
+      setCsqcRate(0)
+      setCsqcSettRate(0)
     }
-
 
     console.log("csqcpirce",csqcpirce)
 
     // let gt = showPrice + showPrice1 + showPrice2;
     // setGrandTotal(gt ?? 0);
 
-  }, [getPriceData, mtTypeOption, diaQColOpt, cSQopt])
+  }, [getPriceData, mtTypeOption, diaQColOpt, cSQopt,cartSelectData])
 
   useEffect(() => {
     setmtTypeOption(cartSelectData?.metal);
@@ -1408,7 +1424,7 @@ export default function CartPage() {
                                     {currencySymbol?.Currencysymbol}
                                     {(
                                       (cartSelectData?.UnitCost ?? 0) +
-                                      (mtrdData?.Z ?? 0) +
+                                      (((mtrdData?.V ?? 0)/currData[0]?.CurrencyRate) + (mtrdData?.W ?? 0)) +
                                       (dqcData ?? 0) +
                                       (csqcData ?? 0) +
                                       (sizeMarkup ?? 0) +
