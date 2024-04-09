@@ -4,22 +4,25 @@
 }
 
 
-.gorjanaFave1web{
+.gorjanaFave1web {
     padding-top: 105px;
     cursor: pointer;
     position: relative;
 }
-.gorjanaFaveImage{
+
+.gorjanaFaveImage {
     width: 100%;
     height: 650px;
+    object-fit: cover;
 }
-.gorjanaFaveBox{
+
+.gorjanaFaveBox {
     position: absolute;
     top: 40%;
     right: 14%;
 }
 
-.gorjanaFavBoxLink{
+.gorjanaFavBoxLink {
     font-size: 19px;
     color: white;
     display: flex;
@@ -29,18 +32,19 @@
     text-decoration: underline;
 }
 
-.gorjanaFave2web{
+.gorjanaFave2web {
     padding-top: 45px;
     cursor: pointer;
     position: relative;
 }
 
-.gorjanaFaveBox2{
+.gorjanaFaveBox2 {
     position: absolute;
     top: 40%;
     left: 15%;
 }
-.gorjanaFavBoxLink2{
+
+.gorjanaFavBoxLink2 {
     font-size: 19px;
     color: white;
     font-family: "PT Sans", sans-serif;
@@ -48,13 +52,14 @@
 }
 
 
-.gorjanaFaveBoxMobile{
+.gorjanaFaveBoxMobile {
     position: absolute;
     top: 60%;
     text-align: center;
     width: 100%;
 }
-.gorjanaFavBoxLinkMobile{
+
+.gorjanaFavBoxLinkMobile {
     font-size: 19px;
     color: white;
     margin-top: -15px;
@@ -62,24 +67,27 @@
     text-decoration: underline;
 }
 
-.gorjanaFaveBox2Mobile{
+.gorjanaFaveBox2Mobile {
     position: absolute;
     bottom: 20%;
     width: 100%;
 }
-.gorjanaFavBoxLink2Mobile{
+
+.gorjanaFavBoxLink2Mobile {
     font-size: 19px;
     color: white;
     margin-top: -15px;
     font-family: "PT Sans", sans-serif;
     text-decoration: underline;
     text-align: center;
-} 
+}
+
 @media screen and (min-width:751px) {
     .gorjanaFave1Mobile {
         display: none;
     }
-    .gorjanaFave2Mobile{
+
+    .gorjanaFave2Mobile {
         display: none;
     }
 }
@@ -89,24 +97,25 @@
     .gorjanaFave1web {
         display: none;
     }
-    .gorjanaFave2web{
+
+    .gorjanaFave2web {
         display: none;
     }
 
 
-    .gorjanaFave1Mobile{
+    .gorjanaFave1Mobile {
         padding-top: 110px;
         cursor: pointer;
         position: relative;
     }
 
-    .gorjanaFave2Mobile{
+    .gorjanaFave2Mobile {
         padding-top: 60px;
         cursor: pointer;
         position: relative;
     }
 
-    .gorjanaFaveImageMobile{
-            width: 100%;
+    .gorjanaFaveImageMobile {
+        width: 100%;
     }
 }
