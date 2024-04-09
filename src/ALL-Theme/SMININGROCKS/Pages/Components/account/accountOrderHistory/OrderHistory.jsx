@@ -217,6 +217,7 @@ const OrderHistory = () => {
                     <div className="py-2 pe-5 w-50 d-flex fs_price_oh _color fw-bold center_price px_change">
                       <div
                         dangerouslySetInnerHTML={{ __html: e?.Currencysymbol }}
+                        style={{fontFamily:'sans-serif', textAlign:'center', marginTop:'2px'}}
                       ></div>{" "}
                       <div className="px-1">{e?.orderAmountwithvat}</div>
                     </div>
@@ -261,7 +262,7 @@ const OrderHistory = () => {
                                   <div className="ps-1 pt-1 text-secondary">
                                     <div className="fw-bold fs-5 fs_small">{el?.metaltypename} {el?.metalcolorname}</div>
                                     <div>{el?.designno}</div>
-                                    <div className="d-flex"><div className="pe-1" dangerouslySetInnerHTML={{__html:e?.Currencysymbol}}></div> {el?.TotalUnitCostWithDiscount}</div>
+                                    <div className="d-flex"><div className="pe-1"  style={{fontFamily:'sans-serif', textAlign:'center', marginTop:'2px'}} dangerouslySetInnerHTML={{__html:e?.Currencysymbol}}></div> {el?.TotalUnitCostWithDiscount}</div>
                                   </div>
                                 </div>
                               );
@@ -270,9 +271,11 @@ const OrderHistory = () => {
                         <div className="pt-2 _end">
                           <div className="d-flex justify-content-between align-items-center fs-4 w-25 w25_oh  text-secondary _w50_oh_2 fs_small " style={{width:'30% !important'}}>
                             <div style={{width:'40%'}}>Total :</div>
-                            <div style={{width:'60%'}} className="d-flex align-items-center"> <div className="pe-1"
+                            <div style={{width:'60%'}} className="d-flex align-items-center"> 
+                            <div className="pe-1"  style={{fontFamily:'sans-serif', textAlign:'center', marginTop:'2px'}}
                                   dangerouslySetInnerHTML={{ __html: e?.Currencysymbol }}
-                            ></div>{e?.orderAmountwithvat}</div>
+                            >
+                              </div>{e?.orderAmountwithvat}</div>
                           </div>
                         </div>
                       </div>
