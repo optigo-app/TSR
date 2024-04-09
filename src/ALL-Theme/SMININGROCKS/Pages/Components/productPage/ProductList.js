@@ -8,7 +8,7 @@ import prodListData from "../../jsonFile/Productlist_4_95oztttesi0o50vr.json";
 import filterData from "../../jsonFile/M_4_95oztttesi0o50vr.json";
 import PriceData from "../../jsonFile/Productlist_4_95oztttesi0o50vr_8.json";
 // import PriceData from "../../jsonFile/testingFile/Productlist_4_95oztttesi0o50vr_8_Original.json";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Card, CardContent, Checkbox, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Select, Slider, Typography } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Button, Card, CardContent, Checkbox, CircularProgress, Divider, Drawer, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, MenuItem, Select, Slider, Typography } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
@@ -113,6 +113,8 @@ const ProductList = () => {
   const [isPriceShow, setIsPriceShow] = useState('');
   const [updatedColorImage, setUpdateColorImage] = useState({});
   const [isActive, setIsActive] = useState(false);
+  const [globImagePath,setGlobImagepath] = useState();
+  const [IsProdLoading,setIsProdLoading] = useState(false);
 
   useEffect(() => {
     setNewProData(getSearchData)
@@ -1626,6 +1628,14 @@ const ProductList = () => {
     setShow4ImageView(true)
   }
 
+  useEffect(()=>{
+    if((newProData?.length || ProductApiData2?.length)){
+     setIsProdLoading(true)
+    }else{
+     setIsProdLoading(false)
+    }
+   },[newProData,ProductApiData2])
+
 
   return (
     <div id="top">
@@ -1635,6 +1645,9 @@ const ProductList = () => {
           width: "100%",
         }}
       >
+        {(!IsProdLoading && <div className="loader-overlay">
+          <CircularProgress className="loadingBarManage" />
+          </div>)}
         <div
           style={{
             display: "flex",

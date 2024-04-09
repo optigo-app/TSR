@@ -80,37 +80,43 @@ export default function CartPage() {
   const [sizeData, setSizeData] = useState([]);
 
   const [mtrdData, setMtrdData] = useState([]);
-  const [dqcData, setDqcData] = useState([]);
-  const [csqcData, setCsqcData] = useState([]);
-  const [selectedColor, setSelectedColor] = useState();
-  const [getPriceData, setGetPriceData] = useState([]);
+  const [dqcData, setDqcData] = useState();
+  const [csqcData, setCsqcData] = useState();
+  const [selectedColor, setSelectedColor] = useState()
+  const [getPriceData, setGetPriceData] = useState([])
 
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dqcRate, setDqcRate] = useState()
+  const [dqcSettRate, setDqcSettRate] = useState()
+  const [csqcRate, setCsqcRate] = useState()
+  const [csqcSettRate, setCsqcSettRate] = useState()
+
+  const [dialogOpen, setDialogOpen] = useState(false)
 
   const setCartCount = useSetRecoilState(CartListCounts);
   const setWishCount = useSetRecoilState(WishListCounts);
   //   const getPriceData = useRecoilValue(priceData);
+  // const getTestProdData = useRecoilValue(newTestProdData);
+
+  // useEffect(()=>{
+  //   console.log("getTestProdData",getTestProdData)
+  // },[getTestProdData])
 
   const navigation = useNavigate();
   let currencySymbol = JSON.parse(localStorage.getItem('CURRENCYCOMBO'))
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     const data = JSON.parse(localStorage.getItem("getPriceData"))
     setGetPriceData(data)
   }, [])
-
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("getPriceData"));
-    setGetPriceData(data);
-  }, []);
 
   useEffect(() => {
     if (!cartListData && cartListData.length === 0) {
       setProdSelectData();
       setCartSelectData();
     }
-  }, []);
+  }, [])
+
+  console.log("dddd",{metalFilterData,daimondFilterData});
 
   const getCountFunc = async () => {
     await GetCount().then((res) => {
@@ -128,42 +134,197 @@ export default function CartPage() {
     }
   }, [cartListData, cartSelectData]);
 
+    // console.log('getPriceDatagetPriceData', getPriceData);
+    console.log('getPriceDatagetPriceData', mtTypeOption);
+
+  // useEffect(() => {
+  //   console.log('getPriceDatagetPriceData', getPriceData);
+  //   let mtrd = getPriceData?.rd?.filter(
+  //     (ele) =>
+  //       ele?.A === cartSelectData?.autocode &&
+  //       ele?.B === cartSelectData?.designno &&
+  //       ele?.D === mtTypeOption
+  //   );
+
+
+  //   if (mtrd && mtrd.length > 0) {
+  //     setMtrdData(mtrd[0] ?? []);
+  //   }
+
+  //   let diaqcprice = getPriceData?.rd1?.filter(
+  //     (ele) =>
+  //       ele.A === cartSelectData?.autocode &&
+  //       ele.B === cartSelectData?.designno &&
+  //       ele.H === diaQColOpt?.split("_")[0] &&
+  //       ele.J === diaQColOpt?.split("_")[1]
+  //   );
+
+  //   console.log("diaqcprice", diaqcprice)
+
+  //   if (diaqcprice && diaqcprice.length > 0) {
+  //     let totalPrice = diaqcprice.reduce((acc, obj) => acc + obj.S, 0)
+  //     setDqcData(totalPrice ?? 0);
+  //   }
+
+  //   let csqcpirce = getPriceData?.rd2?.filter(
+  //     (ele) =>
+  //       ele.A === cartSelectData?.autocode &&
+  //       ele.B === cartSelectData?.designno &&
+  //       ele.H === cSQopt?.split("_")[0] &&
+  //       ele.J === cSQopt?.split("_")[1]
+  //   );
+
+  //   if (csqcpirce && csqcpirce.length > 0) {
+  //     let totalPrice = csqcpirce.reduce((acc, obj) => acc + obj.S, 0)
+  //     setCsqcData(totalPrice ?? 0)
+  //   }
+  // }, [mtTypeOption, diaQColOpt, cSQopt, cartSelectData, getPriceData]);
+
+  let diaUpdatedPrice = () => {
+    let srProductsData = JSON.parse(localStorage.getItem('srProductsData'))
+
+    if (daimondFilterData && daimondFilterData.length) {
+
+      let calcDiaWt = (srProductsData?.diamondweight ?? 0) + (daimondFilterData?.Weight ?? 0)
+
+      let CalcPics = (srProductsData?.diamondpcs ?? 0) + (daimondFilterData?.pieces ?? 0)
+
+      let fpprice = ((dqcRate ?? 0) * (calcDiaWt ?? 0)) + ((dqcSettRate ?? 0) * (CalcPics ?? 0))
+
+      return fpprice
+    }
+    else {
+      return 0
+    }
+
+  }
+
+  let colUpdatedPrice = () => {
+
+    let srProductsData = JSON.parse(localStorage.getItem('srProductsData'))
+
+    if (daimondFilterData && daimondFilterData.length) {
+
+
+      let calcDiaWt = (srProductsData?.totalcolorstoneweight ?? 0) + (daimondFilterData?.Weight ?? 0)
+
+      let CalcPics = (srProductsData?.totalcolorstonepcs ?? 0) + (daimondFilterData?.pieces ?? 0)
+
+      let fpprice = ((csqcRate ?? 0) * (calcDiaWt ?? 0)) + ((csqcSettRate ?? 0) * (CalcPics ?? 0))
+
+      return fpprice
+    } else {
+      return 0
+    }
+
+  }
+
+  let metalUpdatedPrice = () => {
+
+    let srProductsData = JSON.parse(localStorage.getItem('srProductsData'));
+
+    if (metalFilterData && metalFilterData.length) {
+
+      let CalcNetwt = ((srProductsData?.netwt ?? 0) + (metalFilterData?.Weight ?? 0) ?? 0 )
+      console.log("CalcNetwt", CalcNetwt)
+
+      let fprice = ((mtrdData?.AD ?? 0) * CalcNetwt) + ((mtrdData?.AC ?? 0)* CalcNetwt)
+
+      return fprice
+    } else {
+      return 0
+    }
+
+
+  }
+
   useEffect(() => {
-    let mtrd = getPriceData?.rd?.filter(
-      (ele) =>
-        ele?.A === cartSelectData?.autocode &&
-        ele?.B === cartSelectData?.designno &&
-        ele?.D === mtTypeOption
-    );
+    let srProductsData = JSON.parse(localStorage.getItem('srProductsData'));
+    const storeInit = JSON.parse(localStorage.getItem('storeInit'));
+    
+    let mtrd = getPriceData?.rd?.filter((ele) =>
+    storeInit?.IsMetalCustomization === 1
+    ?
+    ele?.A === srProductsData?.autocode &&
+    ele?.B === srProductsData?.designno &&
+    ele?.D === mtTypeOption
+    :
+    ele?.A === srProductsData?.autocode &&
+    ele?.B === srProductsData?.designno
 
+    );
+    
+    console.log("mtrd",mtrd);
+    
+    let showPrice = 0;
     if (mtrd && mtrd.length > 0) {
-      setMtrdData(mtrd[0] ?? []);
+      showPrice = srProductsData?.price - ((srProductsData?.price - srProductsData?.metalrd) + (mtrd[0]?.Z ?? 0));
+      setMtrdData(mtrd[0] ?? [])
+      // setMetalPrice(mtrd[0]?.Z ?? 0)
     }
 
-    let diaqcprice = getPriceData?.rd1?.filter(
-      (ele) =>
-        ele.A === cartSelectData?.autocode &&
-        ele.B === cartSelectData?.designno &&
-        ele.H === diaQColOpt?.split("_")[0] &&
-        ele.J === diaQColOpt?.split("_")[1]
-    );
+    let diaqcprice = getPriceData?.rd1?.filter((ele) =>
+    storeInit?.IsDiamondCustomization === 1 
+      ?
+      ele.A === srProductsData?.autocode &&
+      ele.B === srProductsData?.designno &&
+      ele.H === diaQColOpt?.split("_")[0] &&
+      ele.J === diaQColOpt?.split("_")[1]
+      :
+      ele.A === srProductsData?.autocode &&
+      ele.B === srProductsData?.designno
 
+    )
+
+    console.log("diaqcprice",diaqcprice)
+
+    let showPrice1 = 0;
     if (diaqcprice && diaqcprice.length > 0) {
-      setDqcData(diaqcprice[0] ?? []);
+      showPrice1 = srProductsData?.price - ((srProductsData?.price - srProductsData?.diard1) + (diaqcprice[0]?.S ?? 0));
+      let totalPrice = diaqcprice?.reduce((acc, obj) => acc + obj.S, 0)
+      let diaRate = diaqcprice?.reduce((acc, obj) => acc + obj.O, 0)
+      let diaSettRate = diaqcprice?.reduce((acc, obj) => acc + obj.Q, 0)
+
+      setDqcRate(diaRate ?? 0)
+      setDqcSettRate(diaSettRate ?? 0)
+      setDqcData(totalPrice ?? 0)
+      // setDQCPrice(diaqcprice[0]?.S ?? 0)
     }
 
-    let csqcpirce = getPriceData?.rd2?.filter(
-      (ele) =>
-        ele.A === cartSelectData?.autocode &&
-        ele.B === cartSelectData?.designno &&
-        ele.H === cSQopt?.split("-")[0] &&
-        ele.J === cSQopt?.split("-")[1]
+    let csqcpirce = getPriceData?.rd2?.filter((ele) =>
+    storeInit?.IsCsCustomization === 1
+      ?
+      ele.A === srProductsData?.autocode &&
+      ele.B === srProductsData?.designno &&
+      ele.H === cSQopt?.split("_")[0] &&
+      ele.J === cSQopt?.split("_")[1]
+      :
+      ele.A === srProductsData?.autocode &&
+      ele.B === srProductsData?.designno
+
     );
 
+    console.log("csqcpirce1",csqcpirce)
+
+    let showPrice2 = 0;
     if (csqcpirce && csqcpirce.length > 0) {
-      setCsqcData(csqcpirce[0] ?? []);
+      showPrice2 = srProductsData?.price - ((srProductsData?.price - srProductsData?.csrd2) + (csqcpirce[0]?.S ?? 0));
+      let totalPrice = csqcpirce?.reduce((acc, obj) => acc + obj.S, 0)
+      let diaRate = csqcpirce?.reduce((acc, obj) => acc + obj.O, 0)
+      let diaSettRate = csqcpirce?.reduce((acc, obj) => acc + obj.Q, 0)
+      setCsqcData(totalPrice ?? 0)
+      setCsqcRate(diaRate ?? 0)
+      setCsqcSettRate(diaSettRate ?? 0)
+      // setCSQCPrice(csqcpirce[0]?.S ?? 0)
     }
-  }, [mtTypeOption, diaQColOpt, cSQopt, cartSelectData, getPriceData]);
+
+
+    console.log("csqcpirce",csqcpirce)
+
+    // let gt = showPrice + showPrice1 + showPrice2;
+    // setGrandTotal(gt ?? 0);
+
+  }, [getPriceData, mtTypeOption, diaQColOpt, cSQopt])
 
   useEffect(() => {
     setmtTypeOption(cartSelectData?.metal);
@@ -171,11 +332,17 @@ export default function CartPage() {
     let qualityColor = `${cartSelectData?.diamondquality}_${cartSelectData?.diamondcolor}`;
     setDiaQColOpt(qualityColor);
 
-    let csQualColor = `${cartSelectData?.colorstonequality}-${cartSelectData?.colorstonecolor}`;
+    let csQualColor = `${cartSelectData?.colorstonequality}_${cartSelectData?.colorstonecolor}`;
     setCSQOpt(csQualColor);
 
-    setSelectedColor(cartSelectData?.metalcolorname);
-  }, [cartSelectData]);
+    setSelectedColor(cartSelectData?.metalcolorname)
+
+    console.log("cartSelectData?.detail_ringsize",cartSelectData?.detail_ringsize);
+
+    setSizeOption(cartSelectData?.detail_ringsize)
+        
+  }, [cartSelectData])
+
 
   useEffect(() => {
     getCountFunc();
@@ -388,7 +555,8 @@ export default function CartPage() {
     }
   };
 
-  const [remarks, setRemarks] = useState(cartSelectData?.Remarks || "");
+
+  const [remarks, setRemarks] = useState(cartSelectData?.Remarks || '');
   const handleInputChangeRemarks = (event, index) => {
     let { value } = event.target;
     setRemarks(value);
@@ -417,7 +585,7 @@ export default function CartPage() {
         };
         const response = await CommonAPI(body);
         if (response.Data.rd[0].stat === 1) {
-          await getCartData();
+          await getCartData()
           toast.success("Add remark successfully");
         } else {
           alert("Error");
@@ -430,9 +598,7 @@ export default function CartPage() {
     }
   };
 
-  const [lastEnteredQuantity, setLastEnteredQuantity] = useState(
-    cartSelectData?.Quantity || ""
-  );
+  const [lastEnteredQuantity, setLastEnteredQuantity] = useState(cartSelectData?.Quantity || "");
   useEffect(() => {
     setLastEnteredQuantity(cartSelectData?.Quantity || "");
   }, [cartSelectData]);
@@ -441,6 +607,7 @@ export default function CartPage() {
     let { value } = event.target;
     setLastEnteredQuantity(value);
   };
+
 
   const handleUpdateQuantity = async (num) => {
     try {
@@ -460,7 +627,7 @@ export default function CartPage() {
       };
       const response = await CommonAPI(body);
       if (response.Data.rd[0].stat === 1) {
-        await getCartData();
+        await getCartData()
         toast.success("QTY change successfully");
       } else {
         alert("Error");
@@ -468,6 +635,7 @@ export default function CartPage() {
     } catch (error) {
       console.error("Error:", error);
     } finally {
+
     }
   };
 
@@ -514,42 +682,71 @@ export default function CartPage() {
   };
 
   useEffect(() => {
-    const prodData = JSON.parse(localStorage.getItem("allproductlist"));
-    let isCartData = cartSelectData ? cartSelectData : cartListData[0];
+    const prodData = JSON.parse(localStorage.getItem("allproductlist"))
+    let isCartData = cartSelectData ? cartSelectData : cartListData[0]
 
     const finalProdData = prodData.filter(
       (pd) =>
         pd?.designno === isCartData?.designno &&
         pd?.autocode === isCartData?.autocode
-    )[0];
+    )[0]
 
     if (finalProdData) {
-      setProdSelectData(finalProdData);
+      setProdSelectData(finalProdData)
     }
-  }, [cartSelectData, cartListData]);
+  }, [cartSelectData, cartListData])
 
-  const [sizeMarkup, setSizeMarkup] = useState();
+
+  const [sizeMarkup, setSizeMarkup] = useState(0)
 
   const handelSize = (data) => {
-    const selectedSize = sizeData.find((size) => size.sizename === data);
+    const selectedSize = sizeData.find((size) => size.sizename === (data ?? sizeOption))
+
     if (selectedSize) {
-      setSizeMarkup(selectedSize?.MarkUp);
+      setSizeMarkup(selectedSize?.MarkUp)
+    }else{
+      setSizeMarkup(0)
     }
     setSizeOption(data);
     const filteredData = getAllFilterSizeData?.filter(
-      (item) => item.sizename === data
-    );
+      (item) => item.sizename === (data ?? sizeOption)
+    )
     const filteredDataMetal = filteredData?.filter(
       (item) => item.DiamondStoneTypeName === "METAL"
-    );
+    )
     const filteredDataDaimond = filteredData?.filter(
       (item) => item.DiamondStoneTypeName === "DIAMOND"
-    );
-    setMetalFilterData(filteredDataMetal);
-    setDaimondFiletrData(filteredDataDaimond);
+    )
+    setMetalFilterData(filteredDataMetal)
+    setDaimondFiletrData(filteredDataDaimond)
   };
 
-  const handleColorSelection = (color) => {
+  useEffect(()=>{
+    const selectedSize = sizeData.find((size) => size.sizename === (sizeOption))
+    console.log("condition",(selectedSize && (sizeData?.length !== 0 || (productData?.DefaultSize && productData.DefaultSize.length !== 0))) !== undefined)
+
+    if (selectedSize) {
+      setSizeMarkup(selectedSize?.MarkUp)
+    }else{
+      setSizeMarkup(0)
+    }
+    const filteredData = getAllFilterSizeData?.filter(
+      (item) => item.sizename === (sizeOption)
+    )
+    const filteredDataMetal = filteredData?.filter(
+      (item) => item.DiamondStoneTypeName === "METAL"
+    )
+    const filteredDataDaimond = filteredData?.filter(
+      (item) => item.DiamondStoneTypeName === "DIAMOND"
+    )
+    setMetalFilterData(filteredDataMetal)
+    setDaimondFiletrData(filteredDataDaimond)
+  },[sizeOption,sizeData,getAllFilterSizeData])
+
+
+  console.log("pricedata",cartSelectData?.UnitCost,mtrdData,dqcData,csqcData,sizeMarkup,metalUpdatedPrice(),diaUpdatedPrice(),colUpdatedPrice())
+
+  // const handleColorSelection = (color) => {
     //     let uploadPath = localStorage.getItem('UploadLogicalPath');
     //     const storedDataAll = localStorage.getItem('storeInit');
     //     const data = JSON.parse(storedDataAll);
@@ -587,8 +784,197 @@ export default function CartPage() {
     //         setSelectedImagePath('');
     //       }
     //     }
-  };
+  // };
 
+  console.log('cartListData', cartListData);
+  console.log('dqcData', dqcData);
+  console.log('csqcData', csqcData);
+  console.log('mtrdData', mtrdData?.Z);
+
+  const getCartAndWishListData = async () => {
+
+    const UserEmail = localStorage.getItem("registerEmail")
+    const storeInit = JSON.parse(localStorage.getItem("storeInit"))
+    const Customer_id = JSON.parse(localStorage.getItem("loginUserDetail"));
+
+    let EncodeData = { FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`, Customerid: `${Customer_id?.id}` }
+
+    const encodedCombinedValue = btoa(JSON.stringify(EncodeData));
+
+    const body = {
+      "con": `{\"id\":\"Store\",\"mode\":\"getdesignnolist\",\"appuserid\":\"${UserEmail}\"}`,
+      "f": " useEffect_login ( getdataofcartandwishlist )",
+      "p": encodedCombinedValue
+    }
+
+    await CommonAPI(body).then((res) => {
+      // if (res?.Message === "Success") {
+      //   setCartData(res?.Data?.rd)
+      //   setWishData(res?.Data?.rd1)
+      // }
+    })
+
+  }
+
+  const handleCartUpdate = async() =>{
+
+    console.log("save")
+
+        const allproductlist = JSON.parse(localStorage.getItem("allproductlist"));
+
+        const filterProdData = allproductlist?.filter(
+          (allpd) =>
+            allpd?.autocode === cartListData[0]?.autocode &&
+            allpd?.designno === cartListData[0]?.designno
+        );
+
+        const storeInit = JSON.parse(localStorage.getItem("storeInit"))
+        const UserEmail = localStorage.getItem("registerEmail")
+        const Customer_id = JSON.parse(localStorage.getItem("loginUserDetail"));
+
+
+
+        let product = filterProdData[0]
+
+        const finalJSON = {
+          "stockweb_event": "",
+          "designno": `${product?.designno}`,
+          "autocode": `${product?.autocode}`,
+          "imgrandomno": `${product?.imgrandomno}`,
+          "producttypeid": `${product?.Producttypeid}`,
+          "metaltypeid": `${product?.MetalTypeid}`,
+          "metalcolorid": `${product?.MetalColorid}`,
+          "stockno": "",
+          "DQuality": `${(diaQColOpt ? diaQColOpt?.split('_')[0] : product?.diamondquality?.split(",")[0])}`,
+          "DColor": `${diaQColOpt ? diaQColOpt?.split('_')[1] : product?.diamondcolorname}`,
+          "cmboMetalType": `${product?.MetalTypeName} ${product?.MetalPurity}`,
+          "AdditionalValWt": `${product?.AdditionalValWt}`,
+          "BrandName": `${product?.BrandName ?? ""}`,
+          "Brandid": `${product?.Brandid}`,
+          "CategoryName": `${product?.CategoryName}`,
+          "Categoryid": `${product?.Categoryid}`,
+          "CenterStoneId": `${product?.CenterStoneId}`,
+          "CenterStonePieces": `${product?.CenterStonePieces}`,
+          "CollectionName": `${product?.CollectionName}`,
+          "Collectionid": `${product?.Collectionid}`,
+          "ColorWiseRollOverImageName": `${product?.ColorWiseRollOverImageName}`,
+          "DefaultImageName": `${product?.DefaultImageName}`,
+          "DisplayOrder": `${product?.DisplayOrder}`,
+          "FrontEnd_OrderCnt": `${product?.FrontEnd_OrderCnt}`,
+          "GenderName": `${product?.GenderName}`,
+          "Genderid": `${product?.Genderid}`,
+          "Grossweight": `${product?.Grossweight}`,
+          "InReadyStockCnt": `${product?.InReadyStockCnt}`,
+          "IsBestSeller": `${product?.IsBestSeller}`,
+          "IsColorWiseImageExists": `${product?.IsColorWiseImageExists ?? 0}`,
+          "IsInReadyStock": `${product?.IsInReadyStock}`,
+          "IsNewArrival": `${product?.IsNewArrival}`,
+          "IsRollOverColorWiseImageExists": `${product?.IsRollOverColorWiseImageExists ?? ""}`,
+          "IsTrending": `${product?.IsTrending}`,
+          "MasterManagement_labid": `${product?.MasterManagement_labid}`,
+          "MasterManagement_labname": "",
+          "MetalColorName": `${selectedColor ?? product?.MetalColorName}`,
+          "MetalColorid": `${product?.MetalColorid}`,
+          "MetalPurity": `${mtTypeOption ? (mtTypeOption?.split(' ')[1]) : product?.MetalPurity}`,
+          "MetalPurityid": `${product?.MetalTypeid}`,
+          "MetalTypeName": `${mtTypeOption ? mtTypeOption?.split(' ')[0] : product?.MetalTypeName}`,
+          "MetalTypeid": `${product?.IsInReadyStock}`,
+          "MetalWeight": `${product?.MetalWeight}`,
+          "OcassionName": `${product?.OcassionName ?? ""}`,
+          "Ocassionid": `${product?.Ocassionid}`,
+          "ProducttypeName": `${product?.ProducttypeName}`,
+          "Producttypeid": `${product?.Producttypeid}`,
+          "RollOverImageName": `${product?.RollOverImageName}`,
+          "SubCategoryName": `${product?.SubCategoryName ?? ""}`,
+          "SubCategoryid": `${product?.SubCategoryid}`,
+          "ThemeName": `${product?.ThemeName ?? ""}`,
+          "Themeid": `${product?.Themeid}`,
+          "TitleLine": `${product?.TitleLine}`,
+          "UnitCost": `${product?.UnitCost ?? 0}`,
+          "UnitCostWithmarkup": (`${(product?.UnitCost ?? 0) + (product?.markup ?? 0)}`),
+          "colorstonecolorname": `${cSQopt ? cSQopt?.split('_')[1] : product?.colorstonecolorname}`,
+          "colorstonequality": `${cSQopt ? cSQopt?.split('_')[0] : product?.colorstonequality}`,
+          "diamondcolorname": `${diaQColOpt ? diaQColOpt?.split('_')[1] : product?.diamondcolorname}`,
+          "diamondpcs": `${product?.diamondpcs}`,
+          "diamondquality": `${(diaQColOpt ? diaQColOpt?.split('_')[0] : product?.diamondquality?.split(",")[0])}`,
+          "diamondsetting": `${product?.diamondsetting}`,
+          "diamondshape": `${product?.diamondshape}`,
+          "diamondweight": `${product?.diamondweight}`,
+          "encrypted_designno": `${product?.encrypted_designno ?? ""}`,
+          "hashtagid": `${product?.Hashtagid ?? ""}`,
+          "hashtagname": `${product?.Hashtagname ?? ""}`,
+          "imagepath": `${product?.imagepath}`,
+          "mediumimage": `${product?.MediumImagePath ?? ""}`,
+          "originalimage": `${product?.OriginalImagePath}`,
+          "storyline_html": `${product?.storyline_html ?? ""}`,
+          "storyline_video": `${product?.storyline_video ?? ""}`,
+          "thumbimage": `${product?.ThumbImagePath}`,
+          "totaladditionalvalueweight": `${product?.totaladditionalvalueweight}`,
+          "totalcolorstoneweight": `${product?.totalcolorstoneweight}`,
+          "totaldiamondweight": `${product?.totaldiamondweight}`,
+          "updatedate": `${product?.UpdateDate}`,
+          "videoname": `${product?.videoname ?? ""}`,
+          "FrontEnd_RegNo": `${storeInit?.FrontEnd_RegNo}`,
+          "Customerid": `${Customer_id?.id}`,
+          "PriceMastersetid": `${product?.PriceMastersetid ?? ""}`,
+          "quantity": `${product?.quantity ?? "1"}`,
+          "CurrencyRate": `${product?.CurrencyRate ?? ""}`,
+          "remarks_design": `${product?.remarks_design ?? ""}`,
+          "diamondcolorid": `${product?.diamondcolorid ?? ""}`,
+          "diamondqualityid": `${product?.diamondqualityid ?? ""}`,
+          "detail_ringsize": `${sizeOption ? (sizeOption ?? "") : (product?.detail_ringsize ?? "")}`,
+          "ProjMode": `${product?.ProjMode ?? ""}`,
+          "AlbumMasterid": `${product?.AlbumMasterid ?? ""}`,
+          "AlbumMastername": `${product?.AlbumMastername ?? ""}`,
+          "Albumcode": `${product?.Albumcode ?? ""}`,
+          "Designid": `${product?.Designid ?? ""}`
+        }
+
+        let Data = { "designno": `${cartSelectData?.designno}`, "autocode": `${cartSelectData?.autocode}`, "metalcolorid": 0, "isSolStockNo": 0, "is_show_stock_website": "0", "isdelete_all": 0, "FrontEnd_RegNo": `${storeInit?.FrontEnd_RegNo}`, "Customerid": `${Customer_id?.id}`, "cartidlist": "" }
+
+        let encodedCombinedValue1 = btoa(JSON.stringify(Data))
+
+        const body1 = {
+          con: `{\"id\":\"\",\"mode\":\"removeFromCartList\",\"appuserid\":\"${UserEmail}\"}`,
+          f: "RemoveFromCartIconClick (removeFromCartList)",
+          p: encodedCombinedValue1,
+        }
+
+        await CommonAPI(body1).then(async (res) => {
+          if(res?.Data?.rd[0]?.stat_msg === "success") {
+            // await getCartAndWishListData()
+            // getCountFunc()
+            
+            const encodedCombinedValue = btoa(JSON.stringify(finalJSON));
+
+            const body = {
+              con: `{\"id\":\"\",\"mode\":\"ADDTOCART\",\"appuserid\":\"${UserEmail}\"}`,
+              f: "AddToCartIconClick (ADDTOCART)",
+              p: encodedCombinedValue,
+            };
+    
+            await CommonAPI(body).then(async(res) => {
+              if (res?.Data?.rd[0]?.msg === "success") {
+                await getCartAndWishListData()
+                getCountFunc()
+                getCartData()
+                console.log("done",res);
+              }
+              else{
+                console.log("error",res);
+              }
+            }).catch((error)=>{
+              console.log("error",error);
+    
+            })
+           
+          }
+        })
+
+        console.log("finalJSON",finalJSON);
+        console.log("filterProdData",filterProdData);
+
+  }
 
   return (
     <>
@@ -969,25 +1355,26 @@ export default function CartPage() {
                                                 onChange={(e) =>
                                                   handelSize(e.target.value)
                                                 }
-                                                defaultValue={
-                                                  productData &&
-                                                    productData.DefaultSize
-                                                    ? productData.DefaultSize
-                                                    : sizeData.find(
-                                                      (size) =>
-                                                        size.IsDefaultSize === 1
-                                                    )?.id
+                                                value={
+                                                  sizeOption
+                                                // ??
+                                                    // (productData && productData.DefaultSize
+                                                  //   ? productData.DefaultSize
+                                                  //   : sizeData.find(
+                                                //     (size) =>
+                                                //       size.IsDefaultSize === 1
+                                                //   )?.id)
                                                 }
                                               >
                                                 {sizeData?.map((size) => (
                                                   <option
                                                     key={size.id}
                                                     value={size.sizename} // Pass sizename as value
-                                                    selected={
-                                                      productData &&
-                                                      productData.DefaultSize ===
-                                                      size.sizename
-                                                    }
+                                                    // selected={
+                                                    //   productData &&
+                                                    //   productData.DefaultSize ===
+                                                  //     size.sizename
+                                                    // }
                                                   >
                                                     {size.sizename}
                                                   </option>
@@ -1020,10 +1407,14 @@ export default function CartPage() {
                                   >
                                     {currencySymbol?.Currencysymbol}
                                     {(
-                                      cartSelectData?.UnitCost +
+                                      (cartSelectData?.UnitCost ?? 0) +
                                       (mtrdData?.Z ?? 0) +
-                                      (dqcData?.S ?? 0) +
-                                      (csqcData?.S ?? 0)
+                                      (dqcData ?? 0) +
+                                      (csqcData ?? 0) +
+                                      (sizeMarkup ?? 0) +
+                                      (metalUpdatedPrice() ?? 0) +
+                                      (diaUpdatedPrice() ?? 0) +
+                                      (colUpdatedPrice() ?? 0)
                                     ).toFixed(2)}
                                   </span>
                                 </span>
@@ -1041,6 +1432,7 @@ export default function CartPage() {
                                       fontSize: "16px",
                                       fontWeight: "500",
                                     }}
+                                    onClick={handleCartUpdate}
                                   >
                                     Save
                                   </span>
@@ -1640,10 +2032,14 @@ export default function CartPage() {
                       >
                         {currencySymbol?.Currencysymbol}
                         {(
-                          cartSelectData?.UnitCost +
+                          (cartSelectData?.UnitCost ?? 0) +
                           (mtrdData?.Z ?? 0) +
-                          (dqcData?.S ?? 0) +
-                          (csqcData?.S ?? 0)
+                          (dqcData ?? 0) +
+                          (csqcData ?? 0) +
+                          (sizeMarkup ?? 0) +
+                          (metalUpdatedPrice() ?? 0) +
+                          (diaUpdatedPrice() ?? 0) +
+                          (colUpdatedPrice() ?? 0)
                         ).toFixed(2)}
                       </span>
                     </span>
@@ -1656,7 +2052,13 @@ export default function CartPage() {
                         borderRadius: "4px",
                       }}
                     >
-                      <span style={{ fontSize: "16px", fontWeight: "500" }}>
+                      <span
+                        style={{
+                          fontSize: "16px",
+                          fontWeight: "500",
+                        }}
+                        onClick={handleCartUpdate}
+                      >
                         Save
                       </span>
                     </button>
