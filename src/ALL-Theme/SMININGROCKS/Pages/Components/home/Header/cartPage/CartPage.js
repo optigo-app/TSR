@@ -95,12 +95,12 @@ export default function CartPage() {
   const setCartCount = useSetRecoilState(CartListCounts);
   const setWishCount = useSetRecoilState(WishListCounts);
 
-  const [currData,setCurrData] = useState([])
+  const [currData, setCurrData] = useState([])
 
-  useEffect(()=>{
+  useEffect(() => {
     let currencyData = JSON.parse(localStorage.getItem("currencyData"))
     setCurrData(currencyData)
-  },[])
+  }, [])
   //   const getPriceData = useRecoilValue(priceData);
   // const getTestProdData = useRecoilValue(newTestProdData);
 
@@ -123,7 +123,7 @@ export default function CartPage() {
     }
   }, [])
 
-  console.log("dddd",{metalFilterData,daimondFilterData});
+  console.log("dddd", { metalFilterData, daimondFilterData });
 
   const getCountFunc = async () => {
     await GetCount().then((res) => {
@@ -141,8 +141,8 @@ export default function CartPage() {
     }
   }, [cartListData, cartSelectData]);
 
-    // console.log('getPriceDatagetPriceData', getPriceData);
-    console.log('getPriceDatagetPriceData', mtTypeOption);
+  // console.log('getPriceDatagetPriceData', getPriceData);
+  console.log('getPriceDatagetPriceData', mtTypeOption);
 
   // useEffect(() => {
   //   console.log('getPriceDatagetPriceData', getPriceData);
@@ -232,10 +232,10 @@ export default function CartPage() {
 
     if (metalFilterData && metalFilterData.length) {
 
-      let CalcNetwt = ((srProductsData?.netwt ?? 0) + (metalFilterData?.Weight ?? 0) ?? 0 )
+      let CalcNetwt = ((srProductsData?.netwt ?? 0) + (metalFilterData?.Weight ?? 0) ?? 0)
       console.log("CalcNetwt", CalcNetwt)
 
-      let fprice = ((mtrdData?.AD ?? 0) * CalcNetwt) + ((mtrdData?.AC ?? 0)* CalcNetwt)
+      let fprice = ((mtrdData?.AD ?? 0) * CalcNetwt) + ((mtrdData?.AC ?? 0) * CalcNetwt)
 
       return fprice
     } else {
@@ -248,44 +248,44 @@ export default function CartPage() {
   useEffect(() => {
     let srProductsData = JSON.parse(localStorage.getItem('srProductsData'));
     const storeInit = JSON.parse(localStorage.getItem('storeInit'));
-    
+
     let mtrd = getPriceData?.rd?.filter((ele) =>
-    storeInit?.IsMetalCustomization === 1
-    ?
-    ele?.A === cartSelectData?.autocode &&
-    ele?.B === cartSelectData?.designno &&
-    ele?.D === mtTypeOption
-    :
-    ele?.A === cartSelectData?.autocode &&
-    ele?.B === cartSelectData?.designno
+      storeInit?.IsMetalCustomization === 1
+        ?
+        ele?.A === cartSelectData?.autocode &&
+        ele?.B === cartSelectData?.designno &&
+        ele?.D === mtTypeOption
+        :
+        ele?.A === cartSelectData?.autocode &&
+        ele?.B === cartSelectData?.designno
 
     );
-    
-    console.log("mtrd",mtrd);
-    
+
+    console.log("mtrd", mtrd);
+
     let showPrice = 0;
     if (mtrd && mtrd.length > 0) {
       // showPrice = srProductsData?.price - ((srProductsData?.price - srProductsData?.metalrd) + (mtrd[0]?.Z ?? 0));
       setMtrdData(mtrd[0])
       // setMetalPrice(mtrd[0]?.Z ?? 0)
-    }else{
+    } else {
       setMtrdData([]);
     }
 
     let diaqcprice = getPriceData?.rd1?.filter((ele) =>
-    storeInit?.IsDiamondCustomization === 1 
-      ?
-      ele.A === cartSelectData?.autocode &&
-      ele.B === cartSelectData?.designno &&
-      ele.H === diaQColOpt?.split("_")[0] &&
-      ele.J === diaQColOpt?.split("_")[1]
-      :
-      ele.A === cartSelectData?.autocode &&
-      ele.B === cartSelectData?.designno
+      storeInit?.IsDiamondCustomization === 1
+        ?
+        ele.A === cartSelectData?.autocode &&
+        ele.B === cartSelectData?.designno &&
+        ele.H === diaQColOpt?.split("_")[0] &&
+        ele.J === diaQColOpt?.split("_")[1]
+        :
+        ele.A === cartSelectData?.autocode &&
+        ele.B === cartSelectData?.designno
 
     )
 
-    console.log("diaqcprice",diaqcprice)
+    console.log("diaqcprice", diaqcprice)
 
     let showPrice1 = 0;
     if (diaqcprice && diaqcprice.length > 0) {
@@ -298,26 +298,26 @@ export default function CartPage() {
       setDqcSettRate(diaSettRate)
       setDqcData(totalPrice)
       // setDQCPrice(diaqcprice[0]?.S ?? 0)
-    }else{
+    } else {
       setDqcRate(0)
       setDqcSettRate(0)
       setDqcData(0)
     }
 
     let csqcpirce = getPriceData?.rd2?.filter((ele) =>
-    storeInit?.IsCsCustomization === 1
-      ?
-      ele.A === cartSelectData?.autocode &&
-      ele.B === cartSelectData?.designno &&
-      ele.H === cSQopt?.split("_")[0] &&
-      ele.J === cSQopt?.split("_")[1]
-      :
-      ele.A === cartSelectData?.autocode &&
-      ele.B === cartSelectData?.designno
+      storeInit?.IsCsCustomization === 1
+        ?
+        ele.A === cartSelectData?.autocode &&
+        ele.B === cartSelectData?.designno &&
+        ele.H === cSQopt?.split("_")[0] &&
+        ele.J === cSQopt?.split("_")[1]
+        :
+        ele.A === cartSelectData?.autocode &&
+        ele.B === cartSelectData?.designno
 
     );
 
-    console.log("csqcpirce1",csqcpirce)
+    console.log("csqcpirce1", csqcpirce)
 
     let showPrice2 = 0;
     if (csqcpirce && csqcpirce.length > 0) {
@@ -329,18 +329,18 @@ export default function CartPage() {
       setCsqcRate(diaRate)
       setCsqcSettRate(diaSettRate)
       // setCSQCPrice(csqcpirce[0]?.S ?? 0)
-    }else{
+    } else {
       setCsqcData(0)
       setCsqcRate(0)
       setCsqcSettRate(0)
     }
 
-    console.log("csqcpirce",csqcpirce)
+    console.log("csqcpirce", csqcpirce)
 
     // let gt = showPrice + showPrice1 + showPrice2;
     // setGrandTotal(gt ?? 0);
 
-  }, [getPriceData, mtTypeOption, diaQColOpt, cSQopt,cartSelectData])
+  }, [getPriceData, mtTypeOption, diaQColOpt, cSQopt, cartSelectData])
 
   useEffect(() => {
     setmtTypeOption(cartSelectData?.metal);
@@ -353,10 +353,10 @@ export default function CartPage() {
 
     setSelectedColor(cartSelectData?.metalcolorname)
 
-    console.log("cartSelectData?.detail_ringsize",cartSelectData?.detail_ringsize);
+    console.log("cartSelectData?.detail_ringsize", cartSelectData?.detail_ringsize);
 
     setSizeOption(cartSelectData?.detail_ringsize)
-        
+
   }, [cartSelectData])
 
 
@@ -720,7 +720,7 @@ export default function CartPage() {
 
     if (selectedSize) {
       setSizeMarkup(selectedSize?.MarkUp)
-    }else{
+    } else {
       setSizeMarkup(0)
     }
     setSizeOption(data);
@@ -737,13 +737,13 @@ export default function CartPage() {
     setDaimondFiletrData(filteredDataDaimond)
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     const selectedSize = sizeData.find((size) => size.sizename === (sizeOption))
-    console.log("condition",(selectedSize && (sizeData?.length !== 0 || (productData?.DefaultSize && productData.DefaultSize.length !== 0))) !== undefined)
+    console.log("condition", (selectedSize && (sizeData?.length !== 0 || (productData?.DefaultSize && productData.DefaultSize.length !== 0))) !== undefined)
 
     if (selectedSize) {
       setSizeMarkup(selectedSize?.MarkUp)
-    }else{
+    } else {
       setSizeMarkup(0)
     }
     const filteredData = getAllFilterSizeData?.filter(
@@ -757,49 +757,49 @@ export default function CartPage() {
     )
     setMetalFilterData(filteredDataMetal)
     setDaimondFiletrData(filteredDataDaimond)
-  },[sizeOption,sizeData,getAllFilterSizeData])
+  }, [sizeOption, sizeData, getAllFilterSizeData])
 
 
-  console.log("pricedata",cartSelectData?.UnitCost,mtrdData,dqcData,csqcData,sizeMarkup,metalUpdatedPrice(),diaUpdatedPrice(),colUpdatedPrice())
+  console.log("pricedata", cartSelectData?.UnitCost, mtrdData, dqcData, csqcData, sizeMarkup, metalUpdatedPrice(), diaUpdatedPrice(), colUpdatedPrice())
 
   // const handleColorSelection = (color) => {
-    //     let uploadPath = localStorage.getItem('UploadLogicalPath');
-    //     const storedDataAll = localStorage.getItem('storeInit');
-    //     const data = JSON.parse(storedDataAll);
-    //     if (data.IsColorWiseImages === 1) {
-    //       const selectedColor = color;
-    //       setSelectedColor(selectedColor);
-    //       const filteredData = colorImageData.filter(item => item.colorname.toLowerCase() === selectedColor.toLowerCase());
-    //       console.log('Filter Data', filteredData);
-    //       if (filteredData.length > 0) {
-    //         const correctedData = filteredData.map(item => {
-    //           return {
-    //             ...item,
-    //             imagepath: convertPath(item.imagepath)
-    //           };
-    //         });
-    //         correctedData.forEach(item => {
-    //           item.imagepath = uploadPath + '/' + data.ukey + item.imagepath;
-    //           console.log('Updated Path:', item.imagepath);
-    //         });
-    //         correctedData.forEach((item, index) => {
-    //           correctedData[index] = item;
-    //         });
-    //         setTimeout(() => {
-    //           setUpdateColorImage(correctedData);
-    //         }, 100);
-    //       } else {
-    //         setUpdateColorImage('');
-    //       }
-    //       const selectedColorData = colorImageData.find(item => item.colorname === selectedColor);
-    //       if (selectedColorData) {
-    //         const correctedImagePath = convertPath(selectedColorData.imagepath);
-    //         let path = uploadPath + '/' + data.ukey + correctedImagePath
-    //         setSelectedImagePath(path);
-    //       } else {
-    //         setSelectedImagePath('');
-    //       }
-    //     }
+  //     let uploadPath = localStorage.getItem('UploadLogicalPath');
+  //     const storedDataAll = localStorage.getItem('storeInit');
+  //     const data = JSON.parse(storedDataAll);
+  //     if (data.IsColorWiseImages === 1) {
+  //       const selectedColor = color;
+  //       setSelectedColor(selectedColor);
+  //       const filteredData = colorImageData.filter(item => item.colorname.toLowerCase() === selectedColor.toLowerCase());
+  //       console.log('Filter Data', filteredData);
+  //       if (filteredData.length > 0) {
+  //         const correctedData = filteredData.map(item => {
+  //           return {
+  //             ...item,
+  //             imagepath: convertPath(item.imagepath)
+  //           };
+  //         });
+  //         correctedData.forEach(item => {
+  //           item.imagepath = uploadPath + '/' + data.ukey + item.imagepath;
+  //           console.log('Updated Path:', item.imagepath);
+  //         });
+  //         correctedData.forEach((item, index) => {
+  //           correctedData[index] = item;
+  //         });
+  //         setTimeout(() => {
+  //           setUpdateColorImage(correctedData);
+  //         }, 100);
+  //       } else {
+  //         setUpdateColorImage('');
+  //       }
+  //       const selectedColorData = colorImageData.find(item => item.colorname === selectedColor);
+  //       if (selectedColorData) {
+  //         const correctedImagePath = convertPath(selectedColorData.imagepath);
+  //         let path = uploadPath + '/' + data.ukey + correctedImagePath
+  //         setSelectedImagePath(path);
+  //       } else {
+  //         setSelectedImagePath('');
+  //       }
+  //     }
   // };
 
   console.log('cartListData', cartListData);
@@ -832,163 +832,163 @@ export default function CartPage() {
 
   }
 
-  const handleCartUpdate = async() =>{
+  const handleCartUpdate = async () => {
 
     console.log("save")
 
-        const allproductlist = JSON.parse(localStorage.getItem("allproductlist"));
+    const allproductlist = JSON.parse(localStorage.getItem("allproductlist"));
 
-        const filterProdData = allproductlist?.filter(
-          (allpd) =>
-            allpd?.autocode === cartListData[0]?.autocode &&
-            allpd?.designno === cartListData[0]?.designno
-        );
+    const filterProdData = allproductlist?.filter(
+      (allpd) =>
+        allpd?.autocode === cartListData[0]?.autocode &&
+        allpd?.designno === cartListData[0]?.designno
+    );
 
-        const storeInit = JSON.parse(localStorage.getItem("storeInit"))
-        const UserEmail = localStorage.getItem("registerEmail")
-        const Customer_id = JSON.parse(localStorage.getItem("loginUserDetail"));
+    const storeInit = JSON.parse(localStorage.getItem("storeInit"))
+    const UserEmail = localStorage.getItem("registerEmail")
+    const Customer_id = JSON.parse(localStorage.getItem("loginUserDetail"));
 
 
 
-        let product = filterProdData[0]
+    let product = filterProdData[0]
 
-        const finalJSON = {
-          "stockweb_event": "",
-          "designno": `${product?.designno}`,
-          "autocode": `${product?.autocode}`,
-          "imgrandomno": `${product?.imgrandomno}`,
-          "producttypeid": `${product?.Producttypeid}`,
-          "metaltypeid": `${product?.MetalTypeid}`,
-          "metalcolorid": `${product?.MetalColorid}`,
-          "stockno": "",
-          "DQuality": `${(diaQColOpt ? diaQColOpt?.split('_')[0] : product?.diamondquality?.split(",")[0])}`,
-          "DColor": `${diaQColOpt ? diaQColOpt?.split('_')[1] : product?.diamondcolorname}`,
-          "cmboMetalType": `${product?.MetalTypeName} ${product?.MetalPurity}`,
-          "AdditionalValWt": `${product?.AdditionalValWt}`,
-          "BrandName": `${product?.BrandName ?? ""}`,
-          "Brandid": `${product?.Brandid}`,
-          "CategoryName": `${product?.CategoryName}`,
-          "Categoryid": `${product?.Categoryid}`,
-          "CenterStoneId": `${product?.CenterStoneId}`,
-          "CenterStonePieces": `${product?.CenterStonePieces}`,
-          "CollectionName": `${product?.CollectionName}`,
-          "Collectionid": `${product?.Collectionid}`,
-          "ColorWiseRollOverImageName": `${product?.ColorWiseRollOverImageName}`,
-          "DefaultImageName": `${product?.DefaultImageName}`,
-          "DisplayOrder": `${product?.DisplayOrder}`,
-          "FrontEnd_OrderCnt": `${product?.FrontEnd_OrderCnt}`,
-          "GenderName": `${product?.GenderName}`,
-          "Genderid": `${product?.Genderid}`,
-          "Grossweight": `${product?.Grossweight}`,
-          "InReadyStockCnt": `${product?.InReadyStockCnt}`,
-          "IsBestSeller": `${product?.IsBestSeller}`,
-          "IsColorWiseImageExists": `${product?.IsColorWiseImageExists ?? 0}`,
-          "IsInReadyStock": `${product?.IsInReadyStock}`,
-          "IsNewArrival": `${product?.IsNewArrival}`,
-          "IsRollOverColorWiseImageExists": `${product?.IsRollOverColorWiseImageExists ?? ""}`,
-          "IsTrending": `${product?.IsTrending}`,
-          "MasterManagement_labid": `${product?.MasterManagement_labid}`,
-          "MasterManagement_labname": "",
-          "MetalColorName": `${selectedColor ?? product?.MetalColorName}`,
-          "MetalColorid": `${product?.MetalColorid}`,
-          "MetalPurity": `${mtTypeOption ? (mtTypeOption?.split(' ')[1]) : product?.MetalPurity}`,
-          "MetalPurityid": `${product?.MetalTypeid}`,
-          "MetalTypeName": `${mtTypeOption ? mtTypeOption?.split(' ')[0] : product?.MetalTypeName}`,
-          "MetalTypeid": `${product?.IsInReadyStock}`,
-          "MetalWeight": `${product?.MetalWeight}`,
-          "OcassionName": `${product?.OcassionName ?? ""}`,
-          "Ocassionid": `${product?.Ocassionid}`,
-          "ProducttypeName": `${product?.ProducttypeName}`,
-          "Producttypeid": `${product?.Producttypeid}`,
-          "RollOverImageName": `${product?.RollOverImageName}`,
-          "SubCategoryName": `${product?.SubCategoryName ?? ""}`,
-          "SubCategoryid": `${product?.SubCategoryid}`,
-          "ThemeName": `${product?.ThemeName ?? ""}`,
-          "Themeid": `${product?.Themeid}`,
-          "TitleLine": `${product?.TitleLine}`,
-          "UnitCost": `${product?.UnitCost ?? 0}`,
-          "UnitCostWithmarkup": (`${(product?.UnitCost ?? 0) + (product?.markup ?? 0)}`),
-          "colorstonecolorname": `${cSQopt ? cSQopt?.split('_')[1] : product?.colorstonecolorname}`,
-          "colorstonequality": `${cSQopt ? cSQopt?.split('_')[0] : product?.colorstonequality}`,
-          "diamondcolorname": `${diaQColOpt ? diaQColOpt?.split('_')[1] : product?.diamondcolorname}`,
-          "diamondpcs": `${product?.diamondpcs}`,
-          "diamondquality": `${(diaQColOpt ? diaQColOpt?.split('_')[0] : product?.diamondquality?.split(",")[0])}`,
-          "diamondsetting": `${product?.diamondsetting}`,
-          "diamondshape": `${product?.diamondshape}`,
-          "diamondweight": `${product?.diamondweight}`,
-          "encrypted_designno": `${product?.encrypted_designno ?? ""}`,
-          "hashtagid": `${product?.Hashtagid ?? ""}`,
-          "hashtagname": `${product?.Hashtagname ?? ""}`,
-          "imagepath": `${product?.imagepath}`,
-          "mediumimage": `${product?.MediumImagePath ?? ""}`,
-          "originalimage": `${product?.OriginalImagePath}`,
-          "storyline_html": `${product?.storyline_html ?? ""}`,
-          "storyline_video": `${product?.storyline_video ?? ""}`,
-          "thumbimage": `${product?.ThumbImagePath}`,
-          "totaladditionalvalueweight": `${product?.totaladditionalvalueweight}`,
-          "totalcolorstoneweight": `${product?.totalcolorstoneweight}`,
-          "totaldiamondweight": `${product?.totaldiamondweight}`,
-          "updatedate": `${product?.UpdateDate}`,
-          "videoname": `${product?.videoname ?? ""}`,
-          "FrontEnd_RegNo": `${storeInit?.FrontEnd_RegNo}`,
-          "Customerid": `${Customer_id?.id}`,
-          "PriceMastersetid": `${product?.PriceMastersetid ?? ""}`,
-          "quantity": `${product?.quantity ?? "1"}`,
-          "CurrencyRate": `${product?.CurrencyRate ?? ""}`,
-          "remarks_design": `${product?.remarks_design ?? ""}`,
-          "diamondcolorid": `${product?.diamondcolorid ?? ""}`,
-          "diamondqualityid": `${product?.diamondqualityid ?? ""}`,
-          "detail_ringsize": `${sizeOption ? (sizeOption ?? "") : (product?.detail_ringsize ?? "")}`,
-          "ProjMode": `${product?.ProjMode ?? ""}`,
-          "AlbumMasterid": `${product?.AlbumMasterid ?? ""}`,
-          "AlbumMastername": `${product?.AlbumMastername ?? ""}`,
-          "Albumcode": `${product?.Albumcode ?? ""}`,
-          "Designid": `${product?.Designid ?? ""}`
-        }
+    const finalJSON = {
+      "stockweb_event": "",
+      "designno": `${product?.designno}`,
+      "autocode": `${product?.autocode}`,
+      "imgrandomno": `${product?.imgrandomno}`,
+      "producttypeid": `${product?.Producttypeid}`,
+      "metaltypeid": `${product?.MetalTypeid}`,
+      "metalcolorid": `${product?.MetalColorid}`,
+      "stockno": "",
+      "DQuality": `${(diaQColOpt ? diaQColOpt?.split('_')[0] : product?.diamondquality?.split(",")[0])}`,
+      "DColor": `${diaQColOpt ? diaQColOpt?.split('_')[1] : product?.diamondcolorname}`,
+      "cmboMetalType": `${product?.MetalTypeName} ${product?.MetalPurity}`,
+      "AdditionalValWt": `${product?.AdditionalValWt}`,
+      "BrandName": `${product?.BrandName ?? ""}`,
+      "Brandid": `${product?.Brandid}`,
+      "CategoryName": `${product?.CategoryName}`,
+      "Categoryid": `${product?.Categoryid}`,
+      "CenterStoneId": `${product?.CenterStoneId}`,
+      "CenterStonePieces": `${product?.CenterStonePieces}`,
+      "CollectionName": `${product?.CollectionName}`,
+      "Collectionid": `${product?.Collectionid}`,
+      "ColorWiseRollOverImageName": `${product?.ColorWiseRollOverImageName}`,
+      "DefaultImageName": `${product?.DefaultImageName}`,
+      "DisplayOrder": `${product?.DisplayOrder}`,
+      "FrontEnd_OrderCnt": `${product?.FrontEnd_OrderCnt}`,
+      "GenderName": `${product?.GenderName}`,
+      "Genderid": `${product?.Genderid}`,
+      "Grossweight": `${product?.Grossweight}`,
+      "InReadyStockCnt": `${product?.InReadyStockCnt}`,
+      "IsBestSeller": `${product?.IsBestSeller}`,
+      "IsColorWiseImageExists": `${product?.IsColorWiseImageExists ?? 0}`,
+      "IsInReadyStock": `${product?.IsInReadyStock}`,
+      "IsNewArrival": `${product?.IsNewArrival}`,
+      "IsRollOverColorWiseImageExists": `${product?.IsRollOverColorWiseImageExists ?? ""}`,
+      "IsTrending": `${product?.IsTrending}`,
+      "MasterManagement_labid": `${product?.MasterManagement_labid}`,
+      "MasterManagement_labname": "",
+      "MetalColorName": `${selectedColor ?? product?.MetalColorName}`,
+      "MetalColorid": `${product?.MetalColorid}`,
+      "MetalPurity": `${mtTypeOption ? (mtTypeOption?.split(' ')[1]) : product?.MetalPurity}`,
+      "MetalPurityid": `${product?.MetalTypeid}`,
+      "MetalTypeName": `${mtTypeOption ? mtTypeOption?.split(' ')[0] : product?.MetalTypeName}`,
+      "MetalTypeid": `${product?.IsInReadyStock}`,
+      "MetalWeight": `${product?.MetalWeight}`,
+      "OcassionName": `${product?.OcassionName ?? ""}`,
+      "Ocassionid": `${product?.Ocassionid}`,
+      "ProducttypeName": `${product?.ProducttypeName}`,
+      "Producttypeid": `${product?.Producttypeid}`,
+      "RollOverImageName": `${product?.RollOverImageName}`,
+      "SubCategoryName": `${product?.SubCategoryName ?? ""}`,
+      "SubCategoryid": `${product?.SubCategoryid}`,
+      "ThemeName": `${product?.ThemeName ?? ""}`,
+      "Themeid": `${product?.Themeid}`,
+      "TitleLine": `${product?.TitleLine}`,
+      "UnitCost": `${product?.UnitCost ?? 0}`,
+      "UnitCostWithmarkup": (`${(product?.UnitCost ?? 0) + (product?.markup ?? 0)}`),
+      "colorstonecolorname": `${cSQopt ? cSQopt?.split('_')[1] : product?.colorstonecolorname}`,
+      "colorstonequality": `${cSQopt ? cSQopt?.split('_')[0] : product?.colorstonequality}`,
+      "diamondcolorname": `${diaQColOpt ? diaQColOpt?.split('_')[1] : product?.diamondcolorname}`,
+      "diamondpcs": `${product?.diamondpcs}`,
+      "diamondquality": `${(diaQColOpt ? diaQColOpt?.split('_')[0] : product?.diamondquality?.split(",")[0])}`,
+      "diamondsetting": `${product?.diamondsetting}`,
+      "diamondshape": `${product?.diamondshape}`,
+      "diamondweight": `${product?.diamondweight}`,
+      "encrypted_designno": `${product?.encrypted_designno ?? ""}`,
+      "hashtagid": `${product?.Hashtagid ?? ""}`,
+      "hashtagname": `${product?.Hashtagname ?? ""}`,
+      "imagepath": `${product?.imagepath}`,
+      "mediumimage": `${product?.MediumImagePath ?? ""}`,
+      "originalimage": `${product?.OriginalImagePath}`,
+      "storyline_html": `${product?.storyline_html ?? ""}`,
+      "storyline_video": `${product?.storyline_video ?? ""}`,
+      "thumbimage": `${product?.ThumbImagePath}`,
+      "totaladditionalvalueweight": `${product?.totaladditionalvalueweight}`,
+      "totalcolorstoneweight": `${product?.totalcolorstoneweight}`,
+      "totaldiamondweight": `${product?.totaldiamondweight}`,
+      "updatedate": `${product?.UpdateDate}`,
+      "videoname": `${product?.videoname ?? ""}`,
+      "FrontEnd_RegNo": `${storeInit?.FrontEnd_RegNo}`,
+      "Customerid": `${Customer_id?.id}`,
+      "PriceMastersetid": `${product?.PriceMastersetid ?? ""}`,
+      "quantity": `${product?.quantity ?? "1"}`,
+      "CurrencyRate": `${product?.CurrencyRate ?? ""}`,
+      "remarks_design": `${product?.remarks_design ?? ""}`,
+      "diamondcolorid": `${product?.diamondcolorid ?? ""}`,
+      "diamondqualityid": `${product?.diamondqualityid ?? ""}`,
+      "detail_ringsize": `${sizeOption ? (sizeOption ?? "") : (product?.detail_ringsize ?? "")}`,
+      "ProjMode": `${product?.ProjMode ?? ""}`,
+      "AlbumMasterid": `${product?.AlbumMasterid ?? ""}`,
+      "AlbumMastername": `${product?.AlbumMastername ?? ""}`,
+      "Albumcode": `${product?.Albumcode ?? ""}`,
+      "Designid": `${product?.Designid ?? ""}`
+    }
 
-        let Data = { "designno": `${cartSelectData?.designno}`, "autocode": `${cartSelectData?.autocode}`, "metalcolorid": 0, "isSolStockNo": 0, "is_show_stock_website": "0", "isdelete_all": 0, "FrontEnd_RegNo": `${storeInit?.FrontEnd_RegNo}`, "Customerid": `${Customer_id?.id}`, "cartidlist": "" }
+    let Data = { "designno": `${cartSelectData?.designno}`, "autocode": `${cartSelectData?.autocode}`, "metalcolorid": 0, "isSolStockNo": 0, "is_show_stock_website": "0", "isdelete_all": 0, "FrontEnd_RegNo": `${storeInit?.FrontEnd_RegNo}`, "Customerid": `${Customer_id?.id}`, "cartidlist": "" }
 
-        let encodedCombinedValue1 = btoa(JSON.stringify(Data))
+    let encodedCombinedValue1 = btoa(JSON.stringify(Data))
 
-        const body1 = {
-          con: `{\"id\":\"\",\"mode\":\"removeFromCartList\",\"appuserid\":\"${UserEmail}\"}`,
-          f: "RemoveFromCartIconClick (removeFromCartList)",
-          p: encodedCombinedValue1,
-        }
+    const body1 = {
+      con: `{\"id\":\"\",\"mode\":\"removeFromCartList\",\"appuserid\":\"${UserEmail}\"}`,
+      f: "RemoveFromCartIconClick (removeFromCartList)",
+      p: encodedCombinedValue1,
+    }
 
-        await CommonAPI(body1).then(async (res) => {
-          if(res?.Data?.rd[0]?.stat_msg === "success") {
-            // await getCartAndWishListData()
-            // getCountFunc()
-            
-            const encodedCombinedValue = btoa(JSON.stringify(finalJSON));
+    await CommonAPI(body1).then(async (res) => {
+      if (res?.Data?.rd[0]?.stat_msg === "success") {
+        // await getCartAndWishListData()
+        // getCountFunc()
 
-            const body = {
-              con: `{\"id\":\"\",\"mode\":\"ADDTOCART\",\"appuserid\":\"${UserEmail}\"}`,
-              f: "AddToCartIconClick (ADDTOCART)",
-              p: encodedCombinedValue,
-            };
-    
-            await CommonAPI(body).then(async(res) => {
-              if (res?.Data?.rd[0]?.msg === "success") {
-                await getCartAndWishListData()
-                getCountFunc()
-                getCartData()
-                console.log("done",res);
-              }
-              else{
-                console.log("error",res);
-              }
-            }).catch((error)=>{
-              console.log("error",error);
-    
-            })
-           
+        const encodedCombinedValue = btoa(JSON.stringify(finalJSON));
+
+        const body = {
+          con: `{\"id\":\"\",\"mode\":\"ADDTOCART\",\"appuserid\":\"${UserEmail}\"}`,
+          f: "AddToCartIconClick (ADDTOCART)",
+          p: encodedCombinedValue,
+        };
+
+        await CommonAPI(body).then(async (res) => {
+          if (res?.Data?.rd[0]?.msg === "success") {
+            await getCartAndWishListData()
+            getCountFunc()
+            getCartData()
+            console.log("done", res);
           }
+          else {
+            console.log("error", res);
+          }
+        }).catch((error) => {
+          console.log("error", error);
+
         })
 
-        console.log("finalJSON",finalJSON);
-        console.log("filterProdData",filterProdData);
+      }
+    })
+
+    console.log("finalJSON", finalJSON);
+    console.log("filterProdData", filterProdData);
 
   }
 
@@ -1034,15 +1034,15 @@ export default function CartPage() {
                   </button>
                   <button
                     className="smiTopClearBtn"
-                    onClick={handleRemoveAllWishList}
-                  >
-                    CLEAR ALL
-                  </button>
-                  <button
-                    className="smiTopClearBtn"
                     onClick={() => navigation("/productpage")}
                   >
                     SHOW PRODUCTLIST
+                  </button>
+                  <button
+                    className="smiTopClearBtn"
+                    onClick={handleRemoveAllWishList}
+                  >
+                    CLEAR ALL
                   </button>
                   <button
                     className="placeOrderCartPageBtnMobile"
@@ -1241,7 +1241,7 @@ export default function CartPage() {
                                               METAL COLOR:
                                             </label>
                                             <select
-                                            className="FontFamilySet"
+                                              className="FontFamilySet"
                                               style={{
                                                 border: "none",
                                                 outline: "none",
@@ -1373,24 +1373,24 @@ export default function CartPage() {
                                                 }
                                                 value={
                                                   sizeOption
-                                                // ??
-                                                    // (productData && productData.DefaultSize
+                                                  // ??
+                                                  // (productData && productData.DefaultSize
                                                   //   ? productData.DefaultSize
                                                   //   : sizeData.find(
-                                                //     (size) =>
-                                                //       size.IsDefaultSize === 1
-                                                //   )?.id)
+                                                  //     (size) =>
+                                                  //       size.IsDefaultSize === 1
+                                                  //   )?.id)
                                                 }
                                               >
                                                 {sizeData?.map((size) => (
                                                   <option
                                                     key={size.id}
                                                     value={size.sizename} // Pass sizename as value
-                                                    // selected={
-                                                    //   productData &&
-                                                    //   productData.DefaultSize ===
+                                                  // selected={
+                                                  //   productData &&
+                                                  //   productData.DefaultSize ===
                                                   //     size.sizename
-                                                    // }
+                                                  // }
                                                   >
                                                     {size.sizename}
                                                   </option>
@@ -1424,7 +1424,7 @@ export default function CartPage() {
                                     {currencySymbol?.Currencysymbol}
                                     {(
                                       (cartSelectData?.UnitCost ?? 0) +
-                                      (((mtrdData?.V ?? 0)/currData[0]?.CurrencyRate) + (mtrdData?.W ?? 0)) +
+                                      (((mtrdData?.V ?? 0) / currData?.CurrencyRate) + (mtrdData?.W ?? 0)) +
                                       (dqcData ?? 0) +
                                       (csqcData ?? 0) +
                                       (sizeMarkup ?? 0) +
@@ -1432,6 +1432,7 @@ export default function CartPage() {
                                       (diaUpdatedPrice() ?? 0) +
                                       (colUpdatedPrice() ?? 0)
                                     ).toFixed(2)}
+
                                   </span>
                                 </span>
                                 <button
@@ -1445,7 +1446,7 @@ export default function CartPage() {
                                 >
                                   <span
                                     style={{
-                                      fontSize: "16px",
+                                      fontSize: "15px",
                                       fontWeight: "500",
                                     }}
                                     onClick={handleCartUpdate}
@@ -1551,14 +1552,14 @@ export default function CartPage() {
                                   position: "absolute",
                                   right: "0px",
                                   top: "0px",
-                                  backgroundColor: "black",
                                   borderRadius: "2px",
                                   opacity: "0.8",
                                 }}
-                                onClick={() => handleRemove(item)}
+
                               >
                                 <CloseIcon
-                                  sx={{ color: "white", fontSize: "22px" }}
+                                  sx={{ color: "black", fontSize: "22px", fontWeight: 'bold' }}
+                                  onClick={() => handleRemove(item)}
                                 />
                               </div>
                               <img

@@ -259,14 +259,6 @@ export default function Home() {
     currencyCombo();
   }, []);
 
-  
-
-
-
-
-
-
-
   return (
     <div>
       <div className='homeMain'>

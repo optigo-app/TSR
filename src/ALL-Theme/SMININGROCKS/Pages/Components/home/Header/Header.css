@@ -141,6 +141,10 @@
     /* border: 1px solid black; */
 }
 
+.css-1abqjyq-MuiBadge-badge{
+    background-color: #714f44!important;
+    color: black;
+}
 .nav-li-shop-main:hover {
     height: 90px;
 }
