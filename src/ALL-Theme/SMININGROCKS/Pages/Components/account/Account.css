@@ -140,6 +140,9 @@
     opacity: 1.5;
     /* border-bottom: 2px solid black; */
 }
+.accountTabSection.css-1gu71bi-MuiTabs-root{
+    background: #f6efe6 !important;
+}
 
 @media screen and (max-width: 1441px) {
 

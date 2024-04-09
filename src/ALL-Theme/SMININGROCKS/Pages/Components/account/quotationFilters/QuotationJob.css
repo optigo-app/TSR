@@ -115,6 +115,10 @@
     color: #7d7f85 !important;
 }
 
+.tableHeadRow{
+    background: #f6efe6 !important;
+}
+
 @media(max-width: 768px) {
     .QuotationJobAllBtn  {
         margin-bottom: 20px !important;

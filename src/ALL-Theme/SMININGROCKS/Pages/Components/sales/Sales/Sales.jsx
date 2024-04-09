@@ -128,7 +128,7 @@ function EnhancedTableHead(props) {
 
     return (
         <TableHead>
-            <TableRow>
+            <TableRow className='tableHeadRow'>
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}

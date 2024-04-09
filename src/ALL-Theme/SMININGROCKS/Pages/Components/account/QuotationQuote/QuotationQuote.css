@@ -70,6 +70,9 @@
 .AllQuoteBtn {
     padding-bottom: 35px;
 }
+.tableHeadRow{
+    background: #f6efe6 !important;
+}
 
 @media(max-width: 768px) {
     .QuotePadSec {
