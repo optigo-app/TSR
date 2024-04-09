@@ -115,6 +115,12 @@ const ProductList = () => {
   const [isActive, setIsActive] = useState(false);
   const [globImagePath,setGlobImagepath] = useState();
   const [IsProdLoading,setIsProdLoading] = useState(false);
+  const [currData,setCurrData] = useState([])
+
+  useEffect(()=>{
+    let currencyData = JSON.parse(localStorage.getItem("currencyData"))
+    setCurrData(currencyData)
+  },[])
 
   useEffect(() => {
     setNewProData(getSearchData)
@@ -262,8 +268,8 @@ const ProductList = () => {
         let csrd2 = 0;
 
         if (newPriceData || newPriceData1 || newPriceData2) {
-          price = (newPriceData?.Z ?? 0) + (newPriceData1 ?? 0) + (newPriceData2 ?? 0);
-          metalrd = newPriceData?.Z
+          price = (((newPriceData?.V ?? 0)/currData[0]?.CurrencyRate ?? 0) + newPriceData?.W ?? 0) + (newPriceData1 ?? 0) + (newPriceData2 ?? 0);
+          metalrd = (((newPriceData?.V ?? 0)/currData[0]?.CurrencyRate ?? 0) + newPriceData?.W ?? 0)
           diard1 = newPriceData1 ?? 0
           csrd2 = newPriceData2 ?? 0
           markup = newPriceData?.AB
@@ -1636,6 +1642,11 @@ const ProductList = () => {
     }
    },[newProData,ProductApiData2])
 
+  const decodeEntities = (html) => {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+  }
 
   return (
     <div id="top">
@@ -2176,7 +2187,8 @@ const ProductList = () => {
                               {isPriceShow === 1 &&
                                 <div className={show4ImagesView ? "feature4" : 'feature'}>
                                   <p>
-                                    <span className="feature-count">{currencySym?.Currencysymbol}
+                                    <span className="feature-count" style={{display:'flex'}}>
+                                      <div className="currencyFont" dangerouslySetInnerHTML={{ __html: decodeEntities(currData[0]?.Currencysymbol) }} />
                                       {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}</span>
                                   </p>
                                 </div>
