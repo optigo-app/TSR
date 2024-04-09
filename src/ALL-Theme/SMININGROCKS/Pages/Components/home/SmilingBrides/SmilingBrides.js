@@ -3,6 +3,12 @@ import './SmilingBrides.css'
 import bridesImage from '../../../assets/smilingBrides/brides1.webp'
 import { Colors } from '../../../../lib/consts/Colors'
 import { useDraggable } from 'react-use-draggable-scroll';
+import recom1 from '../../../assets/TSR/recom1.jpg'
+import recom2 from '../../../assets/TSR/recom2.jpg'
+import recom3 from '../../../assets/TSR/recom3.jpg'
+import recom4 from '../../../assets/TSR/recom4.jpg'
+import recom5 from '../../../assets/TSR/recom5.jpg'
+import recom6 from '../../../assets/TSR/recom6.jpg'
 
 
 export default function SmilingBrides() {
@@ -14,41 +20,41 @@ export default function SmilingBrides() {
 
     let demoJSON = [
         {
-            prodImg: 'https://cdn.shopify.com/s/files/1/0015/3849/0427/files/2011-201-G_1_f81e4805-d213-4e43-a397-f286b758b22c.jpg?v=1700604569&width=1080&height=1440&crop=center',
+            prodImg: recom1,
             prodtitle: 'Bespoke Wilder Tag Bracelet',
             price: '$68',
             more: 'More Options'
         },
         {
-            prodImg: 'https://cdn.shopify.com/s/files/1/0015/3849/0427/files/219-3016-G_1_dbf7217e-7e8f-4949-b362-11d4d51d2207.jpg?v=1700606592&width=1080&height=1440&crop=center',
+            prodImg: recom2,
             prodtitle: 'Bespoke Wilder Tag Bracelet',
             price: '$568',
             more: 'More Options'
 
         },
         {
-            prodImg: 'https://cdn.shopify.com/s/files/1/0015/3849/0427/products/JR-005-G_1_ec5b69a5-d22e-466d-8af8-2a96251c5002.jpg?v=1690277846&width=1080&height=1440&crop=center',
+            prodImg: recom3,
             prodtitle: 'Bespoke Wilder Tag Bracelet',
             price: '$108',
             more: 'More Options'
 
         },
         {
-            prodImg: 'https://cdn.shopify.com/s/files/1/0015/3849/0427/products/2210-201-185a-G_1_f7f8e957-0749-4c32-9f86-78ad263afd21.jpg?v=1695406995&width=1080&height=1440&crop=center',
+            prodImg: recom4,
             prodtitle: 'Bespoke Wilder Tag Bracelet',
             price: '$68',
             more: 'More Options'
 
         },
         {
-            prodImg: 'https://cdn.shopify.com/s/files/1/0015/3849/0427/files/WilderAlphabetNecklace_Collection_Shot.jpg?v=1700674254&width=1080&height=1440&crop=center',
+            prodImg: recom5,
             prodtitle: 'Serena',
             price: '$68',
             more: 'More Options'
 
         },
         {
-            prodImg: 'https://cdn.shopify.com/s/files/1/0015/3849/0427/files/WilderAlphabetBracelet_Collection_Shot.jpg?v=1700675714&width=1080&height=1440&crop=center',
+            prodImg: recom6,
             prodtitle: 'Gloriole',
             more: 'More Options',
             price: '$68'

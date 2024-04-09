@@ -196,41 +196,52 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from 'react-slick'
 
+import insta1 from '../../../assets/TSR/insta1.jpg'
+import insta2 from '../../../assets/TSR/insta2.jpg'
+import insta3 from '../../../assets/TSR/insta3.jpg'
+import insta4 from '../../../assets/TSR/insta4.jpg'
+import insta5 from '../../../assets/TSR/insta5.jpg'
+import insta6 from '../../../assets/TSR/insta6.jpg'
+import insta7 from '../../../assets/TSR/insta7.jpg'
+import insta8 from '../../../assets/TSR/insta8.jpg'
+import insta9 from '../../../assets/TSR/insta9.jpg'
+import insta10 from '../../../assets/TSR/insta10.jpg'
+
 export default function ShopOurInstagram() {
 
     const InstaImages = [
         {
             id: 1,
-            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6579ede364a945a463e6a735/828d0220-99df-11ee-a3a6-7b12bc7e3933.jpg?format=webp'
+            iamge: insta1
         },
         {
             id: 2,
-            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6579ede3f56d8214b0aae1fb/8462ac80-99df-11ee-8d11-b3ff59c6302f.jpg?format=webp'
+            iamge: insta2
         },
         {
             id: 3,
-            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6579ede364a945a463e6a736/84801f90-99df-11ee-a4a8-0bb3a85f5541.jpg?format=webp'
+            iamge: insta3
         },
         {
             id: 4,
-            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6579ede364a945a463e6a737/84654490-99df-11ee-b0ce-b78cd6615212.jpg?format=webp'
+            iamge: insta4
         },
         {
             id: 5,
-            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6578e9d47892d5abf60635de/7fa9bbc0-9944-11ee-a79b-53ded4dd0460.jpg?format=webp'
+            iamge: insta5
         },
         
         {
             id: 6,
-            iamge: 'https://www.gorjana.com/cdn/shop/files/Feature-Zoey_1.jpg?v=1700154326&%3Bwidth=700&em-format=avif'
+            iamge: insta6
         },
         {
             id: 7,
-            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6579ede364a945a463e6a735/828d0220-99df-11ee-a3a6-7b12bc7e3933.jpg?format=webp'
+            iamge: insta7
         },
         {
             id: 8,
-            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6579ede3f56d8214b0aae1fc/84877290-99df-11ee-af96-eb84dfa3004e.jpg?format=webp'
+            iamge: insta8
         },
     ]
 
