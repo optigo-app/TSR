@@ -1415,7 +1415,7 @@ export default function CartPage() {
                                     {currencySymbol?.Currencysymbol}
                                     {(
                                       (cartSelectData?.UnitCost ?? 0) +
-                                      (((mtrdData?.V ?? 0)/currData[0]?.CurrencyRate) + (mtrdData?.W ?? 0)) +
+                                      (((mtrdData?.V ?? 0)/currData?.CurrencyRate) + (mtrdData?.W ?? 0)) +
                                       (dqcData ?? 0) +
                                       (csqcData ?? 0) +
                                       (sizeMarkup ?? 0) +
@@ -1436,7 +1436,7 @@ export default function CartPage() {
                                 >
                                   <span
                                     style={{
-                                      fontSize: "16px",
+                                      fontSize: "15px",
                                       fontWeight: "500",
                                     }}
                                     onClick={handleCartUpdate}
@@ -1542,14 +1542,14 @@ export default function CartPage() {
                                   position: "absolute",
                                   right: "0px",
                                   top: "0px",
-                                  backgroundColor: "black",
                                   borderRadius: "2px",
                                   opacity: "0.8",
                                 }}
-                                onClick={() => handleRemove(item)}
+                                
                               >
                                 <CloseIcon
-                                  sx={{ color: "white", fontSize: "22px" }}
+                                  sx={{ color: "black", fontSize: "22px" , fontWeight: 'bold'}}
+                                  onClick={() => handleRemove(item)}
                                 />
                               </div>
                               <img
