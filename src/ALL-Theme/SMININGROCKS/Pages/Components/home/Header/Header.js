@@ -726,7 +726,7 @@ export default function Header() {
                       badgeContent={getCartListCount}
                       overlap={"rectangular"}
                       color="secondary"
-                      className="gorjana-Menu-item"
+                      className="gorjana-Menu-item badge12"
                     >
                       <Tooltip title="Cart">
                         <li
@@ -762,7 +762,7 @@ export default function Header() {
                     badgeContent={getCartListCount}
                     overlap={"rectangular"}
                     color="secondary"
-                    className="gorHeaderMobileIcoen"
+                    className="gorHeaderMobileIcoen badge12"
                   >
                     <Tooltip title="Cart">
                       <li
