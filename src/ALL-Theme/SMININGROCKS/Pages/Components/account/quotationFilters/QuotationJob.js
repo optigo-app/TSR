@@ -682,7 +682,7 @@ const QuotationJob = () => {
                       <TableCell
                         key={column.id}
                         align={column.align}
-                        style={{ minWidth: column.minWidth, backgroundColor: "#ebebeb", color: "#6f6f6f", }}
+                        style={{ minWidth: column.minWidth, backgroundColor: "rgb(255 245 245 / 45%)", color: "#6f6f6f",fontFamily: '"PT Sans", sans-serif', fontWeight:'600' }}
                         onClick={() => handleRequestSort(column.id)}
                       >
                         {column.label}
@@ -704,7 +704,7 @@ const QuotationJob = () => {
                           {columns.map((column) => {
                             const value = row[column.id];
                             return (
-                              <TableCell key={column.id} align={column.align}>
+                              <TableCell key={column.id} align={column.align} style={{fontFamily: '"PT Sans", sans-serif' }}>
                                 {column.format && typeof value === 'number'
                                   ? column.format(value)
                                   : value}

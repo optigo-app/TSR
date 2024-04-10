@@ -740,6 +740,7 @@ const DesignWiseSalesReport = () => {
                     <Typography sx={{ textAlign: "center" }}>NetWt(gm)</Typography>
                     <Slider
                         className='netWtSecSlider'
+                        size='medium'
                         getAriaLabel={() => 'NetWt(gm)'}
                         value={netWtSlider}
                         onChange={handleNetWtSlider}
@@ -954,7 +955,8 @@ const DesignWiseSalesReport = () => {
                                         textTransform: "uppercase",
                                         cursor: "pointer",
                                         fontWeight: "bold",
-                                        textAlign: "start"
+                                        textAlign: "start",
+                                        fontFamily: '"PT Sans", sans-serif',
                                     }}
                                 >
                                     {products?.designno}
@@ -966,7 +968,8 @@ const DesignWiseSalesReport = () => {
                                         textTransform: "uppercase",
                                         cursor: "pointer",
                                         fontWeight: "bold",
-                                        textAlign: "start"
+                                        textAlign: "start",
+                                        fontFamily: '"PT Sans", sans-serif',
                                     }}
                                 >
                                     NetWt: {products?.DesignNetWt}
