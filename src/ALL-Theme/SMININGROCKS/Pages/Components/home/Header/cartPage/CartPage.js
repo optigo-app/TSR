@@ -974,7 +974,6 @@ export default function CartPage() {
             await getCartAndWishListData()
             getCountFunc()
             getCartData()
-            console.log("done", res);
           }
           else {
             console.log("error", res);
@@ -986,12 +985,10 @@ export default function CartPage() {
 
       }
     })
-
-    console.log("finalJSON", finalJSON);
-    console.log("filterProdData", filterProdData);
-
   }
 
+
+  console.log('sizeData',sizeData);
   return (
     <>
       <div className="paddingTopMobileSet" style={{ paddingTop: "130px" }}>

@@ -314,9 +314,9 @@ const ProdDetail = () => {
     );
     
     
-    let showPrice = 0;
+    // let showPrice = 0;
     if (mtrd && mtrd.length > 0) {
-      showPrice = srProductsData?.price - ((srProductsData?.price - srProductsData?.metalrd) + (mtrd[0]?.Z ?? 0));
+      // showPrice = srProductsData?.price - ((srProductsData?.price - srProductsData?.metalrd) + (mtrd[0]?.Z ?? 0));
       setMtrdData(mtrd[0] ?? [])
       setMetalPrice(mtrd[0]?.Z ?? 0)
     }
@@ -335,9 +335,9 @@ const ProdDetail = () => {
     )
 
 
-    let showPrice1 = 0;
+    // let showPrice1 = 0;
     if (diaqcprice && diaqcprice.length > 0) {
-      showPrice1 = srProductsData?.price - ((srProductsData?.price - srProductsData?.diard1) + (diaqcprice[0]?.S ?? 0));
+      // showPrice1 = srProductsData?.price - ((srProductsData?.price - srProductsData?.diard1) + (diaqcprice[0]?.S ?? 0));
       let totalPrice = diaqcprice?.reduce((acc, obj) => acc + obj.S, 0)
       let diaRate = diaqcprice?.reduce((acc, obj) => acc + obj.O, 0)
       let diaSettRate = diaqcprice?.reduce((acc, obj) => acc + obj.Q, 0)
@@ -373,8 +373,8 @@ const ProdDetail = () => {
       setCSQCPrice(csqcpirce[0]?.S ?? 0)
     }
 
-    let gt = showPrice + showPrice1 + showPrice2;
-    setGrandTotal(gt ?? 0);
+    // let gt = showPrice + showPrice1 + showPrice2;
+    // setGrandTotal(gt ?? 0);
 
   }, [getPriceData, mtTypeOption, diaQColOpt, cSQopt])
 
