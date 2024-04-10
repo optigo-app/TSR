@@ -130,6 +130,7 @@ function EnhancedTableHead(props) {
             <TableRow className="tableHeadRow">
                 {headCells.map((headCell) => (
                     <TableCell
+                        style={{ fontFamily: '"PT Sans", sans-serif', fontWeight: '600' }}
                         key={headCell.id}
                         align={headCell.align}
                         padding={headCell.disablePadding ? 'none' : 'normal'}
@@ -266,21 +267,21 @@ const QuotationQuote = () => {
             } else {
                 flags.search = true;
             }
-            
+
             if (cutDate !== undefined) {
                 // if(fromDatess && todatess && moment(fromdates).isSameOrBefore(moment(todates))){
                 if (!fromdates?.includes(undefined) && !todates?.includes(undefined)) {
                     let fromdat = moment(fromdates);
                     let todat = moment(todates);
                     let cutDat = moment(cutDate);
-                    if(moment(fromdates).isSameOrBefore(todates)){
+                    if (moment(fromdates).isSameOrBefore(todates)) {
                         const isBetween = cutDat.isBetween(fromdat, todat, null, '[]');
                         if (isBetween || cutDat.isSame(fromdat) || cutDat.isSame(todat)) {
                             flags.dateTo = true;
                             flags.dateFrom = true;
                         }
                     }
-                    else{
+                    else {
                         // count = count+1
                         // flags.dateFrom = true;
                         // flags.dateTo = true;
@@ -303,15 +304,15 @@ const QuotationQuote = () => {
                     //     flags.dateFrom = true;
                     // }
                     // flags.dateTo = true;
-                    count = count+1
+                    count = count + 1
                     flags.dateFrom = true;
                     Swal.fire({
                         title: "Error !",
                         text: "Enter Valid Date From",
                         icon: "error",
                         confirmButtonText: "ok"
-                      });
-                      reseltFil();
+                    });
+                    reseltFil();
                 } else if (!fromdates?.includes(undefined) && todates?.includes(undefined)) {
                     // let fromdat = new Date(fromdates);
                     // let cutDat = new Date(cutDate);
@@ -319,22 +320,22 @@ const QuotationQuote = () => {
                     //     flags.dateTo = true;
                     //     flags.dateFrom = true;
                     // }
-                    count = count+1
+                    count = count + 1
                     flags.dateTo = true;
                     Swal.fire({
                         title: "Error !",
                         text: "Enter Valid Date To",
                         icon: "error",
                         confirmButtonText: "ok"
-                      });
-                      reseltFil();
+                    });
+                    reseltFil();
                     // flags.dateFrom = true;
 
                 } else if (fromdates?.includes(undefined) && todates?.includes(undefined)) {
                     flags.dateTo = true;
                     flags.dateFrom = true;
                 }
-            //   }
+                //   }
             }
 
             if (flags.dateFrom === true && flags.dateTo === true && flags.search === true) {
@@ -342,10 +343,10 @@ const QuotationQuote = () => {
             }
 
         });
-        if(count === 0){
+        if (count === 0) {
             setFilterData(filteredData);
         }
-        else{
+        else {
             setFilterData(data);
         }
     }
@@ -405,10 +406,10 @@ const QuotationQuote = () => {
     return (
         <Box className='smilingSavedAddressMain salesApiSection' sx={{ padding: "20px", }}>
             <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-                <Box sx={{ paddingRight: "15px" }} className="AllQuoteBtn QuotePadSec"> 
-                <Button variant="contained" className="muiSmilingRocksBtn" sx={{ background: "#7d7f85", display: "flex", alignItems: "center", marginBottom: 0, padding: "6px 0", }} onClick={eve => resetAllFilters(eve)}>
-                    All
-                </Button></Box>
+                <Box sx={{ paddingRight: "15px" }} className="AllQuoteBtn QuotePadSec">
+                    <Button variant="contained" className="muiSmilingRocksBtn" sx={{ background: "#7d7f85", display: "flex", alignItems: "center", marginBottom: 0, padding: "6px 0", }} onClick={eve => resetAllFilters(eve)}>
+                        All
+                    </Button></Box>
                 <Box sx={{ display: "flex", alignItems: "center", position: "relative", padding: "0 15px 35px 0", maxWidth: "max-content" }} className="searchbox QuotePadSec">
                     <TextField id="standard-basic" label="Search" variant="outlined" value={searchVal} onChange={eve => {
                         setSearchVal(eve?.target?.value);
@@ -441,22 +442,22 @@ const QuotationQuote = () => {
                                             //       resetAllFilters();
                                             // }else{
 
-                                                if (((newValue["$y"] <= 2099 && newValue["$y"] >= 1900) || newValue["$y"] < 1000) || isNaN(newValue["$y"])) {
-                                                    setFromDate(newValue)
-                                                } else {
-                                                    
-                                                    Swal.fire({
-                                                        title: "Error !",
-                                                        text: "Enter Valid Date From",
-                                                        icon: "error",
-                                                        confirmButtonText: "ok"
-                                                    });
-                                                    resetAllFilters();
-                                                }
+                                            if (((newValue["$y"] <= 2099 && newValue["$y"] >= 1900) || newValue["$y"] < 1000) || isNaN(newValue["$y"])) {
+                                                setFromDate(newValue)
+                                            } else {
+
+                                                Swal.fire({
+                                                    title: "Error !",
+                                                    text: "Enter Valid Date From",
+                                                    icon: "error",
+                                                    confirmButtonText: "ok"
+                                                });
+                                                resetAllFilters();
                                             }
+                                        }
                                         // }
-                                        }}
-                                    
+                                    }}
+
                                     // placeholder={fromDate ? undefined : "DD MMM YYYY"}
                                     // placeholder="DD MMM YYYY"
                                     className='quotationFilterDates'
@@ -544,13 +545,14 @@ const QuotationQuote = () => {
                                                 scope="row"
                                                 padding="none"
                                                 align="center"
+                                                style={{ fontFamily: '"PT Sans", sans-serif'}}
                                             >
                                                 {row.SrNo}
                                             </TableCell>
-                                            <TableCell align="center">{row.Date}</TableCell>
-                                            <TableCell align="center">{row.SKUNo}</TableCell>
-                                            <TableCell align="center">{row.TotalDesign}</TableCell>
-                                            <TableCell align="right">{row.Amount}</TableCell>
+                                            <TableCell align="center"  style={{ fontFamily: '"PT Sans", sans-serif'}}>{row.Date}</TableCell>
+                                            <TableCell align="center"  style={{ fontFamily: '"PT Sans", sans-serif'}}>{row.SKUNo}</TableCell>
+                                            <TableCell align="center"  style={{ fontFamily: '"PT Sans", sans-serif'}}>{row.TotalDesign}</TableCell>
+                                            <TableCell align="right"  style={{ fontFamily: '"PT Sans", sans-serif'}}>{row.Amount}</TableCell>
                                             {/* <TableCell align="right">{row.protein}</TableCell> */}
                                         </TableRow>
                                     );
@@ -968,7 +970,7 @@ export default QuotationQuote
 //     return (
 //         <Box className='smilingSavedAddressMain salesApiSection' sx={{ padding: "20px", }}>
 //             <Box sx={{ display: "flex", flexWrap: "wrap" }}>
-//                 <Box sx={{ paddingRight: "15px" }} className="AllQuoteBtn QuotePadSec"> 
+//                 <Box sx={{ paddingRight: "15px" }} className="AllQuoteBtn QuotePadSec">
 //                 <Button variant="contained" className="muiSmilingRocksBtn" sx={{ background: "#7d7f85", display: "flex", alignItems: "center", marginBottom: 0, padding: "6px 0", }} onClick={eve => resetAllFilters(eve)}>
 //                     All
 //                 </Button></Box>
