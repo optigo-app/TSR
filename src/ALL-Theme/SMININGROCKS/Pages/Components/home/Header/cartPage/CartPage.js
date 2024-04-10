@@ -99,7 +99,7 @@ export default function CartPage() {
 
   useEffect(() => {
     let currencyData = JSON.parse(localStorage.getItem("currencyData"))
-    setCurrData(currencyData[0])
+    setCurrData(currencyData)
   }, [])
   //   const getPriceData = useRecoilValue(priceData);
   // const getTestProdData = useRecoilValue(newTestProdData);
