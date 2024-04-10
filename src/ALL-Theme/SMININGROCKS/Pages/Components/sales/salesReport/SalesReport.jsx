@@ -297,6 +297,7 @@ function EnhancedTableHead(props) {
             style={{
               minWidth: headCell.minWidth,
               textAlign: headCell?.align || "left",
+              fontFamily: '"PT Sans", sans-serif', fontWeight:'600'
             }}
           >
             <TableSortLabel
@@ -757,7 +758,7 @@ const SalesReport = () => {
           sx={{ paddingBottom: "5px", paddingRight: "15px" }}
         >
           <table>
-            <tbody>
+            <tbody style={{fontFamily: '"PT Sans", sans-serif'}}>
               <tr>
                 <td>Total Gross Wt</td>
                 <td>Total Net Wt(24k)</td>
@@ -817,8 +818,8 @@ const SalesReport = () => {
           </table>
         </Box>
         <Box sx={{ paddingBottom: "20px", paddingRight: "15px" }}>
-          <Typography>Total Amount</Typography>
-          <Typography sx={{ fontWeight: 700, textAlign: "center" }}>
+          <Typography style={{fontFamily: '"PT Sans", sans-serif'}}>Total Amount</Typography>
+          <Typography sx={{ fontWeight: 700, textAlign: "center", fontFamily:'"PT Sans", sans-serif' }} >
             {NumberWithCommas(total?.TotalAmount, 2)}
           </Typography>
         </Box>
@@ -1098,34 +1099,34 @@ const SalesReport = () => {
                           handleimageShow(eve, row?.imgsrc)
                         }
                       >
-                        <TableCell id={labelId} scope="row" align="center">
+                        <TableCell id={labelId} scope="row" align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>
                           {" "}
                           {index + 1}{" "}
                         </TableCell>
-                        <TableCell align="center">{row.EntryDate}</TableCell>
-                        <TableCell align="center">
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>{row.EntryDate}</TableCell>
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>
                           {row.StockDocumentNo}
                         </TableCell>
-                        <TableCell align="center">{row.SKUNo}</TableCell>
-                        <TableCell align="center">{row.designno}</TableCell>
-                        <TableCell align="center">{row.MetalType}</TableCell>
-                        <TableCell align="center">{row.MetalAmount}</TableCell>
-                        <TableCell align="center">
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>{row.SKUNo}</TableCell>
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>{row.designno}</TableCell>
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>{row.MetalType}</TableCell>
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>{row.MetalAmount}</TableCell>
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>
                           {row.DiamondAmount}
                         </TableCell>
-                        <TableCell align="center">
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>
                           {row.ColorStoneAmount}
                         </TableCell>
-                        <TableCell align="center">{row.LabourAmount}</TableCell>
-                        <TableCell align="center">{row.OtherAmount}</TableCell>
-                        <TableCell align="center">{row.UnitCost}</TableCell>
-                        <TableCell align="center">{row.Category}</TableCell>
-                        <TableCell align="center">{row.GrossWt}</TableCell>
-                        <TableCell align="center">{row.NetWt}</TableCell>
-                        <TableCell align="center">{row.DiaPcs}</TableCell>
-                        <TableCell align="center">{row.DiaWt}</TableCell>
-                        <TableCell align="center">{row.CsPcs}</TableCell>
-                        <TableCell align="center">{row.CsWt}</TableCell>
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>{row.LabourAmount}</TableCell>
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>{row.OtherAmount}</TableCell>
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>{row.UnitCost}</TableCell>
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>{row.Category}</TableCell>
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>{row.GrossWt}</TableCell>
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>{row.NetWt}</TableCell>
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>{row.DiaPcs}</TableCell>
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>{row.DiaWt}</TableCell>
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>{row.CsPcs}</TableCell>
+                        <TableCell align="center"  style={{fontFamily: '"PT Sans", sans-serif'}}>{row.CsWt}</TableCell>
                       </TableRow>
                     );
                   })}
