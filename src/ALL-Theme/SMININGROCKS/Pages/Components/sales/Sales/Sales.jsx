@@ -135,6 +135,7 @@ function EnhancedTableHead(props) {
                         align={headCell.align}
                         padding={headCell.disablePadding ? 'none' : 'normal'}
                         sortDirection={orderBy === headCell.id ? order : false}
+                        style={{fontFamily: '"PT Sans", sans-serif', fontWeight:'600'}}
                     >
                         <TableSortLabel
                             active={orderBy === headCell.id}
@@ -500,12 +501,13 @@ const Sales = () => {
                                                 scope="row"
                                                 padding="none"
                                                 align="center"
+                                                style={{fontFamily: '"PT Sans", sans-serif'}}
                                             >
                                                 {index+1}
                                             </TableCell>
-                                            <TableCell align="center">{row.Date}</TableCell>
-                                            <TableCell align="center">{row.StockDocumentNo}</TableCell>
-                                            <TableCell align="right">{row.Amount}</TableCell>
+                                            <TableCell align="center"   style={{fontFamily: '"PT Sans", sans-serif'}}>{row.Date}</TableCell>
+                                            <TableCell align="center"   style={{fontFamily: '"PT Sans", sans-serif'}}>{row.StockDocumentNo}</TableCell>
+                                            <TableCell align="right"   style={{fontFamily: '"PT Sans", sans-serif'}}>{row.Amount}</TableCell>
                                             {/* <TableCell align="right">{row.protein}</TableCell> */}
                                         </TableRow>
                                     );
@@ -530,6 +532,7 @@ const Sales = () => {
                         page={page}
                         onPageChange={handleChangePage}
                         onRowsPerPageChange={handleChangeRowsPerPage}
+                        style={{fontFamily: '"PT Sans", sans-serif'}}
                     />
                 </Paper>}
 
