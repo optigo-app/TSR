@@ -38,21 +38,21 @@ export default function FestiveFinds() {
                 <div className='gorGiftBox1'>
                     <div>
                         <p className='gorGiftBoxMainTitleWeb'>Gifting Made Easy</p>
-                        <img src='https://www.gorjana.com/cdn/shop/files/Feature-TopGifts_8331665f-9cc0-4d68-b09c-9193aff89e15.jpg?v=1702053479&%3Bwidth=1200&em-format=avif' className='gorGiftBox1Images' />
+                        <img src='https://www.gorjana.com/cdn/shop/files/Featured_collection_1-_Alphabets_1.jpg?v=1711663346&width=1000&em-format=avif&em-width=1000' className='gorGiftBox1Images' />
                         <p className='gorGiftBoxDesc'>Top Gifts</p>
                     </div>
                     <div className='gorGiftBox1Sub1'>
-                        <img src='https://www.gorjana.com/cdn/shop/files/Feature-TopFineGifts_5dc280ce-376e-4488-8c79-e37c9339264d.jpg?v=1702053479&%3Bwidth=1200&em-format=avif' className='gorGiftBox1Images' />
+                        <img src='https://www.gorjana.com/cdn/shop/files/Featured_collection_3-_Pearls_1.jpg?v=1711663394&width=1000&em-format=avif&em-width=1000' className='gorGiftBox1Images' />
                         <p className='gorGiftBoxDesc'>Personalized Gifts</p>
                     </div>
                 </div>
                 <div className='gorGiftBox2'>
                     <div>
-                        <img src='https://www.gorjana.com/cdn/shop/files/Feature-GiftsUnder_150_4b3637bc-a43b-451c-b183-3721016224d5.jpg?v=1702053479&%3Bwidth=1200&em-format=avif' className='gorGiftBox2Images' />
+                        <img src='https://www.gorjana.com/cdn/shop/files/Featured_collection_1.jpg?v=1711729489&width=1000&em-format=avif&em-width=1000' className='gorGiftBox2Images' />
                         <p className='gorGiftBoxDesc'>Gifts Under $150</p>
                     </div>
                     <div className='gorGiftBox2Sub1' >
-                        <img src='https://www.gorjana.com/cdn/shop/files/MasonryGrid-GiftsThatGlitter.jpg?v=1701380400&%3Bwidth=1200&em-format=avif' className='gorGiftBox2Images' />
+                        <img src='https://www.gorjana.com/cdn/shop/files/Featured_collection_4-_Hoops_Huggies_1.jpg?v=1711663371&width=1000&em-format=avif&em-width=1000' className='gorGiftBox2Images' />
                         <p className='gorGiftBoxDesc'>Splurge Worthy Gifts</p>
                     </div>
                 </div>
@@ -63,10 +63,10 @@ export default function FestiveFinds() {
                 marginTop: '70px'
             }}>
                 <div className='gorViewLookBookimg'>
-                    <img src='https://www.gorjana.com/cdn/shop/files/Feature-Lookbook_089f3d54-299c-4177-b403-7c3ebeb8e146.jpg?v=1702053479&%3Bwidth=1200&em-format=avif' className='gorViewLookBookImage' />
+                    <img src='https://www.gorjana.com/cdn/shop/files/Feature-Catalog_1.jpg?v=1711663131&width=1000&em-format=avif&em-width=1000' className='gorViewLookBookImage' />
                 </div>
                 <div className='gorViewLookBookDesc'>
-                    <p style={{ fontSize: '30px', margin: '0px', fontFamily: 'Freight Big Pro,serif' }}>The Holiday Lookbook is Here</p>
+                    <p style={{ fontSize: '30px', margin: '0px', fontFamily: 'Freight Big Pro,serif' }}>The Spring Catalog Is Here</p>
                     <p style={{ fontSize: '13px', fontWeight: 500, cursor: 'pointer', textDecoration: 'underline' }}>View Lookbook</p>
                 </div>
             </div>
@@ -74,40 +74,40 @@ export default function FestiveFinds() {
 
             <div style={{marginTop: '100px'}}>
                 <div className='gorjanaTrade1Web'>
-                    <img src='https://www.gorjana.com/cdn/shop/files/Hero_D-2_13.jpg?v=1701993381&width=2800' className='gorjanaFaveImage' />
+                    <img src='https://www.gorjana.com/cdn/shop/files/Substory-D_11_feec347d-4772-405a-b9e5-dc7884357391.jpg?v=1711663592&width=2800' className='gorjanaFaveImage' />
                     <div className='gorjanaTrideBox'>
                         <p style={{
                             fontFamily: 'Freight Big Pro,serif',
                             fontSize: '60px',
-                            color: 'white',
+                            color: 'black',
                             fontWeight: 400
                         }}>Tried and True </p>
                         <p style={{
                             fontFamily: 'Freight Big Pro,serif',
                             fontSize: '21px',
-                            color: 'white',
+                            color: 'black',
                             display: 'flex',
                             justifyContent: 'flex-end',
                             marginTop: '-30px',
                             fontWeight: 300
                         }}>Easy-to-style layers you'll love. </p>
-                        <p className='gorjanaFavBoxLink'>Shop File Jewelry</p>
+                        <p className='gorjanaFavBoxLink' style={{color: 'black'}}>Shop File Jewelry</p>
                     </div>
                 </div>
 
                 <div className='gorjanaTrade1Mobile'>
-                    <img src='https://www.gorjana.com/cdn/shop/files/Hero_M-2_17.jpg?v=1701993404&width=750' className='gorjanaFaveImage' />
+                    <img src='https://www.gorjana.com/cdn/shop/files/Substory-M_10_0bce971b-bbab-4654-8757-bb777ad4da80.jpg?v=1711663594&width=750' className='gorjanaFaveImage' />
                     <div className='gorjanaTrideBoxMobile'>
                         <p style={{
                             fontFamily: 'Freight Big Pro,serif',
                             fontSize: '60px',
-                            color: 'white',
+                            color: 'black',
                             fontWeight: 400
                         }}>Tried and True </p>
                         <p style={{
                             fontFamily: 'Freight Big Pro,serif',
                             fontSize: '18px',
-                            color: 'white',
+                            color: 'black',
                             marginTop: '-20px',
                             fontWeight: 300
                         }}>Easy-to-style layers you'll love. </p>

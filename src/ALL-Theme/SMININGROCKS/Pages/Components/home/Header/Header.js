@@ -699,7 +699,7 @@ export default function Header() {
                       badgeContent={getWishListCount}
                       overlap={"rectangular"}
                       color="secondary"
-                      className="gorjana-Menu-item"
+                      className="gorjana-Menu-item badge12"
                     >
                       <Tooltip title="WishList">
                         <li

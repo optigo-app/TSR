@@ -96,7 +96,7 @@ export default function CartPage() {
   const setWishCount = useSetRecoilState(WishListCounts);
 
   const [currData, setCurrData] = useState()
-
+  console.log('currData',currData);
   useEffect(() => {
     let currencyData = JSON.parse(localStorage.getItem("currencyData"))
     setCurrData(currencyData)
@@ -974,7 +974,6 @@ export default function CartPage() {
             await getCartAndWishListData()
             getCountFunc()
             getCartData()
-            console.log("done", res);
           }
           else {
             console.log("error", res);
@@ -986,10 +985,6 @@ export default function CartPage() {
 
       }
     })
-
-    console.log("finalJSON", finalJSON);
-    console.log("filterProdData", filterProdData);
-
   }
 
   const decodeEntities = (html) => {
@@ -998,6 +993,8 @@ export default function CartPage() {
     return txt.value;
   }
 
+
+  console.log('sizeData',sizeData);
   return (
     <>
       <div className="paddingTopMobileSet" style={{ paddingTop: "130px" }}>
