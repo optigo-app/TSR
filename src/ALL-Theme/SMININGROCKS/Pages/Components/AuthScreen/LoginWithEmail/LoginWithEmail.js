@@ -134,12 +134,12 @@ export default function LoginWithEmail() {
                 setIsLoginState('true')
                 localStorage.setItem('LoginUser', 'true')
                 localStorage.setItem('loginUserDetail', JSON.stringify(response.Data.rd[0]));
-                navigation('/');
                 pdDataCalling()
                 designDataCall()
                 getCountFunc()
                 getDesignPriceList()
                 handelCurrencyData(resData)
+                navigation('/')
                 // window.location.reload(); 
             } else {
                 errors.confirmPassword = 'Password is Invalid'
