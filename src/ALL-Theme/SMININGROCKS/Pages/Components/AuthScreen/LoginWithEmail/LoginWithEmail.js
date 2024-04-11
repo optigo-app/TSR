@@ -86,11 +86,13 @@ export default function LoginWithEmail() {
         let currencyData = JSON.parse(localStorage.getItem('CURRENCYCOMBO'));
 
         let filterData = currencyData?.filter((cd)=>cd?.Currencyid === param?.CurrencyCodeid)
-        
-        console.log("currencyData",filterData);
 
         if(filterData){
-            localStorage.setItem("currencyData",JSON.stringify(filterData))
+            if(Array.isArray(filterData)){
+                localStorage.setItem("currencyData",JSON.stringify(filterData[0]))
+            }else{
+                localStorage.setItem("currencyData",JSON.stringify(filterData))
+            }
         }else{
             let DefaultObj = {
                 "Currencyid": 42,
