@@ -143,7 +143,6 @@ export default function CartPage() {
 
   // console.log('getPriceDatagetPriceData', getPriceData);
   console.log('getPriceDatagetPriceData', mtTypeOption);
-
   // useEffect(() => {
   //   console.log('getPriceDatagetPriceData', getPriceData);
   //   let mtrd = getPriceData?.rd?.filter(
@@ -993,7 +992,7 @@ export default function CartPage() {
     return txt.value;
   }
 
-
+  console.log("pricedata", (cartSelectData?.UnitCost ?? 0), (((mtrdData?.V ?? 0) / currData?.CurrencyRate)+(mtrdData?.W ?? 0)), (dqcData ?? 0), (csqcData ?? 0), (sizeMarkup ?? 0), (metalUpdatedPrice() ?? 0), (diaUpdatedPrice() ?? 0), (colUpdatedPrice() ?? 0))
   console.log('sizeData',sizeData);
   return (
     <>
@@ -1434,7 +1433,6 @@ export default function CartPage() {
                                       style={{ fontFamily: "sans-serif" }}
                                     />
                                     {(
-                                      (cartSelectData?.UnitCost ?? 0) +
                                       ((mtrdData?.V ?? 0) /
                                         currData?.CurrencyRate +
                                         (mtrdData?.W ?? 0)) +
@@ -1742,8 +1740,6 @@ export default function CartPage() {
       <Dialog
         onClose={() => setDialogOpen(false)}
         open={dialogOpen}
-        // fullWidth
-        // maxWidth={"xl"}
         fullScreen
       >
         {!isLoading && (

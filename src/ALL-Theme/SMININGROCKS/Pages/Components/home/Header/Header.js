@@ -47,6 +47,52 @@ export default function Header() {
   const [menul2data, setMenul2data] = useState([])
 
   const setNewMenuData = useSetRecoilState(newMenuData)
+  const [searchedProducts, setSearchedProducts] = useState([]);
+  const setGSearch = useSetRecoilState(searchData);
+
+
+  // function searchDataFucn(e) {
+  //   if (e.key === 'Enter') {
+  //     let ProductApiData2 = JSON.parse(localStorage.getItem("allproductlist"))
+  //     if (ProductApiData2) {
+  //       let data = ProductApiData2.filter((pd) => pd?.CollectionName.toString().toLowerCase().includes(searchText))
+  //       if (data) {
+  //         setGSearch(data);
+  //         navigation('/productpage')
+  //         toggleOverlay();
+  //       }
+  //     } else {
+  //       setGSearch([]);
+  //     }
+  //   }
+  // }
+
+  function searchDataFucn(e) {
+    if (e.key === 'Enter') {
+      let ProductApiData2 = JSON.parse(localStorage.getItem("allproductlist"));
+      if (ProductApiData2) {
+        let searchText = e.target.value.toLowerCase();
+        let data = ProductApiData2.filter((pd) => {
+          for (const key in pd) {
+            if (pd.hasOwnProperty(key) && pd[key]?.toString().toLowerCase().includes(searchText)) {
+              return true;
+            }
+          }
+          return false;
+        });
+        if (data.length > 0) {
+          setGSearch(data);
+          navigation('/productpage');
+          toggleOverlay();
+        } else {
+          setGSearch([]);
+        }
+      } else {
+        setGSearch([]);
+      }
+    }
+  }
+
 
   const separateData = (menuData) => {
 
@@ -79,6 +125,7 @@ export default function Header() {
   };
 
   const handelNewMenuData = (param) => {
+    console.log('prama....', param);
     setNewMenuData(param)
     setIsDropdownOpen(false)
     setDrawerShowOverlay(false)
@@ -250,19 +297,6 @@ export default function Header() {
     // }
   };
 
-
-
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      toggleOverlay();
-      handleEnterPress();
-    }
-  };
-
-  const [searchedProducts, setSearchedProducts] = useState([]);
-  const [gSearch, setGSearch] = useRecoilState(searchData)
-
   const handleEnterPress = () => {
     const savedProductList = localStorage.getItem('allproductlist');
     if (savedProductList) {
@@ -328,12 +362,15 @@ export default function Header() {
               <IoSearchOutline style={{ height: "15px", width: "15px", marginRight: "10px" }} />
               <input
                 type="text"
-                placeholder="Enter Design Number End Click Enter"
+                placeholder="Search..."
                 value={searchText}
                 autoFocus
-                onChange={(e) => setSearchText(e.target.value)}
+                onChange={(e) => {
+                  setSearchText(e.target.value)
+
+                }}
                 className="serachinputBoxOverly"
-                onKeyPress={handleKeyPress}
+                onKeyDown={searchDataFucn}
               />
               <IoClose
                 style={{
@@ -364,9 +401,9 @@ export default function Header() {
       >
         <div style={{ paddingTop: '150px' }}>
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <h1 
-            className="FontFamilySet"
-            style={{ color: 'black', marginLeft: '40%', fontWeight: 400 }}>Search</h1>
+            <h1
+              className="FontFamilySet"
+              style={{ color: 'black', marginLeft: '40%', fontWeight: 400 }}>Search</h1>
             <CloseRoundedIcon
               style={{ fontSize: "32px", marginLeft: '30%', cursor: 'pointer' }}
               onClick={() => {
@@ -407,9 +444,9 @@ export default function Header() {
       >
         <div style={{ paddingTop: '150px' }}>
           <div className="gorYourBagTopHeader">
-            <h1 
-            className="FontFamilySet"
-            style={{ color: 'black', marginLeft: '30%',  fontWeight: 400 }}>Your Bag (1)</h1>
+            <h1
+              className="FontFamilySet"
+              style={{ color: 'black', marginLeft: '30%', fontWeight: 400 }}>Your Bag (1)</h1>
             <CloseRoundedIcon
               style={{ fontSize: "32px", marginLeft: '30%', cursor: 'pointer' }}
               onClick={() => {
