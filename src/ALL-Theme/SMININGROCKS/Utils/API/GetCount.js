@@ -13,12 +13,12 @@ export const GetCount = async() => {
     
     
     
-        let EncodeData = {FrontEnd_RegNo:`${storeInit?.FrontEnd_RegNo}`,Customerid:`${Customer_id?.id}`}
+        let EncodeData = {FrontEnd_RegNo:`${storeInit?.FrontEnd_RegNo}`,Customerid:`${Customer_id?.id ?? 0}`}
     
         const encodedCombinedValue = btoa(JSON.stringify(EncodeData));
     
         let body = {
-            "con":`{\"id\":\"\",\"mode\":\"Getcount\",\"appuserid\":\"${UserEmail}\"}`,
+            "con":`{\"id\":\"\",\"mode\":\"Getcount\",\"appuserid\":\"${UserEmail ?? ''}\"}`,
             "f":"onAddToCart-AddToWishList-Reload (cartcount)",
             "p":encodedCombinedValue
             }
