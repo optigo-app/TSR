@@ -78,19 +78,19 @@ const ProdDetail = () => {
 
   const [addToCartFlag, setAddToCartFlag] = useState(false)
   const [addToWishListFlag, setAddToWishListFlag] = useState()
-  const [globImagePath,setGlobImagepath] = useState()
+  const [globImagePath, setGlobImagepath] = useState()
 
   const [designUniqueNO, setDesignUnicNo] = useState('');
-  const [uploadLogicPath, setUploadLogicPath] = useState(''); 
+  const [uploadLogicPath, setUploadLogicPath] = useState('');
   const [uKey, setUkey] = useState('');
-  const [currData,setCurrData] = useState()
+  const [currData, setCurrData] = useState()
 
-  useEffect(()=>{
+  useEffect(() => {
     let currencyData = JSON.parse(localStorage.getItem("currencyData"))
     setCurrData(currencyData)
-  },[])
-  console.log("currData",currData);
-  
+  }, [])
+  console.log("currData", currData);
+
 
   const setCartCount = useSetRecoilState(CartListCounts)
   const setWishCount = useSetRecoilState(WishListCounts)
@@ -110,15 +110,15 @@ const ProdDetail = () => {
     setGetPriceData(data)
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     const storeInit = JSON.parse(localStorage.getItem('storeInit'))
     setGlobImagepath(storeInit?.DesignImageFol)
-  },[])
+  }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     const storeInit = JSON.parse(localStorage.getItem('storeInit'))
     setGlobImagepath(storeInit?.DesignImageFol)
-  },[])
+  }, [])
 
   useEffect(() => {
 
@@ -277,7 +277,7 @@ const ProdDetail = () => {
     }
 
   }
-  
+
 
   let metalUpdatedPrice = () => {
 
@@ -285,9 +285,9 @@ const ProdDetail = () => {
 
     if (metalFilterData && metalFilterData.length) {
 
-      let CalcNetwt = ((srProductsData?.netwt ?? 0) + (metalFilterData?.Weight ?? 0) ?? 0 )
+      let CalcNetwt = ((srProductsData?.netwt ?? 0) + (metalFilterData?.Weight ?? 0) ?? 0)
 
-      let fprice = ((mtrdData?.AD ?? 0) * CalcNetwt) + ((mtrdData?.AC ?? 0)* CalcNetwt)
+      let fprice = ((mtrdData?.AD ?? 0) * CalcNetwt) + ((mtrdData?.AC ?? 0) * CalcNetwt)
 
       return fprice
     } else {
@@ -313,8 +313,8 @@ const ProdDetail = () => {
         ele?.B === srProductsData?.designno
 
     );
-    
-    
+
+
     // let showPrice = 0;
     if (mtrd && mtrd.length > 0) {
       // showPrice = srProductsData?.price - ((srProductsData?.price - srProductsData?.metalrd) + (mtrd[0]?.Z ?? 0));
@@ -1211,10 +1211,10 @@ const ProdDetail = () => {
     setIsVideoPlaying(true);
   };
 
-    useEffect(() => {
+  useEffect(() => {
 
     let srData = JSON.parse(localStorage.getItem("srProductsData"))
-    let price = ((productData?.UnitCost ?? 0) + (((mtrdData?.V ?? 0)/currData?.CurrencyRate) + (mtrdData?.W ?? 0)) + (dqcData ?? 0) + (csqcData ?? 0) + (sizeMarkup ?? 0) + (metalUpdatedPrice() ?? 0) + (diaUpdatedPrice() ?? 0) + (colUpdatedPrice() ?? 0))
+    let price = ((productData?.UnitCost ?? 0) + (((mtrdData?.V ?? 0) / currData?.CurrencyRate) + (mtrdData?.W ?? 0)) + (dqcData ?? 0) + (csqcData ?? 0) + (sizeMarkup ?? 0) + (metalUpdatedPrice() ?? 0) + (diaUpdatedPrice() ?? 0) + (colUpdatedPrice() ?? 0))
     //((mtrdData?.V/currData[0]?.CurrencyRate ?? 0) + mtrdData?.W ?? 0)
     if (price) {
       srData.price = Number(price)
@@ -1224,7 +1224,7 @@ const ProdDetail = () => {
 
   }, [mtrdData, dqcData, csqcData, sizeMarkup, metalUpdatedPrice, diaUpdatedPrice, colUpdatedPrice])
 
-  console.log("pricedata",(((mtrdData?.V ?? 0)/currData?.CurrencyRate) + (mtrdData?.W ?? 0)) + (dqcData ?? 0) + (csqcData ?? 0) + (sizeMarkup ?? 0) + (metalUpdatedPrice() ?? 0) + (diaUpdatedPrice() ?? 0) + (colUpdatedPrice() ?? 0))
+  console.log("pricedata", (productData?.UnitCost ?? 0), (((mtrdData?.V ?? 0) / currData?.CurrencyRate)+(mtrdData?.W ?? 0)), (dqcData ?? 0), (csqcData ?? 0), (sizeMarkup ?? 0), (metalUpdatedPrice() ?? 0), (diaUpdatedPrice() ?? 0), (colUpdatedPrice() ?? 0))
   // console.log("pricedata",dqcData)
 
   const decodeEntities = (html) => {
@@ -1291,11 +1291,11 @@ const ProdDetail = () => {
                       ? updatedColorImage?.length !== 0
                         ? updatedColorImage[0]?.imagepath
                         : selectedImagePath == ""
-                        ? globImagePath +
+                          ? globImagePath +
                           (!handelmainImg()?.length
                             ? productData?.OriginalImagePath?.split(",")[0]
                             : handelmainImg())
-                        : selectedImagePath
+                          : selectedImagePath
                       : notFound
                   }
                   alt={""}
@@ -1342,7 +1342,7 @@ const ProdDetail = () => {
                             setSelectedImagePath(data.imagepath);
                             setIsVideoPlaying(false);
                           }}
-                          // onClick={() => setThumbImg(data.imagepath)}
+                        // onClick={() => setThumbImg(data.imagepath)}
                         />
                       ))}
 
@@ -1811,57 +1811,57 @@ const ProdDetail = () => {
                   {(sizeData?.length !== 0 ||
                     (productData?.DefaultSize &&
                       productData.DefaultSize.length !== 0)) && (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        width: "95%",
-                        marginTop: "10px",
-                        paddingTop: "10px",
-                        borderTop: "1px solid #42424233",
-                      }}
-                    >
-                      <label
+                      <div
                         style={{
-                          fontSize: "15px",
-                          color: "#424242",
-                          fontFamily: "PT Sans, sans-serif",
+                          display: "flex",
+                          flexDirection: "column",
+                          width: "95%",
+                          marginTop: "10px",
+                          paddingTop: "10px",
+                          borderTop: "1px solid #42424233",
                         }}
                       >
-                        SIZE:
-                      </label>
-                      <select
-                        style={{
-                          border: "none",
-                          outline: "none",
-                          fontSize: "16px",
-                          color: "#424242",
-                          fontFamily: "PT Sans, sans-serif",
-                          fontWeight: "bold",
-                        }}
-                        onChange={(e) => handelSize(e.target.value)}
-                        defaultValue={
-                          productData && productData.DefaultSize
-                            ? productData.DefaultSize
-                            : sizeData.find((size) => size.IsDefaultSize === 1)
+                        <label
+                          style={{
+                            fontSize: "15px",
+                            color: "#424242",
+                            fontFamily: "PT Sans, sans-serif",
+                          }}
+                        >
+                          SIZE:
+                        </label>
+                        <select
+                          style={{
+                            border: "none",
+                            outline: "none",
+                            fontSize: "16px",
+                            color: "#424242",
+                            fontFamily: "PT Sans, sans-serif",
+                            fontWeight: "bold",
+                          }}
+                          onChange={(e) => handelSize(e.target.value)}
+                          defaultValue={
+                            productData && productData.DefaultSize
+                              ? productData.DefaultSize
+                              : sizeData.find((size) => size.IsDefaultSize === 1)
                                 ?.id
-                        }
-                      >
-                        {sizeData?.map((size) => (
-                          <option
-                            key={size.id}
-                            value={size.sizename} // Pass sizename as value
-                            selected={
-                              productData &&
-                              productData.DefaultSize === size.sizename
-                            }
-                          >
-                            {size.sizename}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  )}
+                          }
+                        >
+                          {sizeData?.map((size) => (
+                            <option
+                              key={size.id}
+                              value={size.sizename} // Pass sizename as value
+                              selected={
+                                productData &&
+                                productData.DefaultSize === size.sizename
+                              }
+                            >
+                              {size.sizename}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
                 </div>
 
                 <div
@@ -2034,46 +2034,46 @@ const ProdDetail = () => {
                   {(sizeData?.length !== 0 ||
                     (productData?.DefaultSize &&
                       productData.DefaultSize.length !== 0)) && (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        marginTop: "20px",
-                      }}
-                    >
-                      <label style={{ fontSize: "12.5px", color: "#7d7f85" }}>
-                        SIZE:
-                      </label>
-                      <select
+                      <div
                         style={{
-                          border: "none",
-                          outline: "none",
-                          color: "#7d7f85",
-                          fontSize: "12.5px",
+                          display: "flex",
+                          flexDirection: "column",
+                          marginTop: "20px",
                         }}
-                        onChange={(e) => handelSize(e.target.value)}
-                        defaultValue={
-                          productData && productData.DefaultSize
-                            ? productData.DefaultSize
-                            : sizeData.find((size) => size.IsDefaultSize === 1)
-                                ?.id
-                        }
                       >
-                        {sizeData?.map((size) => (
-                          <option
-                            key={size.id}
-                            value={size.sizename} // Pass sizename as value
-                            selected={
-                              productData &&
-                              productData.DefaultSize === size.sizename
-                            }
-                          >
-                            {size.sizename}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  )}
+                        <label style={{ fontSize: "12.5px", color: "#7d7f85" }}>
+                          SIZE:
+                        </label>
+                        <select
+                          style={{
+                            border: "none",
+                            outline: "none",
+                            color: "#7d7f85",
+                            fontSize: "12.5px",
+                          }}
+                          onChange={(e) => handelSize(e.target.value)}
+                          defaultValue={
+                            productData && productData.DefaultSize
+                              ? productData.DefaultSize
+                              : sizeData.find((size) => size.IsDefaultSize === 1)
+                                ?.id
+                          }
+                        >
+                          {sizeData?.map((size) => (
+                            <option
+                              key={size.id}
+                              value={size.sizename} // Pass sizename as value
+                              selected={
+                                productData &&
+                                productData.DefaultSize === size.sizename
+                              }
+                            >
+                              {size.sizename}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
                   <Divider
                     sx={{
                       marginTop: "20px",
@@ -2086,19 +2086,21 @@ const ProdDetail = () => {
                 {isPriseShow == 1 && (
                   <div style={{ marginTop: "23px" }}>
                     <p
-                     style={{ fontSize: "20px",
-                     color: "#424242",display:'flex'}}
+                      style={{
+                        fontSize: "20px",
+                        color: "#424242", display: 'flex'
+                      }}
                     >
                       {/* Price: <span style={{ fontWeight: '500', fontSize: '16px' }}>{currencySymbol?.Currencysymbol}{`${(productData?.price - grandTotal) === 0 ? "Not Availabel" : (productData?.price - grandTotal)?.toFixed(2)}`}</span> */}
                       {/* Price: <span style={{ fontWeight: '500', fontSize: '16px' }}>{currencySymbol?.Currencysymbol}{`${productData?.UnitCost + (productData?.price - grandTotal)?.toFixed(2)}`}</span> */}
                       <span
-                        style={{ fontWeight: 'bold', fontSize: '22px',letterSpacing:'2.2px',fontFamily: "PT Sans, sans-serif",display:'flex'}}
+                        style={{ fontWeight: 'bold', fontSize: '22px', letterSpacing: '2.2px', fontFamily: "PT Sans, sans-serif", display: 'flex' }}
                       >
                         <div
                           dangerouslySetInnerHTML={{
                             __html: decodeEntities(currData?.Currencysymbol),
                           }}
-                          style={{fontFamily:'sans-serif'}}
+                          style={{ fontFamily: 'sans-serif' }}
                         />
                         {`${(
                           (typeof productData?.UnitCost === "number"
@@ -2384,7 +2386,7 @@ const ProdDetail = () => {
                               !dsl?.ThumbImagePath
                                 ? notFound
                                 : dsl?.imagepath +
-                                  dsl?.ThumbImagePath.split(",")[0]
+                                dsl?.ThumbImagePath.split(",")[0]
                             }
                             alt={""}
                             style={{
@@ -2508,7 +2510,7 @@ const ProdDetail = () => {
                               !dsl?.ThumbImagePath
                                 ? notFound
                                 : dsl?.imagepath +
-                                  dsl?.ThumbImagePath.split(",")[0]
+                                dsl?.ThumbImagePath.split(",")[0]
                             }
                             alt={""}
                             style={{
@@ -2597,9 +2599,8 @@ const ProdDetail = () => {
                   </span>
                   {/* <div style={{display:acc && accNo === '1' ? 'block':'none',userSelect:'none',transition:'0.5s'}}> */}
                   <div
-                    className={`my-list-fineJewe ${
-                      acc && accNo === "1" ? "openAcc" : ""
-                    }`}
+                    className={`my-list-fineJewe ${acc && accNo === "1" ? "openAcc" : ""
+                      }`}
                   >
                     <div>
                       <div className="srAccContainer">
@@ -2649,9 +2650,9 @@ const ProdDetail = () => {
                             <b>
                               {daimondFilterData?.length
                                 ? (
-                                    productData?.diamondweight +
-                                    daimondFilterData[0]?.Weight
-                                  ).toFixed(2)
+                                  productData?.diamondweight +
+                                  daimondFilterData[0]?.Weight
+                                ).toFixed(2)
                                 : productData?.diamondweight}
                             </b>
                           </span>
@@ -2660,7 +2661,7 @@ const ProdDetail = () => {
                             <b>
                               {daimondFilterData?.length
                                 ? productData?.diamondpcs +
-                                  daimondFilterData[0]?.pieces
+                                daimondFilterData[0]?.pieces
                                 : productData?.diamondpcs}
                             </b>
                           </span>
@@ -2669,7 +2670,7 @@ const ProdDetail = () => {
                             <b>
                               {daimondFilterData?.length
                                 ? productData?.diamondpcs +
-                                  daimondFilterData[0]?.pieces
+                                daimondFilterData[0]?.pieces
                                 : productData?.diamondpcs}
                             </b>
                           </span>
@@ -2680,9 +2681,9 @@ const ProdDetail = () => {
                             <b>
                               {metalFilterData?.length
                                 ? (
-                                    productData?.netwt +
-                                    metalFilterData[0]?.Weight
-                                  ).toFixed(2)
+                                  productData?.netwt +
+                                  metalFilterData[0]?.Weight
+                                ).toFixed(2)
                                 : productData?.netwt}
                             </b>
                           </span>
@@ -2698,9 +2699,9 @@ const ProdDetail = () => {
                             <b>
                               {daimondFilterData?.length
                                 ? (
-                                    productData?.diamondweight +
-                                    daimondFilterData[0]?.Weight
-                                  ).toFixed(2)
+                                  productData?.diamondweight +
+                                  daimondFilterData[0]?.Weight
+                                ).toFixed(2)
                                 : productData?.diamondweight}
                             </b>
                           </span>
