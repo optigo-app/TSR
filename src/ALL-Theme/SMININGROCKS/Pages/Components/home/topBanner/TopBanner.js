@@ -23,7 +23,7 @@ export default function TopBanner() {
   return (
     <div>
       <div className='gorjanaFave1web'>
-        <img src='https://www.gorjana.com/cdn/shop/files/Hero_D-2_12.jpg?v=1701379010&width=2800' className='gorjanaFaveImage' />
+        <img src='https://www.gorjana.com/cdn/shop/files/Hero_D_29.jpg?v=1712249875&width=1500' className='gorjanaFaveImage' />
         {islogin === "true" && isB2bFlags == 1 && <div className='gorjanaFaveBox'>
           <p style={{
             fontFamily: "PT Sans, sans-serif",
@@ -51,9 +51,10 @@ export default function TopBanner() {
             fontSize: '60px',
             color: 'white',
             fontWeight: 400,
+            textAlign: 'end'
 
           }}>
-            Forever Favorites
+            Daily Layers
           </p>
           <p style={{
             fontFamily: "PT Sans, sans-serif",
@@ -63,12 +64,12 @@ export default function TopBanner() {
             justifyContent: 'flex-end',
             marginTop: '-30px',
             fontWeight: 300
-          }}>Fine jewelry for every style and occasion.</p>
+          }}>Solid gold and diamonds for every day.</p>
           <p className='gorjanaFavBoxLink' onClick={() => navigation('/productPage')}>Shop File Jewelry</p>
         </div>}
       </div>
       <div className='gorjanaFave1Mobile'>
-        <img src='https://www.gorjana.com/cdn/shop/files/Hero_M-2_16.jpg?v=1701379034&width=750' className='gorjanaFaveImageMobile' />
+        <img src='https://www.gorjana.com/cdn/shop/files/Hero-M_17_1f2fc8ca-c138-4d2b-b913-8df1902ad406.jpg?v=1712249886&width=750' className='gorjanaFaveImageMobile' />
         {islogin === "true" && <div className='gorjanaFaveBoxMobile'>
           <p style={{
             fontFamily: "PT Sans, sans-serif",
@@ -78,7 +79,7 @@ export default function TopBanner() {
             textAlign: 'center'
 
           }}>
-            Forever Favorites
+             Daily Layers
           </p>
           <p style={{
             fontFamily: "PT Sans, sans-serif",
@@ -86,13 +87,13 @@ export default function TopBanner() {
             color: 'white',
             marginTop: '-20px',
             fontWeight: 300
-          }}>Fine jewelry for every style and occasion.</p>
+          }}>Solid gold and diamonds for every day.</p>
           <p className='gorjanaFavBoxLinkMobile' onClick={() => navigation('/productPage')}>Shop File Jewelry</p>
         </div>}
       </div>
 
 
-      <div className='gorjanaFave2web'>
+      {/* <div className='gorjanaFave2web'>
         <img src='https://www.gorjana.com/cdn/shop/files/SubStory-D_7_303500df-182d-4edd-8eff-a93a1eb284ac.jpg?v=1699567448&width' className='gorjanaFaveImage' />
         {islogin === "true" && <div className='gorjanaFaveBox2'>
           <p style={{
@@ -131,7 +132,7 @@ export default function TopBanner() {
           }}>Find something for everyone on your list, including yourself.</p>
           <p className='gorjanaFavBoxLink2Mobile' onClick={() => navigation('/productPage')}>Shop The Gift Guide</p>
         </div>}
-      </div>
+      </div> */}
 
     </div>
 

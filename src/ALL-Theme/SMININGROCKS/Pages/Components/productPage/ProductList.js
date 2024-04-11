@@ -71,8 +71,10 @@ const ProductList = () => {
   const getHeaderData2 = useRecoilValue(HeaderData2)
   const getnewMenuData = useRecoilValue(newMenuData)
 
+
   // console.log("getnewMenuData",getnewMenuData)  
-  // console.log("getHeaderData2",getHeaderData2)
+  // console.log("ProductApiData2",ProductApiData2.filter((pd)=>pd?.CollectionName === "Shred"))
+
 
   const [minPrice, setMinPrice] = useState(null);
   const [maxPrice, setMaxPrice] = useState(null);
@@ -114,17 +116,20 @@ const ProductList = () => {
   const [isActive, setIsActive] = useState(false);
   const [globImagePath, setGlobImagepath] = useState();
   const [IsProdLoading, setIsProdLoading] = useState(false);
-  const [currData, setCurrData] = useState([])
+  const [currData, setCurrData] = useState()
 
   useEffect(() => {
     let currencyData = JSON.parse(localStorage.getItem("currencyData"))
     setCurrData(currencyData)
   }, [])
-  console.log("CurrrDaataaa", currData);
 
   useEffect(() => {
-    setNewProData(getSearchData)
-  }, [getSearchData])
+    setTimeout(() => {
+      if (getSearchData) {
+        setNewProData(getSearchData);
+      }
+    }, 100);
+  }, [getSearchData]);
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("allproductlist"));
@@ -268,8 +273,8 @@ const ProductList = () => {
         let csrd2 = 0;
 
         if (newPriceData || newPriceData1 || newPriceData2) {
-          price = (((newPriceData?.V ?? 0) / currData[0]?.CurrencyRate ?? 0) + newPriceData?.W ?? 0) + (newPriceData1 ?? 0) + (newPriceData2 ?? 0);
-          metalrd = (((newPriceData?.V ?? 0) / currData[0]?.CurrencyRate ?? 0) + newPriceData?.W ?? 0)
+          price = (((newPriceData?.V ?? 0)/currData[0]?.CurrencyRate ?? 0) + newPriceData?.W ?? 0) + (newPriceData1 ?? 0) + (newPriceData2 ?? 0);
+          metalrd = (((newPriceData?.V ?? 0)/currData[0]?.CurrencyRate ?? 0) + newPriceData?.W ?? 0)
           diard1 = newPriceData1 ?? 0
           csrd2 = newPriceData2 ?? 0
           markup = newPriceData?.AB
@@ -1360,8 +1365,6 @@ const ProductList = () => {
 
   };
 
-  console.log("hovwer---", hoveredImageUrls);
-
   const handleMouseLeave = (index) => {
     setHoveredImageUrls(prevState => {
       const newState = { ...prevState };
@@ -1686,7 +1689,7 @@ const ProductList = () => {
           }}
           className='paddingTopMobileSet'
         >
-          <div>
+          <div style={{ width: '100%' }}>
             <div class="bg-image">
               <div class="overlay"></div>
               <div class="text-container">
@@ -2208,7 +2211,7 @@ const ProductList = () => {
                                 <div className={show4ImagesView ? "feature4" : 'feature'}>
                                   <p>
                                     <span className="feature-count" style={{ display: 'flex' }}>
-                                      <div className="currencyFont" dangerouslySetInnerHTML={{ __html: decodeEntities(currData[0]?.Currencysymbol) }} />
+                                      <div className="currencyFont" dangerouslySetInnerHTML={{ __html: decodeEntities(currData?.Currencysymbol) }} />
                                       {((products?.UnitCost ?? 0) + (products?.price ?? 0) + (products?.markup ?? 0)).toFixed(2)}</span>
                                   </p>
                                 </div>
@@ -2264,12 +2267,11 @@ const ProductList = () => {
                   </div>
                 </div>
               </div>
-              <SmilingRock />
-              <Footer />
             </div>
           </div>
         </div>
       </div>
+      <Footer />
     </div >
   );
 };

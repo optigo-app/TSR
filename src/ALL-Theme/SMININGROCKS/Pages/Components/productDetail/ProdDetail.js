@@ -83,7 +83,7 @@ const ProdDetail = () => {
   const [designUniqueNO, setDesignUnicNo] = useState('');
   const [uploadLogicPath, setUploadLogicPath] = useState('');
   const [uKey, setUkey] = useState('');
-  const [currData, setCurrData] = useState([])
+  const [currData, setCurrData] = useState()
 
   useEffect(() => {
     let currencyData = JSON.parse(localStorage.getItem("currencyData"))
@@ -317,7 +317,7 @@ console.log('diaQColOpt');
 
     let showPrice = 0;
     if (mtrd && mtrd.length > 0) {
-      showPrice = srProductsData?.price - ((srProductsData?.price - srProductsData?.metalrd) + (mtrd[0]?.Z ?? 0));
+      // showPrice = srProductsData?.price - ((srProductsData?.price - srProductsData?.metalrd) + (mtrd[0]?.Z ?? 0));
       setMtrdData(mtrd[0] ?? [])
       setMetalPrice(mtrd[0]?.Z ?? 0)
     }
@@ -336,9 +336,9 @@ console.log('diaQColOpt');
     )
 
 
-    let showPrice1 = 0;
+    // let showPrice1 = 0;
     if (diaqcprice && diaqcprice.length > 0) {
-      showPrice1 = srProductsData?.price - ((srProductsData?.price - srProductsData?.diard1) + (diaqcprice[0]?.S ?? 0));
+      // showPrice1 = srProductsData?.price - ((srProductsData?.price - srProductsData?.diard1) + (diaqcprice[0]?.S ?? 0));
       let totalPrice = diaqcprice?.reduce((acc, obj) => acc + obj.S, 0)
       let diaRate = diaqcprice?.reduce((acc, obj) => acc + obj.O, 0)
       let diaSettRate = diaqcprice?.reduce((acc, obj) => acc + obj.Q, 0)
@@ -374,8 +374,8 @@ console.log('diaQColOpt');
       setCSQCPrice(csqcpirce[0]?.S ?? 0)
     }
 
-    let gt = showPrice + showPrice1 + showPrice2;
-    setGrandTotal(gt ?? 0);
+    // let gt = showPrice + showPrice1 + showPrice2;
+    // setGrandTotal(gt ?? 0);
 
   }, [getPriceData, mtTypeOption, diaQColOpt, cSQopt])
 
@@ -1227,7 +1227,7 @@ console.log('diaQColOpt');
   useEffect(() => {
 
     let srData = JSON.parse(localStorage.getItem("srProductsData"))
-    let price = ((productData?.UnitCost ?? 0) + (((mtrdData?.V ?? 0) / currData[0]?.CurrencyRate) + (mtrdData?.W ?? 0)) + (dqcData ?? 0) + (csqcData ?? 0) + (sizeMarkup ?? 0) + (metalUpdatedPrice() ?? 0) + (diaUpdatedPrice() ?? 0) + (colUpdatedPrice() ?? 0))
+    let price = ((productData?.UnitCost ?? 0) + (((mtrdData?.V ?? 0) / currData?.CurrencyRate) + (mtrdData?.W ?? 0)) + (dqcData ?? 0) + (csqcData ?? 0) + (sizeMarkup ?? 0) + (metalUpdatedPrice() ?? 0) + (diaUpdatedPrice() ?? 0) + (colUpdatedPrice() ?? 0))
     //((mtrdData?.V/currData[0]?.CurrencyRate ?? 0) + mtrdData?.W ?? 0)
     if (price) {
       srData.price = Number(price)
@@ -1237,7 +1237,7 @@ console.log('diaQColOpt');
 
   }, [mtrdData, dqcData, csqcData, sizeMarkup, metalUpdatedPrice, diaUpdatedPrice, colUpdatedPrice])
 
-  console.log("pricedata", (((mtrdData?.V ?? 0) / currData[0]?.CurrencyRate) + (mtrdData?.W ?? 0)) + (dqcData ?? 0) + (csqcData ?? 0) + (sizeMarkup ?? 0) + (metalUpdatedPrice() ?? 0) + (diaUpdatedPrice() ?? 0) + (colUpdatedPrice() ?? 0))
+  console.log("pricedata", (productData?.UnitCost ?? 0), (((mtrdData?.V ?? 0) / currData?.CurrencyRate)+(mtrdData?.W ?? 0)), (dqcData ?? 0), (csqcData ?? 0), (sizeMarkup ?? 0), (metalUpdatedPrice() ?? 0), (diaUpdatedPrice() ?? 0), (colUpdatedPrice() ?? 0))
   // console.log("pricedata",dqcData)
 
   const decodeEntities = (html) => {
@@ -2111,7 +2111,7 @@ console.log('diaQColOpt');
                       >
                         <div
                           dangerouslySetInnerHTML={{
-                            __html: decodeEntities(currData[0]?.Currencysymbol),
+                            __html: decodeEntities(currData?.Currencysymbol),
                           }}
                           style={{ fontFamily: 'sans-serif' }}
                         />
@@ -2120,7 +2120,7 @@ console.log('diaQColOpt');
                             ? productData.UnitCost
                             : 0) +
                           ((typeof mtrdData?.V === "number" ? mtrdData.V : 0) /
-                            (currData[0]?.CurrencyRate || 1) +
+                            (currData?.CurrencyRate || 1) +
                             (typeof mtrdData?.W === "number"
                               ? mtrdData.W
                               : 0)) +
