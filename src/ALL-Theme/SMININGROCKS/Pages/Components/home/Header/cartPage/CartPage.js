@@ -96,7 +96,7 @@ export default function CartPage() {
   const setWishCount = useSetRecoilState(WishListCounts);
 
   const [currData, setCurrData] = useState()
-
+  console.log('currData',currData);
   useEffect(() => {
     let currencyData = JSON.parse(localStorage.getItem("currencyData"))
     setCurrData(currencyData)
@@ -143,7 +143,6 @@ export default function CartPage() {
 
   // console.log('getPriceDatagetPriceData', getPriceData);
   console.log('getPriceDatagetPriceData', mtTypeOption);
-
   // useEffect(() => {
   //   console.log('getPriceDatagetPriceData', getPriceData);
   //   let mtrd = getPriceData?.rd?.filter(
@@ -974,7 +973,6 @@ export default function CartPage() {
             await getCartAndWishListData()
             getCountFunc()
             getCartData()
-            console.log("done", res);
           }
           else {
             console.log("error", res);
@@ -986,10 +984,6 @@ export default function CartPage() {
 
       }
     })
-
-    console.log("finalJSON", finalJSON);
-    console.log("filterProdData", filterProdData);
-
   }
 
   const decodeEntities = (html) => {
@@ -998,6 +992,8 @@ export default function CartPage() {
     return txt.value;
   }
 
+  console.log("pricedata", (cartSelectData?.UnitCost ?? 0), (((mtrdData?.V ?? 0) / currData?.CurrencyRate)+(mtrdData?.W ?? 0)), (dqcData ?? 0), (csqcData ?? 0), (sizeMarkup ?? 0), (metalUpdatedPrice() ?? 0), (diaUpdatedPrice() ?? 0), (colUpdatedPrice() ?? 0))
+  console.log('sizeData',sizeData);
   return (
     <>
       <div className="paddingTopMobileSet" style={{ paddingTop: "130px" }}>
@@ -1437,7 +1433,6 @@ export default function CartPage() {
                                       style={{ fontFamily: "sans-serif" }}
                                     />
                                     {(
-                                      (cartSelectData?.UnitCost ?? 0) +
                                       ((mtrdData?.V ?? 0) /
                                         currData?.CurrencyRate +
                                         (mtrdData?.W ?? 0)) +
@@ -1745,8 +1740,6 @@ export default function CartPage() {
       <Dialog
         onClose={() => setDialogOpen(false)}
         open={dialogOpen}
-        // fullWidth
-        // maxWidth={"xl"}
         fullScreen
       >
         {!isLoading && (

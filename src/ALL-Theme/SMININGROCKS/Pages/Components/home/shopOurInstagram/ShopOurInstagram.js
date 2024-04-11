@@ -201,37 +201,37 @@ export default function ShopOurInstagram() {
     const InstaImages = [
         {
             id: 1,
-            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6579ede364a945a463e6a735/828d0220-99df-11ee-a3a6-7b12bc7e3933.jpg?format=webp'
+            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2024-04/6614159a5cba437687098357/bce48450-f5c1-11ee-8d53-a99cc2c31ece.jpg?format=webp'
         },
         {
             id: 2,
-            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6579ede3f56d8214b0aae1fb/8462ac80-99df-11ee-8d11-b3ff59c6302f.jpg?format=webp'
+            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2024-04/6614159bfe1dcad2104f31c0/bce5e3e0-f5c1-11ee-a216-d3318c2f211a.jpg?format=webp'
         },
         {
             id: 3,
-            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6579ede364a945a463e6a736/84801f90-99df-11ee-a4a8-0bb3a85f5541.jpg?format=webp'
+            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2024-04/6614159bfe1dcad2104f31c0/bce5e3e0-f5c1-11ee-a216-d3318c2f211a.jpg?format=webp'
         },
         {
             id: 4,
             iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6579ede364a945a463e6a737/84654490-99df-11ee-b0ce-b78cd6615212.jpg?format=webp'
         },
-        {
-            id: 5,
-            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6578e9d47892d5abf60635de/7fa9bbc0-9944-11ee-a79b-53ded4dd0460.jpg?format=webp'
-        },
+        // {
+        //     id: 5,
+        //     iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6578e9d47892d5abf60635de/7fa9bbc0-9944-11ee-a79b-53ded4dd0460.jpg?format=webp'
+        // },
         
-        {
-            id: 6,
-            iamge: 'https://www.gorjana.com/cdn/shop/files/Feature-Zoey_1.jpg?v=1700154326&%3Bwidth=700&em-format=avif'
-        },
-        {
-            id: 7,
-            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6579ede364a945a463e6a735/828d0220-99df-11ee-a3a6-7b12bc7e3933.jpg?format=webp'
-        },
-        {
-            id: 8,
-            iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6579ede3f56d8214b0aae1fc/84877290-99df-11ee-af96-eb84dfa3004e.jpg?format=webp'
-        },
+        // {
+        //     id: 6,
+        //     iamge: 'https://www.gorjana.com/cdn/shop/files/Feature-Zoey_1.jpg?v=1700154326&%3Bwidth=700&em-format=avif'
+        // },
+        // {
+        //     id: 7,
+        //     iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6579ede364a945a463e6a735/828d0220-99df-11ee-a3a6-7b12bc7e3933.jpg?format=webp'
+        // },
+        // {
+        //     id: 8,
+        //     iamge: 'https://media-library.stackla.com/10/shopify-1538490427/2023-12/6579ede3f56d8214b0aae1fc/84877290-99df-11ee-af96-eb84dfa3004e.jpg?format=webp'
+        // },
     ]
 
     const settings = {
