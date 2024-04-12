@@ -11,7 +11,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { PiStarFourThin } from "react-icons/pi";
 import { IoClose } from "react-icons/io5";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { CartListCounts, HeaderData, HeaderData2, WishListCounts, loginState, newMenuData, openSignInModal, searchData } from "../../../../../../Recoil/atom";
+import { CartListCounts, HeaderData, HeaderData2, WishListCounts, loginState, newMenuData, openSignInModal, searchData, isB2bFlag, isB2CFlag } from "../../../../../../Recoil/atom";
 import { CommonAPI } from "../../../../Utils/API/CommonAPI";
 import Cart from "./Cart";
 import titleImg from "../../../assets/title/sonasons.png"
@@ -212,7 +212,9 @@ export default function Header() {
   };
 
   const [islogin, setislogin] = useRecoilState(loginState);
-  const [isB2bFlag, setIsB2BFlag] = useState('');
+  const isB2bFlags = useRecoilValue(isB2bFlag);
+  const isB2CFlags = useRecoilValue(isB2CFlag);
+  const [isB2CFlagStatus, setIsB2CFlagStatus] = useState(''); 
   const fetchData = () => {
     const value = localStorage.getItem('LoginUser');
     const val = (value === 'true' ? 'true' : 'false')
@@ -225,22 +227,27 @@ export default function Header() {
 
   useEffect(() => {
     const storeInit = JSON.parse(localStorage.getItem('storeInit')) ?? "";
-    const { IsB2BWebsite } = storeInit;
-    setIsB2BFlag(1);
-    // setIsB2BFlag(IsB2BWebsite);
-  }, [])
+    const IsB2BWebsite = storeInit?.IsB2BWebsite;
+      // setIsB2BFlag(IsB2BWebsite);
+      // setIsB2CFlag(IsB2BWebsite);
+      setIsB2CFlagStatus(IsB2BWebsite)
+  }, [islogin])
+
+  console.log('isB2CFlagStatus--',islogin);
+  console.log('isb2b--',isB2bFlags);
+  console.log('isb2c--',isB2CFlags);
 
   const getMenuApi = async () => {
-
-    const storeInit = JSON.parse(localStorage.getItem("storeInit")) ?? ""
-    const Customer_id = JSON.parse(localStorage.getItem("loginUserDetail")) ?? ""
+    const storeInit = await JSON.parse(localStorage.getItem("storeInit")) ?? ""
+    const Customer_id = await JSON.parse(localStorage.getItem("loginUserDetail")) ?? ""
+    let userEmail = await localStorage.getItem("userEmailForPdList")
     // if (storeInit && Customer_id) {
     let pData = JSON.stringify({ "FrontEnd_RegNo": `${storeInit?.FrontEnd_RegNo}`, "Customerid": `${Customer_id?.id ?? 0}` })
 
     let pEnc = btoa(pData)
 
     const body = {
-      con: "{\"id\":\"\",\"mode\":\"GETMENU\",\"appuserid\":\"nimesh@ymail.in\"}",
+      con:`{\"id\":\"\",\"mode\":\"GETMENU\",\"appuserid\":\"${userEmail ?? ''}\"}`,
       f: "onload (GETMENU)",
       p: pEnc
     }
@@ -254,14 +261,18 @@ export default function Header() {
   }
 
   useEffect(() => {
-    if (islogin === 'true') {
-      getMenuApi()
-      const storeInit = JSON.parse(localStorage.getItem('storeInit')) ?? "";
-      const { IsB2BWebsite } = storeInit;
-      setIsB2BFlag(1);
-      // setIsB2BFlag(IsB2BWebsite);
+    const callGetMenuApiWithDelay = () => {
+      setTimeout(() => {
+        getMenuApi();
+      }, 1000);
+    };
+
+    if (islogin === "true" && isB2bFlags === 1) {
+      callGetMenuApiWithDelay();
+    } else {
+      callGetMenuApiWithDelay();
     }
-  }, [islogin])
+  }, [isB2bFlags, islogin]);
 
 
 
@@ -661,7 +672,7 @@ export default function Header() {
           />
           <div className="gorjanaHeaderSubMenuMain">
             <ul className="gorjanaHeaderMenu">
-              {islogin === "true" &&
+              {islogin === "true" && isB2bFlags == 1 && (
                 <li
                   className="gorjana-Menu-item  FontFamilySet"
                   onMouseEnter={handleDropdownOpen}
@@ -677,8 +688,27 @@ export default function Header() {
                   <RiArrowDropDownLine
                     style={{ width: "20px", height: "20px" }}
                   />
-                </li>}
+                </li>
+              )}
 
+              {isB2CFlags == 0 && (
+                <li
+                  className="gorjana-Menu-item  FontFamilySet"
+                  onMouseEnter={handleDropdownOpen}
+                  onMouseLeave={handleDropdownClose}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    fontWeight: 500,
+                    height: '70px'
+                  }}
+                >
+                  Shop
+                  <RiArrowDropDownLine
+                    style={{ width: "20px", height: "20px" }}
+                  />
+                </li>
+              )}
 
               <li
                 className="gorjana-Menu-item"

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Footer from "../home/Footer/Footer";
 import SmilingRock from "../home/smiling_Rock/SmilingRock";
 import "./product.css";
@@ -17,12 +17,11 @@ import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { CommonAPI } from "../../../Utils/API/CommonAPI";
 import axios from "axios";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { CartListCounts, HeaderData, HeaderData2, WishListCounts, colorstoneQualityColorG, diamondQualityColorG, metalTypeG, newMenuData, priceData, productDataNew, searchData } from "../../../../../Recoil/atom";
+import { CartListCounts, HeaderData, HeaderData2, WishListCounts, colorstoneQualityColorG, diamondQualityColorG, metalTypeG, newMenuData, priceData, productDataNew, searchData, isB2CFlag, loginState } from "../../../../../Recoil/atom";
 import { GetCount } from "../../../Utils/API/GetCount";
 import notFound from "../../assets/image-not-found.png";
 import { Category } from "@mui/icons-material";
 import { toast } from "react-toastify";
-
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -43,7 +42,7 @@ const minDistance = 10;
 
 
 const ProductList = () => {
-
+  const dropdownRef = useRef(null);
   const ProductData2 = [];
   const [imageUrl, setImageUrl] = useState('https://cdnfs.optigoapps.com/content-global3/gstoreTHO8349NSI2EA6VQP/Design_Image/4EECAB68AEMDAwMzg4NQ==/Red_Medium/0003885_04012024185657737.png');
   const [isOpenDetail, setIsOpenDetail] = useState(false)
@@ -274,8 +273,8 @@ const ProductList = () => {
         let csrd2 = 0;
 
         if (newPriceData || newPriceData1 || newPriceData2) {
-          price = (((newPriceData?.V ?? 0) / currData?.CurrencyRate ?? 0) + newPriceData?.W ?? 0) + (newPriceData1 ?? 0) + (newPriceData2 ?? 0);
-          metalrd = (((newPriceData?.V ?? 0) / currData?.CurrencyRate ?? 0) + newPriceData?.W ?? 0)
+          price = (((newPriceData?.V ?? 0)/currData[0]?.CurrencyRate ?? 0) + newPriceData?.W ?? 0) + (newPriceData1 ?? 0) + (newPriceData2 ?? 0);
+          metalrd = (((newPriceData?.V ?? 0)/currData[0]?.CurrencyRate ?? 0) + newPriceData?.W ?? 0)
           diard1 = newPriceData1 ?? 0
           csrd2 = newPriceData2 ?? 0
           markup = newPriceData?.AB
@@ -774,12 +773,12 @@ const ProductList = () => {
     const storeInit = JSON.parse(localStorage.getItem("storeInit"))
     const Customer_id = JSON.parse(localStorage.getItem("loginUserDetail"));
 
-    let EncodeData = { FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`, Customerid: `${Customer_id?.id}` }
+    let EncodeData = { FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`, Customerid: `${Customer_id?.id ?? 0}` }
 
     const encodedCombinedValue = btoa(JSON.stringify(EncodeData));
 
     const body = {
-      "con": `{\"id\":\"Store\",\"mode\":\"getdesignnolist\",\"appuserid\":\"${UserEmail}\"}`,
+      "con": `{\"id\":\"Store\",\"mode\":\"getdesignnolist\",\"appuserid\":\"${UserEmail ?? ''}\"}`,
       "f": " useEffect_login ( getdataofcartandwishlist )",
       "p": encodedCombinedValue
     }
@@ -802,9 +801,12 @@ const ProductList = () => {
     getCountFunc()
 
   }, [])
-
+  const isLoginStatus = useRecoilValue(loginState);
+  const isB2CFlags = useRecoilValue(isB2CFlag);
   const handelWishList = async (event, prod) => {
-
+    if (isLoginStatus == "false" && isB2CFlags == 0) {
+      navigate('/LoginOption');
+    }
     try {
       setWishFlag(event.target.checked)
 
@@ -959,7 +961,9 @@ const ProductList = () => {
   }
 
   const handelCartList = async (event, prod) => {
-
+    if (isLoginStatus == "false" && isB2CFlags == 0) {
+      navigate('/LoginOption');
+    }
     try {
       setCartFlag(event.target.checked)
 
@@ -1471,12 +1475,13 @@ const ProductList = () => {
             <>
               <Accordion
                 elevation={0}
+                className="filterAccordian"
                 sx={{
                   borderBottom: "1px solid #c7c8c9",
                   borderRadius: 0,
-                  margin: "0px 15px 0px 15px",
-                  "&.Mui-expanded": {
-                    margin: "0px 15px 0px 15px",
+                  margin: "0px 25px",
+                  '&.Mui-expanded': {
+                    margin: '0px',
                   },
                   "&.MuiPaper-root.MuiAccordion-root:last-of-type": {
                     borderBottomLeftRadius: "0px",
@@ -1590,14 +1595,25 @@ const ProductList = () => {
     { label: 'PRICE LOW TO HIGH' },
     { label: 'PRICE HIGH TO LOW' },
   ];
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsActive(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   const toggleDropdown = () => {
     setIsActive(!isActive);
   };
 
   const handleSortChange = (option) => {
-    debugger
-    console.log('event---', option?.label);
     const selectedOption = option?.label;
     setSelectedOptionData(option?.label);
     setIsActive(false);
@@ -1692,6 +1708,7 @@ const ProductList = () => {
                 <div className="part-content">
                   <div className={`custom-select ${isActive ? 'active' : ''}`}>
                     <button
+                      ref={dropdownRef}
                       className="select-button"
                       onClick={toggleDropdown}
                       aria-haspopup="listbox"
@@ -1701,13 +1718,15 @@ const ProductList = () => {
                         <SortIcon />
                       </span>
                     </button>
-                    <ul className="select-dropdown">
-                      {options.map((option, index) => (
-                        <li key={index} role="option" onClick={() => handleSortChange(option)}>
-                          <label htmlFor={`option-${index}`}>{option.label}</label>
-                        </li>
-                      ))}
-                    </ul>
+                    {isActive && (
+                      <ul className="select-dropdown">
+                        {options.map((option, index) => (
+                          <li key={index} role="option" onClick={() => handleSortChange(option)}>
+                            <label htmlFor={`option-${index}`}>{option.label}</label>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 </div>
               </div>
@@ -1726,7 +1745,7 @@ const ProductList = () => {
                 style={{ width: "100%", display: "flex", position: "relative" }}
               >
                 {/* {isShowfilter && ( */}
-                <div className="smilingWebProductListSideBar" style={{ transition: "1s ease", width: `20%`, left: `${isShowfilter ? "0" : "-500%"}` }}>
+                <div className="smilingWebProductListSideBar" style={{ transition: "1s ease", width: `19%`, left: `${isShowfilter ? "0" : "-500%"}` }}>
                   <ul style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', padding: '0px 20px 0px 0px' }}>
                     <li className="finejwelery me-4" id="finejwelery">Filters</li>
                     <li className="finejwelery" id="finejwelery" onClick={() => handlePageReload()}>All Jwelery</li>

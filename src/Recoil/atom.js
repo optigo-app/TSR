@@ -64,3 +64,11 @@ export const newMenuData = atom({
   key:'newMenuData',
   default:{}
 })
+export const isB2bFlag = atom({
+  key:'isB2bFlag',
+  default:''
+})
+export const isB2CFlag = atom({
+  key:'isB2CFlag',
+  default:''
+})

@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import './TopBanner.css';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { loginState } from '../../../../../../Recoil/atom';
+import { isB2CFlag, isB2bFlag, loginState } from '../../../../../../Recoil/atom';
 
 export default function TopBanner() {
   const [loading, setLoading] = useState(true);
   const navigation = useNavigate();
-
+  const isB2bFlags = useRecoilValue(isB2bFlag);
+  const isB2CFlags = useRecoilValue(isB2CFlag);
   const islogin = useRecoilValue(loginState);
 
   console.log('isloginisloginisloginislogin', islogin);
@@ -23,7 +24,28 @@ export default function TopBanner() {
     <div>
       <div className='gorjanaFave1web'>
         <img src='https://www.gorjana.com/cdn/shop/files/Hero_D_29.jpg?v=1712249875&width=1500' className='gorjanaFaveImage' />
-        {islogin === "true" && <div className='gorjanaFaveBox'>
+        {islogin === "true" && isB2bFlags == 1 && <div className='gorjanaFaveBox'>
+          <p style={{
+            fontFamily: "PT Sans, sans-serif",
+            fontSize: '60px',
+            color: 'white',
+            fontWeight: 400,
+
+          }}>
+            Forever Favorites
+          </p>
+          <p style={{
+            fontFamily: "PT Sans, sans-serif",
+            fontSize: '21px',
+            color: 'white',
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginTop: '-30px',
+            fontWeight: 300
+          }}>Fine jewelry for every style and occasion.</p>
+          <p className='gorjanaFavBoxLink' onClick={() => navigation('/productPage')}>Shop File Jewelry</p>
+        </div>}
+        {isB2CFlags == 0 && <div className='gorjanaFaveBox'>
           <p style={{
             fontFamily: "PT Sans, sans-serif",
             fontSize: '60px',

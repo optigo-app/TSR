@@ -11,7 +11,7 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { CommonAPI } from '../../../Utils/API/CommonAPI'
 import { GetCount } from '../../../Utils/API/GetCount'
-import { CartListCounts, WishListCounts, designSet, colorstoneQualityColorG, diamondQualityColorG, metalTypeG, priceData } from '../../../../../Recoil/atom'
+import { CartListCounts, WishListCounts, designSet, colorstoneQualityColorG, diamondQualityColorG, metalTypeG, priceData, loginState, isB2CFlag } from '../../../../../Recoil/atom'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import notFound from '../../assets/image-not-found.png'
 import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
@@ -93,7 +93,6 @@ const ProdDetail = () => {
     let currencyData = JSON.parse(localStorage.getItem("currencyData"))
     setCurrData(currencyData)
   }, [])
-  console.log("currData", currData);
 
 
   const setCartCount = useSetRecoilState(CartListCounts)
@@ -126,8 +125,9 @@ const ProdDetail = () => {
     let loginInfo = JSON.parse(localStorage.getItem("loginUserDetail"))
     let ColorStoneQualityColor = JSON.parse(localStorage.getItem("ColorStoneQualityColor"))
     setmtTypeOption(loginInfo?.cmboMetalType)
+    console.log('loginInfo?.cmboDiaQualityColor',loginInfo?.cmboDiaQualityColor);
 
-    if (loginInfo?.cmboDiaQualityColor !== "" && !loginInfo?.cmboDiaQualityColor) {
+    if (loginInfo?.cmboDiaQualityColor !== undefined || '' && !loginInfo?.cmboDiaQualityColor) {
       let qualityColor = `${loginInfo?.cmboDiaQualityColor.split("#@#")[0]?.toUpperCase()}_${loginInfo?.cmboDiaQualityColor.split("#@#")[1]?.toUpperCase()}`
       setDiaQColOpt(qualityColor)
     }
@@ -151,7 +151,7 @@ const ProdDetail = () => {
     setSizeOption(sizeData[1]?.id)
 
   }, [colorData])
-
+console.log('diaQColOpt');
   // useEffect(()=>{
 
   //   let srProductsData = JSON.parse(localStorage.getItem('srProductsData'));
@@ -316,7 +316,7 @@ const ProdDetail = () => {
     );
 
 
-    // let showPrice = 0;
+    let showPrice = 0;
     if (mtrd && mtrd.length > 0) {
       // showPrice = srProductsData?.price - ((srProductsData?.price - srProductsData?.metalrd) + (mtrd[0]?.Z ?? 0));
       setMtrdData(mtrd[0] ?? [])
@@ -405,8 +405,8 @@ const ProdDetail = () => {
   const getTheImageSetImage = (autoCode) => {
     const storedData = localStorage.getItem('designsetlist');
     const jsonData = JSON.parse(storedData);
-    const filteredData = jsonData.filter(item => item.autocode === autoCode);
-    if (filteredData.length > 0) {
+    const filteredData = jsonData?.filter(item => item.autocode === autoCode);
+    if (filteredData?.length > 0) {
       const num = filteredData[0].designsetuniqueno;
       const defaultImage = filteredData[0].DefaultImageName;
       setCompleteBackImage(defaultImage);
@@ -572,7 +572,7 @@ const ProdDetail = () => {
       const customerid = data?.id;
       let autoC = autoCode
       const combinedValue = JSON.stringify({
-        autocode: `${autoC}`, FrontEnd_RegNo: `${FrontEnd_RegNo}`, Customerid: `${customerid}`
+        autocode: `${autoC}`, FrontEnd_RegNo: `${FrontEnd_RegNo}`, Customerid: `${customerid ?? 0}`
       });
       const encodedCombinedValue = btoa(combinedValue);
       const body = {
@@ -617,12 +617,12 @@ const ProdDetail = () => {
     const storeInit = JSON.parse(localStorage.getItem("storeInit"))
     const Customer_id = JSON.parse(localStorage.getItem("loginUserDetail"));
 
-    let EncodeData = { FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`, Customerid: `${Customer_id?.id}` }
+    let EncodeData = { FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`, Customerid: `${Customer_id?.id ?? 0}` }
 
     const encodedCombinedValue = btoa(JSON.stringify(EncodeData));
 
     const body = {
-      "con": `{\"id\":\"Store\",\"mode\":\"getdesignnolist\",\"appuserid\":\"${UserEmail}\"}`,
+      "con": `{\"id\":\"Store\",\"mode\":\"getdesignnolist\",\"appuserid\":\"${UserEmail ?? ''}\"}`,
       "f": " useEffect_login ( getdataofcartandwishlist )",
       "p": encodedCombinedValue
     }
@@ -646,6 +646,8 @@ const ProdDetail = () => {
     }
   }, [productData])
 
+  const isLoginStatus = useRecoilValue(loginState);
+  const isB2CFlags = useRecoilValue(isB2CFlag);
   const handelCart = async () => {
 
     try {
@@ -922,12 +924,23 @@ const ProdDetail = () => {
 
   }
 
+  const IshandleB2cCheck = () =>{
+    if (isLoginStatus == "false" && isB2CFlags == 0) {
+      navigate('/LoginOption');
+    }else{
+      setAddToCartFlag(!addToCartFlag)
+    }
+  }
   useEffect(() => {
-    handelCart()
+      handelCart()
   }, [addToCartFlag])
 
-  const handelWishList = async (event) => {
 
+  const handelWishList = async (event) => {
+    if (isLoginStatus == "false" && isB2CFlags == 0) {
+      navigate('/LoginOption');
+      return;
+    }
     try {
       setWishListFlag(event.target.checked)
 
@@ -1147,11 +1160,11 @@ const ProdDetail = () => {
         const Customer_id = JSON.parse(localStorage.getItem("loginUserDetail"));
 
 
-        let Data = { "designlist": `'${productData?.designno}'`, "isselectall": "0", "FrontEnd_RegNo": `${storeInit?.FrontEnd_RegNo}`, "Customerid": `${Customer_id?.id}` }
+        let Data = { "designlist": `'${productData?.designno}'`, "isselectall": "0", "FrontEnd_RegNo": `${storeInit?.FrontEnd_RegNo}`, "Customerid": `${Customer_id?.id ?? 0}` }
 
         let encodedCombinedValue = btoa(JSON.stringify(Data))
         const body = {
-          con: `{\"id\":\"\",\"mode\":\"removeFromWishList\",\"appuserid\":\"${UserEmail}\"}`,
+          con: `{\"id\":\"\",\"mode\":\"removeFromWishList\",\"appuserid\":\"${UserEmail ?? ''}\"}`,
           f: "RemoveFromWishlistIconClick (removeFromWishList)",
           p: encodedCombinedValue,
         }
@@ -2208,7 +2221,7 @@ const ProdDetail = () => {
                   <span className="containercartwish">
                     <div
                       className="addtocartcont"
-                      onClick={() => setAddToCartFlag(!addToCartFlag)}
+                      onClick={() => IshandleB2cCheck()}
                     >
                       <span className="addtocarttxt">
                         {addToCartFlag ? "REMOVE FROM CART" : "ADD TO CART"}
