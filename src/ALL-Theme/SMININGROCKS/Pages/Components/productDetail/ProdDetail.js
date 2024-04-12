@@ -3,7 +3,7 @@ import './proddetail.css'
 import Header from '../home/Header/Header'
 import Footer from '../home/Footer/Footer'
 import SmilingRock from '../home/smiling_Rock/SmilingRock'
-import { Checkbox, Divider, Skeleton, Tooltip } from '@mui/material'
+import { Checkbox, CircularProgress, Divider, Skeleton, Tooltip } from '@mui/material'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import filterData from '../../jsonFile/M_4_95oztttesi0o50vr.json'
@@ -79,6 +79,10 @@ const ProdDetail = () => {
   const [addToCartFlag, setAddToCartFlag] = useState(false)
   const [addToWishListFlag, setAddToWishListFlag] = useState()
   const [globImagePath, setGlobImagepath] = useState()
+  const [isLoading,setIsLoading] = useState(false)
+  const [logicalPath,setLogicalPath] = useState()
+
+  // console.log("logicalPath",logicalPath);
 
   const [designUniqueNO, setDesignUnicNo] = useState('');
   const [uploadLogicPath, setUploadLogicPath] = useState('');
@@ -112,12 +116,9 @@ const ProdDetail = () => {
   useEffect(() => {
     const storeInit = JSON.parse(localStorage.getItem('storeInit'))
     setGlobImagepath(storeInit?.DesignImageFol)
+    setLogicalPath(storeInit?.UploadLogicalPath)
   }, [])
 
-  useEffect(() => {
-    const storeInit = JSON.parse(localStorage.getItem('storeInit'))
-    setGlobImagepath(storeInit?.DesignImageFol)
-  }, [])
 
   useEffect(() => {
 
@@ -1304,11 +1305,11 @@ console.log('diaQColOpt');
                       ? updatedColorImage?.length !== 0
                         ? updatedColorImage[0]?.imagepath
                         : selectedImagePath == ""
-                          ? globImagePath +
+                        ? globImagePath +
                           (!handelmainImg()?.length
                             ? productData?.OriginalImagePath?.split(",")[0]
                             : handelmainImg())
-                          : selectedImagePath
+                        : selectedImagePath
                       : notFound
                   }
                   alt={""}
@@ -1355,7 +1356,7 @@ console.log('diaQColOpt');
                             setSelectedImagePath(data.imagepath);
                             setIsVideoPlaying(false);
                           }}
-                        // onClick={() => setThumbImg(data.imagepath)}
+                          // onClick={() => setThumbImg(data.imagepath)}
                         />
                       ))}
 
@@ -1824,57 +1825,57 @@ console.log('diaQColOpt');
                   {(sizeData?.length !== 0 ||
                     (productData?.DefaultSize &&
                       productData.DefaultSize.length !== 0)) && (
-                      <div
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        width: "95%",
+                        marginTop: "10px",
+                        paddingTop: "10px",
+                        borderTop: "1px solid #42424233",
+                      }}
+                    >
+                      <label
                         style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          width: "95%",
-                          marginTop: "10px",
-                          paddingTop: "10px",
-                          borderTop: "1px solid #42424233",
+                          fontSize: "15px",
+                          color: "#424242",
+                          fontFamily: "PT Sans, sans-serif",
                         }}
                       >
-                        <label
-                          style={{
-                            fontSize: "15px",
-                            color: "#424242",
-                            fontFamily: "PT Sans, sans-serif",
-                          }}
-                        >
-                          SIZE:
-                        </label>
-                        <select
-                          style={{
-                            border: "none",
-                            outline: "none",
-                            fontSize: "16px",
-                            color: "#424242",
-                            fontFamily: "PT Sans, sans-serif",
-                            fontWeight: "bold",
-                          }}
-                          onChange={(e) => handelSize(e.target.value)}
-                          defaultValue={
-                            productData && productData.DefaultSize
-                              ? productData.DefaultSize
-                              : sizeData.find((size) => size.IsDefaultSize === 1)
+                        SIZE:
+                      </label>
+                      <select
+                        style={{
+                          border: "none",
+                          outline: "none",
+                          fontSize: "16px",
+                          color: "#424242",
+                          fontFamily: "PT Sans, sans-serif",
+                          fontWeight: "bold",
+                        }}
+                        onChange={(e) => handelSize(e.target.value)}
+                        defaultValue={
+                          productData && productData.DefaultSize
+                            ? productData.DefaultSize
+                            : sizeData.find((size) => size.IsDefaultSize === 1)
                                 ?.id
-                          }
-                        >
-                          {sizeData?.map((size) => (
-                            <option
-                              key={size.id}
-                              value={size.sizename} // Pass sizename as value
-                              selected={
-                                productData &&
-                                productData.DefaultSize === size.sizename
-                              }
-                            >
-                              {size.sizename}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    )}
+                        }
+                      >
+                        {sizeData?.map((size) => (
+                          <option
+                            key={size.id}
+                            value={size.sizename} // Pass sizename as value
+                            selected={
+                              productData &&
+                              productData.DefaultSize === size.sizename
+                            }
+                          >
+                            {size.sizename}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
                 </div>
 
                 <div
@@ -2047,46 +2048,46 @@ console.log('diaQColOpt');
                   {(sizeData?.length !== 0 ||
                     (productData?.DefaultSize &&
                       productData.DefaultSize.length !== 0)) && (
-                      <div
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        marginTop: "20px",
+                      }}
+                    >
+                      <label style={{ fontSize: "12.5px", color: "#7d7f85" }}>
+                        SIZE:
+                      </label>
+                      <select
                         style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          marginTop: "20px",
+                          border: "none",
+                          outline: "none",
+                          color: "#7d7f85",
+                          fontSize: "12.5px",
                         }}
-                      >
-                        <label style={{ fontSize: "12.5px", color: "#7d7f85" }}>
-                          SIZE:
-                        </label>
-                        <select
-                          style={{
-                            border: "none",
-                            outline: "none",
-                            color: "#7d7f85",
-                            fontSize: "12.5px",
-                          }}
-                          onChange={(e) => handelSize(e.target.value)}
-                          defaultValue={
-                            productData && productData.DefaultSize
-                              ? productData.DefaultSize
-                              : sizeData.find((size) => size.IsDefaultSize === 1)
+                        onChange={(e) => handelSize(e.target.value)}
+                        defaultValue={
+                          productData && productData.DefaultSize
+                            ? productData.DefaultSize
+                            : sizeData.find((size) => size.IsDefaultSize === 1)
                                 ?.id
-                          }
-                        >
-                          {sizeData?.map((size) => (
-                            <option
-                              key={size.id}
-                              value={size.sizename} // Pass sizename as value
-                              selected={
-                                productData &&
-                                productData.DefaultSize === size.sizename
-                              }
-                            >
-                              {size.sizename}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    )}
+                        }
+                      >
+                        {sizeData?.map((size) => (
+                          <option
+                            key={size.id}
+                            value={size.sizename} // Pass sizename as value
+                            selected={
+                              productData &&
+                              productData.DefaultSize === size.sizename
+                            }
+                          >
+                            {size.sizename}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
                   <Divider
                     sx={{
                       marginTop: "20px",
@@ -2101,19 +2102,26 @@ console.log('diaQColOpt');
                     <p
                       style={{
                         fontSize: "20px",
-                        color: "#424242", display: 'flex'
+                        color: "#424242",
+                        display: "flex",
                       }}
                     >
                       {/* Price: <span style={{ fontWeight: '500', fontSize: '16px' }}>{currencySymbol?.Currencysymbol}{`${(productData?.price - grandTotal) === 0 ? "Not Availabel" : (productData?.price - grandTotal)?.toFixed(2)}`}</span> */}
                       {/* Price: <span style={{ fontWeight: '500', fontSize: '16px' }}>{currencySymbol?.Currencysymbol}{`${productData?.UnitCost + (productData?.price - grandTotal)?.toFixed(2)}`}</span> */}
                       <span
-                        style={{ fontWeight: 'bold', fontSize: '22px', letterSpacing: '2.2px', fontFamily: "PT Sans, sans-serif", display: 'flex' }}
+                        style={{
+                          fontWeight: "bold",
+                          fontSize: "22px",
+                          letterSpacing: "2.2px",
+                          fontFamily: "PT Sans, sans-serif",
+                          display: "flex",
+                        }}
                       >
                         <div
                           dangerouslySetInnerHTML={{
                             __html: decodeEntities(currData?.Currencysymbol),
                           }}
-                          style={{ fontFamily: 'sans-serif' }}
+                          style={{ fontFamily: "sans-serif" }}
                         />
                         {`${(
                           (typeof productData?.UnitCost === "number"
@@ -2217,6 +2225,18 @@ console.log('diaQColOpt');
                     >
                       <span className="addtocarttxt">
                         {addToCartFlag ? "REMOVE FROM CART" : "ADD TO CART"}
+                        {/* {true && (
+                          <CircularProgress
+                            size={24}
+                            sx={{
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              marginTop: "-12px",
+                              marginLeft: "-12px",
+                            }}
+                          />
+                        )} */}
                       </span>
                     </div>
                     <div className="wishlistcont">
@@ -2399,7 +2419,7 @@ console.log('diaQColOpt');
                               !dsl?.ThumbImagePath
                                 ? notFound
                                 : dsl?.imagepath +
-                                dsl?.ThumbImagePath.split(",")[0]
+                                  dsl?.ThumbImagePath.split(",")[0]
                             }
                             alt={""}
                             style={{
@@ -2453,7 +2473,7 @@ console.log('diaQColOpt');
                 </div>
               </div>
               <img
-                src={`${uploadLogicPath}/${uKey}/Photo_original/designmanagement_designset/${designUniqueNO}/${completeBackImage}`}
+                src={`${logicalPath}/${uKey}/Photo_original/designmanagement_designset/${designUniqueNO}/${completeBackImage}`}
                 style={{ width: "800px" }}
               />
             </div>
@@ -2471,7 +2491,7 @@ console.log('diaQColOpt');
             >
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <img
-                  src={`${uploadLogicPath}/${uKey}/Photo_original/designmanagement_designset/${designUniqueNO}/${completeBackImage}`}
+                  src={`${logicalPath}/${uKey}/Photo_original/designmanagement_designset/${designUniqueNO}/${completeBackImage}`}
                   className="smilingCompleteLookMainMobileImg"
                 />
               </div>
@@ -2523,7 +2543,7 @@ console.log('diaQColOpt');
                               !dsl?.ThumbImagePath
                                 ? notFound
                                 : dsl?.imagepath +
-                                dsl?.ThumbImagePath.split(",")[0]
+                                  dsl?.ThumbImagePath.split(",")[0]
                             }
                             alt={""}
                             style={{
@@ -2612,8 +2632,9 @@ console.log('diaQColOpt');
                   </span>
                   {/* <div style={{display:acc && accNo === '1' ? 'block':'none',userSelect:'none',transition:'0.5s'}}> */}
                   <div
-                    className={`my-list-fineJewe ${acc && accNo === "1" ? "openAcc" : ""
-                      }`}
+                    className={`my-list-fineJewe ${
+                      acc && accNo === "1" ? "openAcc" : ""
+                    }`}
                   >
                     <div>
                       <div className="srAccContainer">
@@ -2663,9 +2684,9 @@ console.log('diaQColOpt');
                             <b>
                               {daimondFilterData?.length
                                 ? (
-                                  productData?.diamondweight +
-                                  daimondFilterData[0]?.Weight
-                                ).toFixed(2)
+                                    productData?.diamondweight +
+                                    daimondFilterData[0]?.Weight
+                                  ).toFixed(2)
                                 : productData?.diamondweight}
                             </b>
                           </span>
@@ -2674,7 +2695,7 @@ console.log('diaQColOpt');
                             <b>
                               {daimondFilterData?.length
                                 ? productData?.diamondpcs +
-                                daimondFilterData[0]?.pieces
+                                  daimondFilterData[0]?.pieces
                                 : productData?.diamondpcs}
                             </b>
                           </span>
@@ -2683,7 +2704,7 @@ console.log('diaQColOpt');
                             <b>
                               {daimondFilterData?.length
                                 ? productData?.diamondpcs +
-                                daimondFilterData[0]?.pieces
+                                  daimondFilterData[0]?.pieces
                                 : productData?.diamondpcs}
                             </b>
                           </span>
@@ -2694,9 +2715,9 @@ console.log('diaQColOpt');
                             <b>
                               {metalFilterData?.length
                                 ? (
-                                  productData?.netwt +
-                                  metalFilterData[0]?.Weight
-                                ).toFixed(2)
+                                    productData?.netwt +
+                                    metalFilterData[0]?.Weight
+                                  ).toFixed(2)
                                 : productData?.netwt}
                             </b>
                           </span>
@@ -2712,9 +2733,9 @@ console.log('diaQColOpt');
                             <b>
                               {daimondFilterData?.length
                                 ? (
-                                  productData?.diamondweight +
-                                  daimondFilterData[0]?.Weight
-                                ).toFixed(2)
+                                    productData?.diamondweight +
+                                    daimondFilterData[0]?.Weight
+                                  ).toFixed(2)
                                 : productData?.diamondweight}
                             </b>
                           </span>
