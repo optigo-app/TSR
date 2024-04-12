@@ -14,9 +14,17 @@ import Footer from './Footer/Footer';
 import axios from 'axios';
 import { CommonAPI } from '../../../Utils/API/CommonAPI';
 import TopBanner from './topBanner/TopBanner';
+import { isB2CFlag, isB2bFlag, loginState, productDataNew } from '../../../../../Recoil/atom';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { productListApiCall } from '../../../Utils/API/ProductListAPI';
+import { IoIosLogIn } from 'react-icons/io';
 
 export default function Home() {
-
+  const setPdData = useSetRecoilState(productDataNew)
+  const [isStoreInitData, setIsStoreInitData] = useState(false);
+  const islogin = useRecoilValue(loginState);
+  const [isB2bFlags, setIsB2BFlag] = useRecoilState(isB2bFlag);
+  const [isB2CFlags, setIsB2CFlag] = useRecoilState(isB2CFlag);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -50,6 +58,11 @@ export default function Home() {
           localStorage.setItem('UploadLogicalPath', response.data.Data.rd[0].UploadLogicalPath);
           localStorage.setItem('storeInit', JSON.stringify(response.data.Data.rd[0]));
           localStorage.setItem('myAccountFlags', JSON.stringify(response.data.Data.rd1));
+          const storeInit = JSON.parse(localStorage.getItem('storeInit')) ?? "";
+          const IsB2BWebsite = storeInit?.IsB2BWebsite;
+          setIsB2BFlag(IsB2BWebsite);
+          setIsB2CFlag(IsB2BWebsite);
+          setIsStoreInitData(true);
         }
       } catch (error) {
         console.error('Error:', error);
@@ -67,7 +80,7 @@ export default function Home() {
         // {"FrontEnd_RegNo":"95oztttesi0o50vr","Customerid":"856"}
 
         const combinedValue = JSON.stringify({
-          FrontEnd_RegNo: `${FrontEnd_RegNo}`, Customerid: `${storedCustomerId}`
+          FrontEnd_RegNo: `${FrontEnd_RegNo}`, Customerid: `${storedCustomerId ?? 0}`
         });
         const encodedCombinedValue = btoa(combinedValue);
         const body = {
@@ -99,7 +112,7 @@ export default function Home() {
         const customerid = data?.id;
 
         const combinedValue = JSON.stringify({
-          FrontEnd_RegNo: `${FrontEnd_RegNo}`, Customerid: `${customerid}`
+          FrontEnd_RegNo: `${FrontEnd_RegNo}`, Customerid: `${customerid ?? 0}`
         });
         const encodedCombinedValue = btoa(combinedValue);
         const body = {
@@ -133,7 +146,7 @@ export default function Home() {
         const customerid = data?.id;
 
         const combinedValue = JSON.stringify({
-          FrontEnd_RegNo: `${FrontEnd_RegNo}`, Customerid: `${customerid}`
+          FrontEnd_RegNo: `${FrontEnd_RegNo}`, Customerid: `${customerid ?? 0}`
         });
         const encodedCombinedValue = btoa(combinedValue);
         const body = {
@@ -165,7 +178,7 @@ export default function Home() {
         const customerid = data?.id;
 
         const combinedValue = JSON.stringify({
-          FrontEnd_RegNo: `${FrontEnd_RegNo}`, Customerid: `${customerid}`
+          FrontEnd_RegNo: `${FrontEnd_RegNo}`, Customerid: `${customerid ?? 0}`
         });
         const encodedCombinedValue = btoa(combinedValue);
         const body = {
@@ -194,7 +207,7 @@ export default function Home() {
         const loginUserDetail = JSON.parse(localStorage.getItem('loginUserDetail'));
 
         const combinedValue = JSON.stringify({
-          FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`, Customerid: `${loginUserDetail?.id}`
+          FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`, Customerid: `${loginUserDetail?.id ?? 0}`
         });
         const encodedCombinedValue = btoa(combinedValue);
 
@@ -205,7 +218,7 @@ export default function Home() {
         }
 
         await CommonAPI(body).then((res) => {
-          if(res.Data.rd){
+          if (res.Data.rd) {
             localStorage.setItem("CURRENCYCOMBO", JSON.stringify(res.Data.rd))
           }
           // console.log("res",res)
@@ -227,7 +240,7 @@ export default function Home() {
         const storedEmail = localStorage.getItem('registerEmail') || '';
 
         const combinedValue = JSON.stringify({
-          autocode:"", FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`, Customerid: `${loginUserDetail?.id}`
+          autocode: "", FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`, Customerid: `${loginUserDetail?.id ?? 0}`
         });
         const encodedCombinedValue = btoa(combinedValue);
 
@@ -250,6 +263,8 @@ export default function Home() {
 
     }
 
+
+
     fetchData();
     getColorImgData();
     getMetalTypeData();
@@ -257,7 +272,37 @@ export default function Home() {
     getColorStoneQualityData();
     getMetalColor();
     currencyCombo();
-  }, []);
+  }, [isStoreInitData]);
+
+  useEffect(() => {
+    const handelCurrencyData = (param) => {
+      let currencyData = JSON.parse(localStorage.getItem('CURRENCYCOMBO'));
+  
+      let filterData = currencyData?.filter((cd) => cd?.Currencyid === param?.CurrencyCodeid)
+
+      if (filterData) {
+        localStorage.setItem("currencyData", JSON.stringify(filterData))
+      }   else {
+        let DefaultObj = {
+          "Currencyid": 42,
+          "Currencycode": "INR",
+          "Currencyname": "Rupees",
+          "Currencysymbol": "₹",
+          "CurrencyRate": 1.00000,
+          "IsDefault": 1
+        }
+        localStorage.setItem("currencyData", JSON.stringify(DefaultObj))
+      }
+    }
+
+    let pdDataCalling = async () => {
+      await productListApiCall().then((res) => {
+        setPdData(res)
+      })
+    }
+    handelCurrencyData();
+    pdDataCalling();
+  }, [isStoreInitData])
 
   return (
     <div>
@@ -266,7 +311,7 @@ export default function Home() {
         <FestiveFinds />
         <ShopByCategory />
         <SmilingBrides />
-        <ShopOurInstagram /> 
+        <ShopOurInstagram />
         <Footer />
       </div>
     </div>

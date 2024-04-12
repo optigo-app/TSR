@@ -3,7 +3,7 @@ import './proddetail.css'
 import Header from '../home/Header/Header'
 import Footer from '../home/Footer/Footer'
 import SmilingRock from '../home/smiling_Rock/SmilingRock'
-import { Checkbox, Divider, Skeleton, Tooltip } from '@mui/material'
+import { Checkbox, CircularProgress, Divider, Skeleton, Tooltip } from '@mui/material'
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarIcon from '@mui/icons-material/Star';
 import filterData from '../../jsonFile/M_4_95oztttesi0o50vr.json'
@@ -11,7 +11,7 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import { CommonAPI } from '../../../Utils/API/CommonAPI'
 import { GetCount } from '../../../Utils/API/GetCount'
-import { CartListCounts, WishListCounts, designSet, colorstoneQualityColorG, diamondQualityColorG, metalTypeG, priceData } from '../../../../../Recoil/atom'
+import { CartListCounts, WishListCounts, designSet, colorstoneQualityColorG, diamondQualityColorG, metalTypeG, priceData, loginState, isB2CFlag } from '../../../../../Recoil/atom'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import notFound from '../../assets/image-not-found.png'
 import NavigateNextRoundedIcon from '@mui/icons-material/NavigateNextRounded';
@@ -79,6 +79,10 @@ const ProdDetail = () => {
   const [addToCartFlag, setAddToCartFlag] = useState(false)
   const [addToWishListFlag, setAddToWishListFlag] = useState()
   const [globImagePath, setGlobImagepath] = useState()
+  const [isLoading,setIsLoading] = useState(false)
+  const [logicalPath,setLogicalPath] = useState()
+
+  // console.log("logicalPath",logicalPath);
 
   const [designUniqueNO, setDesignUnicNo] = useState('');
   const [uploadLogicPath, setUploadLogicPath] = useState('');
@@ -89,7 +93,6 @@ const ProdDetail = () => {
     let currencyData = JSON.parse(localStorage.getItem("currencyData"))
     setCurrData(currencyData)
   }, [])
-  console.log("currData", currData);
 
 
   const setCartCount = useSetRecoilState(CartListCounts)
@@ -113,20 +116,18 @@ const ProdDetail = () => {
   useEffect(() => {
     const storeInit = JSON.parse(localStorage.getItem('storeInit'))
     setGlobImagepath(storeInit?.DesignImageFol)
+    setLogicalPath(storeInit?.UploadLogicalPath)
   }, [])
 
-  useEffect(() => {
-    const storeInit = JSON.parse(localStorage.getItem('storeInit'))
-    setGlobImagepath(storeInit?.DesignImageFol)
-  }, [])
 
   useEffect(() => {
 
     let loginInfo = JSON.parse(localStorage.getItem("loginUserDetail"))
     let ColorStoneQualityColor = JSON.parse(localStorage.getItem("ColorStoneQualityColor"))
     setmtTypeOption(loginInfo?.cmboMetalType)
+    console.log('loginInfo?.cmboDiaQualityColor',loginInfo?.cmboDiaQualityColor);
 
-    if (loginInfo?.cmboDiaQualityColor !== "" && !loginInfo?.cmboDiaQualityColor) {
+    if (loginInfo?.cmboDiaQualityColor !== undefined || '' && !loginInfo?.cmboDiaQualityColor) {
       let qualityColor = `${loginInfo?.cmboDiaQualityColor.split("#@#")[0]?.toUpperCase()}_${loginInfo?.cmboDiaQualityColor.split("#@#")[1]?.toUpperCase()}`
       setDiaQColOpt(qualityColor)
     }
@@ -150,7 +151,7 @@ const ProdDetail = () => {
     setSizeOption(sizeData[1]?.id)
 
   }, [colorData])
-
+console.log('diaQColOpt');
   // useEffect(()=>{
 
   //   let srProductsData = JSON.parse(localStorage.getItem('srProductsData'));
@@ -315,7 +316,7 @@ const ProdDetail = () => {
     );
 
 
-    // let showPrice = 0;
+    let showPrice = 0;
     if (mtrd && mtrd.length > 0) {
       // showPrice = srProductsData?.price - ((srProductsData?.price - srProductsData?.metalrd) + (mtrd[0]?.Z ?? 0));
       setMtrdData(mtrd[0] ?? [])
@@ -404,8 +405,8 @@ const ProdDetail = () => {
   const getTheImageSetImage = (autoCode) => {
     const storedData = localStorage.getItem('designsetlist');
     const jsonData = JSON.parse(storedData);
-    const filteredData = jsonData.filter(item => item.autocode === autoCode);
-    if (filteredData.length > 0) {
+    const filteredData = jsonData?.filter(item => item.autocode === autoCode);
+    if (filteredData?.length > 0) {
       const num = filteredData[0].designsetuniqueno;
       const defaultImage = filteredData[0].DefaultImageName;
       setCompleteBackImage(defaultImage);
@@ -571,7 +572,7 @@ const ProdDetail = () => {
       const customerid = data?.id;
       let autoC = autoCode
       const combinedValue = JSON.stringify({
-        autocode: `${autoC}`, FrontEnd_RegNo: `${FrontEnd_RegNo}`, Customerid: `${customerid}`
+        autocode: `${autoC}`, FrontEnd_RegNo: `${FrontEnd_RegNo}`, Customerid: `${customerid ?? 0}`
       });
       const encodedCombinedValue = btoa(combinedValue);
       const body = {
@@ -616,12 +617,12 @@ const ProdDetail = () => {
     const storeInit = JSON.parse(localStorage.getItem("storeInit"))
     const Customer_id = JSON.parse(localStorage.getItem("loginUserDetail"));
 
-    let EncodeData = { FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`, Customerid: `${Customer_id?.id}` }
+    let EncodeData = { FrontEnd_RegNo: `${storeInit?.FrontEnd_RegNo}`, Customerid: `${Customer_id?.id ?? 0}` }
 
     const encodedCombinedValue = btoa(JSON.stringify(EncodeData));
 
     const body = {
-      "con": `{\"id\":\"Store\",\"mode\":\"getdesignnolist\",\"appuserid\":\"${UserEmail}\"}`,
+      "con": `{\"id\":\"Store\",\"mode\":\"getdesignnolist\",\"appuserid\":\"${UserEmail ?? ''}\"}`,
       "f": " useEffect_login ( getdataofcartandwishlist )",
       "p": encodedCombinedValue
     }
@@ -645,6 +646,8 @@ const ProdDetail = () => {
     }
   }, [productData])
 
+  const isLoginStatus = useRecoilValue(loginState);
+  const isB2CFlags = useRecoilValue(isB2CFlag);
   const handelCart = async () => {
 
     try {
@@ -921,12 +924,23 @@ const ProdDetail = () => {
 
   }
 
+  const IshandleB2cCheck = () =>{
+    if (isLoginStatus == "false" && isB2CFlags == 0) {
+      navigate('/LoginOption');
+    }else{
+      setAddToCartFlag(!addToCartFlag)
+    }
+  }
   useEffect(() => {
-    handelCart()
+      handelCart()
   }, [addToCartFlag])
 
-  const handelWishList = async (event) => {
 
+  const handelWishList = async (event) => {
+    if (isLoginStatus == "false" && isB2CFlags == 0) {
+      navigate('/LoginOption');
+      return;
+    }
     try {
       setWishListFlag(event.target.checked)
 
@@ -1146,11 +1160,11 @@ const ProdDetail = () => {
         const Customer_id = JSON.parse(localStorage.getItem("loginUserDetail"));
 
 
-        let Data = { "designlist": `'${productData?.designno}'`, "isselectall": "0", "FrontEnd_RegNo": `${storeInit?.FrontEnd_RegNo}`, "Customerid": `${Customer_id?.id}` }
+        let Data = { "designlist": `'${productData?.designno}'`, "isselectall": "0", "FrontEnd_RegNo": `${storeInit?.FrontEnd_RegNo}`, "Customerid": `${Customer_id?.id ?? 0}` }
 
         let encodedCombinedValue = btoa(JSON.stringify(Data))
         const body = {
-          con: `{\"id\":\"\",\"mode\":\"removeFromWishList\",\"appuserid\":\"${UserEmail}\"}`,
+          con: `{\"id\":\"\",\"mode\":\"removeFromWishList\",\"appuserid\":\"${UserEmail ?? ''}\"}`,
           f: "RemoveFromWishlistIconClick (removeFromWishList)",
           p: encodedCombinedValue,
         }
@@ -1291,11 +1305,11 @@ const ProdDetail = () => {
                       ? updatedColorImage?.length !== 0
                         ? updatedColorImage[0]?.imagepath
                         : selectedImagePath == ""
-                          ? globImagePath +
+                        ? globImagePath +
                           (!handelmainImg()?.length
                             ? productData?.OriginalImagePath?.split(",")[0]
                             : handelmainImg())
-                          : selectedImagePath
+                        : selectedImagePath
                       : notFound
                   }
                   alt={""}
@@ -1342,7 +1356,7 @@ const ProdDetail = () => {
                             setSelectedImagePath(data.imagepath);
                             setIsVideoPlaying(false);
                           }}
-                        // onClick={() => setThumbImg(data.imagepath)}
+                          // onClick={() => setThumbImg(data.imagepath)}
                         />
                       ))}
 
@@ -1811,57 +1825,57 @@ const ProdDetail = () => {
                   {(sizeData?.length !== 0 ||
                     (productData?.DefaultSize &&
                       productData.DefaultSize.length !== 0)) && (
-                      <div
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        width: "95%",
+                        marginTop: "10px",
+                        paddingTop: "10px",
+                        borderTop: "1px solid #42424233",
+                      }}
+                    >
+                      <label
                         style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          width: "95%",
-                          marginTop: "10px",
-                          paddingTop: "10px",
-                          borderTop: "1px solid #42424233",
+                          fontSize: "15px",
+                          color: "#424242",
+                          fontFamily: "PT Sans, sans-serif",
                         }}
                       >
-                        <label
-                          style={{
-                            fontSize: "15px",
-                            color: "#424242",
-                            fontFamily: "PT Sans, sans-serif",
-                          }}
-                        >
-                          SIZE:
-                        </label>
-                        <select
-                          style={{
-                            border: "none",
-                            outline: "none",
-                            fontSize: "16px",
-                            color: "#424242",
-                            fontFamily: "PT Sans, sans-serif",
-                            fontWeight: "bold",
-                          }}
-                          onChange={(e) => handelSize(e.target.value)}
-                          defaultValue={
-                            productData && productData.DefaultSize
-                              ? productData.DefaultSize
-                              : sizeData.find((size) => size.IsDefaultSize === 1)
+                        SIZE:
+                      </label>
+                      <select
+                        style={{
+                          border: "none",
+                          outline: "none",
+                          fontSize: "16px",
+                          color: "#424242",
+                          fontFamily: "PT Sans, sans-serif",
+                          fontWeight: "bold",
+                        }}
+                        onChange={(e) => handelSize(e.target.value)}
+                        defaultValue={
+                          productData && productData.DefaultSize
+                            ? productData.DefaultSize
+                            : sizeData.find((size) => size.IsDefaultSize === 1)
                                 ?.id
-                          }
-                        >
-                          {sizeData?.map((size) => (
-                            <option
-                              key={size.id}
-                              value={size.sizename} // Pass sizename as value
-                              selected={
-                                productData &&
-                                productData.DefaultSize === size.sizename
-                              }
-                            >
-                              {size.sizename}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    )}
+                        }
+                      >
+                        {sizeData?.map((size) => (
+                          <option
+                            key={size.id}
+                            value={size.sizename} // Pass sizename as value
+                            selected={
+                              productData &&
+                              productData.DefaultSize === size.sizename
+                            }
+                          >
+                            {size.sizename}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
                 </div>
 
                 <div
@@ -2034,46 +2048,46 @@ const ProdDetail = () => {
                   {(sizeData?.length !== 0 ||
                     (productData?.DefaultSize &&
                       productData.DefaultSize.length !== 0)) && (
-                      <div
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        marginTop: "20px",
+                      }}
+                    >
+                      <label style={{ fontSize: "12.5px", color: "#7d7f85" }}>
+                        SIZE:
+                      </label>
+                      <select
                         style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          marginTop: "20px",
+                          border: "none",
+                          outline: "none",
+                          color: "#7d7f85",
+                          fontSize: "12.5px",
                         }}
-                      >
-                        <label style={{ fontSize: "12.5px", color: "#7d7f85" }}>
-                          SIZE:
-                        </label>
-                        <select
-                          style={{
-                            border: "none",
-                            outline: "none",
-                            color: "#7d7f85",
-                            fontSize: "12.5px",
-                          }}
-                          onChange={(e) => handelSize(e.target.value)}
-                          defaultValue={
-                            productData && productData.DefaultSize
-                              ? productData.DefaultSize
-                              : sizeData.find((size) => size.IsDefaultSize === 1)
+                        onChange={(e) => handelSize(e.target.value)}
+                        defaultValue={
+                          productData && productData.DefaultSize
+                            ? productData.DefaultSize
+                            : sizeData.find((size) => size.IsDefaultSize === 1)
                                 ?.id
-                          }
-                        >
-                          {sizeData?.map((size) => (
-                            <option
-                              key={size.id}
-                              value={size.sizename} // Pass sizename as value
-                              selected={
-                                productData &&
-                                productData.DefaultSize === size.sizename
-                              }
-                            >
-                              {size.sizename}
-                            </option>
-                          ))}
-                        </select>
-                      </div>
-                    )}
+                        }
+                      >
+                        {sizeData?.map((size) => (
+                          <option
+                            key={size.id}
+                            value={size.sizename} // Pass sizename as value
+                            selected={
+                              productData &&
+                              productData.DefaultSize === size.sizename
+                            }
+                          >
+                            {size.sizename}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
                   <Divider
                     sx={{
                       marginTop: "20px",
@@ -2088,19 +2102,26 @@ const ProdDetail = () => {
                     <p
                       style={{
                         fontSize: "20px",
-                        color: "#424242", display: 'flex'
+                        color: "#424242",
+                        display: "flex",
                       }}
                     >
                       {/* Price: <span style={{ fontWeight: '500', fontSize: '16px' }}>{currencySymbol?.Currencysymbol}{`${(productData?.price - grandTotal) === 0 ? "Not Availabel" : (productData?.price - grandTotal)?.toFixed(2)}`}</span> */}
                       {/* Price: <span style={{ fontWeight: '500', fontSize: '16px' }}>{currencySymbol?.Currencysymbol}{`${productData?.UnitCost + (productData?.price - grandTotal)?.toFixed(2)}`}</span> */}
                       <span
-                        style={{ fontWeight: 'bold', fontSize: '22px', letterSpacing: '2.2px', fontFamily: "PT Sans, sans-serif", display: 'flex' }}
+                        style={{
+                          fontWeight: "bold",
+                          fontSize: "22px",
+                          letterSpacing: "2.2px",
+                          fontFamily: "PT Sans, sans-serif",
+                          display: "flex",
+                        }}
                       >
                         <div
                           dangerouslySetInnerHTML={{
                             __html: decodeEntities(currData?.Currencysymbol),
                           }}
-                          style={{ fontFamily: 'sans-serif' }}
+                          style={{ fontFamily: "sans-serif" }}
                         />
                         {`${(
                           (typeof productData?.UnitCost === "number"
@@ -2200,10 +2221,22 @@ const ProdDetail = () => {
                   <span className="containercartwish">
                     <div
                       className="addtocartcont"
-                      onClick={() => setAddToCartFlag(!addToCartFlag)}
+                      onClick={() => IshandleB2cCheck()}
                     >
                       <span className="addtocarttxt">
                         {addToCartFlag ? "REMOVE FROM CART" : "ADD TO CART"}
+                        {/* {true && (
+                          <CircularProgress
+                            size={24}
+                            sx={{
+                              position: "absolute",
+                              top: "50%",
+                              left: "50%",
+                              marginTop: "-12px",
+                              marginLeft: "-12px",
+                            }}
+                          />
+                        )} */}
                       </span>
                     </div>
                     <div className="wishlistcont">
@@ -2386,7 +2419,7 @@ const ProdDetail = () => {
                               !dsl?.ThumbImagePath
                                 ? notFound
                                 : dsl?.imagepath +
-                                dsl?.ThumbImagePath.split(",")[0]
+                                  dsl?.ThumbImagePath.split(",")[0]
                             }
                             alt={""}
                             style={{
@@ -2440,7 +2473,7 @@ const ProdDetail = () => {
                 </div>
               </div>
               <img
-                src={`${uploadLogicPath}/${uKey}/Photo_original/designmanagement_designset/${designUniqueNO}/${completeBackImage}`}
+                src={`${logicalPath}/${uKey}/Photo_original/designmanagement_designset/${designUniqueNO}/${completeBackImage}`}
                 style={{ width: "800px" }}
               />
             </div>
@@ -2458,7 +2491,7 @@ const ProdDetail = () => {
             >
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <img
-                  src={`${uploadLogicPath}/${uKey}/Photo_original/designmanagement_designset/${designUniqueNO}/${completeBackImage}`}
+                  src={`${logicalPath}/${uKey}/Photo_original/designmanagement_designset/${designUniqueNO}/${completeBackImage}`}
                   className="smilingCompleteLookMainMobileImg"
                 />
               </div>
@@ -2510,7 +2543,7 @@ const ProdDetail = () => {
                               !dsl?.ThumbImagePath
                                 ? notFound
                                 : dsl?.imagepath +
-                                dsl?.ThumbImagePath.split(",")[0]
+                                  dsl?.ThumbImagePath.split(",")[0]
                             }
                             alt={""}
                             style={{
@@ -2599,8 +2632,9 @@ const ProdDetail = () => {
                   </span>
                   {/* <div style={{display:acc && accNo === '1' ? 'block':'none',userSelect:'none',transition:'0.5s'}}> */}
                   <div
-                    className={`my-list-fineJewe ${acc && accNo === "1" ? "openAcc" : ""
-                      }`}
+                    className={`my-list-fineJewe ${
+                      acc && accNo === "1" ? "openAcc" : ""
+                    }`}
                   >
                     <div>
                       <div className="srAccContainer">
@@ -2650,9 +2684,9 @@ const ProdDetail = () => {
                             <b>
                               {daimondFilterData?.length
                                 ? (
-                                  productData?.diamondweight +
-                                  daimondFilterData[0]?.Weight
-                                ).toFixed(2)
+                                    productData?.diamondweight +
+                                    daimondFilterData[0]?.Weight
+                                  ).toFixed(2)
                                 : productData?.diamondweight}
                             </b>
                           </span>
@@ -2661,7 +2695,7 @@ const ProdDetail = () => {
                             <b>
                               {daimondFilterData?.length
                                 ? productData?.diamondpcs +
-                                daimondFilterData[0]?.pieces
+                                  daimondFilterData[0]?.pieces
                                 : productData?.diamondpcs}
                             </b>
                           </span>
@@ -2670,7 +2704,7 @@ const ProdDetail = () => {
                             <b>
                               {daimondFilterData?.length
                                 ? productData?.diamondpcs +
-                                daimondFilterData[0]?.pieces
+                                  daimondFilterData[0]?.pieces
                                 : productData?.diamondpcs}
                             </b>
                           </span>
@@ -2681,9 +2715,9 @@ const ProdDetail = () => {
                             <b>
                               {metalFilterData?.length
                                 ? (
-                                  productData?.netwt +
-                                  metalFilterData[0]?.Weight
-                                ).toFixed(2)
+                                    productData?.netwt +
+                                    metalFilterData[0]?.Weight
+                                  ).toFixed(2)
                                 : productData?.netwt}
                             </b>
                           </span>
@@ -2699,9 +2733,9 @@ const ProdDetail = () => {
                             <b>
                               {daimondFilterData?.length
                                 ? (
-                                  productData?.diamondweight +
-                                  daimondFilterData[0]?.Weight
-                                ).toFixed(2)
+                                    productData?.diamondweight +
+                                    daimondFilterData[0]?.Weight
+                                  ).toFixed(2)
                                 : productData?.diamondweight}
                             </b>
                           </span>
