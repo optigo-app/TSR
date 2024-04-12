@@ -18,6 +18,7 @@ import { isB2CFlag, isB2bFlag, loginState, productDataNew } from '../../../../..
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { productListApiCall } from '../../../Utils/API/ProductListAPI';
 import { IoIosLogIn } from 'react-icons/io';
+import { getDesignPriceList } from '../../../Utils/API/PriceDataApi';
 
 export default function Home() {
   const setPdData = useSetRecoilState(productDataNew)
@@ -277,12 +278,16 @@ export default function Home() {
   useEffect(() => {
     const handelCurrencyData = (param) => {
       let currencyData = JSON.parse(localStorage.getItem('CURRENCYCOMBO'));
-  
-      let filterData = currencyData?.filter((cd) => cd?.Currencyid === param?.CurrencyCodeid)
 
-      if (filterData) {
+      let filterData = currencyData?.filter((cd) => cd?.Currencyid === param?.CurrencyCodeid)
+      const DefaultCurrData = currencyData?.filter(item => item.IsDefault == 1);
+      console.log("isDefaultCurr--", DefaultCurrData);
+
+      if (filterData && filterData?.length > 0) {
         localStorage.setItem("currencyData", JSON.stringify(filterData))
-      }   else {
+      }else if(DefaultCurrData && DefaultCurrData?.length > 0){
+        localStorage.setItem("currencyData", JSON.stringify(DefaultCurrData))
+      } else {
         let DefaultObj = {
           "Currencyid": 42,
           "Currencycode": "INR",
@@ -300,8 +305,13 @@ export default function Home() {
         setPdData(res)
       })
     }
-    handelCurrencyData();
-    pdDataCalling();
+
+    setTimeout(() => {
+      handelCurrencyData();
+      pdDataCalling();
+      getDesignPriceList()
+    }, 1000);
+
   }, [isStoreInitData])
 
   return (
