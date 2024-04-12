@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './Header.css'
 import Tooltip from '@mui/material/Tooltip';
-import { Badge, Dialog, Divider, Drawer, SwipeableDrawer, TextField } from "@mui/material";
+import { Badge, Dialog, Divider, Drawer, Modal, SwipeableDrawer, TextField } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { PiBagThin, PiMapPinLight, PiStarThin } from "react-icons/pi";
 import { IoMenuOutline, IoSearch, IoSearchOutline } from "react-icons/io5";
@@ -336,9 +336,19 @@ export default function Header() {
   const [openYourBagDrawer, setOpenYourBagDrawer] = useState(false);
   const setIsLoginState = useSetRecoilState(loginState)
 
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   const handleLogout = () => {
     setIsLoginState('false')
+    localStorage.clear();
     localStorage.setItem('LoginUser', 'false');
     localStorage.removeItem('storeInit');
     localStorage.removeItem('loginUserDetail');
@@ -396,6 +406,23 @@ export default function Header() {
           </div>
         </>
       )}
+
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        closeAfterTransition
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <div>
+          <p>ARE YOU SURE TO LOG OUT ?</p>
+          <div>
+            <button>NO</button>
+            <button>YES</button>
+          </div>
+        </div>
+      </Modal>
 
       <Drawer
         open={openSearchDrawer}
