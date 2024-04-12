@@ -284,9 +284,9 @@ export default function Home() {
       console.log("isDefaultCurr--", DefaultCurrData);
 
       if (filterData && filterData?.length > 0) {
-        localStorage.setItem("currencyData", JSON.stringify(filterData))
+        localStorage.setItem("currencyData", JSON.stringify(filterData[0]))
       }else if(DefaultCurrData && DefaultCurrData?.length > 0){
-        localStorage.setItem("currencyData", JSON.stringify(DefaultCurrData))
+        localStorage.setItem("currencyData", JSON.stringify(DefaultCurrData[0]))
       } else {
         let DefaultObj = {
           "Currencyid": 42,
