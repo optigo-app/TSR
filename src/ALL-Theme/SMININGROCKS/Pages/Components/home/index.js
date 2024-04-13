@@ -14,14 +14,16 @@ import Footer from './Footer/Footer';
 import axios from 'axios';
 import { CommonAPI } from '../../../Utils/API/CommonAPI';
 import TopBanner from './topBanner/TopBanner';
-import { isB2CFlag, isB2bFlag, loginState, productDataNew } from '../../../../../Recoil/atom';
+import { designSet, isB2CFlag, isB2bFlag, loginState, productDataNew } from '../../../../../Recoil/atom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { productListApiCall } from '../../../Utils/API/ProductListAPI';
 import { IoIosLogIn } from 'react-icons/io';
 import { getDesignPriceList } from '../../../Utils/API/PriceDataApi';
+import { DesignSet } from '../../../Utils/API/DesignSet';
 
 export default function Home() {
-  const setPdData = useSetRecoilState(productDataNew)
+  const setPdData = useSetRecoilState(productDataNew);
+  const setDesignList = useSetRecoilState(designSet);
   const [isStoreInitData, setIsStoreInitData] = useState(false);
   const islogin = useRecoilValue(loginState);
   const [isB2bFlags, setIsB2BFlag] = useRecoilState(isB2bFlag);
@@ -305,9 +307,15 @@ export default function Home() {
         setPdData(res)
       })
     }
+    let designDataCall = async () => {
+      await DesignSet().then((res) => {
+          setDesignList(res)
+      })
+  }
 
     setTimeout(() => {
       handelCurrencyData();
+      designDataCall();
       pdDataCalling();
       getDesignPriceList()
     }, 1000);
