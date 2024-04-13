@@ -285,8 +285,8 @@ useEffect(()=>{
         let csrd2 = 0;
 
         if (newPriceData || newPriceData1 || newPriceData2) {
-          price = (((newPriceData?.V ?? 0)/currData[0]?.CurrencyRate ?? 0) + newPriceData?.W ?? 0) + (newPriceData1 ?? 0) + (newPriceData2 ?? 0);
-          metalrd = (((newPriceData?.V ?? 0)/currData[0]?.CurrencyRate ?? 0) + newPriceData?.W ?? 0)
+          price = (((newPriceData?.V ?? 0)/currData?.CurrencyRate ?? 0) + newPriceData?.W ?? 0) + (newPriceData1 ?? 0) + (newPriceData2 ?? 0);
+          metalrd = (((newPriceData?.V ?? 0)/currData?.CurrencyRate ?? 0) + newPriceData?.W ?? 0)
           diard1 = newPriceData1 ?? 0
           csrd2 = newPriceData2 ?? 0
           markup = newPriceData?.AB
@@ -1637,9 +1637,9 @@ useEffect(()=>{
     } else if (selectedOption === 'PRICE LOW TO HIGH') {
       sortedData.sort((a, b) => ((a?.UnitCost ?? 0) + (a?.price ?? 0) + (a?.markup ?? 0)) - ((b?.UnitCost ?? 0) + (b?.price ?? 0) + (b?.markup ?? 0)));
     } else {
-      sortedData = [...ProductApiData2];
+      setNewProData(ProductApiData2);
     }
-    setProductApiData2(sortedData);
+    setNewProData(sortedData);
   };
 
 

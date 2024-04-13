@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './Header.css'
 import Tooltip from '@mui/material/Tooltip';
-import { Badge, Dialog, Divider, Drawer, SwipeableDrawer, TextField } from "@mui/material";
+import { Badge, Dialog, Divider, Drawer, Modal, SwipeableDrawer, TextField } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import { PiBagThin, PiMapPinLight, PiStarThin } from "react-icons/pi";
 import { IoMenuOutline, IoSearch, IoSearchOutline } from "react-icons/io5";
@@ -214,7 +214,8 @@ export default function Header() {
   const [islogin, setislogin] = useRecoilState(loginState);
   const isB2bFlags = useRecoilValue(isB2bFlag);
   const isB2CFlags = useRecoilValue(isB2CFlag);
-  const [isB2CFlagStatus, setIsB2CFlagStatus] = useState(''); 
+  const [isB2CFlagStatus, setIsB2CFlagStatus] = useState('');
+  const [showData, setShowData] = useState(false);
   const fetchData = () => {
     const value = localStorage.getItem('LoginUser');
     const val = (value === 'true' ? 'true' : 'false')
@@ -228,14 +229,15 @@ export default function Header() {
   useEffect(() => {
     const storeInit = JSON.parse(localStorage.getItem('storeInit')) ?? "";
     const IsB2BWebsite = storeInit?.IsB2BWebsite;
-      // setIsB2BFlag(IsB2BWebsite);
-      // setIsB2CFlag(IsB2BWebsite);
-      setIsB2CFlagStatus(IsB2BWebsite)
+    // setIsB2BFlag(IsB2BWebsite);
+    // setIsB2CFlag(IsB2BWebsite);
+    setIsB2CFlagStatus(IsB2BWebsite)
+    setShowData(true);
   }, [islogin])
 
-  console.log('isB2CFlagStatus--',islogin);
-  console.log('isb2b--',isB2bFlags);
-  console.log('isb2c--',isB2CFlags);
+  console.log('isB2CFlagStatus--', islogin);
+  console.log('isb2b--', isB2bFlags);
+  console.log('isb2c--', isB2CFlags);
 
   const getMenuApi = async () => {
     const storeInit = await JSON.parse(localStorage.getItem("storeInit")) ?? ""
@@ -247,7 +249,7 @@ export default function Header() {
     let pEnc = btoa(pData)
 
     const body = {
-      con:`{\"id\":\"\",\"mode\":\"GETMENU\",\"appuserid\":\"${userEmail ?? ''}\"}`,
+      con: `{\"id\":\"\",\"mode\":\"GETMENU\",\"appuserid\":\"${userEmail ?? ''}\"}`,
       f: "onload (GETMENU)",
       p: pEnc
     }
@@ -336,9 +338,19 @@ export default function Header() {
   const [openYourBagDrawer, setOpenYourBagDrawer] = useState(false);
   const setIsLoginState = useSetRecoilState(loginState)
 
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   const handleLogout = () => {
     setIsLoginState('false')
+    localStorage.clear();
     localStorage.setItem('LoginUser', 'false');
     localStorage.removeItem('storeInit');
     localStorage.removeItem('loginUserDetail');
@@ -396,6 +408,23 @@ export default function Header() {
           </div>
         </>
       )}
+
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        closeAfterTransition
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <div>
+          <p>ARE YOU SURE TO LOG OUT ?</p>
+          <div>
+            <button>NO</button>
+            <button>YES</button>
+          </div>
+        </div>
+      </Modal>
 
       <Drawer
         open={openSearchDrawer}
@@ -615,7 +644,6 @@ export default function Header() {
 
             {islogin === "true" &&
               <>
-
                 <div className="tsrmobileDraweMenuItem">
                   <li
                     style={{ cursor: "pointer" }}
@@ -672,7 +700,7 @@ export default function Header() {
           />
           <div className="gorjanaHeaderSubMenuMain">
             <ul className="gorjanaHeaderMenu">
-              {islogin === "true" && isB2bFlags == 1 && (
+              {showData && islogin === "true" && isB2bFlags == 1 && (
                 <li
                   className="gorjana-Menu-item  FontFamilySet"
                   onMouseEnter={handleDropdownOpen}
@@ -691,7 +719,7 @@ export default function Header() {
                 </li>
               )}
 
-              {isB2CFlags == 0 && (
+              {showData && isB2CFlags == 0 && (
                 <li
                   className="gorjana-Menu-item  FontFamilySet"
                   onMouseEnter={handleDropdownOpen}
@@ -759,6 +787,17 @@ export default function Header() {
                     {LOGIN}
                   </li>
                 )}
+
+                {showData && islogin === "false" && isB2CFlags == 0 &&
+                  <li
+                    className="gorjana-Menu-item"
+                    onClick={toggleOverlay} style={{}}>
+                    <IoSearchOutline
+                      style={{ height: "20px", cursor: "pointer", width: "20px" }}
+                    />
+                  </li>
+
+                }
 
                 {islogin === "true" &&
                   <>
@@ -845,13 +884,24 @@ export default function Header() {
                   </Badge>
                 </div>
               ) : (
-                <li
-                  className="gorjana-Menu-item"
-                  style={{ cursor: "pointer", marginInline: '10px', fontWeight: 600 }}
-                  onClick={() => navigation('/LoginOption')}
-                >
-                  {LOGIN}
-                </li>
+                <>
+                  <li
+                    className="gorjana-Menu-item"
+                    style={{ cursor: "pointer", marginInline: '10px', fontWeight: 600 }}
+                    onClick={() => navigation('/LoginOption')}
+                  >
+                    {LOGIN}
+                  </li>
+                  {showData && islogin === "false" && isB2CFlags == 0 &&
+                    <li
+                      className="gorjana-Menu-item"
+                      onClick={toggleOverlay} style={{}}>
+                      <IoSearchOutline
+                        style={{ height: "20px", cursor: "pointer", width: "20px" }}
+                      />
+                    </li>
+                  }
+                </>
               )}
 
               <IoMenuOutline className="gorHeaderMobileIcoen" onClick={toggleDrawer} />

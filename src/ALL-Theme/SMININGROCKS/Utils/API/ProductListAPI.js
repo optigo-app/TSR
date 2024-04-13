@@ -1,7 +1,6 @@
 import { CommonAPI } from "./CommonAPI"
 
 export const productListApiCall = async() =>{
-
     const keyMapping = {
         "0": "id",
         "1": "IsBestSeller",
@@ -86,14 +85,16 @@ export const productListApiCall = async() =>{
     let storeinit = JSON.parse(localStorage.getItem("storeInit"))
     let loginInfo = JSON.parse(localStorage.getItem("loginUserDetail"))
     let userEmail = localStorage.getItem("userEmailForPdList")
-    console.log("userEmail",userEmail);
+    let loginUserStatus = localStorage.getItem("LoginUser") ?? false
+    
+    console.log("loginUserStatus", storeinit?.IsB2BWebsite == 0 ? storeinit?.PackageId :loginInfo?.PackageId);  
 
-    const data = {"PackageId":`${storeinit?.IsB2BWebsite == 0 ? storeinit?.PackageId :loginInfo?.PackageId}`,"autocode":"","FrontEnd_RegNo":`${storeinit?.FrontEnd_RegNo}`,"Customerid":`${loginInfo?.id || ''}`}
+    const data = {"PackageId":`${storeinit?.IsB2BWebsite == 0 ? storeinit?.PackageId :loginInfo?.PackageId}`,"autocode":"","FrontEnd_RegNo":`${storeinit?.FrontEnd_RegNo}`,"Customerid":`${loginInfo?.id ?? 0}`}
 
     let encData =  btoa(JSON.stringify(data))
 
     let body = {
-      "con":`{\"id\":\"\",\"mode\":\"GETPRODUCTLIST\",\"appuserid\":\"${userEmail}\"}`,
+      "con":`{\"id\":\"\",\"mode\":\"GETPRODUCTLIST\",\"appuserid\":\"${userEmail ?? ''}\"}`,
       "f":"onlogin (GETPRODUCTLIST)",
       "p":encData
     }

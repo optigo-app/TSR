@@ -14,13 +14,16 @@ import Footer from './Footer/Footer';
 import axios from 'axios';
 import { CommonAPI } from '../../../Utils/API/CommonAPI';
 import TopBanner from './topBanner/TopBanner';
-import { isB2CFlag, isB2bFlag, loginState, productDataNew } from '../../../../../Recoil/atom';
+import { designSet, isB2CFlag, isB2bFlag, loginState, productDataNew } from '../../../../../Recoil/atom';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { productListApiCall } from '../../../Utils/API/ProductListAPI';
 import { IoIosLogIn } from 'react-icons/io';
+import { getDesignPriceList } from '../../../Utils/API/PriceDataApi';
+import { DesignSet } from '../../../Utils/API/DesignSet';
 
 export default function Home() {
-  const setPdData = useSetRecoilState(productDataNew)
+  const setPdData = useSetRecoilState(productDataNew);
+  const setDesignList = useSetRecoilState(designSet);
   const [isStoreInitData, setIsStoreInitData] = useState(false);
   const islogin = useRecoilValue(loginState);
   const [isB2bFlags, setIsB2BFlag] = useRecoilState(isB2bFlag);
@@ -277,12 +280,16 @@ export default function Home() {
   useEffect(() => {
     const handelCurrencyData = (param) => {
       let currencyData = JSON.parse(localStorage.getItem('CURRENCYCOMBO'));
-  
-      let filterData = currencyData?.filter((cd) => cd?.Currencyid === param?.CurrencyCodeid)
 
-      if (filterData) {
-        localStorage.setItem("currencyData", JSON.stringify(filterData))
-      }   else {
+      let filterData = currencyData?.filter((cd) => cd?.Currencyid === param?.CurrencyCodeid)
+      const DefaultCurrData = currencyData?.filter(item => item.IsDefault == 1);
+      console.log("isDefaultCurr--", DefaultCurrData);
+
+      if (filterData && filterData?.length > 0) {
+        localStorage.setItem("currencyData", JSON.stringify(filterData[0]))
+      }else if(DefaultCurrData && DefaultCurrData?.length > 0){
+        localStorage.setItem("currencyData", JSON.stringify(DefaultCurrData[0]))
+      } else {
         let DefaultObj = {
           "Currencyid": 42,
           "Currencycode": "INR",
@@ -300,8 +307,19 @@ export default function Home() {
         setPdData(res)
       })
     }
-    handelCurrencyData();
-    pdDataCalling();
+    let designDataCall = async () => {
+      await DesignSet().then((res) => {
+          setDesignList(res)
+      })
+  }
+
+    setTimeout(() => {
+      handelCurrencyData();
+      designDataCall();
+      pdDataCalling();
+      getDesignPriceList()
+    }, 1000);
+
   }, [isStoreInitData])
 
   return (
