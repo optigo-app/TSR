@@ -82,29 +82,31 @@ export default function LoginWithEmail() {
         return hashedPassword;
     }
 
-    const handelCurrencyData = (param) =>{
-        let currencyData = JSON.parse(localStorage.getItem('CURRENCYCOMBO'));
+    // const handelCurrencyData = (param) =>{
+    //     let currencyData = JSON.parse(localStorage.getItem('CURRENCYCOMBO'));
 
-        let filterData = currencyData?.filter((cd)=>cd?.Currencyid === param?.CurrencyCodeid)
+    //     console.log("param",param);
 
-        if(filterData){
-            if(Array.isArray(filterData)){
-                localStorage.setItem("currencyData",JSON.stringify(filterData[0]))
-            }else{
-                localStorage.setItem("currencyData",JSON.stringify(filterData))
-            }
-        }else{
-            let DefaultObj = {
-                "Currencyid": 42,
-                "Currencycode": "INR",
-                "Currencyname": "Rupees",
-                "Currencysymbol": "₹",
-                "CurrencyRate": 1.00000,
-                "IsDefault": 1
-            }
-            localStorage.setItem("currencyData",JSON.stringify(DefaultObj))
-        }
-    }  
+    //     const filterData = currencyData?.filter((cd)=>cd?.Currencyid == param?.CurrencyCodeid && cd?.CurrencyCode == param?.Currencycode)
+
+    //     if(filterData.length && filterData){
+    //         if(Array.isArray(filterData)){
+    //             localStorage.setItem("currencyData",JSON.stringify(filterData[0]))
+    //         }else{
+    //             localStorage.setItem("currencyData",JSON.stringify(filterData))
+    //         }
+    //     }else{
+    //         let DefaultObj = {
+    //             "Currencyid": 42,
+    //             "Currencycode": "INR",
+    //             "Currencyname": "Rupees",
+    //             "Currencysymbol": "₹",
+    //             "CurrencyRate": 1.00000,
+    //             "IsDefault": 1
+    //         }
+    //         localStorage.setItem("currencyData",JSON.stringify(DefaultObj))
+    //     }
+    // }  
 
     const handleSubmit = async () => {
         if (!confirmPassword.trim()) {
@@ -136,11 +138,11 @@ export default function LoginWithEmail() {
                 setIsLoginState('true')
                 localStorage.setItem('LoginUser', 'true')
                 localStorage.setItem('loginUserDetail', JSON.stringify(response.Data.rd[0]));
+                // handelCurrencyData()
                 pdDataCalling()
                 designDataCall()
                 getCountFunc()
                 getDesignPriceList()
-                handelCurrencyData(resData)
                 navigation('/')
                 // window.location.reload(); 
             } else {
