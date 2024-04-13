@@ -116,12 +116,24 @@ const ProductList = () => {
   const [isActive, setIsActive] = useState(false);
   const [globImagePath, setGlobImagepath] = useState();
   const [IsProdLoading, setIsProdLoading] = useState(false);
-  const [currData, setCurrData] = useState()
+  const [currData,setCurrData] = useState()
 
-  useEffect(() => {
-    let currencyData = JSON.parse(localStorage.getItem("currencyData"))
-    setCurrData(currencyData)
-  }, [])
+  const handelCurrencyData = () =>{
+
+    let currencyData = JSON.parse(localStorage.getItem('CURRENCYCOMBO'));
+    let loginData = JSON.parse(localStorage.getItem('loginUserDetail'));
+    console.log("param",loginData);
+
+    if(currencyData && loginData){
+      const filterData = currencyData?.filter((cd)=>cd?.Currencyid === loginData?.CurrencyCodeid)[0]
+      console.log("currencyData",filterData);
+      setCurrData(filterData)
+    }
+}  
+
+useEffect(()=>{
+  handelCurrencyData();
+},[])
 
   useEffect(() => {
     setTimeout(() => {

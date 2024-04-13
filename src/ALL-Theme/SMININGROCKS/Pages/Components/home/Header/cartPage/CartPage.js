@@ -95,12 +95,24 @@ export default function CartPage() {
   const setCartCount = useSetRecoilState(CartListCounts);
   const setWishCount = useSetRecoilState(WishListCounts);
 
-  const [currData, setCurrData] = useState()
-  console.log('currData',currData);
-  useEffect(() => {
-    let currencyData = JSON.parse(localStorage.getItem("currencyData"))
-    setCurrData(currencyData)
-  }, [])
+  const [currData,setCurrData] = useState()
+
+  const handelCurrencyData = () =>{
+
+    let currencyData = JSON.parse(localStorage.getItem('CURRENCYCOMBO'));
+    let loginData = JSON.parse(localStorage.getItem('loginUserDetail'));
+    console.log("param",loginData);
+
+    if(currencyData && loginData){
+      const filterData = currencyData?.filter((cd)=>cd?.Currencyid === loginData?.CurrencyCodeid)[0]
+      console.log("currencyData",filterData);
+      setCurrData(filterData)
+    }
+}  
+
+useEffect(()=>{
+  handelCurrencyData();
+},[])
   //   const getPriceData = useRecoilValue(priceData);
   // const getTestProdData = useRecoilValue(newTestProdData);
 
