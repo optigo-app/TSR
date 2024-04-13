@@ -70,7 +70,7 @@ export default function TopBanner() {
       </div>
       <div className='gorjanaFave1Mobile'>
         <img src='https://www.gorjana.com/cdn/shop/files/Hero-M_17_1f2fc8ca-c138-4d2b-b913-8df1902ad406.jpg?v=1712249886&width=750' className='gorjanaFaveImageMobile' />
-        {islogin === "true" && <div className='gorjanaFaveBoxMobile'>
+        {islogin === "true" && isB2bFlags == 1 && <div className='gorjanaFaveBoxMobile'>
           <p style={{
             fontFamily: "PT Sans, sans-serif",
             fontSize: '40px',
@@ -79,7 +79,27 @@ export default function TopBanner() {
             textAlign: 'center'
 
           }}>
-             Daily Layers
+            Daily Layers
+          </p>
+          <p style={{
+            fontFamily: "PT Sans, sans-serif",
+            fontSize: '18px',
+            color: 'white',
+            marginTop: '-20px',
+            fontWeight: 300
+          }}>Solid gold and diamonds for every day.</p>
+          <p className='gorjanaFavBoxLinkMobile' onClick={() => navigation('/productPage')}>Shop File Jewelry</p>
+        </div>}
+        {isB2CFlags == 0 && <div className='gorjanaFaveBoxMobile'>
+          <p style={{
+            fontFamily: "PT Sans, sans-serif",
+            fontSize: '40px',
+            color: 'white',
+            fontWeight: 400,
+            textAlign: 'center'
+
+          }}>
+            Daily Layers
           </p>
           <p style={{
             fontFamily: "PT Sans, sans-serif",

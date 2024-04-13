@@ -20,7 +20,7 @@ export const getDesignPriceList = async () => {
     }
 
     const GetB2CPriceReq = {
-      "CurrencyRate": `${currencyData[0]?.CurrencyRate}`,
+      "CurrencyRate": `${currencyData?.CurrencyRate}`,
       "FrontEnd_RegNo": `${storeInit?.FrontEnd_RegNo}`,
       "Customerid": `${loginUserDetail?.id ?? 0}`,
       "Laboursetid": `${storeInit?.pricemanagement_laboursetid}`,
