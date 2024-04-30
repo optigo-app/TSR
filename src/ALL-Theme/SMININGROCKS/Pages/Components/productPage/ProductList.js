@@ -116,24 +116,24 @@ const ProductList = () => {
   const [isActive, setIsActive] = useState(false);
   const [globImagePath, setGlobImagepath] = useState();
   const [IsProdLoading, setIsProdLoading] = useState(false);
-  const [currData,setCurrData] = useState()
+  const [currData, setCurrData] = useState()
 
-  const handelCurrencyData = () =>{
+  const handelCurrencyData = () => {
 
     let currencyData = JSON.parse(localStorage.getItem('CURRENCYCOMBO'));
     let loginData = JSON.parse(localStorage.getItem('loginUserDetail'));
-    console.log("param",loginData);
+    console.log("param", loginData);
 
-    if(currencyData && loginData){
-      const filterData = currencyData?.filter((cd)=>cd?.Currencyid === loginData?.CurrencyCodeid)[0]
-      console.log("currencyData",filterData);
+    if (currencyData && loginData) {
+      const filterData = currencyData?.filter((cd) => cd?.Currencyid === loginData?.CurrencyCodeid)[0]
+      console.log("currencyData", filterData);
       setCurrData(filterData)
     }
-}  
+  }
 
-useEffect(()=>{
-  handelCurrencyData();
-},[])
+  useEffect(() => {
+    handelCurrencyData();
+  }, [])
 
   useEffect(() => {
     setTimeout(() => {
@@ -285,8 +285,8 @@ useEffect(()=>{
         let csrd2 = 0;
 
         if (newPriceData || newPriceData1 || newPriceData2) {
-          price = (((newPriceData?.V ?? 0)/currData?.CurrencyRate ?? 0) + newPriceData?.W ?? 0) + (newPriceData1 ?? 0) + (newPriceData2 ?? 0);
-          metalrd = (((newPriceData?.V ?? 0)/currData?.CurrencyRate ?? 0) + newPriceData?.W ?? 0)
+          price = (((newPriceData?.V ?? 0) / currData?.CurrencyRate ?? 0) + newPriceData?.W ?? 0) + (newPriceData1 ?? 0) + (newPriceData2 ?? 0);
+          metalrd = (((newPriceData?.V ?? 0) / currData?.CurrencyRate ?? 0) + newPriceData?.W ?? 0)
           diard1 = newPriceData1 ?? 0
           csrd2 = newPriceData2 ?? 0
           markup = newPriceData?.AB
@@ -1944,11 +1944,8 @@ useEffect(()=>{
                 {/* )} */}
                 {/* for mobile */}
                 <div className="smilingMobileProductListSideBar">
-
-                  {/* <hr style={{ marginTop: "0px" }} /> */}
                   <div className="filterListMobileData" style={{ display: "flex", marginInline: "15px" }}>
                     <div style={{ width: "100%" }} onClick={toggleDrawerOverlay}>
-
                       <Drawer
                         anchor="left"
                         open={isOpenDetail}
@@ -1995,58 +1992,6 @@ useEffect(()=>{
                           </div>
                         </div>
                       </div>
-                      {/* <p
-                        className="filterTextData"
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          color: "#7d7f85",
-                          fontSize: "13px",
-                          fontWeight: 500,
-                          margin: "0px",
-                        }}
-                        // onClick={toggleDeatilList}
-                        onClick={toggleDetailDrawer}
-                      >
-                        FILTER<span>{isOpenDetail ? "-" : "+"}</span>
-                      </p>
-
-                    </div>
-                    <hr
-                      className="filterDivider"
-                      style={{
-                        border: "none",
-                        marginBottom: "0px",
-                        marginInline: "5px",
-                        borderLeft: "1px solid black",
-                        height: "50px",
-                        marginTop: "-16px",
-                      }}
-                    />
-                    <div
-                      style={{
-                        width: "49%",
-                        display: "flex",
-                        marginTop: "-15px",
-                        alignItems: "center",
-                      }}
-                    >
-                      <select
-                        style={{
-                          width: "100%",
-                          border: "none",
-                          outline: "none",
-                          fontSize: "13px ",
-                        }}
-                        onChange={handleSortChange}
-                        value={selectedSortOption}
-                      >
-                        <option value="None">Recommended</option>
-                        <option value="None">New</option>
-                        <option value="None">In stock</option>
-                        <option value="PRICE HIGH TO LOW">PRICE HIGH TO LOW</option>
-                        <option value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</option>
-                      </select> */}
                     </div>
                   </div>
                 </div>

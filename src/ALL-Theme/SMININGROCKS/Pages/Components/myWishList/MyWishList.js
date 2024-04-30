@@ -254,7 +254,7 @@ export default function MyWishList() {
                 <button
                   className="smiTopClearBtn"
                   onClick={() => navigation("/productpage")}
-                >
+                > 
                   SHOW PRODUCTLIST
                 </button>
               </div>
