@@ -43,11 +43,9 @@
     font-weight: 500;
     font-family: 'PT Sans', sans-serif;
     margin: 10px;
-
 }
 .smiTopClearBtn:hover{
     background-color: rgba(66, 66, 66, 0.05);
-
 }
 .smiWishLsitBoxTitltLine{
     text-align: center;

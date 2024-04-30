@@ -86,7 +86,7 @@ export default function Register() {
     } else if (fieldName === 'email') {
       if (!value.trim()) {
         setErrors(prevErrors => ({ ...prevErrors, email: 'Email is required' }));
-      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      } else if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
         setErrors(prevErrors => ({ ...prevErrors, email: 'Please enter a valid email address' }));
       } else {
         setErrors(prevErrors => ({ ...prevErrors, email: '' }));
@@ -231,7 +231,7 @@ export default function Register() {
           <CircularProgress className='loadingBarManage' />
         </div>
       )}
-      <div className='smling-forgot-main-Color' style={{padding: '5% 0px 5% 0px'}}>
+      <div className='smling-forgot-main-Color' style={{ padding: '5% 0px 5% 0px' }}>
         <div className='smling-forgot-main'>
           <p style={{
             textAlign: 'center',
@@ -370,7 +370,7 @@ export default function Register() {
               <input type='checkbox' />
               <p style={{ margin: '5px' }}>Subscribe to our newsletter</p>
             </div> */}
-            <Button style={{ marginTop: '10px', color: 'gray' , fontFamily:'PT Sans, sans-serif' }} onClick={() => navigation('/LoginOption')}>BACK</Button>
+            <Button style={{ marginTop: '10px', color: 'gray', fontFamily: 'PT Sans, sans-serif' }} onClick={() => navigation('/LoginOption')}>BACK</Button>
           </div>
         </div>
       </div>

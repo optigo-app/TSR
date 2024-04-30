@@ -128,7 +128,6 @@ export default function LoginWithMobileCode() {
                     <div className='smling-forgot-main'>
                         <p style={{
                             textAlign: 'center',
-                            paddingBlock: '60px',
                             marginTop: '15px',
                             fontSize: '25px',
                             fontFamily: 'PT Sans, sans-serif'
@@ -137,9 +136,8 @@ export default function LoginWithMobileCode() {
                         >Login With Code</p>
                         <p style={{
                             textAlign: 'center',
-                            marginTop: '-80px',
+                            marginTop: '15px',
                             fontSize: '15px',
-                            color: '#7d7f85',
                             fontFamily: 'PT Sans, sans-serif'
                         }}
                             className='AuthScreenSubTitle'

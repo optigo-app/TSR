@@ -666,10 +666,6 @@
     display: none !important;
   }
 
-  .smilingAllProductDataMainMobile {
-    gap: 2px;
-  }
-
   .smilingProductImageMain {
     padding: 0px 0px 0px 17px;
   }
@@ -691,16 +687,14 @@
     flex-direction: row !important;
     flex-wrap: wrap;
     margin: 10px;
+    gap: 2px;
   }
 
   .smilingProductMain {
     margin-inline: 0%;
   }
 
-  .paddingTopMobileSet {
-    padding-top: 1px !important;
-    margin: 136px 0px 0px 0px !important;
-  }
+ 
 
   .listing-card {
     width: 100%;
@@ -795,10 +789,6 @@
     display: none !important;
   }
 
-  .smilingAllProductDataMainMobile {
-    gap: 2px;
-  }
-
   .smilingProductImageMain {
     padding: 0px 0px 0px 17px;
   }
@@ -819,6 +809,7 @@
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: wrap;
+    gap: 2px;
     margin: 10px;
   }
 
@@ -826,10 +817,6 @@
     margin-inline: 0%;
   }
 
-  .paddingTopMobileSet {
-    padding-top: 1px !important;
-    margin: 136px 0px 0px 0px !important;
-  }
 
   .listing-card {
     width: 100%;
@@ -958,10 +945,6 @@
     margin-inline: 0%;
   }
 
-  .paddingTopMobileSet {
-    padding-top: 1px !important;
-    margin: 136px 0px 0px 0px !important;
-  }
 
   .listing-card {
     width: 100%;
